@@ -1,0 +1,8 @@
+G:\github\webfolder\WebfolderSolution\WebfolderBo\bin\Debug\WebfolderBo.dll
+G:\github\webfolder\WebfolderSolution\WebfolderBo\bin\Debug\WebfolderBo.pdb
+G:\github\webfolder\WebfolderSolution\WebfolderBo\bin\Debug\WebfolderService.dll
+G:\github\webfolder\WebfolderSolution\WebfolderBo\bin\Debug\MySql.Data.dll
+G:\github\webfolder\WebfolderSolution\WebfolderBo\bin\Debug\WebfolderService.pdb
+G:\github\webfolder\WebfolderSolution\WebfolderBo\obj\Debug\WebfolderBo.csprojResolveAssemblyReference.cache
+G:\github\webfolder\WebfolderSolution\WebfolderBo\obj\Debug\WebfolderBo.dll
+G:\github\webfolder\WebfolderSolution\WebfolderBo\obj\Debug\WebfolderBo.pdb

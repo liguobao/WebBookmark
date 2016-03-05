@@ -19,5 +19,6 @@ namespace WebfolderUI.Models
         public string QQ { get; set; }
 
 
+        public string LoginName { get; internal set; }
     }
 }

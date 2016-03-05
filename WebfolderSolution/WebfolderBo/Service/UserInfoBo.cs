@@ -27,13 +27,13 @@ namespace WebfolderBo.Service
                 if (newUserInfo != null && newUserInfo.UserInfoID != 0)
                 {
                     result.IsSuccess = true;
-                    result.ResultID = newUserInfo.UserInfoID;
-                    result.ResultMessage = "注册成功";
+                    result.ResultID = newUserInfo.UserInfoID.ConvertToCiphertext();
+                    result.SuccessMessage = "注册成功";
                 }
                 else
                 {
                     result.IsSuccess = false;
-                    result.ResultMessage = "注册失败，请重试。";
+                    result.SuccessMessage = "注册失败，请重试。";
                 }
             }
             catch(Exception ex)
@@ -51,7 +51,7 @@ namespace WebfolderBo.Service
         /// </summary>
         /// <param name="email"></param>
         /// <returns></returns>
-        public static BizResultInfo CheckUserEmail(string email)
+        public static BizResultInfo CheckUserEmailOrLoginName(string email)
         {
             var result = new BizResultInfo();
             if(string.IsNullOrEmpty(email))
@@ -65,17 +65,69 @@ namespace WebfolderBo.Service
             if (newUserInfo == null || newUserInfo.UserInfoID == 0)
             {
                 result.IsSuccess = true;
-                result.ResultID = 0;
-                result.ResultMessage = "邮箱有效，可以注册。";
+                result.ResultID = newUserInfo.UserInfoID.ConvertToCiphertext();
+                result.SuccessMessage = "邮箱有效，可以注册。";
             }
             else
             {
                 result.IsSuccess = false;
                 result.ErrorMessage = "此邮箱已被占用，请输入新邮箱/找回密码。";
-                result.ResultMessage = "此邮箱已被占用，请输入新邮箱/找回密码。";
+              
             }
             return result;
         }
 
+
+        public static BizResultInfo GetUserInfoByUID(long uid)
+        {
+            var userInfo = BizUserInfo.LoadByUserInfoID(uid);
+            var result = new BizResultInfo();
+            if(userInfo!=null && userInfo.UserInfoID!=0)
+            {
+                result.ResultID = uid.ConvertToCiphertext();
+                result.Target = userInfo;
+                result.IsSuccess = true;
+            }else
+            {
+                result.ResultID = "";
+                result.Target = null;
+                result.IsSuccess = false;
+            }
+            return result;
+        }
+
+
+        public static BizResultInfo UserLogin(string loginNameOrEmail,string password)
+        {
+            BizResultInfo result = new BizResultInfo();
+            var rsp = CheckUserEmailOrLoginName(loginNameOrEmail);
+            if(rsp.IsSuccess)
+            {
+                var userInfo = rsp.Target as BizUserInfo;
+                if(userInfo==null)
+                {
+                    result.ErrorMessage = "数据库可能被外星人劫持了，稍等片刻....";
+                    result.IsSuccess = false;
+                    return result;
+                }
+                
+                if(userInfo.UserPassword != password)
+                {
+                    result.ErrorMessage = "亲，密码不对哦，麻烦重新输入密码....";
+                    result.IsSuccess = false;
+                    return result;
+                }else
+                {
+                    result.SuccessMessage="登陆成功，正在前往目的地....";
+                    result.IsSuccess = true;
+                    result.ResultID = userInfo.UserInfoID.ConvertToCiphertext();
+                    return result;
+                }
+            }
+            result.SuccessMessage = "账号不存在呀，麻烦点击旁边去注册一下咯。";
+            return result;
+
+
+        }
     }
 }

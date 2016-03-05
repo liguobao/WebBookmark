@@ -34,7 +34,7 @@ namespace WebfolderUI.Controllers
 
         public ActionResult CheckUserEmail(String email)
         {
-            return Json(UserInfoBo.CheckUserEmail(email));
+            return Json(UserInfoBo.CheckUserEmailOrLoginName(email));
         }
     }
 }

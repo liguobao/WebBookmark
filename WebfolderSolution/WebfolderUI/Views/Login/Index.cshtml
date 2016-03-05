@@ -1,8 +1,7 @@
-﻿
-@{
+﻿@{
     ViewBag.Title = "Login";
 }
-
+@model WebfolderUI.Models.UIUserInfo
 <head lang="en">
     <meta charset="UTF-8">
     <title>Login Page | Webfolder</title>
@@ -12,7 +11,13 @@
     <meta name="renderer" content="webkit">
     <meta http-equiv="Cache-Control" content="no-siteapp" />
     <link rel="alternate icon" type="image/png" href="~/assets/i/favicon.png">
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
     <link href="~/assets/css/amazeui.min.css" rel="stylesheet" />
+    <script type="text/javascript">
+    var loginUrl = './Login/UserLogin';
+    </script>
+    <script src="~/Content/ViewJS/login.js"></script>
+
     <style>
         .header {
             text-align: center;
@@ -38,9 +43,17 @@
     </div>
     <div class="am-g">
         <div class="am-u-lg-6 am-u-md-8 am-u-sm-centered">
-            <form method="post" class="am-form">
+            <div class="am-form">
                 <label for="email">邮箱:</label>
-                <input type="email" name="" id="email" value="">
+                @if (Model != null)
+                {
+                    <input type="email" name="" id="email" value=@Model.UserEmail>
+                }
+                else
+                {
+                    <input type="email" name="" id="email" value="">
+                }
+
                 <br>
                 <label for="password">密码:</label>
                 <input type="password" name="" id="password" value="">
@@ -51,11 +64,11 @@
                 </label>
                 <br />
                 <div class="am-cf">
-                    <input type="submit" name="" value="登 录" class="am-btn am-btn-primary am-btn-sm am-fl">
+                    <input id="login" name="" value="登 录" class="am-btn am-btn-primary am-btn-sm am-fl">
                     <a class="am-btn am-btn-link am-btn-sm am-fl" href="~/Register">点我注册 ^_^</a>
-                    <input type="submit" name="" value="忘记密码 ^_^? " class="am-btn am-btn-default am-btn-sm am-fr">
+                    <input name="" value="忘记密码 ^_^? " class="am-btn am-btn-default am-btn-sm am-fr">
                 </div>
-            </form>
+            </div>
             <hr>
             <p>© 2014 AllMobilize, Inc. Licensed under MIT license.</p>
         </div>

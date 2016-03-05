@@ -23,7 +23,7 @@ function RegisterUser() {
     $.ajax(
       {
           type: "post",
-          url: "CheckUserEmail",
+          url: "./Register/CheckUserEmail",
           data: { email},
           success:
               function (rsp) {
@@ -49,13 +49,13 @@ function AddUser() {
 
     $.ajax({
         type: "post",
-        url: "RegisterUser",
+        url: "./Register/RegisterUser",
         data: { UIUserInfo: userInfo },
         success:
             function (rsp) {
                 if (rsp.IsSuccess) {
-                    alert(rsp.ResultMessage);
-                    window.location.href = '../login?userID=' + rsp.ResultID; // 跳转到B目录
+                    alert(rsp.SuccessMessage);
+                    window.location.href = '../login?uid=' + rsp.ResultID; // 跳转到B目录
                 }
                 else
                     alert(rsp.ErrorMessage);

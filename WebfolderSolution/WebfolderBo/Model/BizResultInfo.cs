@@ -16,17 +16,24 @@ namespace WebfolderBo.Model
         /// <summary>
         /// 返回值
         /// </summary>
-        public long ResultID { get; set; }
+        public string ResultID { get; set; }
+
 
         /// <summary>
         /// 返回信息
         /// </summary>
-        public string ResultMessage { get; set; }
+        public string SuccessMessage { get; set; }
 
 
         /// <summary>
         /// 错误信息
         /// </summary>
         public string ErrorMessage { get; set; }
+
+
+        /// <summary>
+        /// 复杂对象
+        /// </summary>
+        public object Target { get; set; }
     }
 }
