@@ -12,7 +12,7 @@ namespace WebfolderService
     {
         public static readonly string connstr = 
             ConfigurationManager.ConnectionStrings["MySqlconnstr"].ConnectionString;
- 
+
         #region 执行Command.ExecuteNonQuery(),返回受影响的行数
         /// <summary>
         /// 执行Command.ExecuteNonQuery(),返回受影响的行数
@@ -20,29 +20,29 @@ namespace WebfolderService
         /// <param name="cmdText">执行的语句</param>
         /// <param name="parameters">params传入的参数null</param>
         /// <returns></returns>         
-        public static int ExecuteNonQuery(string cmdText,params MySqlParameter[] parameters)
+        public static int ExecuteNonQuery(string cmdText, params MySqlParameter[] parameters)
         {
             using (MySqlConnection conn = new MySqlConnection(connstr))
             {
-                int result=-1;
+                int result = -1;
                 conn.Open();
                 using (MySqlCommand cmd = conn.CreateCommand())
                 {
                     cmd.CommandText = cmdText;
-                    if(parameters==null)
-                    result=cmd.ExecuteNonQuery();
+                    if (parameters == null)
+                        result = cmd.ExecuteNonQuery();
                     else
                     {
-                    cmd.Parameters.AddRange(parameters);
-                    result=cmd.ExecuteNonQuery();
-                    cmd.Parameters.Clear();
+                        cmd.Parameters.AddRange(parameters);
+                        result = cmd.ExecuteNonQuery();
+                        cmd.Parameters.Clear();
                     }
                     return result;
                 }
             }
         }
         #endregion
-        
+
         #region 执行Command.ExecuteScalar(),返回首行首列
         /// <summary>
         /// 执行Command.ExecuteScalar(),返回首行首列
@@ -54,19 +54,20 @@ namespace WebfolderService
             params MySqlParameter[] parameters)
         {
             using (MySqlConnection conn = new MySqlConnection(connstr))
-            { 
-                object obj=null;
+            {
+                object obj = null;
                 conn.Open();
                 using (MySqlCommand cmd = conn.CreateCommand())
                 {
                     cmd.CommandText = cmdText;
-                    if(parameters==null)
-                    obj=cmd.ExecuteScalar();
+                    if (parameters == null)
+                        obj = cmd.ExecuteScalar();
                     else
                     {
-                    cmd.Parameters.AddRange(parameters);
-                    obj=cmd.ExecuteScalar();
-                    cmd.Parameters.Clear();
+                        cmd.Parameters.AddRange(parameters);
+                        //obj=cmd.ExecuteScalar();
+                        obj = cmd.ExecuteNonQuery();
+                        cmd.Parameters.Clear();
                     }
                     return obj;
                 }
@@ -81,32 +82,59 @@ namespace WebfolderService
         /// <param name="cmdText">执行的语句</param>
         /// <param name="parameters">params传入的参数null</param>
         /// <returns></returns>    
-        public static DataTable ExecuteDataTable(string cmdText,params MySqlParameter[] parameters)
+        public static DataTable ExecuteDataTable(string cmdText, params MySqlParameter[] parameters)
         {
             using (MySqlConnection conn = new MySqlConnection(connstr))
             {
-                DataSet ds=new DataSet();
+                DataSet ds = new DataSet();
                 conn.Open();
                 using (MySqlCommand cmd = conn.CreateCommand())
                 {
                     cmd.CommandText = cmdText;
-                    if(parameters!=null)
+                    if (parameters != null)
                     {
                         cmd.Parameters.AddRange(parameters);
-                         using (MySqlDataAdapter adapter = new MySqlDataAdapter(cmd))
-                        {                        
-                        adapter.Fill(ds);
+                        using (MySqlDataAdapter adapter = new MySqlDataAdapter(cmd))
+                        {
+                            adapter.Fill(ds);
                         }
                         cmd.Parameters.Clear();
                     }
                     else
                     {
-                         using (MySqlDataAdapter adapter = new MySqlDataAdapter(cmd))
+                        using (MySqlDataAdapter adapter = new MySqlDataAdapter(cmd))
                         {
-                        adapter.Fill(ds);                                               
-                        }                       
+                            adapter.Fill(ds);
+                        }
                     }
-                    return ds.Tables[0]; 
+                    return ds.Tables[0];
+                }
+            }
+        }
+        #endregion
+
+        #region 执行MySqlDataAdapter SQL语句,返回DataTable
+        /// <summary>
+        /// 执行MySqlDataAdapter SQL语句,返回DataTable
+        /// </summary>
+        /// <param name="cmdText">SQL语句</param>
+        /// <returns></returns>
+        public static DataTable ExecuteDataTable(string cmdText)
+        {
+            using (MySqlConnection conn = new MySqlConnection(connstr))
+            {
+                DataSet ds = new DataSet();
+                conn.Open();
+                using (MySqlCommand cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = cmdText;
+                    {
+                        using (MySqlDataAdapter adapter = new MySqlDataAdapter(cmd))
+                        {
+                            adapter.Fill(ds);
+                        }
+                    }
+                    return ds.Tables[0];
                 }
             }
         }
@@ -122,26 +150,27 @@ namespace WebfolderService
         public static MySqlDataReader ExecuteDataReader(string cmdText, params MySqlParameter[] parameters)
         {
             MySqlConnection conn = new MySqlConnection(connstr);
-            MySqlDataReader read=null;
+            MySqlDataReader read = null;
             conn.Open();
             using (MySqlCommand cmd = conn.CreateCommand())
             {
                 cmd.CommandText = cmdText;
-                if(parameters!=null)
-                { 
+                if (parameters != null)
+                {
                     cmd.Parameters.AddRange(parameters);
-                    read=cmd.ExecuteReader(CommandBehavior.CloseConnection);
+                    read = cmd.ExecuteReader(CommandBehavior.CloseConnection);
                     cmd.Parameters.Clear();
                 }
                 else
                 {
-                    read=cmd.ExecuteReader(CommandBehavior.CloseConnection);                    
+                    read = cmd.ExecuteReader(CommandBehavior.CloseConnection);
                 }
                 return read;
             }
         }
-		#endregion
-        
+        #endregion
+
+
         #region 返回查询后的数据表第一行DataRow
         /// <summary>
         /// 返回查询后的数据表第一行DataRow
@@ -150,15 +179,15 @@ namespace WebfolderService
         /// <param name="parameters">params参数集合</param>
         public DataRow GetDataRow(string cmdText, params MySqlParameter[] parameters)
         {
-            DataTable dt=ExecuteDataTable(cmdText, parameters);
-                if (dt.Rows.Count > 0)
-                    return dt.Rows[0];
-                else
-                    return null;
-            
+            DataTable dt = ExecuteDataTable(cmdText, parameters);
+            if (dt.Rows.Count > 0)
+                return dt.Rows[0];
+            else
+                return null;
+
         }
         #endregion
-        
+
         #region 执行存储过程 ExecuteNonQuery(),返回受影响的行数
         /// <summary>
         /// 执行存储过程 ExecuteNonQuery(),返回受影响的行数
@@ -166,29 +195,30 @@ namespace WebfolderService
         /// <param name="cmdText">执行的语句</param>
         /// <param name="parameters">params传入的参数null</param>
         /// <returns></returns> 
-		public static int ExecuteStoredProcedure(string procName,params MySqlParameter[] parameters)
+        public static int ExecuteStoredProcedure(string procName, params MySqlParameter[] parameters)
         {
             MySqlConnection conn = new MySqlConnection(connstr);
-            int result=-1;
+            int result = -1;
             conn.Open();
             using (MySqlCommand cmd = conn.CreateCommand())
             {
                 cmd.CommandText = procName;
                 cmd.CommandType = CommandType.StoredProcedure;
-                if(parameters!=null)
+                if (parameters != null)
                 {
                     cmd.Parameters.AddRange(parameters);
-                    result=cmd.ExecuteNonQuery();
+                    result = cmd.ExecuteNonQuery();
                     cmd.Parameters.Clear();
                 }
                 else
                 {
-                   cmd.Parameters.AddRange(parameters);
-                   result=cmd.ExecuteNonQuery(); 
+                    cmd.Parameters.AddRange(parameters);
+                    result = cmd.ExecuteNonQuery();
                 }
                 return result;
             }
         }
         #endregion
     }
+
 }

@@ -117,8 +117,26 @@ namespace WebfolderService.DAL
 				}
        		}
         }
-		#endregion
-        
+        #endregion
+
+        public UserInfo GetByUserEmailOrUserLoginName(string emailOrLoginName)
+        {
+            string sql = "SELECT * FROM tblUserInfo WHERE UserLoginName = @EmailOrLoginName or UserEmail = @EmailOrLoginName";
+            using (MySqlDataReader reader = MyDBHelper.ExecuteDataReader(sql,
+                new MySqlParameter("@EmailOrLoginName", ToDBValue(emailOrLoginName))))
+            {
+                if (reader.Read())
+                {
+                    return ToModel(reader);
+                }
+                else
+                {
+                    return null;
+                }
+            }
+        }
+
+
         #region 把DataRow转换成Model
         /// <summary>
         /// 把DataRow转换成Model
