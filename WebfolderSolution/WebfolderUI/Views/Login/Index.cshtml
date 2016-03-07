@@ -44,25 +44,19 @@
     <div class="am-g">
         <div class="am-u-lg-6 am-u-md-8 am-u-sm-centered">
             <div class="am-form">
-                <label for="email">邮箱:</label>
+                <label for="email">邮箱 / 登陆名:</label>
                 @if (Model != null)
                 {
-                    <input type="email" name="" id="email" value=@Model.UserEmail>
+                    <input type="text" name="" id="email" value=@Model.UserEmail placeholder="邮箱 / 登陆名">
                 }
                 else
                 {
-                    <input type="email" name="" id="email" value="">
+                    <input type="text" name="" id="email" value="" placeholder="请输入邮箱 / 登陆名">
                 }
 
                 <br>
                 <label for="password">密码:</label>
-                <input type="password" name="" id="password" value="">
-                <br>
-                <label for="remember-me">
-                    <input id="remember-me" type="checkbox">
-                    记住密码
-                </label>
-                <br />
+                <input type="password" name="" id="password" value="" placeholder="请输入密码">
                 <div class="am-cf">
                     <input id="login" name="" value="登 录" class="am-btn am-btn-primary am-btn-sm am-fl">
                     <a class="am-btn am-btn-link am-btn-sm am-fl" href="~/Register">点我注册 ^_^</a>

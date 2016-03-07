@@ -35,11 +35,13 @@ namespace WebfolderUI.Controllers
 
         public ActionResult UserLogin(UIUserInfo uiUserInfo)
         {
-            var rsp = UserInfoBo.UserLogin(string.IsNullOrEmpty(uiUserInfo.UserEmail) ? 
-                uiUserInfo.LoginName : uiUserInfo.UserEmail, 
-                uiUserInfo.Password);
+            string logionName = string.IsNullOrEmpty(uiUserInfo.LoginName) ? uiUserInfo.UserEmail : uiUserInfo.LoginName;
+            var rsp = UserInfoBo.UserLogin(logionName, uiUserInfo.Password);
+            if(rsp.IsSuccess)
+            {
+                new UILoginHelper().WriteUserInfo(logionName, uiUserInfo.Password);
+            }
             return Json(rsp);
-
         }
     }
 }
