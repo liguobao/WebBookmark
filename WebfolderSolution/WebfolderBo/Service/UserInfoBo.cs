@@ -78,6 +78,7 @@ namespace WebfolderBo.Service
         }
 
 
+
         public static BizResultInfo GetUserInfoByUID(long uid)
         {
             var userInfo = BizUserInfo.LoadByUserInfoID(uid);
@@ -97,10 +98,27 @@ namespace WebfolderBo.Service
         }
 
 
+        public static BizResultInfo GetUserInfoByLoginName(string loginName)
+        {
+            BizResultInfo result = new BizResultInfo();
+            var newUserInfo = BizUserInfo.LoadByUserEmailOrUserLoginName(loginName);
+            if(newUserInfo!=null && newUserInfo.UserInfoID!=0)
+            {
+                result.IsSuccess = true;
+                result.Target = newUserInfo;
+                result.ResultID = newUserInfo.UserInfoID.ConvertToCiphertext();
+            }else
+            {
+                result.IsSuccess = false;
+                result.ErrorMessage = "找遍了数据库都没找到这个人呀...要不，你换个号？";
+            }
+            return result;
+        }
+
         public static BizResultInfo UserLogin(string loginNameOrEmail,string password)
         {
             BizResultInfo result = new BizResultInfo();
-            var rsp = CheckUserEmailOrLoginName(loginNameOrEmail);
+            var rsp = GetUserInfoByLoginName(loginNameOrEmail);
             if(rsp.IsSuccess)
             {
                 var userInfo = rsp.Target as BizUserInfo;
@@ -124,7 +142,7 @@ namespace WebfolderBo.Service
                     return result;
                 }
             }
-            result.SuccessMessage = "账号不存在呀，麻烦点击旁边去注册一下咯。";
+            result.ErrorMessage = "账号不存在呀，麻烦点击旁边去注册一下咯。";
             return result;
 
 

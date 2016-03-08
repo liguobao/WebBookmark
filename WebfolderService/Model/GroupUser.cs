@@ -18,47 +18,27 @@ namespace WebfolderService.Model
         /// <summary>
         /// 主键，自增
         /// </summary>
-		public long GroupUserID
-		{
-			 get;
-             set;
-		}
+		public long GroupUserID{get;set;}
             
         /// <summary>
         /// 用户群组ID
         /// </summary>
-		public long GroupID
-		{
-			 get;
-             set;
-		}
+		public long GroupID{get;set;}
             
         /// <summary>
         /// 用户ID
         /// </summary>
-		public long UserInfoID
-		{
-			 get;
-             set;
-		}
+		public long UserInfoID{get;set;}
             
         /// <summary>
         /// 是否通过
         /// </summary>
-		public ushort IsPass
-		{
-			 get;
-             set;
-		}
+		public ushort IsPass{get;set;}
             
         /// <summary>
         /// 创建时间
         /// </summary>
-		public DateTime CreateTime
-		{
-			 get;
-             set;
-		}
+		public DateTime CreateTime{get;set;}
             
 	}
 }

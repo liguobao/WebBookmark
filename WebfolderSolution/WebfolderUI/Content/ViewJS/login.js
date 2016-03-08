@@ -35,6 +35,7 @@ function login()
             if(rsp.IsSuccess)
             {
                 alert(rsp.SuccessMessage);
+                window.location.href = '../UserInfo?uid=' + rsp.ResultID; // 跳转到B目录
             }else
             {
                 alert(rsp.ErrorMessage);

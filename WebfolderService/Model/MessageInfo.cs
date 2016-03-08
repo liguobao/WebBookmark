@@ -18,65 +18,37 @@ namespace WebfolderService.Model
         /// <summary>
         /// 主键，自增
         /// </summary>
-		public long MessageInfoID
-		{
-			 get;
-             set;
-		}
+		public long MessageInfoID{get;set;}
             
         /// <summary>
         /// 消息主题
         /// </summary>
-		public string MessageTitle
-		{
-			 get;
-             set;
-		}
+		public string MessageTitle{get;set;}
             
         /// <summary>
         /// 消息内容
         /// </summary>
-		public string MessageContent
-		{
-			 get;
-             set;
-		}
+		public string MessageContent{get;set;}
             
         /// <summary>
         /// UID
         /// </summary>
-		public long UserInfoID
-		{
-			 get;
-             set;
-		}
+		public long UserInfoID{get;set;}
             
         /// <summary>
         /// 是否已读
         /// </summary>
-		public ushort IsRead
-		{
-			 get;
-             set;
-		}
+		public ushort IsRead{get;set;}
             
         /// <summary>
         /// 消息类型
         /// </summary>
-		public int MessageInfoType
-		{
-			 get;
-             set;
-		}
+		public int MessageInfoType{get;set;}
             
         /// <summary>
         /// 创建时间
         /// </summary>
-		public DateTime CreateTime
-		{
-			 get;
-             set;
-		}
+		public DateTime CreateTime{get;set;}
             
 	}
 }

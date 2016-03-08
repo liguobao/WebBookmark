@@ -19,7 +19,7 @@ namespace WebfolderService.DAL
         /// </summary>        
         public bool Add (UserInfo userInfo)
 		{
-				string sql ="INSERT INTO tblUserInfo (UserLoginName, UserPassword, UserName, UserEmail, UserPhone, UserQQ, CreateTime)  VALUES (@UserLoginName, @UserPassword, @UserName, @UserEmail, @UserPhone, @UserQQ, @CreateTime)";
+				string sql ="INSERT INTO tblUserInfo (UserLoginName, UserPassword, UserName, UserEmail, UserPhone, UserQQ, CreateTime, UserImagURL, UserInfoComment)  VALUES (@UserLoginName, @UserPassword, @UserName, @UserEmail, @UserPhone, @UserQQ, @CreateTime, @UserImagURL, @UserInfoComment)";
 				MySqlParameter[] para = new MySqlParameter[]
 					{
 						new MySqlParameter("@UserLoginName", ToDBValue(userInfo.UserLoginName)),
@@ -29,6 +29,8 @@ namespace WebfolderService.DAL
 						new MySqlParameter("@UserPhone", ToDBValue(userInfo.UserPhone)),
 						new MySqlParameter("@UserQQ", ToDBValue(userInfo.UserQQ)),
 						new MySqlParameter("@CreateTime", ToDBValue(userInfo.CreateTime)),
+						new MySqlParameter("@UserImagURL", ToDBValue(userInfo.UserImagURL)),
+						new MySqlParameter("@UserInfoComment", ToDBValue(userInfo.UserInfoComment)),
 					};
 					
 				int AddId = (int)MyDBHelper.ExecuteScalar(sql, para);
@@ -78,6 +80,8 @@ namespace WebfolderService.DAL
                 +", UserPhone = @UserPhone" 
                 +", UserQQ = @UserQQ" 
                 +", CreateTime = @CreateTime" 
+                +", UserImagURL = @UserImagURL" 
+                +", UserInfoComment = @UserInfoComment" 
                
             +" WHERE UserInfoID = @UserInfoID";
 
@@ -92,6 +96,8 @@ namespace WebfolderService.DAL
 					,new MySqlParameter("@UserPhone", ToDBValue(userInfo.UserPhone))
 					,new MySqlParameter("@UserQQ", ToDBValue(userInfo.UserQQ))
 					,new MySqlParameter("@CreateTime", ToDBValue(userInfo.CreateTime))
+					,new MySqlParameter("@UserImagURL", ToDBValue(userInfo.UserImagURL))
+					,new MySqlParameter("@UserInfoComment", ToDBValue(userInfo.UserInfoComment))
 			};
 
 			return MyDBHelper.ExecuteNonQuery(sql, para);
@@ -135,6 +141,8 @@ namespace WebfolderService.DAL
 			userInfo.UserPhone = (string)ToModelValue(dr,"UserPhone");
 			userInfo.UserQQ = (string)ToModelValue(dr,"UserQQ");
 			userInfo.CreateTime = (DateTime)ToModelValue(dr,"CreateTime");
+			userInfo.UserImagURL = (string)ToModelValue(dr,"UserImagURL");
+			userInfo.UserInfoComment = (string)ToModelValue(dr,"UserInfoComment");
 			return userInfo;
 		}
 		#endregion
