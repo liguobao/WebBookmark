@@ -19,10 +19,12 @@ namespace WebfolderUI.Models
         public string QQ { get; set; }
 
 
-        public string LoginName { get; internal set; }
+        public string LoginName { get; set; }
 
 
-        public string UserInfoComment { get; internal set; }
-        public string UserImagURL { get; internal set; }
+        public string UserInfoComment { get; set; }
+
+
+        public string UserImagURL { get;  set; }
     }
 }

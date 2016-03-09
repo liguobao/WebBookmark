@@ -1,14 +1,14 @@
 G:\github\webfolder\WebfolderSolution\WebfolderUI\bin\roslyn\csc.exe
+G:\github\webfolder\WebfolderSolution\WebfolderUI\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
 G:\github\webfolder\WebfolderSolution\WebfolderUI\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
 G:\github\webfolder\WebfolderSolution\WebfolderUI\bin\roslyn\Microsoft.CodeAnalysis.dll
-G:\github\webfolder\WebfolderSolution\WebfolderUI\bin\roslyn\System.Reflection.Metadata.dll
-G:\github\webfolder\WebfolderSolution\WebfolderUI\bin\roslyn\VBCSCompiler.exe
-G:\github\webfolder\WebfolderSolution\WebfolderUI\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
 G:\github\webfolder\WebfolderSolution\WebfolderUI\bin\roslyn\Microsoft.CodeAnalysis.VisualBasic.dll
 G:\github\webfolder\WebfolderSolution\WebfolderUI\bin\roslyn\Microsoft.CSharp.Core.targets
 G:\github\webfolder\WebfolderSolution\WebfolderUI\bin\roslyn\Microsoft.VisualBasic.Core.targets
 G:\github\webfolder\WebfolderSolution\WebfolderUI\bin\roslyn\System.Collections.Immutable.dll
+G:\github\webfolder\WebfolderSolution\WebfolderUI\bin\roslyn\System.Reflection.Metadata.dll
 G:\github\webfolder\WebfolderSolution\WebfolderUI\bin\roslyn\vbc.exe
+G:\github\webfolder\WebfolderSolution\WebfolderUI\bin\roslyn\VBCSCompiler.exe
 G:\github\webfolder\WebfolderSolution\WebfolderUI\bin\roslyn\VBCSCompiler.exe.config
 G:\github\webfolder\WebfolderSolution\WebfolderUI\bin\WebfolderUI.dll.config
 G:\github\webfolder\WebfolderSolution\WebfolderUI\bin\WebfolderUI.dll

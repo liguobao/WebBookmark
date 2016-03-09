@@ -47,7 +47,7 @@ namespace WebfolderBo.Service
 
 
         /// <summary>
-        /// 检查邮箱是否有效
+        /// 检查邮箱/登陆账号是否有效
         /// </summary>
         /// <param name="email"></param>
         /// <returns></returns>
@@ -57,7 +57,7 @@ namespace WebfolderBo.Service
             if(string.IsNullOrEmpty(email))
             {
                 result.IsSuccess = false;
-                result.ErrorMessage = "邮箱不能为空。";
+                result.ErrorMessage = "邮箱/登陆账号不能为空。";
                 return result;
             }
 
@@ -66,12 +66,12 @@ namespace WebfolderBo.Service
             {
                 result.IsSuccess = true;
                 result.ResultID = newUserInfo.UserInfoID.ConvertToCiphertext();
-                result.SuccessMessage = "邮箱有效，可以注册。";
+                result.SuccessMessage = "邮箱/登陆账号有效，可以注册。";
             }
             else
             {
                 result.IsSuccess = false;
-                result.ErrorMessage = "此邮箱已被占用，请输入新邮箱/找回密码。";
+                result.ErrorMessage = "此邮箱/登陆账号已被占用，请输入新邮箱/登陆账号/找回密码。";
               
             }
             return result;
@@ -98,7 +98,7 @@ namespace WebfolderBo.Service
         }
 
 
-        public static BizResultInfo GetUserInfoByLoginName(string loginName)
+        public static BizResultInfo GetUserInfoByLoginNameOrEmail(string loginName)
         {
             BizResultInfo result = new BizResultInfo();
             var newUserInfo = BizUserInfo.LoadByUserEmailOrUserLoginName(loginName);
@@ -118,7 +118,7 @@ namespace WebfolderBo.Service
         public static BizResultInfo UserLogin(string loginNameOrEmail,string password)
         {
             BizResultInfo result = new BizResultInfo();
-            var rsp = GetUserInfoByLoginName(loginNameOrEmail);
+            var rsp = GetUserInfoByLoginNameOrEmail(loginNameOrEmail);
             if(rsp.IsSuccess)
             {
                 var userInfo = rsp.Target as BizUserInfo;

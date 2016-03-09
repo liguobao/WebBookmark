@@ -20,7 +20,7 @@ namespace WebfolderUI.Controllers
             if (!uiLoginHelper.CheckUserLogin(Request))
                 return View(uiUserInfo);
           
-            var result =  UserInfoBo.GetUserInfoByLoginName(uiLoginHelper.GetUIUserLoginNameOrEmail(Request));
+            var result =  UserInfoBo.GetUserInfoByLoginNameOrEmail(uiLoginHelper.GetUIUserLoginNameOrEmail(Request));
             if (result.IsSuccess)
             {
                 var bizUserInfo = result.Target as BizUserInfo;
@@ -32,10 +32,77 @@ namespace WebfolderUI.Controllers
                 uiUserInfo.LoginName = bizUserInfo.UserLoginName;
                 uiUserInfo.Phone = bizUserInfo.UserPhone;
                 uiUserInfo.LoginName = bizUserInfo.UserLoginName;
+                uiUserInfo.QQ = bizUserInfo.UserQQ;
                 uiUserInfo.UserInfoComment = bizUserInfo.UserInfoComment;
                 uiUserInfo.UserImagURL = bizUserInfo.UserImagURL;
             }
             return View(uiUserInfo);
         }
+
+
+        public ActionResult SaveUserInfo(UIUserInfo uiUserInfo)
+        {
+            var loginEmail = uiLoginHelper.GetUIUserLoginNameOrEmail(Request);
+            return Json(SaveUserToDB(loginEmail, uiUserInfo));
+        }
+
+
+        public ActionResult CheckUserEmailOrLoginName(string emailOrLoginName)
+        {
+            var cookieLoginName= uiLoginHelper.GetUIUserLoginNameOrEmail(Request);
+            BizResultInfo result = new BizResultInfo();
+            if (cookieLoginName.Equals(emailOrLoginName))
+            {
+                result.IsSuccess = true;
+                result.SuccessMessage = "邮箱是有效的哦，可以使用。";
+                
+            }else
+            {
+                result = UserInfoBo.CheckUserEmailOrLoginName(emailOrLoginName);
+            }
+            return Json(result);
+        }
+
+        private BizResultInfo SaveUserToDB(String loginEmail, UIUserInfo uiUserInfo)
+        {
+           var result = UserInfoBo.GetUserInfoByLoginNameOrEmail(loginEmail);
+            if (result.IsSuccess)
+            {
+                var userInfo = result.Target as BizUserInfo;
+                userInfo.UserEmail = uiUserInfo.UserEmail;
+                userInfo.UserInfoComment = uiUserInfo.UserInfoComment;
+                userInfo.UserName = uiUserInfo.UserName;
+                userInfo.UserQQ = uiUserInfo.QQ;
+                userInfo.UserPhone = uiUserInfo.Phone;
+                userInfo.UserLoginName = uiUserInfo.LoginName;
+                userInfo.Save();
+                result.IsSuccess = true;
+                result.SuccessMessage = "保存成功了耶，你可以去别的地方玩了。";
+            }
+            else
+            {
+                result.IsSuccess = false;
+                result.ErrorMessage = "没找到登陆信息呀呀呀！";
+            }
+            return (result);
+        }
+
+
+        public ActionResult SaveUserImag()
+        {
+            BizResultInfo result = UploadFileHelper.UploadFile(Request);
+            if(result.IsSuccess)
+            {
+                var loginEmail = uiLoginHelper.GetUIUserLoginNameOrEmail(Request);
+                var res=  UserInfoBo.GetUserInfoByLoginNameOrEmail(loginEmail);
+                var bizUserInfo = res.Target as BizUserInfo;
+                bizUserInfo.UserImagURL = result.ResultID;
+                bizUserInfo.Save();
+                result.SuccessMessage = "上传成功！";
+            }
+            return JavaScript("alert('"+result.SuccessMessage+"');");
+        }
+
+
     }
 }
