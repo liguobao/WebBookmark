@@ -20,12 +20,17 @@ namespace WebfolderUI
                 return result;
             }
             var file = requestBase.Files[0];
-            string path = AppDomain.CurrentDomain.BaseDirectory + "uploads/userImg/";
+            string path = AppDomain.CurrentDomain.BaseDirectory + "UploadFiles/UserImg/";
             string filename = Path.GetFileName(file.FileName);
+            Random ran = new Random();
+            int randKey = ran.Next(0, 99999);
+            filename = DateTime.Now.ToString("yyyyMMdd")+ randKey + filename;
             file.SaveAs(Path.Combine(path, filename));
             result.IsSuccess = true;
-            result.ResultID = "uploads/userImg/"+filename;
+            result.ResultID = "~/UploadFiles/UserImg/" + filename;
             return result;
+
+           
         }
     }
 }

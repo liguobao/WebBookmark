@@ -96,13 +96,23 @@ namespace WebfolderUI.Controllers
                 var loginEmail = uiLoginHelper.GetUIUserLoginNameOrEmail(Request);
                 var res=  UserInfoBo.GetUserInfoByLoginNameOrEmail(loginEmail);
                 var bizUserInfo = res.Target as BizUserInfo;
+                var path = Server.MapPath(bizUserInfo.UserImagURL);
+                if(System.IO.File.Exists(path))
+                {
+                    System.IO.File.Delete(path);
+                }
                 bizUserInfo.UserImagURL = result.ResultID;
                 bizUserInfo.Save();
                 result.SuccessMessage = "上传成功！";
             }
-            return JavaScript("alert('"+result.SuccessMessage+"');");
+            return Json(result);
         }
 
+
+        public ActionResult SaveIndex()
+        {
+            return View();
+        }
 
     }
 }

@@ -4,6 +4,23 @@
         checkEmail();
         e.stopPropagation();
     });
+
+    $('#uploadFile').fileupload({
+        url: userImgUploadUrl,
+        dataType: 'json',
+        done: function (e, rsp) {
+            if (rsp.result.IsSuccess) {
+                alert(rsp.result.SuccessMessage);
+
+            } else {
+                alert(rsp.result.ErrorMessage);
+            }
+            location.reload();
+        } 
+    });
+
+
+
 });
 
 function checkEmail()

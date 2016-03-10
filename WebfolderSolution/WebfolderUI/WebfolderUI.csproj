@@ -122,9 +122,9 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\Site.css" />
-    <Content Include="Content\ViewJS\register.js" />
-    <Content Include="Content\ViewJS\login.js" />
-    <Content Include="Content\ViewJS\userInfo.js" />
+    <Content Include="DomainJS\register.js" />
+    <Content Include="DomainJS\login.js" />
+    <Content Include="DomainJS\userInfo.js" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Scripts\bootstrap.js" />
@@ -134,10 +134,9 @@
     <Content Include="assets\fonts\fontawesome-webfont.woff" />
     <Content Include="assets\fonts\fontawesome-webfont.woff2" />
     <Content Include="assets\fonts\FontAwesome.otf" />
-    <None Include="Scripts\jquery-1.10.2.intellisense.js" />
-    <Content Include="Scripts\jquery-1.10.2.js" />
-    <Content Include="Scripts\jquery-1.10.2.min.js" />
-    <Content Include="Scripts\jquery.form.js" />
+    <Content Include="Scripts\jQueryFileUpload\jquery.fileupload.js" />
+    <Content Include="Scripts\jQueryFileUpload\jquery.iframe-transport.js" />
+    <Content Include="Scripts\jQueryFileUpload\vendor\jquery.ui.widget.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
@@ -169,7 +168,6 @@
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
-    <Content Include="Scripts\jquery-1.10.2.min.map" />
     <Content Include="Views\UserInfo\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -180,7 +178,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="uploads\userImg\" />
+    <Folder Include="UploadFiles\UserImg\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\WebfolderBo\WebfolderBo.csproj">
