@@ -6,9 +6,9 @@ using System.Web.Mvc;
 
 namespace WebfolderUI.Controllers
 {
-    public class SharedController : Controller
+    public class DefaultController : Controller
     {
-        // GET: Layout
+        // GET: Default
         public ActionResult Index()
         {
             return View();

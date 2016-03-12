@@ -44,5 +44,12 @@ namespace WebfolderUI.Controllers
             }
             return Json(rsp);
         }
+
+
+        public ActionResult ForgetPassWord(string  email)
+        {
+            return null;
+        }
+       
     }
 }

@@ -1,72 +1,89 @@
-﻿@{
-    ViewBag.Title = "Login";
-}
-@model WebfolderUI.Models.UIUserInfo
-<head lang="en">
-    <meta charset="UTF-8">
-    <title>Login Page | Webfolder</title>
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="format-detection" content="telephone=no">
+﻿
+<!DOCTYPE html>
+<html class="js cssanimations">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,Chrome=1">
     <meta name="renderer" content="webkit">
-    <meta http-equiv="Cache-Control" content="no-siteapp" />
-    <link rel="alternate icon" type="image/png" href="~/assets/i/favicon.png">
-    <script src="~/assets/js/jquery.min.js"></script>
+    <title>登录 -  Webfolder</title>
+    <meta name="keywords" content=" Webfolder,Find friend base on webfolder ">
+    <meta name="description" content="Webfolder,Find friend base on webfolder">
+    <base href="."><!--[if IE]></base><![endif]-->
     <link href="~/assets/css/amazeui.min.css" rel="stylesheet" />
-    <script type="text/javascript">
-    var loginUrl = './Login/UserLogin';
-    </script>
-
+    <link href="~/assets/login/common.css" rel="stylesheet" />
+    <link href="~/assets/login/icon.css" rel="stylesheet" />
+    <link href="~/assets/login/link.css" rel="stylesheet" />
+    <link href="~/assets/login/login.css" rel="stylesheet" />
+    <link href="~/assets/login/new.css" rel="stylesheet" />
+    <link href="~/assets/login/style.css" rel="stylesheet" />
+    <script src="~/assets/js/jquery.min.js"></script>
     <script src="~/DomainJS/login.js"></script>
+    <script type="text/javascript">
+        var loginUrl = './Login/UserLogin';
 
-    <style>
-        .header {
-            text-align: center;
+    </script>
+    <!--[if lte IE 8]>
+    <script type="text/javascript" src="http://ask.amazeui.org/static/js/respond.js"></script>
+    <![endif]-->
+    <style type="text/css">
+        .fancybox-margin {
+            margin-right: 0px;
         }
-
-            .header h1 {
-                font-size: 200%;
-                color: #333;
-                margin-top: 30px;
-            }
-
-            .header p {
-                font-size: 14px;
-            }
     </style>
 </head>
-    <div class="header">
-        <div class="am-g">
-            <h1>Webfolder login</h1>
-            <p>Find friend base on webfolder<br />发现兴趣、朋友、圈子...</p>
-        </div>
-        <hr />
-    </div>
-    <div class="am-g">
-        <div class="am-u-lg-6 am-u-md-8 am-u-sm-centered">
-            <div class="am-form">
-                <label for="email">邮箱 / 登陆名:</label>
-                @if (Model != null)
-                {
-                    <input type="text" name="" id="email" value=@Model.UserEmail placeholder="邮箱 / 登陆名">
-                }
-                else
-                {
-                    <input type="text" name="" id="email" value="" placeholder="请输入邮箱 / 登陆名">
-                }
-
-                <br>
-                <label for="password">密码:</label>
-                <input type="password" name="" id="password" value="" placeholder="请输入密码">
-                <div class="am-cf">
-                    <input id="login" name="" value="登 录" class="am-btn am-btn-primary am-btn-sm am-fl">
-                    <a class="am-btn am-btn-link am-btn-sm am-fl" href="~/Register">点我注册 ^_^</a>
-                    <input name="" value="忘记密码 ^_^? " class="am-btn am-btn-default am-btn-sm am-fr">
+<body>
+    <noscript unselectable="on" id="noscript">
+        &lt;div class="aw-404 aw-404-wrap container"&gt;
+        &lt;img src="http://ask.amazeui.org/static/common/no-js.jpg"&gt;
+        &lt;p&gt;你的浏览器禁用了JavaScript, 请开启后刷新浏览器获得更好的体验!&lt;/p&gt;
+        &lt;/div&gt;
+    </noscript>
+    <div id="wrapper">
+        <div class="aw-login-box">
+            <div class="mod-body am-cf">
+                <div class="content am-fl">
+                    <h5 style="font-size:xx-large">Webfolder</h5>
+                    <p>Find friend base on webfolder<br />发现兴趣、朋友、圈子...</p>
+                    <br />
+                    <ul>
+                        <li>
+                            <input type="text" id="aw-login-user-name" class="am-form-field am-radius" placeholder="邮箱 / 用户名" name="user_name">
+                        </li>
+                        <li>
+                            <input type="password" id="aw-login-user-password" class="am-form-field am-radius" placeholder="密码" name="password">
+                        </li>
+                        <li class="am-alert am-alert-danger error_message hide">
+                            <i class="icon icon-delete"></i> <em></em>
+                        </li>
+                        <li class="last">
+                            <a href="javascript:;" id="login_submit" class="am-fr am-btn am-btn-secondary am-radius">登录</a>
+                            <a href="">&nbsp;&nbsp;忘记密码</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="side-bar am-fl">
                 </div>
             </div>
-            <hr>
-            <p>© 2014 AllMobilize, Inc. Licensed under MIT license.</p>
+            <div class="mod-footer">
+                <span>还没有账号?</span>&nbsp;&nbsp;
+                <a href="~/Register">立即注册</a>&nbsp;&nbsp;•&nbsp;&nbsp;
+                <a href="#">游客访问</a>&nbsp;&nbsp;•&nbsp;&nbsp;
+
+            </div>
         </div>
     </div>
+    <div class="aw-footer-wrap">
+        <div class="aw-footer">
+            Copyright © 2016, All Rights Reserved
 
+            <span class="am-hide-sm-only">UI Powered By Amaze UI</span>
+        </div>
+    </div>
+    <!-- DO NOT REMOVE -->
+    <div id="aw-ajax-box" class="aw-ajax-box"></div>
+    <div style="display:none;" id="__crond"><img src="./" width="1" height="1"></div>
+    <!-- Escape time: 0.075984001159668 --><!-- / DO NOT REMOVE -->
 
+</body>
+</html>

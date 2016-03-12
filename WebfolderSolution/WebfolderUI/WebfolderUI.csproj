@@ -109,6 +109,7 @@
     <Content Include="assets\i\examples\loginPage.png" />
     <Content Include="assets\i\examples\sidebarPage.png" />
     <Content Include="assets\i\favicon.png" />
+    <Content Include="assets\i\login_bg.jpg" />
     <Content Include="assets\i\startup-640x1096.png" />
     <Content Include="assets\js\amazeui.ie8polyfill.js" />
     <Content Include="assets\js\amazeui.ie8polyfill.min.js" />
@@ -119,6 +120,12 @@
     <Content Include="assets\js\app.js" />
     <Content Include="assets\js\handlebars.min.js" />
     <Content Include="assets\js\jquery.min.js" />
+    <Content Include="assets\login\common.css" />
+    <Content Include="assets\login\icon.css" />
+    <Content Include="assets\login\link.css" />
+    <Content Include="assets\login\login.css" />
+    <Content Include="assets\login\new.css" />
+    <Content Include="assets\login\style.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\Site.css" />
@@ -150,10 +157,11 @@
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Commom\UploadFileHelper.cs" />
-    <Compile Include="Controllers\SharedController.cs" />
+    <Compile Include="Controllers\DefaultController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\RegisterController.cs" />
     <Compile Include="Controllers\UserInfoController.cs" />
+    <Compile Include="Controllers\WebfolderTableController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -170,6 +178,9 @@
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="Views\UserInfo\Index.cshtml" />
+    <Content Include="Views\Default\Index.cshtml" />
+    <Content Include="Views\WebfolderTable\Index.cshtml" />
+    <Content Include="Views\WebfolderTable\ImportWebfolder.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -180,7 +191,6 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="UploadFiles\UserImg\" />
-    <Folder Include="Views\Layout\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\WebfolderBo\WebfolderBo.csproj">

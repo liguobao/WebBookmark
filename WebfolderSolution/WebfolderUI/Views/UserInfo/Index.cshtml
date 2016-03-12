@@ -21,7 +21,7 @@
                 <div class="am-panel-bd">
                     <div class="am-g">
                         <div class="am-u-md-12">
-                            <span>你的头像</span>
+                            <span>头像</span>
                         </div>
                         <div class="am-u-md-12">
                             @if (Model != null && !string.IsNullOrEmpty(Model.UserImagURL))
@@ -51,17 +51,17 @@
         <div class="am-u-sm-12 am-u-md-8 am-u-md-pull-4">
             <div class="am-form am-form-horizontal">
                 <div class="am-form-group">
-                    <label for="login-name" class="am-u-sm-3 am-form-label">登陆名 / Login-Name</label>
+                    <label for="login-name" class="am-u-sm-3 am-form-label">用户名/User-Name</label>
                     <div class="am-u-sm-9">
                         @if (Model != null && !string.IsNullOrEmpty(Model.LoginName))
                         {
-                            <input type="text" id="login-name" placeholder="登陆名 / Login-Name" value='@Model.LoginName'>
+                            <input type="text" id="login-name" placeholder="用户名 / User-Name" value='@Model.LoginName'>
                         }
                         else
                         {
-                            <input type="text" id="login-name" placeholder="登陆名 / Login-Name">
+                            <input type="text" id="login-name" placeholder="用户名 / User-Name">
                         }
-                        <small>输入你的登陆名....</small>
+                        <small>输入你的用户名....</small>
                     </div>
                 </div>
                 <div class="am-form-group">
