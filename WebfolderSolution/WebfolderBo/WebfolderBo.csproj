@@ -30,6 +30,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="HtmlAgilityPack">
+      <HintPath>..\DLL\HtmlAgilityPack.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -40,9 +43,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Model\BizHrefInfo.cs" />
     <Compile Include="Model\BizUserInfo.cs" />
     <Compile Include="Model\BizResultInfo.cs" />
     <Compile Include="Encryption.cs" />
+    <Compile Include="Model\BizUserWebFolder.cs" />
+    <Compile Include="Model\BizUserWebFolderImportLog.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Service\UserInfoBo.cs" />
   </ItemGroup>

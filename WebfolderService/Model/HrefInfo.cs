@@ -13,17 +13,17 @@ namespace WebfolderService.Model
     /// <summary>
     /// 
     /// </summary>
-	public class UserWebFolder
+	public class HrefInfo
 	{
         /// <summary>
         /// 主键，自增
         /// </summary>
-		public long UserWebFolderID{get;set;}
+		public long HrefInfoID{get;set;}
             
         /// <summary>
-        /// 收藏夹名称
+        /// 网页收藏夹ID
         /// </summary>
-		public string WebFolderName{get;set;}
+		public long UserWebFolderID{get;set;}
             
         /// <summary>
         /// 用户ID
@@ -31,19 +31,29 @@ namespace WebfolderService.Model
 		public long UserInfoID{get;set;}
             
         /// <summary>
+        /// 网址
+        /// </summary>
+		public string Href{get;set;}
+            
+        /// <summary>
+        /// 网页HTML
+        /// </summary>
+		public string HTML{get;set;}
+            
+        /// <summary>
+        /// 域名
+        /// </summary>
+		public string Host{get;set;}
+            
+        /// <summary>
         /// 创建时间
         /// </summary>
 		public DateTime CreateTime{get;set;}
             
         /// <summary>
-        /// 对外是否可见
+        /// 导入XML信息
         /// </summary>
-		public sbyte Visible{get;set;}
-            
-        /// <summary>
-        /// 父收藏夹ID
-        /// </summary>
-		public long ParentWebfolderID{get;set;}
+		public string ImportXML{get;set;}
             
 	}
 }

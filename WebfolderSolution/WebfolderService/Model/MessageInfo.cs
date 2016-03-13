@@ -38,7 +38,7 @@ namespace WebfolderService.Model
         /// <summary>
         /// 是否已读
         /// </summary>
-		public ushort IsRead{get;set;}
+		public sbyte IsRead{get;set;}
             
         /// <summary>
         /// 消息类型

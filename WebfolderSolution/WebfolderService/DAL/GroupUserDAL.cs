@@ -121,7 +121,7 @@ namespace WebfolderService.DAL
 			groupUser.GroupUserID = (long)ToModelValue(dr,"GroupUserID");
 			groupUser.GroupID = (long)ToModelValue(dr,"GroupID");
 			groupUser.UserInfoID = (long)ToModelValue(dr,"UserInfoID");
-			groupUser.IsPass = (ushort)ToModelValue(dr,"IsPass");
+			groupUser.IsPass = (sbyte)ToModelValue(dr,"IsPass");
 			groupUser.CreateTime = (DateTime)ToModelValue(dr,"CreateTime");
 			return groupUser;
 		}

@@ -1,6 +1,6 @@
 ﻿@using WebfolderUI
 
-@if (new WebfolderUI.UILoginHelper().CheckUserLogin(Request) == false)
+@if (UILoginHelper.CheckUserLogin(Request) == false)
 {
     Response.Redirect("login");
 }

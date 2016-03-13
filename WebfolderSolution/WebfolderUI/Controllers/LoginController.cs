@@ -39,8 +39,8 @@ namespace WebfolderUI.Controllers
             var rsp = UserInfoBo.UserLogin(logionName, uiUserInfo.Password);
             if(rsp.IsSuccess)
             {
-                
-                new UILoginHelper().WriteUserInfo(logionName, uiUserInfo.Password, Response);
+
+                UILoginHelper.WriteUserInfo(rsp.ResultID, logionName, uiUserInfo.Password, Response);
             }
             return Json(rsp);
         }

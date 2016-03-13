@@ -33,7 +33,7 @@ namespace WebfolderService.Model
         /// <summary>
         /// 是否通过
         /// </summary>
-		public ushort IsPass{get;set;}
+		public sbyte IsPass{get;set;}
             
         /// <summary>
         /// 创建时间

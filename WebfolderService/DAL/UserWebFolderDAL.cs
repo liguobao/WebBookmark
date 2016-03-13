@@ -19,23 +19,24 @@ namespace WebfolderService.DAL
         /// </summary>        
         public bool Add (UserWebFolder userWebFolder)
 		{
-				string sql ="INSERT INTO tblUserWebFolder (WebFolderName, UserInfoID, CreateTime, Visible)  VALUES (@WebFolderName, @UserInfoID, @CreateTime, @Visible)";
+				string sql ="INSERT INTO tblUserWebFolder (UserWebFolderID, WebFolderName, UserInfoID, CreateTime, Visible, ParentWebfolderID)  VALUES (@UserWebFolderID, @WebFolderName, @UserInfoID, @CreateTime, @Visible, @ParentWebfolderID)";
 				MySqlParameter[] para = new MySqlParameter[]
 					{
+						new MySqlParameter("@UserWebFolderID", ToDBValue(userWebFolder.UserWebFolderID)),
 						new MySqlParameter("@WebFolderName", ToDBValue(userWebFolder.WebFolderName)),
 						new MySqlParameter("@UserInfoID", ToDBValue(userWebFolder.UserInfoID)),
 						new MySqlParameter("@CreateTime", ToDBValue(userWebFolder.CreateTime)),
 						new MySqlParameter("@Visible", ToDBValue(userWebFolder.Visible)),
+						new MySqlParameter("@ParentWebfolderID", ToDBValue(userWebFolder.ParentWebfolderID)),
 					};
-					
-				int AddId = (int)MyDBHelper.ExecuteScalar(sql, para);
+				int AddId = (int)MyDBHelper.ExecuteNonQuery(sql, para);
 				if(AddId==1)
 				{
 					return true;
 				}else
 				{
 					return false;					
-				}
+				}			
 		}
          #endregion
 
@@ -72,6 +73,7 @@ namespace WebfolderService.DAL
                 +", UserInfoID = @UserInfoID" 
                 +", CreateTime = @CreateTime" 
                 +", Visible = @Visible" 
+                +", ParentWebfolderID = @ParentWebfolderID" 
                
             +" WHERE UserWebFolderID = @UserWebFolderID";
 
@@ -83,6 +85,7 @@ namespace WebfolderService.DAL
 					,new MySqlParameter("@UserInfoID", ToDBValue(userWebFolder.UserInfoID))
 					,new MySqlParameter("@CreateTime", ToDBValue(userWebFolder.CreateTime))
 					,new MySqlParameter("@Visible", ToDBValue(userWebFolder.Visible))
+					,new MySqlParameter("@ParentWebfolderID", ToDBValue(userWebFolder.ParentWebfolderID))
 			};
 
 			return MyDBHelper.ExecuteNonQuery(sql, para);
@@ -122,7 +125,8 @@ namespace WebfolderService.DAL
 			userWebFolder.WebFolderName = (string)ToModelValue(dr,"WebFolderName");
 			userWebFolder.UserInfoID = (long)ToModelValue(dr,"UserInfoID");
 			userWebFolder.CreateTime = (DateTime)ToModelValue(dr,"CreateTime");
-			userWebFolder.Visible = (ushort)ToModelValue(dr,"Visible");
+			userWebFolder.Visible = (sbyte)ToModelValue(dr,"Visible");
+			userWebFolder.ParentWebfolderID = (long)ToModelValue(dr,"ParentWebfolderID");
 			return userWebFolder;
 		}
 		#endregion

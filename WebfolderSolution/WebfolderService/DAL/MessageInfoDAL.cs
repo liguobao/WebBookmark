@@ -128,7 +128,7 @@ namespace WebfolderService.DAL
 			messageInfo.MessageTitle = (string)ToModelValue(dr,"MessageTitle");
 			messageInfo.MessageContent = (string)ToModelValue(dr,"MessageContent");
 			messageInfo.UserInfoID = (long)ToModelValue(dr,"UserInfoID");
-			messageInfo.IsRead = (ushort)ToModelValue(dr,"IsRead");
+			messageInfo.IsRead = (sbyte)ToModelValue(dr,"IsRead");
 			messageInfo.MessageInfoType = (int)ToModelValue(dr,"MessageInfoType");
 			messageInfo.CreateTime = (DateTime)ToModelValue(dr,"CreateTime");
 			return messageInfo;

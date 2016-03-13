@@ -8,16 +8,16 @@ using WebfolderService.Model;
 namespace WebfolderService.BLL
 {
 	[DataObject]
-    public partial class URLInfoBLL
+    public partial class HrefInfoBLL
     {
         #region 根据传入Model，并返回Model
         /// <summary>
         /// 根据传入Model，并返回是否插入成功。
         /// </summary> 
 		[DataObjectMethod(DataObjectMethodType.Insert)]
-        public bool URLInfoAdd(URLInfo uRLInfo)
+        public bool HrefInfoAdd(HrefInfo hrefInfo)
         {
-            return new URLInfoDAL().Add(uRLInfo);
+            return new HrefInfoDAL().Add(hrefInfo);
         }
         #endregion
         
@@ -26,9 +26,9 @@ namespace WebfolderService.BLL
         /// 根据Id删除数据记录
         /// </summary>
 		[DataObjectMethod(DataObjectMethodType.Delete)]
-        public int DeleteByURLInfoID(long uRLInfoID)
+        public int DeleteByHrefInfoID(long hrefInfoID)
         {
-            return new URLInfoDAL().DeleteByURLInfoID(uRLInfoID);
+            return new HrefInfoDAL().DeleteByHrefInfoID(hrefInfoID);
         }
         #endregion
 		
@@ -37,9 +37,9 @@ namespace WebfolderService.BLL
         /// <summary>
         /// 根据字段名获取数据记录
         /// </summary>
-	     public IEnumerable<URLInfo> GetBycolumnName(string columnName,string columnContent)
+	     public IEnumerable<HrefInfo> GetBycolumnName(string columnName,string columnContent)
 		{
-			return new URLInfoDAL().GetBycolumnName(columnName,columnContent);
+			return new HrefInfoDAL().GetBycolumnName(columnName,columnContent);
 		}
         #endregion
         
@@ -48,9 +48,9 @@ namespace WebfolderService.BLL
         /// 根据传入Model更新数据并返回更新后的Model
         /// </summary>
 		[DataObjectMethod(DataObjectMethodType.Update)]
-		public int Update(URLInfo uRLInfo)
+		public int Update(HrefInfo hrefInfo)
         {
-            return new URLInfoDAL().Update(uRLInfo);
+            return new HrefInfoDAL().Update(hrefInfo);
         }
         #endregion
 
@@ -59,9 +59,9 @@ namespace WebfolderService.BLL
         /// 传入Id，获得Model实体
         /// </summary>
 		[DataObjectMethod(DataObjectMethodType.Select)]
-        public URLInfo GetByURLInfoID(long uRLInfoID)
+        public HrefInfo GetByHrefInfoID(long hrefInfoID)
         {
-            return new URLInfoDAL().GetByURLInfoID(uRLInfoID);
+            return new HrefInfoDAL().GetByHrefInfoID(hrefInfoID);
         }
         #endregion
         
@@ -71,7 +71,7 @@ namespace WebfolderService.BLL
         ///</summary>
 		public int GetTotalCount()
 		{
-			return new URLInfoDAL().GetTotalCount();
+			return new HrefInfoDAL().GetTotalCount();
 		}
 		#endregion
         
@@ -80,9 +80,9 @@ namespace WebfolderService.BLL
         /// 获得分页记录集IEnumerable<>
         ///</summary>  
 		[DataObjectMethod(DataObjectMethodType.Select)]
-		public IEnumerable<URLInfo> GetPagedData(int minrownum,int maxrownum)
+		public IEnumerable<HrefInfo> GetPagedData(int minrownum,int maxrownum)
 		{
-			return new URLInfoDAL().GetPagedData(minrownum,maxrownum);
+			return new HrefInfoDAL().GetPagedData(minrownum,maxrownum);
 		}
 		#endregion
         
@@ -91,9 +91,9 @@ namespace WebfolderService.BLL
         /// 获得总记录集IEnumerable<>
         ///</summary>  
 		[DataObjectMethod(DataObjectMethodType.Select)]
-		public IEnumerable<URLInfo> GetAll()
+		public IEnumerable<HrefInfo> GetAll()
 		{
-			return new URLInfoDAL().GetAll();
+			return new HrefInfoDAL().GetAll();
 		}
         #endregion
     }

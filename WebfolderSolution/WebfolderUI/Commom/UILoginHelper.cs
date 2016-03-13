@@ -6,7 +6,7 @@ namespace WebfolderUI
 {
     public class UILoginHelper
     {
-        public string  GetUIUserLoginNameOrEmail(HttpRequestBase requestBase)
+        public static string  GetUIUserLoginNameOrEmail(HttpRequestBase requestBase)
         {
             string loginNameOrEmail = string.Empty;
             var userInfo = requestBase.Cookies["UserInfo"];
@@ -16,7 +16,7 @@ namespace WebfolderUI
         }
 
 
-        public string GetUIUserPassword(HttpRequestBase requestBase)
+        public static string GetUIUserPassword(HttpRequestBase requestBase)
         {
             string password = string.Empty;
             var userInfo = requestBase.Cookies["UserInfo"];
@@ -25,9 +25,20 @@ namespace WebfolderUI
             return password;
         }
 
-        public void WriteUserInfo(string loginNameOrEmail,string password,HttpResponseBase responseBase)
+
+        public static long GetUIDInCookie(HttpRequestBase requestBase)
+        {
+            long uid = 0;
+            var userInfo = requestBase.Cookies["UserInfo"];
+            if (userInfo != null)
+                uid = userInfo.Values["UID"].ConvertToPlainLong();
+            return uid;
+        }
+
+        public static void WriteUserInfo(string uid, string loginNameOrEmail,string password,HttpResponseBase responseBase)
         {
             HttpCookie cookie = new HttpCookie("UserInfo");
+            cookie.Values.Add("UID", uid);
             cookie.Values.Add("LoginNameOrEmail", loginNameOrEmail.ConvertToCiphertext());
             cookie.Values.Add("Token",password.ConvertToCiphertext());
             responseBase.Cookies.Add(cookie);
@@ -35,7 +46,7 @@ namespace WebfolderUI
 
 
 
-        public bool CheckUserLogin(HttpRequestBase requestBase)
+        public static bool CheckUserLogin(HttpRequestBase requestBase)
         {
             var rsp = UserInfoBo.UserLogin(GetUIUserLoginNameOrEmail(requestBase), GetUIUserPassword(requestBase));
             return rsp.IsSuccess;  

@@ -38,7 +38,13 @@ namespace WebfolderService.Model
         /// <summary>
         /// 对外是否可见
         /// </summary>
-		public ushort Visible{get;set;}
+		public sbyte Visible{get;set;}
+        
+        
+        /// <summary>
+        /// 父收藏夹ID
+        /// </summary>
+		public long ParentWebfolderID{get;set;}
             
 	}
 }

@@ -121,7 +121,7 @@ namespace WebfolderService.DAL
 			userRelationship.UserRelationshipID = (long)ToModelValue(dr,"UserRelationshipID");
 			userRelationship.FollowerID = (long)ToModelValue(dr,"FollowerID");
 			userRelationship.BeFollwedUID = (long)ToModelValue(dr,"BeFollwedUID");
-			userRelationship.IsMutuallyFollwe = (ushort)ToModelValue(dr,"IsMutuallyFollwe");
+			userRelationship.IsMutuallyFollwe = (sbyte)ToModelValue(dr,"IsMutuallyFollwe");
 			userRelationship.CreateTime = (DateTime)ToModelValue(dr,"CreateTime");
 			return userRelationship;
 		}

@@ -33,7 +33,7 @@ namespace WebfolderService.Model
         /// <summary>
         /// 是否互相关注
         /// </summary>
-		public ushort IsMutuallyFollwe{get;set;}
+		public sbyte IsMutuallyFollwe{get;set;}
             
         /// <summary>
         /// 创建时间

@@ -13,37 +13,27 @@ namespace WebfolderService.Model
     /// <summary>
     /// 
     /// </summary>
-	public class URLInfo
+	public class UserWebFolderImportLog
 	{
         /// <summary>
-        /// 主键，自增
+        /// 主键
         /// </summary>
-		public long URLInfoID{get;set;}
+		public long UserWebFolderImportLogID{get;set;}
             
         /// <summary>
-        /// 网页收藏夹ID
-        /// </summary>
-		public long UserWebFolderID{get;set;}
-            
-        /// <summary>
-        /// 用户ID
+        /// 用户UID
         /// </summary>
 		public long UserInfoID{get;set;}
             
         /// <summary>
-        /// 网址
+        /// 文件所在路径
         /// </summary>
-		public string URL{get;set;}
+		public string Path{get;set;}
             
         /// <summary>
-        /// 网页HTML
+        /// 文件名称
         /// </summary>
-		public string HTML{get;set;}
-            
-        /// <summary>
-        /// 域名
-        /// </summary>
-		public string DomainName{get;set;}
+		public string FileName{get;set;}
             
         /// <summary>
         /// 创建时间

@@ -11,21 +11,24 @@ using WebfolderService.Model;
 
 namespace WebfolderService.DAL
 {
-	public partial class GroupUserDAL
+	public partial class HrefInfoDAL
 	{
         #region 根据传入Model，并返回Model
         /// <summary>
         /// 根据传入Model，并返回Model
         /// </summary>        
-        public bool Add (GroupUser groupUser)
+        public bool Add (HrefInfo hrefInfo)
 		{
-				string sql ="INSERT INTO tblGroupUser (GroupID, UserInfoID, IsPass, CreateTime)  VALUES (@GroupID, @UserInfoID, @IsPass, @CreateTime)";
+				string sql ="INSERT INTO tblHrefInfo (UserWebFolderID, UserInfoID, Href, HTML, Host, CreateTime, ImportXML)  VALUES (@UserWebFolderID, @UserInfoID, @Href, @HTML, @Host, @CreateTime, @ImportXML)";
 				MySqlParameter[] para = new MySqlParameter[]
 					{
-						new MySqlParameter("@GroupID", ToDBValue(groupUser.GroupID)),
-						new MySqlParameter("@UserInfoID", ToDBValue(groupUser.UserInfoID)),
-						new MySqlParameter("@IsPass", ToDBValue(groupUser.IsPass)),
-						new MySqlParameter("@CreateTime", ToDBValue(groupUser.CreateTime)),
+						new MySqlParameter("@UserWebFolderID", ToDBValue(hrefInfo.UserWebFolderID)),
+						new MySqlParameter("@UserInfoID", ToDBValue(hrefInfo.UserInfoID)),
+						new MySqlParameter("@Href", ToDBValue(hrefInfo.Href)),
+						new MySqlParameter("@HTML", ToDBValue(hrefInfo.HTML)),
+						new MySqlParameter("@Host", ToDBValue(hrefInfo.Host)),
+						new MySqlParameter("@CreateTime", ToDBValue(hrefInfo.CreateTime)),
+						new MySqlParameter("@ImportXML", ToDBValue(hrefInfo.ImportXML)),
 					};
 					
 				int AddId = (int)MyDBHelper.ExecuteScalar(sql, para);
@@ -43,13 +46,13 @@ namespace WebfolderService.DAL
         /// <summary>
         /// 根据Id删除数据记录
         /// </summary>
-        public int DeleteByGroupUserID(long groupUserID)
+        public int DeleteByHrefInfoID(long hrefInfoID)
 		{
-            string sql = "DELETE from tblGroupUser WHERE GroupUserID = @GroupUserID";
+            string sql = "DELETE from tblHrefInfo WHERE HrefInfoID = @HrefInfoID";
 
             MySqlParameter[] para = new MySqlParameter[]
 			{
-				new MySqlParameter("@GroupUserID", groupUserID)
+				new MySqlParameter("@HrefInfoID", hrefInfoID)
 			};
 		
             return MyDBHelper.ExecuteNonQuery(sql, para);
@@ -63,26 +66,32 @@ namespace WebfolderService.DAL
         /// <summary>
         /// 根据传入Model更新数据并返回更新后的Model
         /// </summary>
-        public int Update(GroupUser groupUser)
+        public int Update(HrefInfo hrefInfo)
         {
             string sql =
-                "UPDATE tblGroupUser " +
+                "UPDATE tblHrefInfo " +
                 "SET " +
-			" GroupID = @GroupID" 
+			" UserWebFolderID = @UserWebFolderID" 
                 +", UserInfoID = @UserInfoID" 
-                +", IsPass = @IsPass" 
+                +", Href = @Href" 
+                +", HTML = @HTML" 
+                +", Host = @Host" 
                 +", CreateTime = @CreateTime" 
+                +", ImportXML = @ImportXML" 
                
-            +" WHERE GroupUserID = @GroupUserID";
+            +" WHERE HrefInfoID = @HrefInfoID";
 
 
 			MySqlParameter[] para = new MySqlParameter[]
 			{
-				new MySqlParameter("@GroupUserID", groupUser.GroupUserID)
-					,new MySqlParameter("@GroupID", ToDBValue(groupUser.GroupID))
-					,new MySqlParameter("@UserInfoID", ToDBValue(groupUser.UserInfoID))
-					,new MySqlParameter("@IsPass", ToDBValue(groupUser.IsPass))
-					,new MySqlParameter("@CreateTime", ToDBValue(groupUser.CreateTime))
+				new MySqlParameter("@HrefInfoID", hrefInfo.HrefInfoID)
+					,new MySqlParameter("@UserWebFolderID", ToDBValue(hrefInfo.UserWebFolderID))
+					,new MySqlParameter("@UserInfoID", ToDBValue(hrefInfo.UserInfoID))
+					,new MySqlParameter("@Href", ToDBValue(hrefInfo.Href))
+					,new MySqlParameter("@HTML", ToDBValue(hrefInfo.HTML))
+					,new MySqlParameter("@Host", ToDBValue(hrefInfo.Host))
+					,new MySqlParameter("@CreateTime", ToDBValue(hrefInfo.CreateTime))
+					,new MySqlParameter("@ImportXML", ToDBValue(hrefInfo.ImportXML))
 			};
 
 			return MyDBHelper.ExecuteNonQuery(sql, para);
@@ -93,10 +102,10 @@ namespace WebfolderService.DAL
         /// <summary>
         /// 传入Id，获得Model实体
         /// </summary>
-        public GroupUser GetByGroupUserID(long groupUserID)
+        public HrefInfo GetByHrefInfoID(long hrefInfoID)
         {
-            string sql = "SELECT * FROM tblGroupUser WHERE GroupUserID = @GroupUserID";
-            using(MySqlDataReader reader = MyDBHelper.ExecuteDataReader(sql, new MySqlParameter("@GroupUserID", groupUserID)))
+            string sql = "SELECT * FROM tblHrefInfo WHERE HrefInfoID = @HrefInfoID";
+            using(MySqlDataReader reader = MyDBHelper.ExecuteDataReader(sql, new MySqlParameter("@HrefInfoID", hrefInfoID)))
 			{
 				if (reader.Read())
 				{
@@ -114,16 +123,19 @@ namespace WebfolderService.DAL
         /// <summary>
         /// 把DataRow转换成Model
         /// </summary>
-		public GroupUser ToModel(MySqlDataReader dr)
+		public HrefInfo ToModel(MySqlDataReader dr)
 		{
-			GroupUser groupUser = new GroupUser();
+			HrefInfo hrefInfo = new HrefInfo();
 
-			groupUser.GroupUserID = (long)ToModelValue(dr,"GroupUserID");
-			groupUser.GroupID = (long)ToModelValue(dr,"GroupID");
-			groupUser.UserInfoID = (long)ToModelValue(dr,"UserInfoID");
-			groupUser.IsPass = (sbyte)ToModelValue(dr,"IsPass");
-			groupUser.CreateTime = (DateTime)ToModelValue(dr,"CreateTime");
-			return groupUser;
+			hrefInfo.HrefInfoID = (long)ToModelValue(dr,"HrefInfoID");
+			hrefInfo.UserWebFolderID = (long)ToModelValue(dr,"UserWebFolderID");
+			hrefInfo.UserInfoID = (long)ToModelValue(dr,"UserInfoID");
+			hrefInfo.Href = (string)ToModelValue(dr,"Href");
+			hrefInfo.HTML = (string)ToModelValue(dr,"HTML");
+			hrefInfo.Host = (string)ToModelValue(dr,"Host");
+			hrefInfo.CreateTime = (DateTime)ToModelValue(dr,"CreateTime");
+			hrefInfo.ImportXML = (string)ToModelValue(dr,"ImportXML");
+			return hrefInfo;
 		}
 		#endregion
         
@@ -133,7 +145,7 @@ namespace WebfolderService.DAL
         ///</summary>        
 		public int GetTotalCount()
 		{
-			string sql = "SELECT count(*) FROM tblGroupUser";
+			string sql = "SELECT count(*) FROM tblHrefInfo";
 			return (int)MyDBHelper.ExecuteScalar(sql);
 		}
 		#endregion
@@ -142,9 +154,9 @@ namespace WebfolderService.DAL
         ///<summary>
         /// 获得分页记录集IEnumerable<>
         ///</summary>              
-		public IEnumerable<GroupUser> GetPagedData(int minrownum,int maxrownum)
+		public IEnumerable<HrefInfo> GetPagedData(int minrownum,int maxrownum)
 		{
-			string sql = "SELECT * from(SELECT *,(row_number() over(order by GroupUserID))-1 rownum FROM tblGroupUser) t where rownum>=@minrownum and rownum<=@maxrownum";
+			string sql = "SELECT * from(SELECT *,(row_number() over(order by HrefInfoID))-1 rownum FROM tblHrefInfo) t where rownum>=@minrownum and rownum<=@maxrownum";
 			using(MySqlDataReader reader = MyDBHelper.ExecuteDataReader(sql,
 				new MySqlParameter("@minrownum",minrownum),
 				new MySqlParameter("@maxrownum",maxrownum)))
@@ -159,9 +171,9 @@ namespace WebfolderService.DAL
         ///<summary>
         ///根据字段名获取数据记录IEnumerable<>
         ///</summary>              
-		public IEnumerable<GroupUser> GetBycolumnName(string columnName,string columnContent)
+		public IEnumerable<HrefInfo> GetBycolumnName(string columnName,string columnContent)
 		{
-			string sql = "SELECT * FROM tblGroupUser where "+columnName+"="+columnContent;
+			string sql = "SELECT * FROM tblHrefInfo where "+columnName+"="+columnContent;
 			using(MySqlDataReader reader = MyDBHelper.ExecuteDataReader(sql))
 			{
 				return ToModels(reader);			
@@ -175,9 +187,9 @@ namespace WebfolderService.DAL
         ///<summary>
         /// 获得总记录集IEnumerable<>
         ///</summary> 
-		public IEnumerable<GroupUser> GetAll()
+		public IEnumerable<HrefInfo> GetAll()
 		{
-			string sql = "SELECT * FROM tblGroupUser";
+			string sql = "SELECT * FROM tblHrefInfo";
 			using(MySqlDataReader reader = MyDBHelper.ExecuteDataReader(sql))
 			{
 				return ToModels(reader);			
@@ -189,9 +201,9 @@ namespace WebfolderService.DAL
         ///<summary>
         /// 把MySqlDataReader转换成IEnumerable<>
         ///</summary> 
-		protected IEnumerable<GroupUser> ToModels(MySqlDataReader reader)
+		protected IEnumerable<HrefInfo> ToModels(MySqlDataReader reader)
 		{
-			var list = new List<GroupUser>();
+			var list = new List<HrefInfo>();
 			while(reader.Read())
 			{
 				list.Add(ToModel(reader));

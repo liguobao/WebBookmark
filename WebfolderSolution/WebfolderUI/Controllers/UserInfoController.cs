@@ -11,16 +11,16 @@ namespace WebfolderUI.Controllers
 {
     public class UserInfoController : Controller
     {
-        private static UILoginHelper uiLoginHelper = new UILoginHelper();
+       
         // GET: UserInfo
         public ActionResult Index()
         {
             UIUserInfo uiUserInfo = null;
 
-            if (!uiLoginHelper.CheckUserLogin(Request))
+            if (!UILoginHelper.CheckUserLogin(Request))
                 return View(uiUserInfo);
           
-            var result =  UserInfoBo.GetUserInfoByLoginNameOrEmail(uiLoginHelper.GetUIUserLoginNameOrEmail(Request));
+            var result =  UserInfoBo.GetUserInfoByLoginNameOrEmail(UILoginHelper.GetUIUserLoginNameOrEmail(Request));
             if (result.IsSuccess)
             {
                 var bizUserInfo = result.Target as BizUserInfo;
@@ -42,14 +42,14 @@ namespace WebfolderUI.Controllers
 
         public ActionResult SaveUserInfo(UIUserInfo uiUserInfo)
         {
-            var loginEmail = uiLoginHelper.GetUIUserLoginNameOrEmail(Request);
+            var loginEmail = UILoginHelper.GetUIUserLoginNameOrEmail(Request);
             return Json(SaveUserToDB(loginEmail, uiUserInfo));
         }
 
 
         public ActionResult CheckUserEmailOrLoginName(string emailOrLoginName)
         {
-            var cookieLoginName= uiLoginHelper.GetUIUserLoginNameOrEmail(Request);
+            var cookieLoginName= UILoginHelper.GetUIUserLoginNameOrEmail(Request);
             BizResultInfo result = new BizResultInfo();
             if (cookieLoginName.Equals(emailOrLoginName))
             {
@@ -90,10 +90,10 @@ namespace WebfolderUI.Controllers
 
         public ActionResult SaveUserImag()
         {
-            BizResultInfo result = UploadFileHelper.UploadFile(Request);
+            BizResultInfo result = UploadFileHelper.UploadFileToUserImg(Request);
             if(result.IsSuccess)
             {
-                var loginEmail = uiLoginHelper.GetUIUserLoginNameOrEmail(Request);
+                var loginEmail = UILoginHelper.GetUIUserLoginNameOrEmail(Request);
                 var res=  UserInfoBo.GetUserInfoByLoginNameOrEmail(loginEmail);
                 var bizUserInfo = res.Target as BizUserInfo;
                 var path = Server.MapPath(bizUserInfo.UserImagURL);
