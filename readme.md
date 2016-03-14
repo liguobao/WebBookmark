@@ -1,11 +1,12 @@
----
-layout: post
-title: MyWebFolder Commit log
-category: .net
----
-
 
 #MyWebFolder Commit log
+
+##2016.3.14
+1. 修改项目名为WebBookmark，修改数据库名为WebBookmark
+2. 新增批量插入方法
+3. 简单完成导入数据
+
+
 
 ##2016.3.13
 1. 新建UploadWebfolderlog表，用于存储上传过的网页收藏夹文件

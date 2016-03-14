@@ -1,0 +1,20 @@
+G:\github\webfolder\WebfolderSolution\WebfolderService\bin\Debug\WebfolderService.dll
+G:\github\webfolder\WebfolderSolution\WebfolderService\bin\Debug\WebfolderService.pdb
+G:\github\webfolder\WebfolderSolution\WebfolderService\bin\Debug\MySql.Data.dll
+G:\github\webfolder\WebfolderSolution\WebfolderService\bin\Debug\MySql.Data.Entity.dll
+G:\github\webfolder\WebfolderSolution\WebfolderService\bin\Debug\MySql.Data.Entity.EF6.dll
+G:\github\webfolder\WebfolderSolution\WebfolderService\bin\Debug\MySql.Fabric.Plugin.dll
+G:\github\webfolder\WebfolderSolution\WebfolderService\bin\Debug\MySql.Web.dll
+G:\github\webfolder\WebfolderSolution\WebfolderService\obj\Debug\WebfolderService.csprojResolveAssemblyReference.cache
+G:\github\webfolder\WebfolderSolution\WebfolderService\obj\Debug\WebfolderService.dll
+G:\github\webfolder\WebfolderSolution\WebfolderService\obj\Debug\WebfolderService.pdb
+C:\Users\LGB83\Documents\Visual Studio 2015\Projects\webfolder\WebfolderSolution\WebfolderService\bin\Debug\WebfolderService.dll
+C:\Users\LGB83\Documents\Visual Studio 2015\Projects\webfolder\WebfolderSolution\WebfolderService\bin\Debug\WebfolderService.pdb
+C:\Users\LGB83\Documents\Visual Studio 2015\Projects\webfolder\WebfolderSolution\WebfolderService\bin\Debug\MySql.Data.dll
+C:\Users\LGB83\Documents\Visual Studio 2015\Projects\webfolder\WebfolderSolution\WebfolderService\bin\Debug\MySql.Data.Entity.dll
+C:\Users\LGB83\Documents\Visual Studio 2015\Projects\webfolder\WebfolderSolution\WebfolderService\bin\Debug\MySql.Data.Entity.EF6.dll
+C:\Users\LGB83\Documents\Visual Studio 2015\Projects\webfolder\WebfolderSolution\WebfolderService\bin\Debug\MySql.Fabric.Plugin.dll
+C:\Users\LGB83\Documents\Visual Studio 2015\Projects\webfolder\WebfolderSolution\WebfolderService\bin\Debug\MySql.Web.dll
+C:\Users\LGB83\Documents\Visual Studio 2015\Projects\webfolder\WebfolderSolution\WebfolderService\obj\Debug\WebfolderService.dll
+C:\Users\LGB83\Documents\Visual Studio 2015\Projects\webfolder\WebfolderSolution\WebfolderService\obj\Debug\WebfolderService.pdb
+C:\Users\LGB83\Documents\Visual Studio 2015\Projects\webfolder\WebfolderSolution\WebfolderService\obj\Debug\WebfolderService.csprojResolveAssemblyReference.cache

@@ -1,0 +1,19 @@
+G:\github\webfolder\WebfolderSolution\WebfolderBo\bin\Debug\WebfolderBo.dll
+G:\github\webfolder\WebfolderSolution\WebfolderBo\bin\Debug\WebfolderBo.pdb
+G:\github\webfolder\WebfolderSolution\WebfolderBo\bin\Debug\WebfolderService.dll
+G:\github\webfolder\WebfolderSolution\WebfolderBo\bin\Debug\MySql.Data.dll
+G:\github\webfolder\WebfolderSolution\WebfolderBo\bin\Debug\WebfolderService.pdb
+G:\github\webfolder\WebfolderSolution\WebfolderBo\obj\Debug\WebfolderBo.csprojResolveAssemblyReference.cache
+G:\github\webfolder\WebfolderSolution\WebfolderBo\obj\Debug\WebfolderBo.dll
+G:\github\webfolder\WebfolderSolution\WebfolderBo\obj\Debug\WebfolderBo.pdb
+C:\Users\LGB83\Documents\Visual Studio 2015\Projects\webfolder\WebfolderSolution\WebfolderBo\bin\Debug\WebfolderBo.dll
+C:\Users\LGB83\Documents\Visual Studio 2015\Projects\webfolder\WebfolderSolution\WebfolderBo\bin\Debug\WebfolderBo.pdb
+C:\Users\LGB83\Documents\Visual Studio 2015\Projects\webfolder\WebfolderSolution\WebfolderBo\bin\Debug\WebfolderService.dll
+C:\Users\LGB83\Documents\Visual Studio 2015\Projects\webfolder\WebfolderSolution\WebfolderBo\bin\Debug\MySql.Data.dll
+C:\Users\LGB83\Documents\Visual Studio 2015\Projects\webfolder\WebfolderSolution\WebfolderBo\bin\Debug\WebfolderService.pdb
+C:\Users\LGB83\Documents\Visual Studio 2015\Projects\webfolder\WebfolderSolution\WebfolderBo\obj\Debug\WebfolderBo.csprojResolveAssemblyReference.cache
+C:\Users\LGB83\Documents\Visual Studio 2015\Projects\webfolder\WebfolderSolution\WebfolderBo\obj\Debug\WebfolderBo.dll
+C:\Users\LGB83\Documents\Visual Studio 2015\Projects\webfolder\WebfolderSolution\WebfolderBo\obj\Debug\WebfolderBo.pdb
+C:\Users\LGB83\Documents\Visual Studio 2015\Projects\webfolder\WebfolderSolution\WebfolderBo\bin\Debug\HtmlAgilityPack.dll
+C:\Users\LGB83\Documents\Visual Studio 2015\Projects\webfolder\WebfolderSolution\WebfolderBo\bin\Debug\HtmlAgilityPack.pdb
+C:\Users\LGB83\Documents\Visual Studio 2015\Projects\webfolder\WebfolderSolution\WebfolderBo\bin\Debug\HtmlAgilityPack.xml
