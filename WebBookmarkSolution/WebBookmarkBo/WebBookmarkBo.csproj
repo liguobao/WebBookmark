@@ -54,7 +54,7 @@
     <Compile Include="Service\UserWebFolderBo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\WebfolderService\WebBookmarkService.csproj">
+    <ProjectReference Include="..\WebBookmarkService\WebBookmarkService.csproj">
       <Project>{81aacaf8-c34f-42c6-8689-7289c33daa91}</Project>
       <Name>WebBookmarkService</Name>
     </ProjectReference>
