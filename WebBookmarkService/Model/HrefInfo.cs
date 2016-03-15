@@ -53,7 +53,7 @@ namespace WebBookmarkService.Model
         /// <summary>
         /// 导入XML信息
         /// </summary>
-		public string ImportXML{get;set;}
+		public string IElementJSON{get;set;}
             
 	}
 }

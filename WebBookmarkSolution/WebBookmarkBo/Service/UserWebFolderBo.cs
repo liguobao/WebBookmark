@@ -22,7 +22,17 @@ namespace WebfolderBo.Service
             {
                 result.IsSuccess = isSuccess;
                 result.SuccessMessage = "插入成功。";
-                result.Target = lstBizWebfolder;
+                Dictionary<int, int> dicHash = new Dictionary<int, int>();
+                foreach(var w in lstBizWebfolder)
+                {
+                    if (!dicHash.ContainsKey(w.IElementHashcode))
+                        dicHash.Add(w.IElementHashcode,w.IElementHashcode);
+                }
+                var uid = lstBizWebfolder.FirstOrDefault().UserInfoID;
+                var lstDataInfo = BizUserWebFolder.LoadAllByUID(uid);
+
+                var dicDataInfo = lstDataInfo.Where(datainfo => dicHash.ContainsKey(datainfo.IElementHashcode)).ToDictionary(model=>model.IElementHashcode,model=>model);
+                result.Target = dicDataInfo;
 
             }else
             {

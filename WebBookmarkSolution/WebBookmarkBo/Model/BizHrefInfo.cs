@@ -16,7 +16,7 @@ namespace WebBookmarkBo.Model
         /// <summary>
         /// 网页收藏夹ID
         /// </summary>
-        public long UserWebBookmarkID { get; set; }
+        public long UserWebFolderID { get; set; }
 
         /// <summary>
         /// 用户ID
@@ -46,6 +46,6 @@ namespace WebBookmarkBo.Model
         /// <summary>
         /// 导入XML信息
         /// </summary>
-        public string ImportXML { get; set; }
+        public string IElementJSON { get; set; }
     }
 }

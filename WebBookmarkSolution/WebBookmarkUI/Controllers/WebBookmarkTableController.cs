@@ -1,6 +1,7 @@
 ﻿using AngleSharp.Dom;
 using AngleSharp.Dom.Html;
 using AngleSharp.Parser.Html;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -39,9 +40,9 @@ namespace WebBookmarkUI.Controllers
             long uid = UILoginHelper.GetUIDInCookie(Request);
 
 
-            Dictionary<IElement, IElement> dicWebBookmarkElement = new Dictionary<IElement, IElement>();
+            Dictionary<int, IElement> dicWebBookmarkElement = new Dictionary<int, IElement>();
             Dictionary<IElement, List<IElement>> dicWebBookmarkNameToHrefList = new Dictionary<IElement, List<IElement>>();
-
+            Dictionary<int, BizUserWebFolder> dicHashcodeToModel = new Dictionary<int, BizUserWebFolder>();
 
             var path = Server.MapPath(filePath);
             var allText = System.IO.File.ReadAllText(path);
@@ -51,26 +52,41 @@ namespace WebBookmarkUI.Controllers
                 var tree = new HtmlParser().Parse(allText);
                 if (tree != null)
                 {
-                    FillDictionaryWebBookmarkAndHrefInfo(tree.FirstElementChild, 
+                    FillDictionaryWebBookmarkAndHrefInfo(tree.FirstElementChild,
                         dicWebBookmarkElement, dicWebBookmarkNameToHrefList);
                 }
-                List<BizUserWebFolder> lstWebfolder = new List<BizUserWebFolder>();
-                foreach(var element in dicWebBookmarkElement.Keys)
+                result = SaveToDBAndFillHashModel(uid, dicWebBookmarkElement, ref dicHashcodeToModel);
+
+                List<BizHrefInfo> lstBizHrefInfo = new List<BizHrefInfo>();
+
+                foreach (var webbookmarkInfo in dicWebBookmarkNameToHrefList)
                 {
-                    lstWebfolder.Add(new BizUserWebFolder()
+                    var webbookmark = webbookmarkInfo.Key;
+                    var hrefNode = webbookmarkInfo.Value.Find(w=>w.NodeName.ToUpper()=="DL");
+                    if (hrefNode == null || hrefNode.Children ==null || hrefNode.Children.Count() ==0)
+                        continue;
+                    foreach(var oneHref in hrefNode.Children)
                     {
-                        WebFolderName = element.TextContent,
-                        UserInfoID = uid,
-                        Visible = 0,
-                        CreateTime = DateTime.Now,
-                        Comment ="",
-                        ParentWebfolderID=0,
-                    });
+                        if (oneHref.Children == null || oneHref.Children.Count() == 0)
+                            continue; 
+                        var hrefInfo = (IHtmlAnchorElement)oneHref.Children.FirstOrDefault();
+                        if (hrefInfo == null)
+                            continue;
+                        var webbookmarkHashcode = webbookmark.GetHashCode();
+                        BizUserWebFolder bizUserWebFolder = null;
+                        if (dicHashcodeToModel.ContainsKey(webbookmarkHashcode))
+                            bizUserWebFolder = dicHashcodeToModel[webbookmarkHashcode];
+
+                        BizHrefInfo bizHrefInfo = new BizHrefInfo();
+                        bizHrefInfo.UserInfoID = uid;
+                        bizHrefInfo.Host = hrefInfo.Host;
+                        bizHrefInfo.Href = hrefInfo.Href;
+                        bizHrefInfo.IElementJSON = hrefInfo.OuterHtml;
+                        bizHrefInfo.UserWebFolderID = bizUserWebFolder != null ? bizUserWebFolder.UserWebFolderID : 0;
+                        bizHrefInfo.CreateTime = DateTime.Now;
+                        lstBizHrefInfo.Add(bizHrefInfo);
+                    }
                 }
-
-                result= UserWebFolderBo.BatchAddUserWebfolder(lstWebfolder);
-
-
 
 
 
@@ -81,9 +97,38 @@ namespace WebBookmarkUI.Controllers
             return Json(result);
         }
 
+        private static BizResultInfo SaveToDBAndFillHashModel(long uid, Dictionary<int, IElement> dicWebBookmarkElement,
+            ref Dictionary<int, BizUserWebFolder> dicHashcodeToModel)
+        {
+            BizResultInfo result;
+            List<BizUserWebFolder> lstWebfolder = new List<BizUserWebFolder>();
 
-       private void FillDictionaryWebBookmarkAndHrefInfo(IElement tree,
-           Dictionary<IElement, IElement> dicWebBookmarkElement,
+            foreach (var element in dicWebBookmarkElement.Values)
+            {
+                lstWebfolder.Add(new BizUserWebFolder()
+                {
+                    WebFolderName = element.TextContent,
+                    UserInfoID = uid,
+                    Visible = 0,
+                    CreateTime = DateTime.Now,
+                    IntroContent = "",
+                    ParentWebfolderID = 0,
+                    IElementJSON = element.OuterHtml,
+                    IElementHashcode = element.GetHashCode(),
+                });
+            }
+
+            result = UserWebFolderBo.BatchAddUserWebfolder(lstWebfolder);
+            if (result.IsSuccess)
+            {
+                dicHashcodeToModel = result.Target as Dictionary<int, BizUserWebFolder>;
+            }
+
+            return result;
+        }
+
+        private void FillDictionaryWebBookmarkAndHrefInfo(IElement tree,
+           Dictionary<int, IElement> dicWebBookmarkElement,
            Dictionary<IElement, List<IElement>> dicWebBookmarkNameToHrefList)
         {
             
@@ -101,10 +146,10 @@ namespace WebBookmarkUI.Controllers
                     var tagName = one.TagName.ToUpper();
                     if (tagName == "H3")
                     {
-                        if (dicWebBookmarkElement.ContainsKey(one))
+                        if (dicWebBookmarkElement.ContainsKey(one.GetHashCode()))
                             continue;
                         dicWebBookmarkNameToHrefList.Add(one, tree.Children.ToList());
-                        dicWebBookmarkElement.Add(one,one);
+                        dicWebBookmarkElement.Add(one.GetHashCode(), one);
                     }
                     
                 }
@@ -141,7 +186,7 @@ namespace WebBookmarkUI.Controllers
                         var hrefInfo = new BizHrefInfo();
                         hrefInfo.Href = oneInfo.Href;
                         hrefInfo.Host = oneInfo.Host;
-                        hrefInfo.ImportXML = one.InnerHtml;
+                        hrefInfo.IElementJSON = one.InnerHtml;
                         hrefInfo.CreateTime = DateTime.Now;
                         lstHrefInfo.Add(hrefInfo);
 

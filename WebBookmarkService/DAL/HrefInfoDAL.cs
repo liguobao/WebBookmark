@@ -19,7 +19,7 @@ namespace WebBookmarkService.DAL
         /// </summary>        
         public bool Add (HrefInfo hrefInfo)
 		{
-				string sql ="INSERT INTO tblHrefInfo (UserWebFolderID, UserInfoID, Href, HTML, Host, CreateTime, ImportXML)  VALUES (@UserWebFolderID, @UserInfoID, @Href, @HTML, @Host, @CreateTime, @ImportXML)";
+				string sql ="INSERT INTO tblHrefInfo (UserWebFolderID, UserInfoID, Href, HTML, Host, CreateTime, IElementJSON)  VALUES (@UserWebFolderID, @UserInfoID, @Href, @HTML, @Host, @CreateTime, @IElementJSON)";
 				MySqlParameter[] para = new MySqlParameter[]
 					{
 						new MySqlParameter("@UserWebFolderID", ToDBValue(hrefInfo.UserWebFolderID)),
@@ -28,7 +28,7 @@ namespace WebBookmarkService.DAL
 						new MySqlParameter("@HTML", ToDBValue(hrefInfo.HTML)),
 						new MySqlParameter("@Host", ToDBValue(hrefInfo.Host)),
 						new MySqlParameter("@CreateTime", ToDBValue(hrefInfo.CreateTime)),
-						new MySqlParameter("@ImportXML", ToDBValue(hrefInfo.ImportXML)),
+						new MySqlParameter("@IElementJSON", ToDBValue(hrefInfo.IElementJSON)),
 					};
 					
 				int AddId = (int)MyDBHelper.ExecuteScalar(sql, para);
@@ -41,6 +41,7 @@ namespace WebBookmarkService.DAL
 				}
 		}
          #endregion
+         
 
         #region  根据Id删除数据记录
         /// <summary>
@@ -77,7 +78,7 @@ namespace WebBookmarkService.DAL
                 +", HTML = @HTML" 
                 +", Host = @Host" 
                 +", CreateTime = @CreateTime" 
-                +", ImportXML = @ImportXML" 
+                +", IElementJSON = @IElementJSON" 
                
             +" WHERE HrefInfoID = @HrefInfoID";
 
@@ -91,7 +92,7 @@ namespace WebBookmarkService.DAL
 					,new MySqlParameter("@HTML", ToDBValue(hrefInfo.HTML))
 					,new MySqlParameter("@Host", ToDBValue(hrefInfo.Host))
 					,new MySqlParameter("@CreateTime", ToDBValue(hrefInfo.CreateTime))
-					,new MySqlParameter("@ImportXML", ToDBValue(hrefInfo.ImportXML))
+					,new MySqlParameter("@IElementJSON", ToDBValue(hrefInfo.IElementJSON))
 			};
 
 			return MyDBHelper.ExecuteNonQuery(sql, para);
@@ -134,7 +135,7 @@ namespace WebBookmarkService.DAL
 			hrefInfo.HTML = (string)ToModelValue(dr,"HTML");
 			hrefInfo.Host = (string)ToModelValue(dr,"Host");
 			hrefInfo.CreateTime = (DateTime)ToModelValue(dr,"CreateTime");
-			hrefInfo.ImportXML = (string)ToModelValue(dr,"ImportXML");
+			hrefInfo.IElementJSON = (string)ToModelValue(dr,"IElementJSON");
 			return hrefInfo;
 		}
 		#endregion

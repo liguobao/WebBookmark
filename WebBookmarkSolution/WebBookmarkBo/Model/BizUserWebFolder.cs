@@ -41,12 +41,18 @@ namespace WebBookmarkBo.Model
         /// <summary>
         /// 父收藏夹ID
         /// </summary>
-        public long ParentWebfolderID { get; set; }
+        public long? ParentWebfolderID { get; set; }
 
         /// <summary>
-        /// 说明
+        /// 
         /// </summary>
-        public string Comment { get; set; }
+        public string IntroContent { get; set; }
+
+
+        public string IElementJSON { get; set; }
+
+        public int IElementHashcode { get; set; }
+
         #endregion
 
 
@@ -57,11 +63,13 @@ namespace WebBookmarkBo.Model
             {
                 UserInfoID= UserInfoID,
                 UserWebFolderID=UserWebFolderID,
-                Comment = Comment,
+                IntroContent = IntroContent,
                 CreateTime=CreateTime,
                 ParentWebfolderID = ParentWebfolderID,
                 Visible = Visible,
                 WebFolderName = WebFolderName,
+                IElementJSON = IElementJSON,
+                IElementHashcode = IElementHashcode,
             };
 
         } 
@@ -70,11 +78,13 @@ namespace WebBookmarkBo.Model
         {
             UserInfoID = dataInfo.UserInfoID;
             UserWebFolderID = dataInfo.UserWebFolderID;
-            Comment = dataInfo.Comment;
+            IntroContent = dataInfo.IntroContent;
             CreateTime = dataInfo.CreateTime;
             ParentWebfolderID = dataInfo.ParentWebfolderID;
             Visible = dataInfo.Visible;
             WebFolderName = dataInfo.WebFolderName;
+            IElementJSON = dataInfo.IElementJSON;
+            IElementHashcode = dataInfo.IElementHashcode;
         }
 
         public BizUserWebFolder()
@@ -82,11 +92,15 @@ namespace WebBookmarkBo.Model
 
         }
 
-        public List<BizUserWebFolder> LoadAllByUID(long uid)
+        public static List<BizUserWebFolder> LoadAllByUID(long uid)
         {
-            List<BizUserWebFolder> lst = new List<BizUserWebFolder>();
-
-            return lst;
+            List<BizUserWebFolder> list = new List<BizUserWebFolder>();
+            var lstModel = new UserWebFolderDAL().GetByUID(uid);
+            if(lstModel!=null)
+            {
+                list.AddRange(lstModel.Select(model=>new BizUserWebFolder(model)));
+            }
+            return list;
         }
     }
 }

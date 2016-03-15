@@ -16,7 +16,7 @@ namespace WebBookmarkService.Model
 	public class UserWebFolder
 	{
         /// <summary>
-        /// 主键，自增
+        /// 
         /// </summary>
 		public long UserWebFolderID{get;set;}
             
@@ -43,12 +43,20 @@ namespace WebBookmarkService.Model
         /// <summary>
         /// 父收藏夹ID
         /// </summary>
-		public long ParentWebfolderID{get;set;}
+		public long? ParentWebfolderID{get;set;}
             
         /// <summary>
-        /// 注释
+        /// 收藏夹描述
         /// </summary>
-		public string Comment{get;set;}
+		public string IntroContent{get;set;}
             
-	}
+        /// <summary>
+        /// IElement 序列化数据
+        /// </summary>
+		public string IElementJSON{get;set;}
+
+
+        public int IElementHashcode { get; set; }
+
+    }
 }

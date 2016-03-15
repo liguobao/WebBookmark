@@ -1,6 +1,14 @@
 
 #MyWebFolder Commit log
 
+
+##2016.3.15
+1. 完善完成导入数据方法
+2. 并没有完成上面这个方案，算法还有bug
+3. 修修补补小bug
+
+
+
 ##2016.3.14
 1. 修改项目名为WebBookmark，修改数据库名为WebBookmark
 2. 新增批量插入方法
