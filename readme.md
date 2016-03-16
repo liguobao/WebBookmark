@@ -2,6 +2,12 @@
 #MyWebFolder Commit log
 
 
+##2016.3.16
+1. 基本完成数据导入，待更多用例测试（并不像测试，测试肯定出bug）
+2. 修改hrefInfo表为bookmarkInfo，添加bookmarkName字段
+3. 准备建立error表，记录系统异常，懒得引入log4之类的鬼了。
+
+
 ##2016.3.15
 1. 完善完成导入数据方法
 2. 并没有完成上面这个方案，算法还有bug

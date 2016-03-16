@@ -61,20 +61,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BLL\GroupBLL.cs" />
-    <Compile Include="BLL\GroupUserBLL.cs" />
-    <Compile Include="BLL\HrefInfoBLL.cs" />
-    <Compile Include="BLL\MessageInfoBLL.cs" />
-    <Compile Include="BLL\UserInfoBLL.cs" />
-    <Compile Include="BLL\UserLabelInfologBLL.cs" />
-    <Compile Include="BLL\UserRelationshipBLL.cs" />
-    <Compile Include="BLL\UserWebBookmarkImportLogBLL.cs" />
-    <Compile Include="BLL\UserWebFolderBLL.cs" />
-    <Compile Include="BLL\UserWebpageLabelBLL.cs" />
-    <Compile Include="BLL\WebpageCommentBLL.cs" />
+    <Compile Include="DAL\BookmarkInfoDAL.cs" />
     <Compile Include="DAL\GroupDAL.cs" />
     <Compile Include="DAL\GroupUserDAL.cs" />
-    <Compile Include="DAL\HrefInfoDAL.cs" />
     <Compile Include="DAL\MessageInfoDAL.cs" />
     <Compile Include="DAL\UserInfoDAL.cs" />
     <Compile Include="DAL\UserLabelInfologDAL.cs" />
@@ -83,9 +72,9 @@
     <Compile Include="DAL\UserWebBookmarkImportLogDAL.cs" />
     <Compile Include="DAL\UserWebpageLabelDAL.cs" />
     <Compile Include="DAL\WebpageCommentDAL.cs" />
+    <Compile Include="Model\BookmarkInfo.cs" />
     <Compile Include="Model\Group.cs" />
     <Compile Include="Model\GroupUser.cs" />
-    <Compile Include="Model\HrefInfo.cs" />
     <Compile Include="Model\MessageInfo.cs" />
     <Compile Include="Model\UserInfo.cs" />
     <Compile Include="Model\UserLabelInfolog.cs" />

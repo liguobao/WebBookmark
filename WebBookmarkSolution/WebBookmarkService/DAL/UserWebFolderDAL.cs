@@ -89,6 +89,60 @@ namespace WebBookmarkService.DAL
         #endregion
 
 
+        /// <summary>
+        /// 批量更新
+        /// </summary>
+        /// <param name="lstUserWebFolder"></param>
+        /// <returns></returns>
+        public bool BatchUpdata(List<UserWebFolder> lstUserWebFolder)
+        {
+            try
+            {
+                StringBuilder sbSQL = new StringBuilder();
+                int index = 0;
+
+                List<MySqlParameter> lstPara = new List<MySqlParameter>();
+                foreach (var userWebFolder in lstUserWebFolder)
+                {
+                    sbSQL.AppendLine(
+                   "UPDATE tblUserWebFolder " +
+                   "SET "
+                   + " WebFolderName = @WebFolderName" + index
+                   + ", UserInfoID = @UserInfoID" + index
+                   + ", CreateTime = @CreateTime" + index
+                   + ", Visible = @Visible" + index
+                   + ", ParentWebfolderID = @ParentWebfolderID" + index
+                   + ", IntroContent = @IntroContent" + index
+                   + ", IElementJSON = @IElementJSON" + index
+                   + ", IElementHashcode = @IElementHashcode" + index
+                   + " WHERE UserWebFolderID = @UserWebFolderID" + index + ";");
+
+                    MySqlParameter[] paramater = new MySqlParameter[]
+                   {
+                        new MySqlParameter(string.Format("@UserWebFolderID{0}",index), ToDBValue(userWebFolder.UserWebFolderID)),
+                        new MySqlParameter(string.Format("@WebFolderName{0}",index), ToDBValue(userWebFolder.WebFolderName)),
+                        new MySqlParameter(string.Format("@UserInfoID{0}",index), ToDBValue(userWebFolder.UserInfoID)),
+                        new MySqlParameter(string.Format("@CreateTime{0}",index), ToDBValue(userWebFolder.CreateTime)),
+                        new MySqlParameter(string.Format("@Visible{0}",index), ToDBValue(userWebFolder.Visible)),
+                        new MySqlParameter(string.Format("@ParentWebfolderID{0}",index), ToDBValue(userWebFolder.ParentWebfolderID)),
+                        new MySqlParameter(string.Format("@IntroContent{0}",index), ToDBValue(userWebFolder.IntroContent)),
+                        new MySqlParameter(string.Format("@IElementJSON{0}",index), ToDBValue(userWebFolder.IElementJSON)),
+                         new MySqlParameter(string.Format("@IElementHashcode{0}",index), ToDBValue(userWebFolder.IElementHashcode)),
+
+                   };
+                    lstPara.AddRange(paramater);
+                    index = index + 1;
+                }
+
+                return MyDBHelper.ExecuteNonQuery(sbSQL.ToString(), lstPara.ToArray()) > 0;
+            }
+            catch(Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+
         ///<summary>
         ///根据字段名获取数据记录IEnumerable<>
         ///</summary>              

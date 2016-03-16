@@ -13,12 +13,12 @@ namespace WebBookmarkService.Model
     /// <summary>
     /// 
     /// </summary>
-	public class HrefInfo
+	public class BookmarkInfo
 	{
         /// <summary>
         /// 主键，自增
         /// </summary>
-		public long HrefInfoID{get;set;}
+		public long BookmarkInfoID{get;set;}
             
         /// <summary>
         /// 网页收藏夹ID
@@ -54,6 +54,11 @@ namespace WebBookmarkService.Model
         /// 导入XML信息
         /// </summary>
 		public string IElementJSON{get;set;}
+            
+        /// <summary>
+        /// 
+        /// </summary>
+		public string BookmarkName{get;set;}
             
 	}
 }

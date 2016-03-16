@@ -8,16 +8,16 @@ using WebBookmarkService.Model;
 namespace WebBookmarkService.BLL
 {
 	[DataObject]
-    public partial class HrefInfoBLL
+    public partial class BookmarkInfoBLL
     {
         #region 根据传入Model，并返回Model
         /// <summary>
         /// 根据传入Model，并返回是否插入成功。
         /// </summary> 
 		[DataObjectMethod(DataObjectMethodType.Insert)]
-        public bool HrefInfoAdd(HrefInfo hrefInfo)
+        public bool BookmarkInfoAdd(BookmarkInfo bookmarkInfo)
         {
-            return new HrefInfoDAL().Add(hrefInfo);
+            return new BookmarkInfoDAL().Add(bookmarkInfo);
         }
         #endregion
         
@@ -26,9 +26,9 @@ namespace WebBookmarkService.BLL
         /// 根据Id删除数据记录
         /// </summary>
 		[DataObjectMethod(DataObjectMethodType.Delete)]
-        public int DeleteByHrefInfoID(long hrefInfoID)
+        public int DeleteByBookmarkInfoID(long bookmarkInfoID)
         {
-            return new HrefInfoDAL().DeleteByHrefInfoID(hrefInfoID);
+            return new BookmarkInfoDAL().DeleteByBookmarkInfoID(bookmarkInfoID);
         }
         #endregion
 		
@@ -37,9 +37,9 @@ namespace WebBookmarkService.BLL
         /// <summary>
         /// 根据字段名获取数据记录
         /// </summary>
-	     public IEnumerable<HrefInfo> GetBycolumnName(string columnName,string columnContent)
+	     public IEnumerable<BookmarkInfo> GetBycolumnName(string columnName,string columnContent)
 		{
-			return new HrefInfoDAL().GetBycolumnName(columnName,columnContent);
+			return new BookmarkInfoDAL().GetBycolumnName(columnName,columnContent);
 		}
         #endregion
         
@@ -48,9 +48,9 @@ namespace WebBookmarkService.BLL
         /// 根据传入Model更新数据并返回更新后的Model
         /// </summary>
 		[DataObjectMethod(DataObjectMethodType.Update)]
-		public int Update(HrefInfo hrefInfo)
+		public int Update(BookmarkInfo bookmarkInfo)
         {
-            return new HrefInfoDAL().Update(hrefInfo);
+            return new BookmarkInfoDAL().Update(bookmarkInfo);
         }
         #endregion
 
@@ -59,9 +59,9 @@ namespace WebBookmarkService.BLL
         /// 传入Id，获得Model实体
         /// </summary>
 		[DataObjectMethod(DataObjectMethodType.Select)]
-        public HrefInfo GetByHrefInfoID(long hrefInfoID)
+        public BookmarkInfo GetByBookmarkInfoID(long bookmarkInfoID)
         {
-            return new HrefInfoDAL().GetByHrefInfoID(hrefInfoID);
+            return new BookmarkInfoDAL().GetByBookmarkInfoID(bookmarkInfoID);
         }
         #endregion
         
@@ -71,7 +71,7 @@ namespace WebBookmarkService.BLL
         ///</summary>
 		public int GetTotalCount()
 		{
-			return new HrefInfoDAL().GetTotalCount();
+			return new BookmarkInfoDAL().GetTotalCount();
 		}
 		#endregion
         
@@ -80,9 +80,9 @@ namespace WebBookmarkService.BLL
         /// 获得分页记录集IEnumerable<>
         ///</summary>  
 		[DataObjectMethod(DataObjectMethodType.Select)]
-		public IEnumerable<HrefInfo> GetPagedData(int minrownum,int maxrownum)
+		public IEnumerable<BookmarkInfo> GetPagedData(int minrownum,int maxrownum)
 		{
-			return new HrefInfoDAL().GetPagedData(minrownum,maxrownum);
+			return new BookmarkInfoDAL().GetPagedData(minrownum,maxrownum);
 		}
 		#endregion
         
@@ -91,9 +91,9 @@ namespace WebBookmarkService.BLL
         /// 获得总记录集IEnumerable<>
         ///</summary>  
 		[DataObjectMethod(DataObjectMethodType.Select)]
-		public IEnumerable<HrefInfo> GetAll()
+		public IEnumerable<BookmarkInfo> GetAll()
 		{
-			return new HrefInfoDAL().GetAll();
+			return new BookmarkInfoDAL().GetAll();
 		}
         #endregion
     }

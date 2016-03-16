@@ -11,24 +11,25 @@ using WebBookmarkService.Model;
 
 namespace WebBookmarkService.DAL
 {
-	public partial class HrefInfoDAL
+	public partial class BookmarkInfoDAL
 	{
         #region 根据传入Model，并返回Model
         /// <summary>
         /// 根据传入Model，并返回Model
         /// </summary>        
-        public bool Add (HrefInfo hrefInfo)
+        public bool Add (BookmarkInfo bookmarkInfo)
 		{
-				string sql ="INSERT INTO tblHrefInfo (UserWebFolderID, UserInfoID, Href, HTML, Host, CreateTime, IElementJSON)  VALUES (@UserWebFolderID, @UserInfoID, @Href, @HTML, @Host, @CreateTime, @IElementJSON)";
+				string sql ="INSERT INTO tblBookmarkInfo (UserWebFolderID, UserInfoID, Href, HTML, Host, CreateTime, IElementJSON, BookmarkName)  VALUES (@UserWebFolderID, @UserInfoID, @Href, @HTML, @Host, @CreateTime, @IElementJSON, @BookmarkName)";
 				MySqlParameter[] para = new MySqlParameter[]
 					{
-						new MySqlParameter("@UserWebFolderID", ToDBValue(hrefInfo.UserWebFolderID)),
-						new MySqlParameter("@UserInfoID", ToDBValue(hrefInfo.UserInfoID)),
-						new MySqlParameter("@Href", ToDBValue(hrefInfo.Href)),
-						new MySqlParameter("@HTML", ToDBValue(hrefInfo.HTML)),
-						new MySqlParameter("@Host", ToDBValue(hrefInfo.Host)),
-						new MySqlParameter("@CreateTime", ToDBValue(hrefInfo.CreateTime)),
-						new MySqlParameter("@IElementJSON", ToDBValue(hrefInfo.IElementJSON)),
+						new MySqlParameter("@UserWebFolderID", ToDBValue(bookmarkInfo.UserWebFolderID)),
+						new MySqlParameter("@UserInfoID", ToDBValue(bookmarkInfo.UserInfoID)),
+						new MySqlParameter("@Href", ToDBValue(bookmarkInfo.Href)),
+						new MySqlParameter("@HTML", ToDBValue(bookmarkInfo.HTML)),
+						new MySqlParameter("@Host", ToDBValue(bookmarkInfo.Host)),
+						new MySqlParameter("@CreateTime", ToDBValue(bookmarkInfo.CreateTime)),
+						new MySqlParameter("@IElementJSON", ToDBValue(bookmarkInfo.IElementJSON)),
+						new MySqlParameter("@BookmarkName", ToDBValue(bookmarkInfo.BookmarkName)),
 					};
 					
 				int AddId = (int)MyDBHelper.ExecuteScalar(sql, para);
@@ -40,20 +41,20 @@ namespace WebBookmarkService.DAL
 					return false;					
 				}
 		}
-        #endregion
-
+         #endregion
+         
 
         #region  根据Id删除数据记录
         /// <summary>
         /// 根据Id删除数据记录
         /// </summary>
-        public int DeleteByHrefInfoID(long hrefInfoID)
+        public int DeleteByBookmarkInfoID(long bookmarkInfoID)
 		{
-            string sql = "DELETE from tblHrefInfo WHERE HrefInfoID = @HrefInfoID";
+            string sql = "DELETE from tblBookmarkInfo WHERE BookmarkInfoID = @BookmarkInfoID";
 
             MySqlParameter[] para = new MySqlParameter[]
 			{
-				new MySqlParameter("@HrefInfoID", hrefInfoID)
+				new MySqlParameter("@BookmarkInfoID", bookmarkInfoID)
 			};
 		
             return MyDBHelper.ExecuteNonQuery(sql, para);
@@ -67,10 +68,10 @@ namespace WebBookmarkService.DAL
         /// <summary>
         /// 根据传入Model更新数据并返回更新后的Model
         /// </summary>
-        public int Update(HrefInfo hrefInfo)
+        public int Update(BookmarkInfo bookmarkInfo)
         {
             string sql =
-                "UPDATE tblHrefInfo " +
+                "UPDATE tblBookmarkInfo " +
                 "SET " +
 			" UserWebFolderID = @UserWebFolderID" 
                 +", UserInfoID = @UserInfoID" 
@@ -79,20 +80,22 @@ namespace WebBookmarkService.DAL
                 +", Host = @Host" 
                 +", CreateTime = @CreateTime" 
                 +", IElementJSON = @IElementJSON" 
+                +", BookmarkName = @BookmarkName" 
                
-            +" WHERE HrefInfoID = @HrefInfoID";
+            +" WHERE BookmarkInfoID = @BookmarkInfoID";
 
 
 			MySqlParameter[] para = new MySqlParameter[]
 			{
-				new MySqlParameter("@HrefInfoID", hrefInfo.HrefInfoID)
-					,new MySqlParameter("@UserWebFolderID", ToDBValue(hrefInfo.UserWebFolderID))
-					,new MySqlParameter("@UserInfoID", ToDBValue(hrefInfo.UserInfoID))
-					,new MySqlParameter("@Href", ToDBValue(hrefInfo.Href))
-					,new MySqlParameter("@HTML", ToDBValue(hrefInfo.HTML))
-					,new MySqlParameter("@Host", ToDBValue(hrefInfo.Host))
-					,new MySqlParameter("@CreateTime", ToDBValue(hrefInfo.CreateTime))
-					,new MySqlParameter("@IElementJSON", ToDBValue(hrefInfo.IElementJSON))
+				new MySqlParameter("@BookmarkInfoID", bookmarkInfo.BookmarkInfoID)
+					,new MySqlParameter("@UserWebFolderID", ToDBValue(bookmarkInfo.UserWebFolderID))
+					,new MySqlParameter("@UserInfoID", ToDBValue(bookmarkInfo.UserInfoID))
+					,new MySqlParameter("@Href", ToDBValue(bookmarkInfo.Href))
+					,new MySqlParameter("@HTML", ToDBValue(bookmarkInfo.HTML))
+					,new MySqlParameter("@Host", ToDBValue(bookmarkInfo.Host))
+					,new MySqlParameter("@CreateTime", ToDBValue(bookmarkInfo.CreateTime))
+					,new MySqlParameter("@IElementJSON", ToDBValue(bookmarkInfo.IElementJSON))
+					,new MySqlParameter("@BookmarkName", ToDBValue(bookmarkInfo.BookmarkName))
 			};
 
 			return MyDBHelper.ExecuteNonQuery(sql, para);
@@ -103,10 +106,10 @@ namespace WebBookmarkService.DAL
         /// <summary>
         /// 传入Id，获得Model实体
         /// </summary>
-        public HrefInfo GetByHrefInfoID(long hrefInfoID)
+        public BookmarkInfo GetByBookmarkInfoID(long bookmarkInfoID)
         {
-            string sql = "SELECT * FROM tblHrefInfo WHERE HrefInfoID = @HrefInfoID";
-            using(MySqlDataReader reader = MyDBHelper.ExecuteDataReader(sql, new MySqlParameter("@HrefInfoID", hrefInfoID)))
+            string sql = "SELECT * FROM tblBookmarkInfo WHERE BookmarkInfoID = @BookmarkInfoID";
+            using(MySqlDataReader reader = MyDBHelper.ExecuteDataReader(sql, new MySqlParameter("@BookmarkInfoID", bookmarkInfoID)))
 			{
 				if (reader.Read())
 				{
@@ -124,19 +127,20 @@ namespace WebBookmarkService.DAL
         /// <summary>
         /// 把DataRow转换成Model
         /// </summary>
-		public HrefInfo ToModel(MySqlDataReader dr)
+		public BookmarkInfo ToModel(MySqlDataReader dr)
 		{
-			HrefInfo hrefInfo = new HrefInfo();
+			BookmarkInfo bookmarkInfo = new BookmarkInfo();
 
-			hrefInfo.HrefInfoID = (long)ToModelValue(dr,"HrefInfoID");
-			hrefInfo.UserWebFolderID = (long)ToModelValue(dr,"UserWebFolderID");
-			hrefInfo.UserInfoID = (long)ToModelValue(dr,"UserInfoID");
-			hrefInfo.Href = (string)ToModelValue(dr,"Href");
-			hrefInfo.HTML = (string)ToModelValue(dr,"HTML");
-			hrefInfo.Host = (string)ToModelValue(dr,"Host");
-			hrefInfo.CreateTime = (DateTime)ToModelValue(dr,"CreateTime");
-			hrefInfo.IElementJSON = (string)ToModelValue(dr,"IElementJSON");
-			return hrefInfo;
+			bookmarkInfo.BookmarkInfoID = (long)ToModelValue(dr,"BookmarkInfoID");
+			bookmarkInfo.UserWebFolderID = (long)ToModelValue(dr,"UserWebFolderID");
+			bookmarkInfo.UserInfoID = (long)ToModelValue(dr,"UserInfoID");
+			bookmarkInfo.Href = (string)ToModelValue(dr,"Href");
+			bookmarkInfo.HTML = (string)ToModelValue(dr,"HTML");
+			bookmarkInfo.Host = (string)ToModelValue(dr,"Host");
+			bookmarkInfo.CreateTime = (DateTime)ToModelValue(dr,"CreateTime");
+			bookmarkInfo.IElementJSON = (string)ToModelValue(dr,"IElementJSON");
+			bookmarkInfo.BookmarkName = (string)ToModelValue(dr,"BookmarkName");
+			return bookmarkInfo;
 		}
 		#endregion
         
@@ -146,7 +150,7 @@ namespace WebBookmarkService.DAL
         ///</summary>        
 		public int GetTotalCount()
 		{
-			string sql = "SELECT count(*) FROM tblHrefInfo";
+			string sql = "SELECT count(*) FROM tblBookmarkInfo";
 			return (int)MyDBHelper.ExecuteScalar(sql);
 		}
 		#endregion
@@ -155,9 +159,9 @@ namespace WebBookmarkService.DAL
         ///<summary>
         /// 获得分页记录集IEnumerable<>
         ///</summary>              
-		public IEnumerable<HrefInfo> GetPagedData(int minrownum,int maxrownum)
+		public IEnumerable<BookmarkInfo> GetPagedData(int minrownum,int maxrownum)
 		{
-			string sql = "SELECT * from(SELECT *,(row_number() over(order by HrefInfoID))-1 rownum FROM tblHrefInfo) t where rownum>=@minrownum and rownum<=@maxrownum";
+			string sql = "SELECT * from(SELECT *,(row_number() over(order by BookmarkInfoID))-1 rownum FROM tblBookmarkInfo) t where rownum>=@minrownum and rownum<=@maxrownum";
 			using(MySqlDataReader reader = MyDBHelper.ExecuteDataReader(sql,
 				new MySqlParameter("@minrownum",minrownum),
 				new MySqlParameter("@maxrownum",maxrownum)))
@@ -172,9 +176,9 @@ namespace WebBookmarkService.DAL
         ///<summary>
         ///根据字段名获取数据记录IEnumerable<>
         ///</summary>              
-		public IEnumerable<HrefInfo> GetBycolumnName(string columnName,string columnContent)
+		public IEnumerable<BookmarkInfo> GetBycolumnName(string columnName,string columnContent)
 		{
-			string sql = "SELECT * FROM tblHrefInfo where "+columnName+"="+columnContent;
+			string sql = "SELECT * FROM tblBookmarkInfo where "+columnName+"="+columnContent;
 			using(MySqlDataReader reader = MyDBHelper.ExecuteDataReader(sql))
 			{
 				return ToModels(reader);			
@@ -188,9 +192,9 @@ namespace WebBookmarkService.DAL
         ///<summary>
         /// 获得总记录集IEnumerable<>
         ///</summary> 
-		public IEnumerable<HrefInfo> GetAll()
+		public IEnumerable<BookmarkInfo> GetAll()
 		{
-			string sql = "SELECT * FROM tblHrefInfo";
+			string sql = "SELECT * FROM tblBookmarkInfo";
 			using(MySqlDataReader reader = MyDBHelper.ExecuteDataReader(sql))
 			{
 				return ToModels(reader);			
@@ -202,9 +206,9 @@ namespace WebBookmarkService.DAL
         ///<summary>
         /// 把MySqlDataReader转换成IEnumerable<>
         ///</summary> 
-		protected IEnumerable<HrefInfo> ToModels(MySqlDataReader reader)
+		protected IEnumerable<BookmarkInfo> ToModels(MySqlDataReader reader)
 		{
-			var list = new List<HrefInfo>();
+			var list = new List<BookmarkInfo>();
 			while(reader.Read())
 			{
 				list.Add(ToModel(reader));

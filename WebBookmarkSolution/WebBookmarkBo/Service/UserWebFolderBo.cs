@@ -42,5 +42,33 @@ namespace WebfolderBo.Service
 
             return result;
         } 
+
+
+        /// <summary>
+        /// 批量更新
+        /// </summary>
+        /// <param name="lstBizWebfolder"></param>
+        /// <returns></returns>
+        public static BizResultInfo BatchUpdateWebfolder(List<BizUserWebFolder> lstBizWebfolder)
+        {
+            BizResultInfo result = new BizResultInfo();
+            if (lstBizWebfolder == null || lstBizWebfolder.Count == 0)
+            {
+                result.IsSuccess = false;
+                result.ErrorMessage = "插入数据不能为空。";
+            }
+            var lstModel = lstBizWebfolder.Select(biz => biz.ToModel()).ToList();
+            var isSuccess = new UserWebFolderDAL().BatchUpdata(lstModel);
+            result.IsSuccess = isSuccess;
+            if (isSuccess)
+            {
+                result.SuccessMessage = "更新成功！";
+            }else
+            {
+                result.ErrorMessage = "更新失败，可能是海底光纤断了...待会再试试咯。";
+            }
+
+            return result;
+        }
     }
 }

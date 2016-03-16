@@ -5,6 +5,7 @@ using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web.Mvc;
 using System.Xml.Linq;
 using WebBookmarkBo.Model;
@@ -57,44 +58,37 @@ namespace WebBookmarkUI.Controllers
                 }
                 result = SaveToDBAndFillHashModel(uid, dicWebBookmarkElement, ref dicHashcodeToModel);
 
-                List<BizHrefInfo> lstBizHrefInfo = new List<BizHrefInfo>();
+                List<BizBookmarkInfo> lstBizHrefInfo = new List<BizBookmarkInfo>();
 
-                foreach (var webbookmarkInfo in dicWebBookmarkNameToHrefList)
+                FillHrefListAndWebfolderInfo(tree.FirstElementChild,uid,lstBizHrefInfo,dicHashcodeToModel);
+
+                Task.Factory.StartNew(()=> 
                 {
-                    var webbookmark = webbookmarkInfo.Key;
-                    var hrefNode = webbookmarkInfo.Value.Find(w=>w.NodeName.ToUpper()=="DL");
-                    if (hrefNode == null || hrefNode.Children ==null || hrefNode.Children.Count() ==0)
-                        continue;
-                    foreach(var oneHref in hrefNode.Children)
+                    try
                     {
-                        if (oneHref.Children == null || oneHref.Children.Count() == 0)
-                            continue; 
-                        var hrefInfo = (IHtmlAnchorElement)oneHref.Children.FirstOrDefault();
-                        if (hrefInfo == null)
-                            continue;
-                        var webbookmarkHashcode = webbookmark.GetHashCode();
-                        BizUserWebFolder bizUserWebFolder = null;
-                        if (dicHashcodeToModel.ContainsKey(webbookmarkHashcode))
-                            bizUserWebFolder = dicHashcodeToModel[webbookmarkHashcode];
-
-                        BizHrefInfo bizHrefInfo = new BizHrefInfo();
-                        bizHrefInfo.UserInfoID = uid;
-                        bizHrefInfo.Host = hrefInfo.Host;
-                        bizHrefInfo.Href = hrefInfo.Href;
-                        bizHrefInfo.IElementJSON = hrefInfo.OuterHtml;
-                        bizHrefInfo.UserWebFolderID = bizUserWebFolder != null ? bizUserWebFolder.UserWebFolderID : 0;
-                        bizHrefInfo.CreateTime = DateTime.Now;
-                        lstBizHrefInfo.Add(bizHrefInfo);
+                        UserWebFolderBo.BatchUpdateWebfolder(dicHashcodeToModel.Values.ToList());
                     }
-                }
+                    catch(Exception ex)
+                    {
+                       
+                    }
 
+                });
+                Task.Factory.StartNew(() =>
+                {
+                    try
+                    {
+                        BizBookmarkInfoBo.BatchSaveToDB(lstBizHrefInfo);
+                    }
+                    catch (Exception ex)
+                    {
 
+                    }
 
-
+                });
             }
 
-
-            return Json(result);
+            return Json(new BizResultInfo() { IsSuccess = true,SuccessMessage="保存成功耶，你可以到别的地方玩了。" });
         }
 
         private static BizResultInfo SaveToDBAndFillHashModel(long uid, Dictionary<int, IElement> dicWebBookmarkElement,
@@ -157,7 +151,7 @@ namespace WebBookmarkUI.Controllers
         }
 
        private static void FillWebBookmarkAndHrefInfo(IElement tree,
-            List<BizUserWebFolder> lstWebBookmark, List<BizHrefInfo> lstHrefInfo)
+            List<BizUserWebFolder> lstWebBookmark, List<BizBookmarkInfo> lstHrefInfo)
         {
             var firstOne = tree.FirstElementChild;
 
@@ -183,7 +177,7 @@ namespace WebBookmarkUI.Controllers
                     else if(tagName =="A")
                     {
                         var oneInfo = (IHtmlAnchorElement)one;
-                        var hrefInfo = new BizHrefInfo();
+                        var hrefInfo = new BizBookmarkInfo();
                         hrefInfo.Href = oneInfo.Href;
                         hrefInfo.Host = oneInfo.Host;
                         hrefInfo.IElementJSON = one.InnerHtml;
@@ -195,29 +189,52 @@ namespace WebBookmarkUI.Controllers
             }
         }
 
-        private void GetWebBookmarkList(IElement tree, List<BizUserWebFolder> lstWebBookmark,long uid)
+        private void FillHrefListAndWebfolderInfo(IElement tree,long uid,
+            List<BizBookmarkInfo> lstBizHrefInfo, Dictionary<int, BizUserWebFolder> dicHashcodeToModel)
         {
-            foreach (var one in tree.Children)
+            foreach (var element in tree.Children)
             {
-                if (one.Children.Count() != 0)
+                if (element.Children.Count() != 0)
                 {
-                    GetWebBookmarkList(one, lstWebBookmark,uid);
+                    FillHrefListAndWebfolderInfo(element, uid, lstBizHrefInfo, dicHashcodeToModel);
                 }
                 else
                 {
-                    if (string.IsNullOrEmpty(one.TagName))
+                    if (string.IsNullOrEmpty(element.TagName))
                         continue;
 
-                    var tagName = one.TagName.ToUpper();
+                    var tagName = element.TagName.ToUpper();
+                   
+
                     if (tagName == "H3")
                     {
-                        BizUserWebFolder bizWebBookmark = new BizUserWebFolder();
-                        bizWebBookmark.CreateTime = DateTime.Now;
-                        bizWebBookmark.WebFolderName = one.TextContent;
-                        bizWebBookmark.UserInfoID = uid;
-                        bizWebBookmark.Visible =0;
-                        bizWebBookmark.ParentWebfolderID = 0;
-                        lstWebBookmark.Add(bizWebBookmark);
+                        var parentHashcode = element.ParentElement.ParentElement.ParentElement.FirstElementChild.GetHashCode();
+                        if (dicHashcodeToModel.ContainsKey(parentHashcode) && dicHashcodeToModel.ContainsKey(element.GetHashCode()))
+                        {
+                            dicHashcodeToModel[element.GetHashCode()].ParentWebfolderID
+                                = dicHashcodeToModel[parentHashcode].UserWebFolderID;
+                        }
+
+                    }
+                    else if(tagName == "A")
+                    {
+                        var parentHashcode = element.ParentElement.ParentElement.ParentElement.FirstElementChild.GetHashCode();
+                        if (dicHashcodeToModel.ContainsKey(parentHashcode))
+                        {
+                            var hrefInfo = element as IHtmlAnchorElement;
+                            if (hrefInfo == null)
+                                continue;
+                            var bizUserWebFolder = dicHashcodeToModel[parentHashcode];
+                            var bizBookmarkInfo = new BizBookmarkInfo();
+                            bizBookmarkInfo.BookmarkName = hrefInfo.Text;
+                            bizBookmarkInfo.UserInfoID = uid;
+                            bizBookmarkInfo.Host = hrefInfo.Host;
+                            bizBookmarkInfo.Href = hrefInfo.Href;
+                            bizBookmarkInfo.IElementJSON = hrefInfo.OuterHtml;
+                            bizBookmarkInfo.UserWebFolderID = bizUserWebFolder.UserWebFolderID;
+                            bizBookmarkInfo.CreateTime = DateTime.Now;
+                            lstBizHrefInfo.Add(bizBookmarkInfo);
+                        }
                     }
                 }
             }
