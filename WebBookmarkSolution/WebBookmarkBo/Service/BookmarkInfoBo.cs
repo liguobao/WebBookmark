@@ -8,7 +8,7 @@ using WebBookmarkService.DAL;
 
 namespace WebfolderBo.Service
 {
-    public class BizBookmarkInfoBo
+    public class BookmarkInfoBo
     {
         public static BizResultInfo BatchSaveToDB(List<BizBookmarkInfo> lstBizBookmarkInfo)
         {
