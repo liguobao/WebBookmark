@@ -26,6 +26,7 @@ namespace WebBookmarkUI.Controllers
             bizUserInfo.UserPassword = uiUserInfo.Password;
             bizUserInfo.UserPhone = uiUserInfo.Phone;
             bizUserInfo.UserQQ = uiUserInfo.QQ;
+            bizUserInfo.UserInfoComment = uiUserInfo.UserInfoComment;
             var result=  UserInfoBo.RegisterUser(bizUserInfo);
 
             return Json(result);
@@ -34,7 +35,7 @@ namespace WebBookmarkUI.Controllers
 
         public ActionResult CheckUserEmail(String email)
         {
-            return Json(UserInfoBo.CheckUserEmailOrLoginName(email));
+            return Json(UserInfoBo.CheckUserEmail(email));
         }
     }
 }

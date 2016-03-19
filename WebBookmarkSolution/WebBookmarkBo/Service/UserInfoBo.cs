@@ -72,6 +72,32 @@ namespace WebBookmarkBo.Service
         }
 
 
+        public static BizResultInfo CheckUserEmail(string email)
+        {
+            var result = new BizResultInfo();
+            if (string.IsNullOrEmpty(email))
+            {
+                result.IsSuccess = false;
+                result.ErrorMessage = "邮箱不能为空。";
+                return result;
+            }
+
+            var newUserInfo = BizUserInfo.LoadByUserEmailOrUserLoginName(email);
+            if (newUserInfo == null || newUserInfo.UserInfoID == 0)
+            {
+                result.IsSuccess = true;
+                result.ResultID = newUserInfo.UserInfoID.ConvertToCiphertext();
+                result.SuccessMessage = "邮箱有效，可以注册。";
+            }
+            else
+            {
+                result.IsSuccess = false;
+                result.ErrorMessage = "此邮箱已被占用。";
+
+            }
+            return result;
+        }
+
 
         public static BizResultInfo GetUserInfoByUID(long uid)
         {

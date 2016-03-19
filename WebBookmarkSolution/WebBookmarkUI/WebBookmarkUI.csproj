@@ -163,6 +163,7 @@
     <Content Include="assets\login\link.css" />
     <Content Include="assets\login\login.css" />
     <Content Include="assets\login\new.css" />
+    <Content Include="assets\login\register.css" />
     <Content Include="assets\login\style.css" />
     <Content Include="DomainJS\importbookmark.js" />
     <Content Include="DomainJS\login.js" />
@@ -198,7 +199,9 @@
     <Content Include="UploadFiles\UserImportFile\2016031922031学生-白854748548-bookmarks_16_3_17.html" />
     <Content Include="UploadFiles\UserImportFile\201603192724学生-白若冰-674988272bookmarks_16_3_17.html" />
     <Content Include="UploadFiles\UserImportFile\2016031953749周德阳-zhdyly%40qq.com%28369557272%29-bookmarks_16_3_17.html" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
