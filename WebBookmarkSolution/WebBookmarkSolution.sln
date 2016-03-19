@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.23107.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebBookmarkUI", "WebBookmarkUI\WebBookmarkUI.csproj", "{851362EF-98A2-4928-8CEF-5C8A2A9B22E9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebBookmarkBo", "WebBookmarkBo\WebBookmarkBo.csproj", "{9CBB6D15-1C1A-4746-A943-5805F773A433}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebBookmarkService", "WebBookmarkService\WebBookmarkService.csproj", "{81AACAF8-C34F-42C6-8689-7289C33DAA91}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{851362EF-98A2-4928-8CEF-5C8A2A9B22E9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{851362EF-98A2-4928-8CEF-5C8A2A9B22E9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{851362EF-98A2-4928-8CEF-5C8A2A9B22E9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{851362EF-98A2-4928-8CEF-5C8A2A9B22E9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9CBB6D15-1C1A-4746-A943-5805F773A433}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9CBB6D15-1C1A-4746-A943-5805F773A433}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9CBB6D15-1C1A-4746-A943-5805F773A433}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9CBB6D15-1C1A-4746-A943-5805F773A433}.Release|Any CPU.Build.0 = Release|Any CPU
+		{81AACAF8-C34F-42C6-8689-7289C33DAA91}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{81AACAF8-C34F-42C6-8689-7289C33DAA91}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{81AACAF8-C34F-42C6-8689-7289C33DAA91}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{81AACAF8-C34F-42C6-8689-7289C33DAA91}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

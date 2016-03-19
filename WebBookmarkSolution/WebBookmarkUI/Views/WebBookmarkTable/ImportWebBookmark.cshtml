@@ -1,0 +1,48 @@
+﻿
+@{
+    ViewBag.Title = "ImportWebBookmark";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<script>
+    var uploadUrl = "@Url.Action("UploadWebBookmarkFile")";
+    var saveToDBURL = "@Url.Action("ImportWebBookmarkToDB")";
+</script>
+<script src="~/DomainJS/importbookmark.js"></script>
+<div class="am-cf am-padding">
+    <div class="am-fl am-cf"><strong class="am-text-primary am-text-lg">导入收藏夹</strong> / <small>Import WebBookmark</small></div>
+</div>
+<div class="am-u-md-12">
+    <div class="am-form-group am-form-file">
+        <button type="button" class="am-btn am-btn-danger am-btn-sm">
+            <i class="am-icon-cloud-upload"></i> 选择要上传的文件
+        </button>
+        <input id="uploadFile" type="file" accept=".XML,.HTML" multiple>
+    </div>
+    <div id="file-list">请选择文件</div>
+    <br />
+    <div class="am-form-group">
+        <button type="button" class="am-btn am-btn-secondary am-btn-sm" id="btnSaveToDB">
+            <i class="am-icon-cloud-download"></i> 保存到我的收藏夹
+        </button>
+    </div>
+</div>
+
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+
+<div class="am-cf am-padding">
+    <div class="am-fl am-cf"><strong class="am-text-primary am-text-lg">导出收藏夹</strong> / <small>Export WebBookmark</small></div>
+</div>
+<div class="am-u-md-12">
+    <div class="am-form-group am-form-file">
+        <button type="button" class="am-btn am-btn-success am-btn-sm" id="btnExport">
+            <i class="am-icon-cloud-download"></i> 导出到本地
+        </button>
+    </div>
+</div>
+
+

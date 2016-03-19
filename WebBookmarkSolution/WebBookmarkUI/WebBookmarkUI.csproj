@@ -1,0 +1,285 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{851362EF-98A2-4928-8CEF-5C8A2A9B22E9}</ProjectGuid>
+    <ProjectTypeGuids>{E3E379DF-F4C6-4180-9B81-6769533ABE47};{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>WebBookmarkUI</RootNamespace>
+    <AssemblyName>WebBookmarkUI</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <MvcBuildViews>false</MvcBuildViews>
+    <UseIISExpress>true</UseIISExpress>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <MvcProjectUpgradeChecked>true</MvcProjectUpgradeChecked>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+    <OldToolsVersion>12.0</OldToolsVersion>
+    <UseGlobalApplicationHostFile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Newtonsoft.Json, Version=8.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.8.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Abstractions" />
+    <Reference Include="System.Web.Routing" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="Microsoft.Web.Mvc.FixedDisplayModes, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.FixedDisplayModes.1.0.0\lib\net40\Microsoft.Web.Mvc.FixedDisplayModes.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http">
+    </Reference>
+    <Reference Include="System.Net.Http.Formatting, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.4.0.30506.0\lib\net40\System.Net.Http.Formatting.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http.WebRequest">
+    </Reference>
+    <Reference Include="System.Web.Http, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.4.0.30506.0\lib\net40\System.Web.Http.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http.WebHost, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.WebHost.4.0.30506.0\lib\net40\System.Web.Http.WebHost.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.4.0.30506.0\lib\net40\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Razor.2.0.30506.0\lib\net40\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.2.0.30506.0\lib\net40\System.Web.WebPages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.2.0.30506.0\lib\net40\System.Web.WebPages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.2.0.30506.0\lib\net40\System.Web.WebPages.Razor.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Commom\UILoginHelper.cs" />
+    <Compile Include="Commom\UploadFileHelper.cs" />
+    <Compile Include="Controllers\DefaultController.cs" />
+    <Compile Include="Controllers\LoginController.cs" />
+    <Compile Include="Controllers\RegisterController.cs" />
+    <Compile Include="Controllers\UserInfoController.cs" />
+    <Compile Include="Controllers\WebBookmarkTableController.cs" />
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UIUserInfo.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="App_Start\FilterConfig.cs" />
+    <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="App_Start\WebApiConfig.cs" />
+    <Content Include="assets\css\admin.css" />
+    <Content Include="assets\css\amazeui.css" />
+    <Content Include="assets\css\amazeui.flat.css" />
+    <Content Include="assets\css\amazeui.flat.min.css" />
+    <Content Include="assets\css\amazeui.min.css" />
+    <Content Include="assets\css\app.css" />
+    <Content Include="assets\fonts\fontawesome-webfont.svg" />
+    <Content Include="assets\i\app-icon72x72%402x.png" />
+    <Content Include="assets\i\examples\admin-chrome.png" />
+    <Content Include="assets\i\examples\admin-firefox.png" />
+    <Content Include="assets\i\examples\admin-ie.png" />
+    <Content Include="assets\i\examples\admin-opera.png" />
+    <Content Include="assets\i\examples\admin-safari.png" />
+    <Content Include="assets\i\examples\adminPage.png" />
+    <Content Include="assets\i\examples\blogPage.png" />
+    <Content Include="assets\i\examples\landing.png" />
+    <Content Include="assets\i\examples\landingPage.png" />
+    <Content Include="assets\i\examples\loginPage.png" />
+    <Content Include="assets\i\examples\sidebarPage.png" />
+    <Content Include="assets\i\favicon.png" />
+    <Content Include="assets\i\login_bg.jpg" />
+    <Content Include="assets\i\startup-640x1096.png" />
+    <Content Include="assets\js\amazeui.ie8polyfill.js" />
+    <Content Include="assets\js\amazeui.ie8polyfill.min.js" />
+    <Content Include="assets\js\amazeui.js" />
+    <Content Include="assets\js\amazeui.min.js" />
+    <Content Include="assets\js\amazeui.widgets.helper.js" />
+    <Content Include="assets\js\amazeui.widgets.helper.min.js" />
+    <Content Include="assets\js\app.js" />
+    <Content Include="assets\js\handlebars.min.js" />
+    <Content Include="assets\js\jquery.min.js" />
+    <Content Include="assets\login\common.css" />
+    <Content Include="assets\login\icon.css" />
+    <Content Include="assets\login\link.css" />
+    <Content Include="assets\login\login.css" />
+    <Content Include="assets\login\new.css" />
+    <Content Include="assets\login\style.css" />
+    <Content Include="DomainJS\importbookmark.js" />
+    <Content Include="DomainJS\login.js" />
+    <Content Include="DomainJS\register.js" />
+    <Content Include="DomainJS\userInfo.js" />
+    <Content Include="Global.asax" />
+    <Content Include="Scripts\jQueryFileUpload\jquery.fileupload.js" />
+    <Content Include="Scripts\jQueryFileUpload\jquery.iframe-transport.js" />
+    <Content Include="Scripts\jQueryFileUpload\vendor\jquery.ui.widget.js" />
+    <Content Include="UploadFiles\UserImg\2016031458672QQ图片20160309215908.jpg" />
+    <Content Include="UploadFiles\UserImportFile\201603131332bookmark.html" />
+    <Content Include="UploadFiles\UserImportFile\2016031314161bookmarks_16_3_13.html" />
+    <Content Include="UploadFiles\UserImportFile\2016031331767bookmark.html" />
+    <Content Include="UploadFiles\UserImportFile\2016031345848bookmarks_16_3_13.html" />
+    <Content Include="UploadFiles\UserImportFile\2016031349732bookmark.html" />
+    <Content Include="UploadFiles\UserImportFile\2016031359693bookmark.html" />
+    <Content Include="UploadFiles\UserImportFile\201603136535bookmarks_16_3_13.html" />
+    <Content Include="UploadFiles\UserImportFile\2016031366059bookmark.html" />
+    <Content Include="UploadFiles\UserImportFile\2016031381858bookmarks_16_3_13.html" />
+    <Content Include="UploadFiles\UserImportFile\2016031383379bookmarks_16_3_13.html" />
+    <Content Include="UploadFiles\UserImportFile\2016031387318bookmark.html" />
+    <Content Include="UploadFiles\UserImportFile\2016031391659bookmarks_16_3_13.html" />
+    <Content Include="UploadFiles\UserImportFile\2016031398616bookmark.html" />
+    <Content Include="UploadFiles\UserImportFile\2016031399806bookmarks_16_3_13.html" />
+    <Content Include="UploadFiles\UserImportFile\2016031417172bookmark.html" />
+    <Content Include="UploadFiles\UserImportFile\2016031425678bookmarks_16_3_13.html" />
+    <Content Include="UploadFiles\UserImportFile\2016031439086bookmarks_16_3_13.html" />
+    <Content Include="UploadFiles\UserImportFile\2016031454925bookmarks_16_3_13.html" />
+    <Content Include="UploadFiles\UserImportFile\2016031460916bookmarks_16_3_13.html" />
+    <Content Include="UploadFiles\UserImportFile\2016031485864bookmark.html" />
+    <Content Include="UploadFiles\UserImportFile\2016031555144bookmarks_16_3_13.html" />
+    <Content Include="UploadFiles\UserImportFile\2016031665059bookmarks_16_3_13.html" />
+    <Content Include="UploadFiles\UserImportFile\2016031922031学生-白854748548-bookmarks_16_3_17.html" />
+    <Content Include="UploadFiles\UserImportFile\201603192724学生-白若冰-674988272bookmarks_16_3_17.html" />
+    <Content Include="UploadFiles\UserImportFile\2016031953749周德阳-zhdyly%40qq.com%28369557272%29-bookmarks_16_3_17.html" />
+    <Content Include="Web.config" />
+    <Content Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Views\Web.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="App_Data\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="assets\fonts\fontawesome-webfont.eot" />
+    <Content Include="assets\fonts\fontawesome-webfont.ttf" />
+    <Content Include="assets\fonts\fontawesome-webfont.woff" />
+    <Content Include="assets\fonts\fontawesome-webfont.woff2" />
+    <Content Include="assets\fonts\FontAwesome.otf" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\WebBookmarkBo\WebBookmarkBo.csproj">
+      <Project>{9cbb6d15-1c1a-4746-a943-5805f773a433}</Project>
+      <Name>WebBookmarkBo</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Default\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Login\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Register\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shared\Error.cshtml" />
+    <Content Include="Views\Shared\Lockout.cshtml" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Shared\_LoginPartial.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\UserInfo\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\WebBookmarkTable\ImportWebBookmark.cshtml" />
+    <Content Include="Views\WebBookmarkTable\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Properties\PublishProfiles\00.pubxml" />
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <Target Name="MvcBuildViews" AfterTargets="AfterBuild" Condition="'$(MvcBuildViews)'=='true'">
+    <AspNetCompiler VirtualPath="temp" PhysicalPath="$(WebProjectOutputDir)" />
+  </Target>
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>2047</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:2047/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target> -->
+</Project>
