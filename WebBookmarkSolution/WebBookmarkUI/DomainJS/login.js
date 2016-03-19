@@ -20,7 +20,7 @@ function login()
         return;
     }
 
-    var userInfo =
+    var uiUserInfo =
     {
         UserEmail:email,
         Password: password,
@@ -29,7 +29,7 @@ function login()
     $.ajax({
         type:"post",
         url: loginUrl,
-        data: { UIUserInfo: userInfo },
+        data: uiUserInfo,
         success: function (rsp)
         {
             if(rsp.IsSuccess)

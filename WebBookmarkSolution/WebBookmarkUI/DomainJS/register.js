@@ -38,7 +38,7 @@ function RegisterUser() {
 }
 
 function AddUser() {
-    var userInfo =
+    var uiUserInfo =
     {
         UserEmail: $("#UserEmail").val(),
         Password: $("#UserPassword").val(),
@@ -50,7 +50,7 @@ function AddUser() {
     $.ajax({
         type: "post",
         url: "./Register/RegisterUser",
-        data: { UIUserInfo: userInfo },
+        data: uiUserInfo,
         success:
             function (rsp) {
                 if (rsp.IsSuccess) {

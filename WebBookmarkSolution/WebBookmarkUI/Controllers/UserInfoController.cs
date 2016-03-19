@@ -47,21 +47,41 @@ namespace WebBookmarkUI.Controllers
         }
 
 
-        public ActionResult CheckUserEmailOrLoginName(string emailOrLoginName)
+        public ActionResult CheckUserEmail(string email)
         {
             var cookieLoginName= UILoginHelper.GetUIUserLoginNameOrEmail(Request);
             BizResultInfo result = new BizResultInfo();
-            if (cookieLoginName.Equals(emailOrLoginName))
+            if (cookieLoginName.Equals(email))
             {
                 result.IsSuccess = true;
                 result.SuccessMessage = "邮箱是有效的哦，可以使用。";
                 
             }else
             {
-                result = UserInfoBo.CheckUserEmailOrLoginName(emailOrLoginName);
+                result = UserInfoBo.CheckUserEmailOrLoginName(email);
             }
             return Json(result);
         }
+
+        public ActionResult CheckUserLoginName(string loginName)
+        {
+            var cookieLoginName = UILoginHelper.GetUIUserLoginNameOrEmail(Request);
+            BizResultInfo result = UserInfoBo.GetUserInfoByLoginNameOrEmail(cookieLoginName);
+            if (result.IsSuccess)
+            {
+                var userInfo = result.Target as BizUserInfo;
+                if(!userInfo.UserLoginName.Equals(loginName))
+                {
+                    result = UserInfoBo.CheckUserEmailOrLoginName(loginName);
+                }else
+                {
+                    result.IsSuccess = true;
+                    result.SuccessMessage = "邮箱是有效的哦，可以使用。";
+                }
+            }
+            return Json(result);
+        }
+
 
         private BizResultInfo SaveUserToDB(String loginEmail, UIUserInfo uiUserInfo)
         {

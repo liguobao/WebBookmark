@@ -25,15 +25,15 @@
 
 function checkEmail()
 {
-    var emailOrLoginName = $("#user-email").val();
-    if (emailOrLoginName == "") {
+    var email = $("#user-email").val();
+    if (email == "") {
         alert("请输入邮箱地址。");
         return;
     }
     $.ajax({
         type: "post",
-        url: "./UserInfo/CheckUserEmailOrLoginName",
-        data: { emailOrLoginName},
+        url: "./UserInfo/CheckUserEmail",
+        data: { email},
         success:
             function (rsp) {
                 if (rsp.IsSuccess)
@@ -51,16 +51,16 @@ function checkEmail()
 
 function checkLoginName()
 {
-    var emailOrLoginName = $("#login-name").val();
-    if (emailOrLoginName == "") {
+    var loginName = $("#login-name").val();
+    if (loginName == "") {
         alert("请输入登陆名呀。");
         return;
     }
 
     $.ajax({
         type: "post",
-        url: "./UserInfo/CheckUserEmailOrLoginName",
-        data: { emailOrLoginName},
+        url: "./UserInfo/CheckUserLoginName",
+        data: { loginName},
                 success:
             function (rsp) {
                 if (rsp.IsSuccess)
@@ -89,7 +89,7 @@ function saveUserInfoToDB()
 
     var usercomment = $("#user-intro").val();
 
-    var userInfo =
+    var uiUserInfo =
    {
        UserEmail: email,
        UserName: name,
@@ -103,7 +103,7 @@ function saveUserInfoToDB()
     $.ajax({
         type: "post",
         url: "./UserInfo/SaveUserInfo",
-        data: { UIUserInfo: userInfo },
+        data: uiUserInfo,
         success:
             function (rsp) {
                 if (rsp.IsSuccess) {
