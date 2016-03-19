@@ -19,13 +19,14 @@ namespace WebBookmarkService.DAL
         /// </summary>        
         public bool Add (SystemLog systemLog)
 		{
-				string sql ="INSERT INTO tblSystemLog (LogTitle, LogContent, LogType, CreateTime)  VALUES (@LogTitle, @LogContent, @LogType, @CreateTime)";
+				string sql ="INSERT INTO tblSystemLog (LogTitle, LogContent, LogType, CreateTime, DynamicInfo)  VALUES (@LogTitle, @LogContent, @LogType, @CreateTime, @DynamicInfo)";
 				MySqlParameter[] para = new MySqlParameter[]
 					{
 						new MySqlParameter("@LogTitle", ToDBValue(systemLog.LogTitle)),
 						new MySqlParameter("@LogContent", ToDBValue(systemLog.LogContent)),
 						new MySqlParameter("@LogType", ToDBValue(systemLog.LogType)),
 						new MySqlParameter("@CreateTime", ToDBValue(systemLog.CreateTime)),
+						new MySqlParameter("@DynamicInfo", ToDBValue(systemLog.DynamicInfo)),
 					};
 					
 				int AddId = (int)MyDBHelper.ExecuteScalar(sql, para);
@@ -73,6 +74,7 @@ namespace WebBookmarkService.DAL
                 +", LogContent = @LogContent" 
                 +", LogType = @LogType" 
                 +", CreateTime = @CreateTime" 
+                +", DynamicInfo = @DynamicInfo" 
                
             +" WHERE SystemLogID = @SystemLogID";
 
@@ -84,6 +86,7 @@ namespace WebBookmarkService.DAL
 					,new MySqlParameter("@LogContent", ToDBValue(systemLog.LogContent))
 					,new MySqlParameter("@LogType", ToDBValue(systemLog.LogType))
 					,new MySqlParameter("@CreateTime", ToDBValue(systemLog.CreateTime))
+					,new MySqlParameter("@DynamicInfo", ToDBValue(systemLog.DynamicInfo))
 			};
 
 			return MyDBHelper.ExecuteNonQuery(sql, para);
@@ -122,8 +125,9 @@ namespace WebBookmarkService.DAL
 			systemLog.SystemLogID = (long)ToModelValue(dr,"SystemLogID");
 			systemLog.LogTitle = (string)ToModelValue(dr,"LogTitle");
 			systemLog.LogContent = (string)ToModelValue(dr,"LogContent");
-			systemLog.LogType = (int?)ToModelValue(dr,"LogType");
+			systemLog.LogType = (int)ToModelValue(dr,"LogType");
 			systemLog.CreateTime = (DateTime?)ToModelValue(dr,"CreateTime");
+			systemLog.DynamicInfo = (string)ToModelValue(dr,"DynamicInfo");
 			return systemLog;
 		}
 		#endregion

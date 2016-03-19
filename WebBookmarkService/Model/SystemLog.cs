@@ -31,14 +31,19 @@ namespace WebBookmarkService.Model
 		public string LogContent{get;set;}
             
         /// <summary>
-        /// 日志类型：常规/警告/异常
+        /// Info = 0,Warning=1,Debug=2,Error=3,Exception=4,
         /// </summary>
-		public int? LogType{get;set;}
+		public int LogType{get;set;}
             
         /// <summary>
         /// 创建时间
         /// </summary>
 		public DateTime? CreateTime{get;set;}
+            
+        /// <summary>
+        /// 
+        /// </summary>
+		public string DynamicInfo{get;set;}
             
 	}
 }

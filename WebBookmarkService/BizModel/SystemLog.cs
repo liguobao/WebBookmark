@@ -31,14 +31,19 @@ namespace WebBookmarkService.BizModel
 		public string LogContent{get;set;}
             
         /// <summary>
-        /// 日志类型：常规/警告/异常
+        /// Info = 0,Warning=1,Debug=2,Error=3,Exception=4,
         /// </summary>
-		public int? LogType{get;set;}
+		public int LogType{get;set;}
             
         /// <summary>
         /// 创建时间
         /// </summary>
 		public DateTime? CreateTime{get;set;}
+            
+        /// <summary>
+        /// 
+        /// </summary>
+		public string DynamicInfo{get;set;}
             
         
         /// <summary>
@@ -53,6 +58,7 @@ namespace WebBookmarkService.BizModel
                 LogContent =  LogContent,
                 LogType =  LogType,
                 CreateTime =  CreateTime,
+                DynamicInfo =  DynamicInfo,
             }
         }
         
@@ -64,6 +70,7 @@ namespace WebBookmarkService.BizModel
              LogContent =  dataInfo.LogContent;
              LogType =  dataInfo.LogType;
              CreateTime =  dataInfo.CreateTime;
+             DynamicInfo =  dataInfo.DynamicInfo;
         }
         
         public  BizSystemLog ()

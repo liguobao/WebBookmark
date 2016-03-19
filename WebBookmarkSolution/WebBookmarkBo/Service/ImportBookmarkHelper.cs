@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using WebBookmarkBo.Model;
+using WebBookmarkService.BizModel;
 
 namespace WebfolderBo.Service
 {
@@ -50,6 +51,7 @@ namespace WebfolderBo.Service
             }
             catch (Exception ex)
             {
+                LogHelper.WriteException("遍历书签文件失败",ex,new {UserInfoID= uid,Path= path });
                 return (new BizResultInfo() { IsSuccess = false, ErrorMessage = "发生了一些意外，反正你是看不懂的...." });
             }
 
@@ -91,6 +93,8 @@ namespace WebfolderBo.Service
             }
             catch (Exception ex)
             {
+                LogHelper.WriteException("遍历书签文件失败", ex, new { UserInfoID = uid, BookmarkText = bookmarkText });
+
                 return (new BizResultInfo() { IsSuccess = false, ErrorMessage = "发生了一些意外，反正你是看不懂的...." });
             }
 
@@ -115,7 +119,8 @@ namespace WebfolderBo.Service
                 }
                 catch (Exception ex)
                 {
-
+                    LogHelper.WriteException("BatchUpdateWebfolder Exception", ex,
+                        new {DicHashcodeToModel = dicHashcodeToModel,});
                 }
 
             });
@@ -127,7 +132,11 @@ namespace WebfolderBo.Service
                 }
                 catch (Exception ex)
                 {
-
+                    LogHelper.WriteException("BookmarkInfo BatchSaveToDB Exception", ex,
+                       new
+                       {  
+                           BizHrefInfoList = lstBizHrefInfo
+                       });
                 }
 
             });
@@ -142,7 +151,6 @@ namespace WebfolderBo.Service
         private static void SaveWebFolderToDBAndFillHashModel(long uid, Dictionary<int, IElement> dicWebBookmarkElement,
             ref Dictionary<int, BizUserWebFolder> dicHashcodeToModel)
         {
-
             List<BizUserWebFolder> lstWebfolder = new List<BizUserWebFolder>();
 
             foreach (var element in dicWebBookmarkElement.Values)
