@@ -5,6 +5,19 @@ using System.Web;
 
 namespace WebBookmarkUI.Models
 {
+
+
+
+    public class WebBookmarkTableModel 
+    {
+        public List<UIWebFolderInfo> AllWebFolderInfoList { get; set; }
+
+        public UIWebFolderInfo FirstWebFolderInfo { get; set; }
+
+
+
+    }
+
     /// <summary>
     /// 书签夹
     /// </summary>

@@ -121,7 +121,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\UIUserInfo.cs" />
-    <Compile Include="Models\UIWebFolderInfo.cs" />
+    <Compile Include="Models\WebBookmarkTableModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

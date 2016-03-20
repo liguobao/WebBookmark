@@ -17,22 +17,24 @@ namespace WebBookmarkUI.Controllers
         public ActionResult Index()
         {
             var uid = UILoginHelper.GetUIDInCookie(Request);
-            var lstModel = new List<UIWebFolderInfo>();
+            WebBookmarkTableModel model = null;
 
             if (uid!=default(long))
             {
                 var result = UserWebFolderBo.LoadWebfolderByUID(uid);
                 if (!result.IsSuccess)
                     return View();
-
+                model = new WebBookmarkTableModel();
+                model.AllWebFolderInfoList = new List<UIWebFolderInfo>();
                 foreach(var bizWebfolder in (result.Target as List<BizUserWebFolder>).OrderBy(folder=>folder.ParentWebfolderID))
                 {
                     UIWebFolderInfo uiModel = ToUIModel(bizWebfolder);
-                    lstModel.Add(uiModel);
+                    model.AllWebFolderInfoList.Add(uiModel);
                 }
+                model.FirstWebFolderInfo = model.AllWebFolderInfoList.Find(folder => folder.ParentWebfolderID == 0);
             }
 
-            return View(lstModel);
+            return View(model);
         }
 
         private static UIWebFolderInfo ToUIModel(BizUserWebFolder bizWebfolder)
@@ -45,6 +47,7 @@ namespace WebBookmarkUI.Controllers
             uiModel.Visible = bizWebfolder.Visible;
             uiModel.IntroContent = bizWebfolder.IntroContent;
             uiModel.IElementJSON = bizWebfolder.IElementJSON;
+            uiModel.CreateTime = bizWebfolder.CreateTime;
             uiModel.ChildrenFolderList = new List<UIWebFolderInfo>();
             uiModel.UIBookmarkInfoList = new List<UIBookmarkInfo>();
 
