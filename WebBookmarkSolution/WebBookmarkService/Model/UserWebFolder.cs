@@ -43,7 +43,7 @@ namespace WebBookmarkService.Model
         /// <summary>
         /// 父收藏夹ID
         /// </summary>
-		public long? ParentWebfolderID{get;set;}
+		public long ParentWebfolderID{get;set;}
             
         /// <summary>
         /// 收藏夹描述

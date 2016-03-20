@@ -170,47 +170,7 @@ namespace WebBookmarkBo.Service
 
 
 
-        /// <summary>
-        /// long 转换成string密文
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
-        public static string ConvertToCiphertext(this long id)
-        {
-            string val = id.ToString();
-            return EncryptString(val);
-        }
-
-        /// <summary>
-        /// string密文 转换成long
-        /// </summary>
-        /// <param name="val"></param>
-        /// <returns></returns>
-        public static long ConvertToPlainLong(this string val)
-        {
-            var dec = DecryptString(val);
-            return Convert.ToInt64(dec);
-        }
-
-        /// <summary>
-        /// 明文字符串转换成密文
-        /// </summary>
-        /// <param name="plaintext"></param>
-        /// <returns></returns>
-        public static string ConvertToCiphertext(this string plaintext)
-        {
-            return EncryptString(plaintext);
-        }
-
-        /// <summary>
-        /// 密文字符串转换成明文
-        /// </summary>
-        /// <param name="ciphertext"></param>
-        /// <returns></returns>
-        public static string ConvertToPlaintext(this string ciphertext)
-        {
-            return DecryptString(ciphertext);
-        }
+      
 
     }
 }

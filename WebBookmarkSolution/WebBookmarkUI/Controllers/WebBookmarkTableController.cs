@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Web.Mvc;
 using System.Xml.Linq;
 using WebBookmarkBo.Model;
+using WebBookmarkUI.Models;
 using WebfolderBo.Service;
 
 namespace WebBookmarkUI.Controllers
@@ -15,9 +16,67 @@ namespace WebBookmarkUI.Controllers
         // GET: WebBookmarkTable
         public ActionResult Index()
         {
-            return View();
+            var uid = UILoginHelper.GetUIDInCookie(Request);
+            var lstModel = new List<UIWebFolderInfo>();
+
+            if (uid!=default(long))
+            {
+                var result = UserWebFolderBo.LoadWebfolderByUID(uid);
+                if (!result.IsSuccess)
+                    return View();
+
+                foreach(var bizWebfolder in (result.Target as List<BizUserWebFolder>).OrderBy(folder=>folder.ParentWebfolderID))
+                {
+                    UIWebFolderInfo uiModel = ToUIModel(bizWebfolder);
+                    lstModel.Add(uiModel);
+                }
+            }
+
+            return View(lstModel);
         }
 
+        private static UIWebFolderInfo ToUIModel(BizUserWebFolder bizWebfolder)
+        {
+            var uiModel = new UIWebFolderInfo();
+            uiModel.ParentWebfolderID = bizWebfolder.ParentWebfolderID;
+            uiModel.UserInfoID = bizWebfolder.UserInfoID;
+            uiModel.UserWebFolderID = bizWebfolder.UserWebFolderID;
+            uiModel.WebFolderName = bizWebfolder.WebFolderName;
+            uiModel.Visible = bizWebfolder.Visible;
+            uiModel.IntroContent = bizWebfolder.IntroContent;
+            uiModel.IElementJSON = bizWebfolder.IElementJSON;
+            uiModel.ChildrenFolderList = new List<UIWebFolderInfo>();
+            uiModel.UIBookmarkInfoList = new List<UIBookmarkInfo>();
+
+            if (bizWebfolder.ChildrenFolderList!=null && bizWebfolder.ChildrenFolderList.Count!=0)
+            {
+                uiModel.ChildrenFolderList.AddRange(
+                    bizWebfolder.ChildrenFolderList.
+                    Select(childeren=>ToUIModel(childeren)));
+            }
+
+            if(bizWebfolder.BizBookmarkInfoList!=null && bizWebfolder.BizBookmarkInfoList.Count!=0)
+            {
+              
+
+                foreach(var bookmark in bizWebfolder.BizBookmarkInfoList)
+                {
+                    var uiBookmarkInfo = new UIBookmarkInfo()
+                    {
+                        UserInfoID = bookmark.UserInfoID,
+                        UserWebFolderID = bookmark.UserWebFolderID,
+                        Host = bookmark.Host,
+                        Href = bookmark.Href,
+                        BookmarkName = bookmark.BookmarkName,
+                        CreateTime = bookmark.CreateTime,
+                        BookmarkInfoID = bookmark.BookmarkInfoID,
+                    };
+
+                    uiModel.UIBookmarkInfoList.Add(uiBookmarkInfo);
+                } 
+            }
+            return uiModel;
+        }
 
         public ActionResult ImportWebBookmark()
         {

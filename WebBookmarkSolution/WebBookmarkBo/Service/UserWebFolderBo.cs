@@ -2,12 +2,15 @@
 using System.Collections.Generic;
 using System.Linq;
 using WebBookmarkBo.Model;
+using WebBookmarkService;
 using WebBookmarkService.DAL;
 
 namespace WebfolderBo.Service
 {
     public class UserWebFolderBo
     {
+        private static UserWebFolderDAL webFolderDAL = new UserWebFolderDAL();
+
         public static BizResultInfo BatchAddUserWebfolder(List<BizUserWebFolder> lstBizWebfolder)
         {
             BizResultInfo result = new BizResultInfo();
@@ -17,7 +20,7 @@ namespace WebfolderBo.Service
                 result.ErrorMessage = "插入数据不能为空。";
             }
             var lstModel = lstBizWebfolder.Select(biz=>biz.ToModel()).ToList();  
-            var isSuccess = new UserWebFolderDAL().BatchAdd(lstModel);
+            var isSuccess = webFolderDAL.BatchAdd(lstModel);
             if(isSuccess)
             {
                 result.IsSuccess = isSuccess;
@@ -58,7 +61,7 @@ namespace WebfolderBo.Service
                 result.ErrorMessage = "插入数据不能为空。";
             }
             var lstModel = lstBizWebfolder.Select(biz => biz.ToModel()).ToList();
-            var isSuccess = new UserWebFolderDAL().BatchUpdata(lstModel);
+            var isSuccess = webFolderDAL.BatchUpdata(lstModel);
             result.IsSuccess = isSuccess;
             if (isSuccess)
             {
@@ -70,5 +73,83 @@ namespace WebfolderBo.Service
 
             return result;
         }
+
+        /// <summary>
+        /// 加载书签夹数据
+        /// </summary>
+        /// <param name="uid"></param>
+        /// <returns></returns>
+        public static BizResultInfo LoadWebfolderByUID(long uid)
+        {
+            var result = new BizResultInfo();
+
+            try
+            {
+                var lstWebFolder = BizUserWebFolder.LoadAllByUID(uid);
+                var lstBookmark = BookmarkInfoBo.LoadByUID(uid);
+                Dictionary<long, List<BizBookmarkInfo>> dicWebfolderIDToBookmarkList = new Dictionary<long, List<BizBookmarkInfo>>();
+                Dictionary<long, List<BizUserWebFolder>> dicParentWebfolderIDToWebfolder = new Dictionary<long, List<BizUserWebFolder>>();
+
+                FillDictionary(lstWebFolder, lstBookmark, dicWebfolderIDToBookmarkList, dicParentWebfolderIDToWebfolder);
+
+                foreach (var webfolder in lstWebFolder)
+                {
+                    if (dicWebfolderIDToBookmarkList.ContainsKey(webfolder.UserWebFolderID))
+                    {
+                        webfolder.BizBookmarkInfoList = dicWebfolderIDToBookmarkList[webfolder.UserWebFolderID];
+                    }
+                    if (dicParentWebfolderIDToWebfolder.ContainsKey(webfolder.UserWebFolderID))
+                    {
+                        webfolder.ChildrenFolderList = dicParentWebfolderIDToWebfolder[webfolder.UserWebFolderID];
+                    }
+                }
+
+                result.IsSuccess = true;
+                result.Target = lstWebFolder;
+
+            }catch(Exception ex)
+            {
+                result.IsSuccess = false;
+                result.ErrorMessage = "加载数据失败了，可能是网络挂了，可能这就是命吧。";
+                result.Target = null;
+                LogHelper.WriteException("LoadWebfolderByUID Exception", ex,new {UID =uid });
+            }
+
+            return result;
+        }
+
+        private static void FillDictionary(List<BizUserWebFolder> lstWebFolder, List<BizBookmarkInfo> lstBookmark, Dictionary<long, List<BizBookmarkInfo>> dicWebfolderIDToBookmarkList, Dictionary<long, List<BizUserWebFolder>> dicParentWebfolderIDToWebfolder)
+        {
+            if (lstBookmark != null)
+            {
+                foreach (var bookmark in lstBookmark)
+                {
+                    if (dicWebfolderIDToBookmarkList.ContainsKey(bookmark.UserWebFolderID))
+                        dicWebfolderIDToBookmarkList[bookmark.UserWebFolderID].Add(bookmark);
+                    else
+                        dicWebfolderIDToBookmarkList.Add(bookmark.UserWebFolderID, new List<BizBookmarkInfo>() { bookmark });
+                }
+            }
+
+            if (lstWebFolder != null)
+            {
+                foreach (var folder in lstWebFolder)
+                {
+                    if (dicParentWebfolderIDToWebfolder.ContainsKey(folder.ParentWebfolderID))
+                    {
+                        dicParentWebfolderIDToWebfolder[folder.ParentWebfolderID].Add(folder);
+                    }
+                    else
+                    {
+                        dicParentWebfolderIDToWebfolder.Add(folder.ParentWebfolderID, new List<BizUserWebFolder>()
+                        {
+                            folder
+                        });
+                    }
+
+                }
+            }
+        }
+
     }
 }

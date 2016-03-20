@@ -5,7 +5,7 @@ using System;
 using WebBookmarkService.DAL;
 using WebBookmarkService.Model;
 
-namespace WebBookmarkService.BizModel
+namespace WebBookmarkService
 {	
     /// <summary>
     /// 

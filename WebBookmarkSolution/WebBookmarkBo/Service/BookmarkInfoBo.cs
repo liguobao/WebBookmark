@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using WebBookmarkBo.Model;
 using WebBookmarkService.DAL;
 
@@ -10,6 +8,8 @@ namespace WebfolderBo.Service
 {
     public class BookmarkInfoBo
     {
+        private static BookmarkInfoDAL DAL = new BookmarkInfoDAL();
+
         public static BizResultInfo BatchSaveToDB(List<BizBookmarkInfo> lstBizBookmarkInfo)
         {
             BizResultInfo result = new BizResultInfo();
@@ -20,11 +20,21 @@ namespace WebfolderBo.Service
                 return result;
             }
             var lstModel = lstBizBookmarkInfo.Select(info => info.ToModel()).ToList();
-            var isSuccess = new BookmarkInfoDAL().BatchInsert(lstModel);
+            var isSuccess = DAL.BatchInsert(lstModel);
             result.IsSuccess = isSuccess;
             if (!isSuccess)
                 result.ErrorMessage = "可能是海底光纤挂了...重新试一下咯！(打死不认是程序的问题！！！)";
             return result;
         }
+
+
+        public static List<BizBookmarkInfo> LoadByUID(long uid)
+        {
+            var lstBiz = new List<BizBookmarkInfo>();
+            var lstModel = DAL.GetListByUID(uid);
+            lstBiz = lstModel.Select(model => new BizBookmarkInfo(model)).ToList();
+            return lstBiz;
+        }
+
     }
 }

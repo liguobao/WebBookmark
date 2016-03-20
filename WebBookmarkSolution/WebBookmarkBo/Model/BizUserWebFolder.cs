@@ -41,7 +41,7 @@ namespace WebBookmarkBo.Model
         /// <summary>
         /// 父收藏夹ID
         /// </summary>
-        public long? ParentWebfolderID { get; set; }
+        public long ParentWebfolderID { get; set; }
 
         /// <summary>
         /// 
@@ -52,6 +52,13 @@ namespace WebBookmarkBo.Model
         public string IElementJSON { get; set; }
 
         public int IElementHashcode { get; set; }
+
+
+        public List<BizBookmarkInfo> BizBookmarkInfoList { get; set; }
+
+        public List<BizUserWebFolder> ChildrenFolderList { get; set;}
+
+
 
         #endregion
 

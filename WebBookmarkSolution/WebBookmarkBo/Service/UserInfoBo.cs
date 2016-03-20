@@ -1,5 +1,6 @@
 ﻿using System;
 using WebBookmarkBo.Model;
+using WebfolderBo;
 
 namespace WebBookmarkBo.Service
 {

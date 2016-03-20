@@ -249,7 +249,7 @@ namespace WebBookmarkService.DAL
             userWebFolder.UserInfoID = (long)ToModelValue(dr, "UserInfoID");
             userWebFolder.CreateTime = (DateTime)ToModelValue(dr, "CreateTime");
             userWebFolder.Visible = (sbyte)ToModelValue(dr, "Visible");
-            userWebFolder.ParentWebfolderID = (long?)ToModelValue(dr, "ParentWebfolderID");
+            userWebFolder.ParentWebfolderID = (long)ToModelValue(dr, "ParentWebfolderID");
             userWebFolder.IntroContent = (string)ToModelValue(dr, "IntroContent");
             userWebFolder.IElementJSON = (string)ToModelValue(dr, "IElementJSON");
             userWebFolder.IElementHashcode = (int)ToModelValue(dr, "IElementHashcode");

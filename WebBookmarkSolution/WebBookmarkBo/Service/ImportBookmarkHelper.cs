@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using WebBookmarkBo.Model;
-using WebBookmarkService.BizModel;
+using WebBookmarkService;
 
 namespace WebfolderBo.Service
 {

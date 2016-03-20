@@ -224,15 +224,27 @@ namespace WebBookmarkService.DAL
 				return ToModels(reader);			
 			}
 		}
-		#endregion
-        
-        
-        
+        #endregion
+
+        #region 根据字段名获取数据记录IEnumerable<>
+        ///<summary>
+        ///根据字段名获取数据记录IEnumerable<>
+        ///</summary>              
+        public IEnumerable<BookmarkInfo> GetListByUID(long uid)
+        {
+            string sql = "SELECT * FROM tblBookmarkInfo where UserInfoID=" + uid;
+            using (MySqlDataReader reader = MyDBHelper.ExecuteDataReader(sql))
+            {
+                return ToModels(reader);
+            }
+        }
+        #endregion
+
         #region 获得总记录集IEnumerable<>
         ///<summary>
         /// 获得总记录集IEnumerable<>
         ///</summary> 
-		public IEnumerable<BookmarkInfo> GetAll()
+        public IEnumerable<BookmarkInfo> GetAll()
 		{
 			string sql = "SELECT * FROM tblBookmarkInfo";
 			using(MySqlDataReader reader = MyDBHelper.ExecuteDataReader(sql))

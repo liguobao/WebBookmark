@@ -3,16 +3,19 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using WebBookmarkService.DAL;
 using WebBookmarkService.Model;
 
 namespace WebBookmarkBo.Model
 {
     public class BizBookmarkInfo
     {
+        #region 属性
+
         /// <summary>
         /// 主键，自增
         /// </summary>
-		public long BookmarkInfoID { get; set; }
+        public long BookmarkInfoID { get; set; }
 
         /// <summary>
         /// 网页收藏夹ID
@@ -55,6 +58,8 @@ namespace WebBookmarkBo.Model
         public string BookmarkName { get; set; }
 
 
+        #endregion
+
         /// <summary>
         /// Biz Convert To DB Model
         /// </summary>
@@ -94,6 +99,19 @@ namespace WebBookmarkBo.Model
         public BizBookmarkInfo()
         {
 
+        }
+
+
+        public void Save()
+        {
+            if(BookmarkInfoID!=0)
+            {
+                new BookmarkInfoDAL().Update(ToModel());
+            }
+            else
+            {
+                new BookmarkInfoDAL().Add(ToModel());
+            }
         }
     }
 }
