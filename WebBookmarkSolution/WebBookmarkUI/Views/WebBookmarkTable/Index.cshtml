@@ -3,8 +3,8 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 @model WebBookmarkUI.Models.WebBookmarkTableModel
-<script>
-    var lstWebfolder = '@Newtonsoft.Json.JsonConvert.SerializeObject(Model)';
+<script type="text/javascript">
+    var lstWebfolder = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(Model))
 </script>
 
 

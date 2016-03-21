@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Web.Mvc;
 using System.Xml.Linq;
 using WebBookmarkBo.Model;
+using WebBookmarkService;
 using WebBookmarkUI.Models;
 using WebfolderBo.Service;
 
@@ -80,6 +81,23 @@ namespace WebBookmarkUI.Controllers
             }
             return uiModel;
         }
+
+
+        public ActionResult ShowFolderInfo(string strAllFolder,long showFolderID)
+        {
+            WebBookmarkTableModel model = null;
+            try
+            {
+                model = JsonConvert.DeserializeObject<WebBookmarkTableModel>(strAllFolder);
+                model.FirstWebFolderInfo = model.AllWebFolderInfoList.Find(folder => folder.ParentWebfolderID == showFolderID);
+
+            }catch(Exception ex)
+            {
+                LogHelper.WriteException("ShowFolderInfo Exception", ex, new { StrAllFolder=strAllFolder,ShowFolderID=showFolderID });
+            }
+            return View(model);
+        }
+
 
         public ActionResult ImportWebBookmark()
         {

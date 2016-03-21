@@ -255,6 +255,7 @@
   <ItemGroup>
     <None Include="Properties\PublishProfiles\00.pubxml" />
     <None Include="Properties\PublishProfiles\webBookmarkWebsite.pubxml" />
+    <Content Include="Views\WebBookmarkTable\ShowFolderInfo.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
