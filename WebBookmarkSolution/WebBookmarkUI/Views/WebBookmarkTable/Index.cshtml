@@ -4,10 +4,10 @@
 }
 @model WebBookmarkUI.Models.WebBookmarkTableModel
 <script type="text/javascript">
-    var lstWebfolder = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(Model))
+    var strAllFolder = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(Model));
+    var showFolderURL = "@Url.Action("ShowFolderInfo")";
 </script>
-
-
+<script src="~/DomainJS/webbookmarktable.js"></script>
 <div class="admin-content">
     <div class="am-cf am-padding">
         <div class="am-fl am-cf"><strong class="am-text-primary am-text-lg">我的全部书签</strong> / <small>My Webfolder</small></div>
@@ -43,8 +43,8 @@
                      foreach (var folder in Model.FirstWebFolderInfo.ChildrenFolderList)
                      {
                         <tr>
-                            <td>@index <div style="display:none" name="folderID">@folder.UserWebFolderID</div></td>
-                            <td>@folder.WebFolderName</td>
+                            <td>@index</td>
+                            <td><div name="folder"><div name="divFolderID" style="display:none"> @folder.UserWebFolderID</div> @folder.WebFolderName</div></td>
                             <td>@folder.CreateTime</td>
                             <td><span class="am-icon-folder"></span></td>
                             <td>

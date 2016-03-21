@@ -15,26 +15,32 @@ namespace WebBookmarkUI.Controllers
     public class WebBookmarkTableController : Controller
     {
         // GET: WebBookmarkTable
-        public ActionResult Index()
+        public ActionResult Index(string strAllFolder = "", long showFolderID = 0)
         {
-            var uid = UILoginHelper.GetUIDInCookie(Request);
             WebBookmarkTableModel model = null;
 
-            if (uid!=default(long))
+            if (string.IsNullOrEmpty(strAllFolder) && showFolderID == 0)
             {
-                var result = UserWebFolderBo.LoadWebfolderByUID(uid);
-                if (!result.IsSuccess)
-                    return View();
-                model = new WebBookmarkTableModel();
-                model.AllWebFolderInfoList = new List<UIWebFolderInfo>();
-                foreach(var bizWebfolder in (result.Target as List<BizUserWebFolder>).OrderBy(folder=>folder.ParentWebfolderID))
+                var uid = UILoginHelper.GetUIDInCookie(Request);
+                if (uid != default(long))
                 {
-                    UIWebFolderInfo uiModel = ToUIModel(bizWebfolder);
-                    model.AllWebFolderInfoList.Add(uiModel);
+                    var result = UserWebFolderBo.LoadWebfolderByUID(uid);
+                    if (!result.IsSuccess)
+                        return View();
+                    model = new WebBookmarkTableModel();
+                    model.AllWebFolderInfoList = new List<UIWebFolderInfo>();
+                    foreach (var bizWebfolder in (result.Target as List<BizUserWebFolder>).OrderBy(folder => folder.ParentWebfolderID))
+                    {
+                        UIWebFolderInfo uiModel = ToUIModel(bizWebfolder);
+                        model.AllWebFolderInfoList.Add(uiModel);
+                    }
+                    model.FirstWebFolderInfo = model.AllWebFolderInfoList.Find(folder => folder.ParentWebfolderID == 0);
                 }
-                model.FirstWebFolderInfo = model.AllWebFolderInfoList.Find(folder => folder.ParentWebfolderID == 0);
+            }else
+            {
+                model = JsonConvert.DeserializeObject<WebBookmarkTableModel>(strAllFolder); ;
+                model.FirstWebFolderInfo = model.AllWebFolderInfoList.Find(folder => folder.ParentWebfolderID == showFolderID);
             }
-
             return View(model);
         }
 
@@ -46,8 +52,8 @@ namespace WebBookmarkUI.Controllers
             uiModel.UserWebFolderID = bizWebfolder.UserWebFolderID;
             uiModel.WebFolderName = bizWebfolder.WebFolderName;
             uiModel.Visible = bizWebfolder.Visible;
-            uiModel.IntroContent = bizWebfolder.IntroContent;
-            uiModel.IElementJSON = bizWebfolder.IElementJSON;
+            //uiModel.IntroContent = bizWebfolder.IntroContent;
+            //uiModel.IElementJSON = bizWebfolder.IElementJSON;
             uiModel.CreateTime = bizWebfolder.CreateTime;
             uiModel.ChildrenFolderList = new List<UIWebFolderInfo>();
             uiModel.UIBookmarkInfoList = new List<UIBookmarkInfo>();
@@ -83,17 +89,18 @@ namespace WebBookmarkUI.Controllers
         }
 
 
-        public ActionResult ShowFolderInfo(string strAllFolder,long showFolderID)
+        public ActionResult ShowFolderInfo(string strAllFolder = "", long showFolderID = 0)
         {
             WebBookmarkTableModel model = null;
             try
             {
-                model = JsonConvert.DeserializeObject<WebBookmarkTableModel>(strAllFolder);
+                model = JsonConvert.DeserializeObject<WebBookmarkTableModel>(strAllFolder); ;
                 model.FirstWebFolderInfo = model.AllWebFolderInfoList.Find(folder => folder.ParentWebfolderID == showFolderID);
+               
 
             }catch(Exception ex)
             {
-                LogHelper.WriteException("ShowFolderInfo Exception", ex, new { StrAllFolder=strAllFolder,ShowFolderID=showFolderID });
+                LogHelper.WriteException("ShowFolderInfo Exception", ex, new { WebBookmarkTableModel = model, ShowFolderID = showFolderID });
             }
             return View(model);
         }

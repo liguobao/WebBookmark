@@ -170,6 +170,7 @@
     <Content Include="DomainJS\login.js" />
     <Content Include="DomainJS\register.js" />
     <Content Include="DomainJS\userInfo.js" />
+    <Content Include="DomainJS\webbookmarktable.js" />
     <Content Include="Global.asax" />
     <Content Include="Scripts\jQueryFileUpload\jquery.fileupload.js" />
     <Content Include="Scripts\jQueryFileUpload\jquery.iframe-transport.js" />
