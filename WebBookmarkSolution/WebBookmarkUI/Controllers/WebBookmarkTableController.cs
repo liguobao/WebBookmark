@@ -15,31 +15,23 @@ namespace WebBookmarkUI.Controllers
     public class WebBookmarkTableController : Controller
     {
         // GET: WebBookmarkTable
-        public ActionResult Index(string strAllFolder = "", long showFolderID = 0)
+        public ActionResult Index(long folderID=0)
         {
             WebBookmarkTableModel model = null;
-
-            if (string.IsNullOrEmpty(strAllFolder) && showFolderID == 0)
+            var uid = UILoginHelper.GetUIDInCookie(Request);
+            if (uid != default(long))
             {
-                var uid = UILoginHelper.GetUIDInCookie(Request);
-                if (uid != default(long))
+                var result = UserWebFolderBo.LoadWebfolderByUID(uid);
+                if (!result.IsSuccess)
+                    return View();
+                model = new WebBookmarkTableModel();
+                model.AllWebFolderInfoList = new List<UIWebFolderInfo>();
+                foreach (var bizWebfolder in (result.Target as List<BizUserWebFolder>).OrderBy(folder => folder.ParentWebfolderID))
                 {
-                    var result = UserWebFolderBo.LoadWebfolderByUID(uid);
-                    if (!result.IsSuccess)
-                        return View();
-                    model = new WebBookmarkTableModel();
-                    model.AllWebFolderInfoList = new List<UIWebFolderInfo>();
-                    foreach (var bizWebfolder in (result.Target as List<BizUserWebFolder>).OrderBy(folder => folder.ParentWebfolderID))
-                    {
-                        UIWebFolderInfo uiModel = ToUIModel(bizWebfolder);
-                        model.AllWebFolderInfoList.Add(uiModel);
-                    }
-                    model.FirstWebFolderInfo = model.AllWebFolderInfoList.Find(folder => folder.ParentWebfolderID == 0);
+                    UIWebFolderInfo uiModel = ToUIModel(bizWebfolder);
+                    model.AllWebFolderInfoList.Add(uiModel);
                 }
-            }else
-            {
-                model = JsonConvert.DeserializeObject<WebBookmarkTableModel>(strAllFolder); ;
-                model.FirstWebFolderInfo = model.AllWebFolderInfoList.Find(folder => folder.ParentWebfolderID == showFolderID);
+                model.FirstWebFolderInfo = model.AllWebFolderInfoList.Find(folder => folder.ParentWebfolderID == folderID);
             }
             return View(model);
         }
@@ -88,23 +80,7 @@ namespace WebBookmarkUI.Controllers
             return uiModel;
         }
 
-
-        public ActionResult ShowFolderInfo(string strAllFolder = "", long showFolderID = 0)
-        {
-            WebBookmarkTableModel model = null;
-            try
-            {
-                model = JsonConvert.DeserializeObject<WebBookmarkTableModel>(strAllFolder); ;
-                model.FirstWebFolderInfo = model.AllWebFolderInfoList.Find(folder => folder.ParentWebfolderID == showFolderID);
-               
-
-            }catch(Exception ex)
-            {
-                LogHelper.WriteException("ShowFolderInfo Exception", ex, new { WebBookmarkTableModel = model, ShowFolderID = showFolderID });
-            }
-            return View(model);
-        }
-
+       
 
         public ActionResult ImportWebBookmark()
         {

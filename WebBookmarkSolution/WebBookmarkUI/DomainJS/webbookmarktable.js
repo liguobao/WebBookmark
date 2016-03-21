@@ -1,18 +1,15 @@
 ﻿$(function () {
 
-    $('body').on('click', "[name='folder']", function () {
+    $('body').on('click', "[name='openfolder']", function () {
         var $this = $(this);
         var $divfolder = $this.find("[name='divFolderID']");
         var folderID = $divfolder.text();
-        $.ajax({
-            type: "post",
-            url: showFolderURL,
-            data: {
-                strAllFolder: strAllFolder,
-                showFolderID: folderID
-            }
-        });
+        window.location.href = indexURL + '?folderID=' + folderID; // 跳转到B目录
+    });
 
+    $("#btnBack").on('click', function ()
+    {
+        history.back();
     });
 
 })

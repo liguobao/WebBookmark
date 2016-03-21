@@ -178,13 +178,13 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>03/19/2016 14:58:40</publishTime>
     </File>
     <File Include="bin/WebBookmarkUI.dll">
-      <publishTime>03/19/2016 23:32:50</publishTime>
+      <publishTime>03/21/2016 23:55:27</publishTime>
     </File>
     <File Include="bin/WebfolderBo.dll">
-      <publishTime>03/19/2016 23:32:49</publishTime>
+      <publishTime>03/20/2016 23:49:22</publishTime>
     </File>
     <File Include="bin/WebfolderService.dll">
-      <publishTime>03/19/2016 16:14:25</publishTime>
+      <publishTime>03/20/2016 23:49:21</publishTime>
     </File>
     <File Include="bin/zh-Hans/System.Net.Http.Formatting.resources.dll">
       <publishTime>03/19/2016 14:58:54</publishTime>
@@ -221,6 +221,9 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     </File>
     <File Include="DomainJS/userInfo.js">
       <publishTime>03/19/2016 17:53:58</publishTime>
+    </File>
+    <File Include="DomainJS/webbookmarktable.js">
+      <publishTime>03/21/2016 23:53:40</publishTime>
     </File>
     <File Include="Global.asax">
       <publishTime>03/19/2016 14:55:00</publishTime>
@@ -322,7 +325,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>03/19/2016 21:44:56</publishTime>
     </File>
     <File Include="Views/Register/Index.cshtml">
-      <publishTime>03/19/2016 22:22:58</publishTime>
+      <publishTime>03/19/2016 23:33:44</publishTime>
     </File>
     <File Include="Views/Shared/Error.cshtml">
       <publishTime>03/19/2016 15:23:04</publishTime>
@@ -337,7 +340,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>03/19/2016 15:23:04</publishTime>
     </File>
     <File Include="Views/UserInfo/Index.cshtml">
-      <publishTime>03/19/2016 15:23:04</publishTime>
+      <publishTime>03/20/2016 22:01:54</publishTime>
     </File>
     <File Include="Views/Web.config">
       <publishTime>03/19/2016 14:55:00</publishTime>
@@ -346,10 +349,13 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>03/19/2016 15:23:04</publishTime>
     </File>
     <File Include="Views/WebBookmarkTable/Index.cshtml">
-      <publishTime>03/19/2016 15:23:04</publishTime>
+      <publishTime>03/21/2016 23:54:46</publishTime>
+    </File>
+    <File Include="Views/WebBookmarkTable/ShowFolderInfo.cshtml">
+      <publishTime>03/21/2016 20:56:38</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>03/19/2016 23:32:51</publishTime>
+      <publishTime>03/21/2016 23:55:29</publishTime>
     </File>
   </ItemGroup>
 </Project>
