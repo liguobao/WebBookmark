@@ -133,6 +133,11 @@ namespace WebBookmarkUI.Controllers
 
         
 
+        public ActionResult ImportWebBookmark()
+        {
+            return View();
+        }
+
         public ActionResult ImportWebBookmarkToDB(string filePath)
         {
             BizResultInfo result = new BizResultInfo();
