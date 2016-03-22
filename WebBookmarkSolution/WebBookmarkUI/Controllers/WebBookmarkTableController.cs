@@ -9,6 +9,7 @@ using WebBookmarkBo.Model;
 using WebBookmarkService;
 using WebBookmarkUI.Models;
 using WebfolderBo.Service;
+using WebfolderBo;
 
 namespace WebBookmarkUI.Controllers
 {
@@ -17,21 +18,21 @@ namespace WebBookmarkUI.Controllers
         // GET: WebBookmarkTable
         public ActionResult Index(long folderID=0)
         {
-            WebBookmarkTableModel model = null;
+            UIWebFolderInfo model = null;
             var uid = UILoginHelper.GetUIDInCookie(Request);
             if (uid != default(long))
             {
                 var result = UserWebFolderBo.LoadWebfolderByUID(uid);
                 if (!result.IsSuccess)
                     return View();
-                model = new WebBookmarkTableModel();
-                model.AllWebFolderInfoList = new List<UIWebFolderInfo>();
+                model = new UIWebFolderInfo();
+                var allWebFolderInfo = new List<UIWebFolderInfo>();
                 foreach (var bizWebfolder in (result.Target as List<BizUserWebFolder>).OrderBy(folder => folder.ParentWebfolderID))
                 {
                     UIWebFolderInfo uiModel = ToUIModel(bizWebfolder);
-                    model.AllWebFolderInfoList.Add(uiModel);
+                    allWebFolderInfo.Add(uiModel);
                 }
-                model.FirstWebFolderInfo = model.AllWebFolderInfoList.Find(folder => folder.ParentWebfolderID == folderID);
+                model = allWebFolderInfo.Find(folder => folder.ParentWebfolderID == folderID);
             }
             return View(model);
         }
@@ -82,9 +83,52 @@ namespace WebBookmarkUI.Controllers
 
        
 
-        public ActionResult ImportWebBookmark()
+        public ActionResult AddBookmark(string name,string href,long folderID,string type)
         {
-            return View();
+            BizResultInfo result = new BizResultInfo();
+            if (string.IsNullOrEmpty(name) || string.IsNullOrEmpty(type))
+            {
+                result.ErrorMessage = "名称和类型必须填写呀。";
+                result.IsSuccess = false;
+                return Json(result);
+            }
+
+            try
+            {
+                if(type=="bookmark")
+                {
+                    BizBookmarkInfo bookmark = new BizBookmarkInfo();
+                    bookmark.Href = href;
+                    bookmark.BookmarkName = name;
+                    bookmark.UserWebFolderID = folderID;
+                    bookmark.CreateTime = DateTime.Now;
+                    bookmark.Host = href.GetHost();
+                    bookmark.UserInfoID = UILoginHelper.GetUIDInCookie(Request);
+                    bookmark.Save();
+                }else
+                {
+                    BizUserWebFolder folder = new BizUserWebFolder();
+                    folder.UserInfoID = UILoginHelper.GetUIDInCookie(Request);
+                    folder.WebFolderName = name;
+                    folder.ParentWebfolderID = folderID;
+                    folder.CreateTime = DateTime.Now;
+                    folder.Save();
+                
+                }
+
+               
+
+                result.IsSuccess = true;
+                result.SuccessMessage = "保存成功了耶，刷新一下页面就能看到了哦。";
+
+            }catch(Exception ex)
+            {
+                result.IsSuccess = false;
+                result.SuccessMessage = "保存失败，可能是数据库不开心了吧，重新保存试试。";
+                LogHelper.WriteException("AddBookmark Exception", ex, new { Name = name,Href = href,FolderID =folderID });
+            }
+            return Json(result);
+
         }
 
         

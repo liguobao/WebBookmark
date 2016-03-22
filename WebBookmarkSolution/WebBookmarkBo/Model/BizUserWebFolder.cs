@@ -99,6 +99,19 @@ namespace WebBookmarkBo.Model
 
         }
 
+        public void Save ()
+        {
+            if(UserWebFolderID !=0)
+            {
+                new UserWebFolderDAL().Update(ToModel());
+
+            }else
+            {
+                new UserWebFolderDAL().Add(ToModel());
+            }
+        }
+
+
         public static List<BizUserWebFolder> LoadAllByUID(long uid)
         {
             List<BizUserWebFolder> list = new List<BizUserWebFolder>();
@@ -109,5 +122,8 @@ namespace WebBookmarkBo.Model
             }
             return list;
         }
+
+
+
     }
 }

@@ -110,7 +110,7 @@ namespace WebBookmarkBo.Model
             }
             else
             {
-                new BookmarkInfoDAL().Add(ToModel());
+                new BookmarkInfoDAL().Add(ToModel()); ;
             }
         }
     }

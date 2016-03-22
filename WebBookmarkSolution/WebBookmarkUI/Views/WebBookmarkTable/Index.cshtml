@@ -2,9 +2,10 @@
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-@model WebBookmarkUI.Models.WebBookmarkTableModel
+@model WebBookmarkUI.Models.UIWebFolderInfo
 <script type="text/javascript">
     var indexURL = "@Url.Action("Index")";
+    var saveBookmarkURL = "@Url.Action("AddBookmark")";
 </script>
 <script src="~/DomainJS/webbookmarktable.js"></script>
 <div class="admin-content">
@@ -21,36 +22,52 @@
             </div>
             <div class="am-modal-bd">
                     <div class="content am-center">
-                        <h5 style="font-size:xx-large">新增书签</h5>
+                        <h5 style="font-size:xx-large">新增书签/书签夹</h5>
                         <ul class="am-list">
                             <li class="am-text-left" style="margin: 5px 20px;">
-                                <input type="text" id="name" class="am-form-field am-radius" placeholder="名称">
+                                <input type="text" id="bookmarkname" class="am-form-field am-radius" placeholder="名称">
                             </li>
-                            <li class="am-text-left" style="margin: 5px 20px;">
-                                <input type="text" id="href" class="am-form-field am-radius" placeholder="URL地址">
-                            </li>
-                            <li class="am-text-left" style="margin: 5px 20px;">
-                                <select id="folderSelect" class="am-form-field am-radius">
-                                  @if (Model != null && Model.FirstWebFolderInfo != null && Model.FirstWebFolderInfo.ChildrenFolderList !=null)
-                                  {
-                                      foreach (var folder in Model.FirstWebFolderInfo.ChildrenFolderList)
-                                      {
-                                         <option value='@folder.UserWebFolderID'>@folder.WebFolderName</option>
-                                      }
-                                  }else
-                                  {
-                                       <option value="0">书签栏</option>
-                                  }
-                                </select>
-                            </li>
+                            <li class ="am-text-left" style="margin: 5px 20px; border:none">
 
+                                <select id="bookmarkSelect" class="am-form-field am-radius" data-am-selected>
+                                    <option value="bookmark">书签</option>
+                                    <option value="folder">书签夹</option>
+                                </select>
+
+                                <select id="folderSelect" class="am-form-field am-radius am-text-right" data-am-selected>
+                                    @if (Model != null && Model.ChildrenFolderList != null && Model.ChildrenFolderList != null)
+                                    {
+                                        <option value='@Model.UserWebFolderID'>@Model.WebFolderName</option>
+                                        foreach (var folder in Model.ChildrenFolderList)
+                                        {
+                                            <option value='@folder.UserWebFolderID'>@folder.WebFolderName</option>
+                                        }
+
+                                    }
+                                    else
+                                    {
+                                        <option value="0">书签栏</option>
+                                    }
+                                </select>
+
+                            </li>
+                            <li class="am-text-left" style="margin: 5px 20px;" id="bookmarkURL">
+                                <input type="text" id="bookmarkhref" class="am-form-field am-radius" placeholder="URL地址">
+                            </li>
                         </ul>
+                        <div class="am-text-center" style="margin: 20px 20px;">
+
+                            <button class="am-btn am-btn-secondary am-radius" id="btnSaveBookmark">保存</button>
+                            <button class="am-btn am-btn-secondary am-radius" id="btnBookmarkCancel" onclick="javascript:void(0)" data-am-modal-close>取消</button>
+                        </div>
+
                         <div class="am-form-group">
                            
                         </div>
                     </div>
 
             </div>
+
         </div>
     </div>
 
@@ -63,14 +80,11 @@
                         <div class="am-footer-switch">
                             <span class="am-footer-ysp" data-rel="mobile"
                                   data-am-modal="{target: '#am-switch-mode'}">
-                            <button type="button" class="am-btn am-btn-default"><span class="am-icon-plus"></span> 新增书签</button>
+                            <button type="button" class="am-btn am-btn-default"><span class="am-icon-plus"></span> 新增书签/书签夹</button>
                             </span>
                         </div>
 
                     </footer>
-
-
-
 
                 </div>
 
@@ -94,9 +108,9 @@
                     </tr>
                 </thead>
                 <tbody>
-                 @if (Model != null && Model.FirstWebFolderInfo != null)
+                 @if (Model != null && Model.ChildrenFolderList != null)
                  {
-                     foreach (var folder in Model.FirstWebFolderInfo.ChildrenFolderList)
+                     foreach (var folder in Model.ChildrenFolderList)
                      {
                         <tr>
                             <td><span class="am-icon-folder"></span></td>
@@ -105,8 +119,10 @@
                             <td>
                             <div class="am-btn-toolbar">
                                 <div class="am-btn-group am-btn-group-xs">
-                                <button class="am-btn am-btn-default am-btn-xs am-text-secondary"><span class="am-icon-pencil-square-o"></span> 修改</button>
-                                <button class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"><span class="am-icon-trash-o"></span> 删除</button>
+                                <button class="am-btn am-btn-default am-btn-xs am-text-secondary" id="edit">
+                                    <div id="model" hidden>@Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(folder))</div>
+                                    <span class="am-icon-pencil-square-o"></span> 修改</button>
+                                <button class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only delete"><span class="am-icon-trash-o"></span> 删除</button>
                                 </div>
                             </div>
                             </td>
@@ -114,7 +130,7 @@
                      }
                      
                      
-                      foreach (var bookmark in Model.FirstWebFolderInfo.UIBookmarkInfoList)
+                      foreach (var bookmark in Model.UIBookmarkInfoList)
                      {
                         <tr>
                             <td><samp class="am-icon-bookmark"></samp></td>
@@ -123,7 +139,9 @@
                             <td>
                             <div class="am-btn-toolbar">
                                 <div class="am-btn-group am-btn-group-xs">
-                                <button class="am-btn am-btn-default am-btn-xs am-text-secondary"><span class="am-icon-pencil-square-o"></span> 修改</button>
+                                <button class="am-btn am-btn-default am-btn-xs am-text-secondary">
+                                    <div id="model" hidden>@Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(bookmark))</div>
+                                    <span class="am-icon-pencil-square-o"></span> 修改</button>
                                 <button class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"><span class="am-icon-trash-o"></span> 删除</button>
                                 </div>
                             </div>

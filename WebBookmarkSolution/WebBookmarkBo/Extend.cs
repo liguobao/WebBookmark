@@ -71,5 +71,19 @@ namespace WebfolderBo
         {
             return Encryption.DecryptString(ciphertext);
         }
+
+
+        /// <summary>
+        /// 获取域名
+        /// </summary>
+        /// <param name="href"></param>
+        /// <returns></returns>
+        public static string GetHost(this string href)
+        {
+            if (string.IsNullOrEmpty(href))
+                return string.Empty;
+            Uri uri = new Uri(href);
+            return uri.Host;
+        }
     }
 }
