@@ -6,7 +6,11 @@
 <script type="text/javascript">
     var indexURL = "@Url.Action("Index")";
     var saveBookmarkURL = "@Url.Action("AddBookmark")";
+    var convertToUIWebFolderInfoURL = "@Url.Action("ConvertToUIWebFolderInfo")"; 
+    var convertToUIBookmarkInfoURL = "@Url.Action("ConvertToUIBookmarkInfo")"; 
+    var deleteInfoURL = "@Url.Action("DeleteBookmarkOrWebFolder")"; 
 </script>
+<script src="~/Scripts/layer/layer.js"></script>
 <script src="~/DomainJS/webbookmarktable.js"></script>
 <div class="admin-content">
     <div class="am-cf am-padding">
@@ -20,9 +24,10 @@
             <div class="am-modal-hd am-modal-footer-hd">
                 <a href="javascript:void(0)" data-dismiss="modal" class="am-close am-close-spin " data-am-modal-close>&times;</a>
             </div>
-            <div class="am-modal-bd">
+            <div class="am-modal-bd" id="addFolderOrBookmark">
                     <div class="content am-center">
                         <h5 style="font-size:xx-large">新增书签/书签夹</h5>
+                        <div id="editID" hidden></div>
                         <ul class="am-list">
                             <li class="am-text-left" style="margin: 5px 20px;">
                                 <input type="text" id="bookmarkname" class="am-form-field am-radius" placeholder="名称">
@@ -80,7 +85,7 @@
                         <div class="am-footer-switch">
                             <span class="am-footer-ysp" data-rel="mobile"
                                   data-am-modal="{target: '#am-switch-mode'}">
-                            <button type="button" class="am-btn am-btn-default"><span class="am-icon-plus"></span> 新增书签/书签夹</button>
+                            <button type="button" class="am-btn am-btn-default" id="btnAddFolderOrBookmark"><span class="am-icon-plus"></span> 新增书签/书签夹</button>
                             </span>
                         </div>
 
@@ -119,10 +124,13 @@
                             <td>
                             <div class="am-btn-toolbar">
                                 <div class="am-btn-group am-btn-group-xs">
-                                <button class="am-btn am-btn-default am-btn-xs am-text-secondary" id="edit">
-                                    <div id="model" hidden>@Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(folder))</div>
-                                    <span class="am-icon-pencil-square-o"></span> 修改</button>
-                                <button class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only delete"><span class="am-icon-trash-o"></span> 删除</button>
+                                    <button class="am-btn am-btn-default am-btn-xs am-text-secondary" id="folderedit">
+                                        <div id="model" hidden>@Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(folder))</div>
+                                        <span class="am-icon-pencil-square-o"></span> 修改
+                                    </button>
+                                <button class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only delete" id="delete" value="folder">
+                                    <div name="infoID" style="display:none"> @folder.UserWebFolderID</div>
+                                    <span class="am-icon-trash-o"></span> 删除</button>
                                 </div>
                             </div>
                             </td>
@@ -139,10 +147,13 @@
                             <td>
                             <div class="am-btn-toolbar">
                                 <div class="am-btn-group am-btn-group-xs">
-                                <button class="am-btn am-btn-default am-btn-xs am-text-secondary">
-                                    <div id="model" hidden>@Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(bookmark))</div>
-                                    <span class="am-icon-pencil-square-o"></span> 修改</button>
-                                <button class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"><span class="am-icon-trash-o"></span> 删除</button>
+                                    <button class="am-btn am-btn-default am-btn-xs am-text-secondary" id="bookmarkedit">
+                                        <div id="model" hidden>@Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(bookmark))</div>
+                                        <span class="am-icon-pencil-square-o"></span> 修改
+                                    </button>
+                                <button class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only" id="delete" value="bookmark">
+                                    <div name="infoID" style="display:none"> @bookmark.BookmarkInfoID</div>
+                                    <span class="am-icon-trash-o"></span> 删除</button>
                                 </div>
                             </div>
                             </td>

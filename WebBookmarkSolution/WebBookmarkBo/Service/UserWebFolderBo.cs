@@ -151,5 +151,11 @@ namespace WebfolderBo.Service
             }
         }
 
+
+        public static bool DeleteWebfolder(long webFolderID)
+        {
+            return BookmarkInfoBo.DeleteByWebFolderID(webFolderID) && webFolderDAL.DeleteByUserWebFolderID(webFolderID) >0;
+        }
+
     }
 }

@@ -36,5 +36,20 @@ namespace WebfolderBo.Service
             return lstBiz;
         }
 
+        /// <summary>
+        /// 根据
+        /// </summary>
+        /// <param name="webfolderID"></param>
+        /// <returns></returns>
+        public static bool DeleteByWebFolderID(long webfolderID)
+        {
+            return  DAL.DeleteByWebFolderID(webfolderID) >=0;
+        }
+
+
+        public static bool DeleteByBookmarkInfoID(long bookmarkInfoID)
+        {
+            return DAL.DeleteByBookmarkInfoID(bookmarkInfoID) >= 0;
+        }
     }
 }

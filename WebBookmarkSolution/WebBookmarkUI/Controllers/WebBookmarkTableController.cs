@@ -81,9 +81,38 @@ namespace WebBookmarkUI.Controllers
             return uiModel;
         }
 
-       
 
-        public ActionResult AddBookmark(string name,string href,long folderID,string type)
+        public ActionResult ConvertToUIWebFolderInfo(string strModel)
+        {
+            UIWebFolderInfo folderInfo = null;
+            try
+            {
+                folderInfo = JsonConvert.DeserializeObject<UIWebFolderInfo>(strModel);
+            }catch(Exception ex)
+            {
+                LogHelper.WriteException("UIWebFolderInfo反序列化失败", ex, new { Modle = strModel });
+            }
+            return Json(folderInfo);
+        }
+
+
+
+        public ActionResult ConvertToUIBookmarkInfo(string strModel)
+        {
+            UIBookmarkInfo bookmark = null;
+            try
+            {
+                bookmark = JsonConvert.DeserializeObject<UIBookmarkInfo>(strModel);
+            }
+            catch (Exception ex)
+            {
+                LogHelper.WriteException("UIBookmarkInfo反序列化失败", ex, new { Modle = strModel });
+            }
+            return Json(bookmark);
+        }
+
+
+        public ActionResult AddBookmark(string name,string href,long folderID,string type,long infoID)
         {
             BizResultInfo result = new BizResultInfo();
             if (string.IsNullOrEmpty(name) || string.IsNullOrEmpty(type))
@@ -98,6 +127,13 @@ namespace WebBookmarkUI.Controllers
                 if(type=="bookmark")
                 {
                     BizBookmarkInfo bookmark = new BizBookmarkInfo();
+
+                    if(infoID!=0)
+                    {
+                        bookmark = BizBookmarkInfo.LoadByID(infoID);
+                    }
+
+                   
                     bookmark.Href = href;
                     bookmark.BookmarkName = name;
                     bookmark.UserWebFolderID = folderID;
@@ -108,6 +144,11 @@ namespace WebBookmarkUI.Controllers
                 }else
                 {
                     BizUserWebFolder folder = new BizUserWebFolder();
+                    if(infoID!=0)
+                    {
+                        folder = BizUserWebFolder.LoadByID(infoID);
+                    }
+
                     folder.UserInfoID = UILoginHelper.GetUIDInCookie(Request);
                     folder.WebFolderName = name;
                     folder.ParentWebfolderID = folderID;
@@ -131,6 +172,32 @@ namespace WebBookmarkUI.Controllers
 
         }
 
+
+        public ActionResult DeleteBookmarkOrWebFolder(long infoID,string type)
+        {
+            BizResultInfo result = new BizResultInfo();
+            try
+            {
+                if(type=="folder")
+                {
+                    result.IsSuccess = UserWebFolderBo.DeleteWebfolder(infoID);
+                    result.SuccessMessage = "删除成功!";
+                }
+                else
+                {
+                    result.IsSuccess = BookmarkInfoBo.DeleteByBookmarkInfoID(infoID);
+                    result.SuccessMessage = "删除成功!";
+                }
+            }
+            catch(Exception ex)
+            {
+                LogHelper.WriteException("", ex, new { InfoID = infoID});
+                result.IsSuccess =false;
+                result.ErrorMessage = "操作失败，可能这就是命吧!要不你重试一下？";
+            }
+
+            return Json(result);
+        }
         
 
         public ActionResult ImportWebBookmark()

@@ -112,6 +112,15 @@ namespace WebBookmarkBo.Model
         }
 
 
+        public static BizUserWebFolder LoadByID(long infoID)
+        {
+           var dataInfo= new UserWebFolderDAL().GetByUserWebFolderID(infoID);
+           if (dataInfo != null)
+               return new BizUserWebFolder(dataInfo);
+           return new BizUserWebFolder();
+        }
+
+
         public static List<BizUserWebFolder> LoadAllByUID(long uid)
         {
             List<BizUserWebFolder> list = new List<BizUserWebFolder>();

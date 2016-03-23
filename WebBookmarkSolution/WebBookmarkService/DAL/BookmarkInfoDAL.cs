@@ -84,6 +84,24 @@ namespace WebBookmarkService.DAL
         }
 
 
+        #region  
+        /// <summary>
+        /// 根据 WebFolderID 删除数据
+        /// </summary>
+        public int DeleteByWebFolderID(long webfolderID)
+        {
+            string sql = "DELETE from tblBookmarkInfo WHERE UserWebFolderID = @UserWebFolderID";
+
+            MySqlParameter[] para = new MySqlParameter[]
+			{
+				new MySqlParameter("@UserWebFolderID", webfolderID)
+			};
+            return MyDBHelper.ExecuteNonQuery(sql, para);
+        }
+        #endregion
+
+
+
         #region  根据Id删除数据记录
         /// <summary>
         /// 根据Id删除数据记录

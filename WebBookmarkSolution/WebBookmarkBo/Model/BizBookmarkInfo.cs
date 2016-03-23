@@ -96,11 +96,19 @@ namespace WebBookmarkBo.Model
         }
 
 
+
         public BizBookmarkInfo()
         {
 
         }
 
+        public static BizBookmarkInfo LoadByID(long infoID)
+        {
+            var dataInfo = new BookmarkInfoDAL().GetByBookmarkInfoID(infoID);
+            if(dataInfo!=null)
+                return new BizBookmarkInfo(dataInfo);
+            return new BizBookmarkInfo();
+        }
 
         public void Save()
         {
