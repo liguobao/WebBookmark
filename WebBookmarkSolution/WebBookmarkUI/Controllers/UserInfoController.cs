@@ -134,5 +134,75 @@ namespace WebBookmarkUI.Controllers
             return View();
         }
 
+
+
+        public ActionResult ModifyPasswordIndex()
+        {
+            UIUserInfo uiUserInfo = null;
+
+            if (!UILoginHelper.CheckUserLogin(Request))
+                return View(uiUserInfo);
+
+            var result = UserInfoBo.GetUserInfoByLoginNameOrEmail(UILoginHelper.GetUIUserLoginNameOrEmail(Request));
+            if (result.IsSuccess)
+            {
+                var bizUserInfo = result.Target as BizUserInfo;
+                if (bizUserInfo == null || bizUserInfo.UserInfoID == 0)
+                    return View(uiUserInfo);
+                uiUserInfo = new UIUserInfo();
+                uiUserInfo.UserEmail = bizUserInfo.UserEmail;
+                uiUserInfo.UserName = bizUserInfo.UserName;
+                uiUserInfo.LoginName = bizUserInfo.UserLoginName;
+                uiUserInfo.Phone = bizUserInfo.UserPhone;
+                uiUserInfo.LoginName = bizUserInfo.UserLoginName;
+                uiUserInfo.QQ = bizUserInfo.UserQQ;
+                uiUserInfo.UserInfoComment = bizUserInfo.UserInfoComment;
+                uiUserInfo.UserImagURL = bizUserInfo.UserImagURL;
+            }
+            return View(uiUserInfo);
+
+        }
+
+
+        public ActionResult SavePassword(string oldpassword,string newpassword)
+        {
+            BizResultInfo  result = new BizResultInfo();
+            if(string.IsNullOrEmpty(oldpassword) || string.IsNullOrEmpty(newpassword))
+            {
+                result.IsSuccess = false;
+                result.ErrorMessage = "原密码和新密码都不能为空呀。";
+                return Json(result);
+
+            }
+
+            string password = UILoginHelper.GetUIUserPassword(Request);
+
+            if(password != oldpassword)
+            {
+                result.IsSuccess = false;
+                result.ErrorMessage = "原密码错误，请重新输入.";
+                return Json(result);
+            }
+
+            long uid = UILoginHelper.GetUIDInCookie(Request);
+
+            var userInfo = BizUserInfo.LoadByUserInfoID(uid);
+            if(userInfo!=null && userInfo.UserInfoID!=0)
+            {
+                userInfo.UserPassword = newpassword;
+                userInfo.Save();
+
+                result.IsSuccess = true;
+                result.SuccessMessage = "修改成功，请重新登陆一下哦。";
+            }
+            else
+            {
+                result.IsSuccess = false;
+                result.ErrorMessage = "数据库里面找不到你丫，重新登陆一下看看。";
+            }
+            return Json(result);
+
+        }
+
     }
 }

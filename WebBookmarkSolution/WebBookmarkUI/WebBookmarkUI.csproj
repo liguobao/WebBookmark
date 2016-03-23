@@ -168,6 +168,7 @@
     <Content Include="assets\login\style.css" />
     <Content Include="DomainJS\importbookmark.js" />
     <Content Include="DomainJS\login.js" />
+    <Content Include="DomainJS\modifypassword.js" />
     <Content Include="DomainJS\register.js" />
     <Content Include="DomainJS\userInfo.js" />
     <Content Include="DomainJS\webbookmarktable.js" />
@@ -265,7 +266,7 @@
   <ItemGroup>
     <None Include="Properties\PublishProfiles\00.pubxml" />
     <None Include="Properties\PublishProfiles\webBookmarkWebsite.pubxml" />
-    <Content Include="Views\WebBookmarkTable\ShowFolderInfo.cshtml" />
+    <Content Include="Views\UserInfo\ModifyPasswordIndex.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
