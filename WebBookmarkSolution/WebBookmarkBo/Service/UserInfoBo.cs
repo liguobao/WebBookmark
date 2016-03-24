@@ -1,11 +1,15 @@
 ﻿using System;
 using WebBookmarkBo.Model;
+using WebBookmarkService.DAL;
 using WebfolderBo;
+using System.Linq;
+using System.Collections.Generic;
 
 namespace WebBookmarkBo.Service
 {
     public class UserInfoBo
     {
+
         /// <summary>
         /// 注册用户
         /// </summary>
@@ -168,5 +172,16 @@ namespace WebBookmarkBo.Service
 
 
         }
+
+
+        public static List<BizUserInfo> SearchUserList(string nameOrEmail)
+        {
+            var list = new UserInfoDAL().SearchByNameOrEmail(nameOrEmail);
+
+            if (list == null || list.Count == 0)
+                return new List<BizUserInfo>();
+            return list.Select(model => new BizUserInfo(model)).ToList();
+        }
+
     }
 }

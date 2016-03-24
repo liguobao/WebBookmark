@@ -8,6 +8,7 @@ using System.Text;
 using System.Data;
 using MySql.Data.MySqlClient;
 using WebBookmarkService.Model;
+using System.Linq;
 
 namespace WebBookmarkService.DAL
 {
@@ -271,5 +272,28 @@ namespace WebBookmarkService.DAL
 			}
 		}
         #endregion
-	}
+
+        /// <summary>
+        /// 通过用户名/用户邮箱搜索用户
+        /// </summary>
+        /// <param name="emailOrUserName"></param>
+        /// <returns></returns>
+        public List<UserInfo> SearchByNameOrEmail(string emailOrUserName)
+        {
+            string sql = "SELECT * FROM tblUserInfo WHERE UserName = @EmailOrUserName% or UserEmail = @EmailOrUserName%";
+            using (MySqlDataReader reader = MyDBHelper.ExecuteDataReader(sql,
+                new MySqlParameter("@EmailOrUserName", ToDBValue(emailOrUserName))))
+            {
+                if (reader.Read())
+                {
+                    var models = ToModels(reader);
+                    return models.ToList();
+                }
+                else
+                {
+                    return null;
+                }
+            }
+        }
+    }
 }

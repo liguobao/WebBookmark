@@ -85,5 +85,8 @@ namespace WebfolderBo
             Uri uri = new Uri(href);
             return uri.Host;
         }
+
+
+       
     }
 }

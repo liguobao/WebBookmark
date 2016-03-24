@@ -113,6 +113,8 @@
     <Compile Include="Commom\UILoginHelper.cs" />
     <Compile Include="Commom\UploadFileHelper.cs" />
     <Compile Include="Controllers\DefaultController.cs" />
+    <Compile Include="Controllers\FindFriendController.cs" />
+    <Compile Include="Controllers\InterestRecommendController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\RegisterController.cs" />
     <Compile Include="Controllers\UserInfoController.cs" />
@@ -267,6 +269,10 @@
     <None Include="Properties\PublishProfiles\00.pubxml" />
     <None Include="Properties\PublishProfiles\webBookmarkWebsite.pubxml" />
     <Content Include="Views\UserInfo\ModifyPasswordIndex.cshtml" />
+    <Content Include="Views\FindFriend\Index.cshtml" />
+    <Content Include="Views\FindFriend\SearchUser.cshtml" />
+    <Content Include="Views\InterestRecommend\Index.cshtml" />
+    <Content Include="Views\InterestRecommend\ViewForSearchUser.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
