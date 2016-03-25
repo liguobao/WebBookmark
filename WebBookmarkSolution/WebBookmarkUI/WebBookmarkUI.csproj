@@ -169,6 +169,7 @@
     <Content Include="assets\login\register.css" />
     <Content Include="assets\login\style.css" />
     <Content Include="DomainJS\importbookmark.js" />
+    <Content Include="DomainJS\interestrecommend.js" />
     <Content Include="DomainJS\login.js" />
     <Content Include="DomainJS\modifypassword.js" />
     <Content Include="DomainJS\register.js" />
@@ -273,6 +274,7 @@
     <Content Include="Views\FindFriend\SearchUser.cshtml" />
     <Content Include="Views\InterestRecommend\Index.cshtml" />
     <Content Include="Views\InterestRecommend\ViewForSearchUser.cshtml" />
+    <Content Include="Views\InterestRecommend\SearchUser.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

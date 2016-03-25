@@ -50,6 +50,12 @@ namespace WebBookmarkUI.Controllers
         public ActionResult CheckUserEmail(string email)
         {
             var cookieLoginName= UILoginHelper.GetUIUserLoginNameOrEmail(Request);
+            if(!cookieLoginName.Contains('@'))
+            {
+               var userInfo = UserInfoBo.GetUserInfoByLoginNameOrEmail(cookieLoginName).Target as BizUserInfo;
+               cookieLoginName = userInfo.UserEmail;
+            }
+
             BizResultInfo result = new BizResultInfo();
             if (cookieLoginName.Equals(email))
             {

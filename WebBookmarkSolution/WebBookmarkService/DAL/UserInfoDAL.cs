@@ -278,21 +278,13 @@ namespace WebBookmarkService.DAL
         /// </summary>
         /// <param name="emailOrUserName"></param>
         /// <returns></returns>
-        public List<UserInfo> SearchByNameOrEmail(string emailOrUserName)
+        public IEnumerable<UserInfo> SearchByNameOrEmail(string emailOrUserName)
         {
-            string sql = "SELECT * FROM tblUserInfo WHERE UserName = @EmailOrUserName% or UserEmail = @EmailOrUserName%";
+            string sql = "SELECT * FROM tblUserInfo WHERE UserName like @EmailOrUserName or UserEmail like @EmailOrUserName";
             using (MySqlDataReader reader = MyDBHelper.ExecuteDataReader(sql,
-                new MySqlParameter("@EmailOrUserName", ToDBValue(emailOrUserName))))
+                new MySqlParameter("@EmailOrUserName", ToDBValue(emailOrUserName+"%"))))
             {
-                if (reader.Read())
-                {
-                    var models = ToModels(reader);
-                    return models.ToList();
-                }
-                else
-                {
-                    return null;
-                }
+                return ToModels(reader);
             }
         }
     }

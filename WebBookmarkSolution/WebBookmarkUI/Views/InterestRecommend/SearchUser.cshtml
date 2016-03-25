@@ -1,0 +1,74 @@
+﻿@model List<WebBookmarkUI.Models.UIUserInfo>
+
+<div class="am-g">
+    <div class="am-u-sm-12">
+        <div class="aw-mod aw-mod-search-result">
+            <div class="mod-head">
+                <div class="tabbable">
+                    <ul class="am-nav am-nav-tabs aw-nav-tabs active" id="list_nav">
+                        <h2 class="hidden-xs">
+                            <p>
+                                搜索 - <span id="aw-search-type">全部</span>
+                            </p>
+                        </h2>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="mod-body">
+                <div class="tab-content">
+                    <div class="tab-pane active">
+                        <div id="search_result">
+
+                            @if(Model!=null)
+                            {
+                                foreach(var userInfo in Model)
+                                {
+                                     <div class="aw-item">
+                                   
+                                        @if (!string.IsNullOrEmpty(userInfo.UserImagURL))
+                                        {
+                                            <a href='@Url.Content(@userInfo.UserImagURL)' class="aw-user-img" data-id="322"><img src='@Url.Content(@userInfo.UserImagURL)' alt="" width="60" height="60"></a>
+                                        }
+                                        else
+                                        {
+                                            <a href='http://s.amazeui.org/media/i/demos/bw-2014-06-19.jpg?imageView/1/w/200/h/200/q/80' class="aw-user-img"><img src='http://s.amazeui.org/media/i/demos/bw-2014-06-19.jpg?imageView/1/w/200/h/200/q/80' alt="" width="50" height="50"></a>
+                                        }
+                                        <a href="javascript:;" onclick="AWS.User.follow($(this), 'user', 322);" class="btn btn-normal btn-success follow"><span>关注</span> <em>|</em> <b>0</b></a>
+                                        <p class="aw-title">
+                                            <a href="#" target="_blank">@userInfo.UserName / @userInfo.UserEmail</a>
+                                        </p>
+
+                                        <p class="aw-article-content">
+                                             @if (!string.IsNullOrEmpty(userInfo.UserInfoComment))
+                                             {
+                                                <span>
+                                                    简介： @userInfo.UserInfoComment
+                                                </span>
+                                             }
+                                             else
+                                             {
+                                                 <span>
+                                                    简介： 这个用户还没来得及给自己写简介呢。
+                                                </span>
+                                             }
+                                            
+                                        </p>
+                                      </div>
+                                }
+                                
+                            }
+                        </div>
+
+                        <!-- 加载更多内容 -->
+                        <a class="aw-load-more-content" id="search_result_more" data-page="2">
+                            <span>更多...</span>
+                        </a>
+                        <!-- end 加载更多内容 -->
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>

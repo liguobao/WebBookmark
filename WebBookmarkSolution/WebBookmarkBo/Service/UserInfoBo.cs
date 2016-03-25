@@ -178,7 +178,7 @@ namespace WebBookmarkBo.Service
         {
             var list = new UserInfoDAL().SearchByNameOrEmail(nameOrEmail);
 
-            if (list == null || list.Count == 0)
+            if (list == null || list.Count() == 0)
                 return new List<BizUserInfo>();
             return list.Select(model => new BizUserInfo(model)).ToList();
         }

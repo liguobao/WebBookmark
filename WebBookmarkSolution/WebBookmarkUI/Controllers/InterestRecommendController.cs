@@ -35,7 +35,7 @@ namespace WebBookmarkUI.Controllers
                     CreateTime = model.CreateTime,
                 }));
             }
-            return PartialView("ViewForSearchUser", lstUserInfoModel);
+            return PartialView("SearchUser", lstUserInfoModel);
         } 
 
     }
