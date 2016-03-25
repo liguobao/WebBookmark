@@ -1,0 +1,205 @@
+﻿@model WebBookmarkUI.Models.SearchUserInfo
+
+<link href="~/assets/login/common.css" rel="stylesheet" />
+<link href="~/assets/login/icon.css" rel="stylesheet" />
+<link href="~/assets/login/link.css" rel="stylesheet" />
+<link href="~/assets/login/style.css" rel="stylesheet" />
+<link href="~/assets/login/new.css" rel="stylesheet" />
+<link href="~/assets/login/user.css" rel="stylesheet" />
+
+@if(Model!=null)
+{
+    <div class="aw-mod aw-user-detail-box">
+    <div class="mod-head">
+        @if (!string.IsNullOrEmpty(Model.UserImagURL))
+        {
+             <img src='@Url.Content(Model.UserImagURL)' width="100" height="100">
+        }
+        else
+        {
+            <img src='http://s.amazeui.org/media/i/demos/bw-2014-06-19.jpg?imageView/1/w/200/h/200/q/80' width="100" height="100">
+        }
+        <div>
+            <h1>@Model.UserName /@Model.UserEmail &nbsp;&nbsp;&nbsp;
+            @if (Model.IsFollow)
+            {
+                 <button data-id='@Model.UserInfoID' class="am-btn am-btn-primary" id="unFollowUser"><span>取消关注</span></button>
+                 <button class="am-btn btn-success" data-id='@Model.UserInfoID' id="followUser" style="display:none"><span>关注</span></button>
+            }
+            else
+            {
+                <button data-id='@Model.UserInfoID' class="am-btn am-btn-primary" id="unFollowUser" hidden><span>取消关注</span></button>
+                <button class="am-btn btn-success" data-id='@Model.UserInfoID' id="followUser"><span>关注</span></button>
+            }
+            </h1>
+        </div>
+       
+        <p>简介：@(!string.IsNullOrEmpty(Model.UserInfoComment) ? Model.UserInfoComment : "此人太懒，都不给自己写个简介。")</p>
+        <p>注册时间：@Model.CreateTime</p>
+      
+
+        <p class="text-color-999"></p>
+        <p class="aw-user-flag"></p>
+    </div>
+    <div class="mod-body">
+        <div class="meta">
+            <span><i class="icon icon-prestige"></i> 威望 : <em class="aw-text-color-green">52</em></span>
+            <span><i class="icon icon-score"></i> 积分 : <em class="aw-text-color-orange">20060</em></span>                      <span><i class="icon icon-agree"></i> 赞同 : <em class="aw-text-color-orange">20</em></span>
+            <span><i class="icon icon-thank"></i> 感谢 : <em class="aw-text-color-orange">18</em></span>
+        </div>
+        <!-- 擅长话题 -->
+        <div class="good-at-topics am-cf">
+            <h2>擅长话题</h2>
+            <ul>
+                <li>
+                    <span class="topic-tag">
+                        <a href="http://ask.amazeui.org/?/topic/%E6%BB%9A%E5%8A%A8%E6%9D%A1" class="text" data-id="99">滚动条</a>
+                    </span>
+                    <span>
+                        <i class="icon icon-agree"></i> 3&nbsp;&nbsp;
+                        <i class="icon icon-thank"></i> 1
+                    </span>
+                </li>
+                <li>
+                    <span class="topic-tag">
+                        <a href="http://ask.amazeui.org/?/topic/less" class="text" data-id="86">less</a>
+                    </span>
+                    <span>
+                        <i class="icon icon-agree"></i> 2&nbsp;&nbsp;
+                        <i class="icon icon-thank"></i> 0
+                    </span>
+                </li>
+                <li>
+                    <span class="topic-tag">
+                        <a href="http://ask.amazeui.org/?/topic/%E7%BD%91%E6%A0%BC" class="text" data-id="98">网格</a>
+                    </span>
+                    <span>
+                        <i class="icon icon-agree"></i> 1&nbsp;&nbsp;
+                        <i class="icon icon-thank"></i> 1
+                    </span>
+                </li>
+                <li>
+                    <span class="topic-tag">
+                        <a href="http://ask.amazeui.org/?/topic/modal" class="text" data-id="115">modal</a>
+                    </span>
+                    <span>
+                        <i class="icon icon-agree"></i> 1&nbsp;&nbsp;
+                        <i class="icon icon-thank"></i> 0
+                    </span>
+                </li>
+                <li>
+                    <span class="topic-tag">
+                        <a href="http://ask.amazeui.org/?/topic/%E6%B1%82%E5%8A%A9" class="text" data-id="19">求助</a>
+                    </span>
+                    <span>
+                        <i class="icon icon-agree"></i> 1&nbsp;&nbsp;
+                        <i class="icon icon-thank"></i> 1
+                    </span>
+                </li>
+                <li>
+                    <span class="topic-tag">
+                        <a href="http://ask.amazeui.org/?/topic/%E5%9B%9E%E5%A4%8D%E6%A1%86" class="text" data-id="472">回复框</a>
+                    </span>
+                    <span>
+                        <i class="icon icon-agree"></i> 1&nbsp;&nbsp;
+                        <i class="icon icon-thank"></i> 0
+                    </span>
+                </li>
+                <li>
+                    <span class="topic-tag">
+                        <a href="http://ask.amazeui.org/?/topic/%E4%B8%89%E7%BA%A7%E8%8F%9C%E5%8D%95" class="text" data-id="91">三级菜单</a>
+                    </span>
+                    <span>
+                        <i class="icon icon-agree"></i> 1&nbsp;&nbsp;
+                        <i class="icon icon-thank"></i> 0
+                    </span>
+                </li>
+                <li>
+                    <span class="topic-tag">
+                        <a href="http://ask.amazeui.org/?/topic/tree" class="text" data-id="110">tree</a>
+                    </span>
+                    <span>
+                        <i class="icon icon-agree"></i> 1&nbsp;&nbsp;
+                        <i class="icon icon-thank"></i> 0
+                    </span>
+                </li>
+                <li>
+                    <span class="topic-tag">
+                        <a href="http://ask.amazeui.org/?/topic/amazecss%E6%A8%A1%E6%9D%BF" class="text" data-id="126">amazecss模板</a>
+                    </span>
+                    <span>
+                        <i class="icon icon-agree"></i> 1&nbsp;&nbsp;
+                        <i class="icon icon-thank"></i> 0
+                    </span>
+                </li>
+                <li>
+                    <span class="topic-tag">
+                        <a href="http://ask.amazeui.org/?/topic/%E5%BE%AE%E4%BF%A1" class="text" data-id="211">微信</a>
+                    </span>
+                    <span>
+                        <i class="icon icon-agree"></i> 1&nbsp;&nbsp;
+                        <i class="icon icon-thank"></i> 0
+                    </span>
+                </li>
+                <li>
+                    <span class="topic-tag">
+                        <a href="http://ask.amazeui.org/?/topic/%E8%A1%A8%E5%8D%95" class="text" data-id="156">表单</a>
+                    </span>
+                    <span>
+                        <i class="icon icon-agree"></i> 1&nbsp;&nbsp;
+                        <i class="icon icon-thank"></i> 0
+                    </span>
+                </li>
+                <li>
+                    <span class="topic-tag">
+                        <a href="http://ask.amazeui.org/?/topic/%E7%89%88%E6%9C%AC%E9%97%AE%E9%A2%98" class="text" data-id="310">版本问题</a>
+                    </span>
+                    <span>
+                        <i class="icon icon-agree"></i> 1&nbsp;&nbsp;
+                        <i class="icon icon-thank"></i> 0
+                    </span>
+                </li>
+            </ul>
+        </div>
+        <!-- end 擅长话题 -->
+
+    </div>
+
+    <div class="mod-footer">
+        <div class="am-tabs" data-am-tabs="">
+            <ul class="am-tabs-nav am-nav am-nav-tabs aw-nav-tabs">
+                <li><a href="http://ask.amazeui.org/?/#actions" id="page_actions">动态</a></li>
+                <li><a href="http://ask.amazeui.org/?/#detail" id="page_detail">详细资料</a></li>
+            </ul>
+            <div class="am-tabs-bd aw-user-center-tab" style="touch-action: pan-y; -webkit-user-select: none; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);">
+                <div class="am-tab-panel am-active am-in" id="overview">
+                   
+                </div>
+               
+                 
+              
+                <div class="am-tab-panel" id="articles">
+                    <div class="aw-mod">
+                        <div class="mod-head">
+                            <h3>文章</h3>
+                        </div>
+                        <div class="mod-body">
+                            <div class="aw-profile-publish-list" id="contents_user_actions_articles"><p style="padding: 15px 0" align="center">没有内容</p></div>
+                        </div>
+                        <div class="mod-footer">
+                            <!-- 加载更多内容 -->
+                            <a class="aw-load-more-content disabled loading" id="bp_user_actions_articles_more" data-page="1">
+                                <span>没有更多了</span>
+                            </a>
+                            <!-- end 加载更多内容 -->
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+}
+
+

@@ -135,7 +135,7 @@ namespace WebBookmarkUI.Controllers
         }
 
 
-        public ActionResult SaveIndex()
+        public ActionResult ShowUserDetail(long userInfoID)
         {
             return View();
         }

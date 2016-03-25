@@ -113,7 +113,6 @@
     <Compile Include="Commom\UILoginHelper.cs" />
     <Compile Include="Commom\UploadFileHelper.cs" />
     <Compile Include="Controllers\DefaultController.cs" />
-    <Compile Include="Controllers\FindFriendController.cs" />
     <Compile Include="Controllers\InterestRecommendController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\RegisterController.cs" />
@@ -122,6 +121,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\SearchUserInfo.cs" />
     <Compile Include="Models\UIUserInfo.cs" />
     <Compile Include="Models\UIWebFolderInfo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -168,6 +168,7 @@
     <Content Include="assets\login\new.css" />
     <Content Include="assets\login\register.css" />
     <Content Include="assets\login\style.css" />
+    <Content Include="assets\login\user.css" />
     <Content Include="DomainJS\importbookmark.js" />
     <Content Include="DomainJS\interestrecommend.js" />
     <Content Include="DomainJS\login.js" />
@@ -270,11 +271,9 @@
     <None Include="Properties\PublishProfiles\00.pubxml" />
     <None Include="Properties\PublishProfiles\webBookmarkWebsite.pubxml" />
     <Content Include="Views\UserInfo\ModifyPasswordIndex.cshtml" />
-    <Content Include="Views\FindFriend\Index.cshtml" />
-    <Content Include="Views\FindFriend\SearchUser.cshtml" />
     <Content Include="Views\InterestRecommend\Index.cshtml" />
-    <Content Include="Views\InterestRecommend\ViewForSearchUser.cshtml" />
     <Content Include="Views\InterestRecommend\SearchUser.cshtml" />
+    <Content Include="Views\InterestRecommend\ShowUserInfo.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

@@ -1,4 +1,4 @@
-﻿@model List<WebBookmarkUI.Models.UIUserInfo>
+﻿@model List<WebBookmarkUI.Models.SearchUserInfo>
 
 <div class="am-g">
     <div class="am-u-sm-12">
@@ -8,7 +8,7 @@
                     <ul class="am-nav am-nav-tabs aw-nav-tabs active" id="list_nav">
                         <h2 class="hidden-xs">
                             <p>
-                                搜索 - <span id="aw-search-type">全部</span>
+                                搜索结果 - <span id="aw-search-type">全部</span>
                             </p>
                         </h2>
                     </ul>
@@ -34,37 +34,41 @@
                                         {
                                             <a href='http://s.amazeui.org/media/i/demos/bw-2014-06-19.jpg?imageView/1/w/200/h/200/q/80' class="aw-user-img"><img src='http://s.amazeui.org/media/i/demos/bw-2014-06-19.jpg?imageView/1/w/200/h/200/q/80' alt="" width="50" height="50"></a>
                                         }
-                                        <a href="javascript:;" onclick="AWS.User.follow($(this), 'user', 322);" class="btn btn-normal btn-success follow"><span>关注</span> <em>|</em> <b>0</b></a>
-                                        <p class="aw-title">
-                                            <a href="#" target="_blank">@userInfo.UserName / @userInfo.UserEmail</a>
-                                        </p>
+                                       
+                                        @if (!userInfo.IsFollow)
+                                        {
+                                            <button id="follow" class="am-btn btn-success"><span>关注</span><div id="userid" hidden>@userInfo.UserInfoID</div></button>
+                                        }
+                                        else
+                                        {
+                                            <button class="am-btn am-btn-primary" disabled><span>已关注</span></button>
 
-                                        <p class="aw-article-content">
-                                             @if (!string.IsNullOrEmpty(userInfo.UserInfoComment))
-                                             {
-                                                <span>
-                                                    简介： @userInfo.UserInfoComment
-                                                </span>
-                                             }
-                                             else
-                                             {
-                                                 <span>
-                                                    简介： 这个用户还没来得及给自己写简介呢。
-                                                </span>
-                                             }
-                                            
-                                        </p>
-                                      </div>
+                                        }
+
+                                     <p class="aw-title">
+                                         <a href="#" id="showUserInfo" data-id='@userInfo.UserInfoID'>@userInfo.UserName / @userInfo.UserEmail</a>
+                                     </p>
+
+                                     <p class="aw-article-content">
+                                         @if (!string.IsNullOrEmpty(userInfo.UserInfoComment))
+                                         {
+                                             <span>
+                                                 简介： @userInfo.UserInfoComment
+                                             </span>
+                                         }
+                                         else
+                                         {
+                                             <span>
+                                                 简介： 这个用户还没来得及给自己写简介呢。
+                                             </span>
+                                         }
+
+                                     </p>
+</div>
                                 }
                                 
                             }
                         </div>
-
-                        <!-- 加载更多内容 -->
-                        <a class="aw-load-more-content" id="search_result_more" data-page="2">
-                            <span>更多...</span>
-                        </a>
-                        <!-- end 加载更多内容 -->
                     </div>
                 </div>
             </div>

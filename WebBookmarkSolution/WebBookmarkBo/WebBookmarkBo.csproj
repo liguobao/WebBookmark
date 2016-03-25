@@ -45,6 +45,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Extend.cs" />
+    <Compile Include="Model\BizUserRelationship.cs" />
     <Compile Include="Model\BizBookmarkInfo.cs" />
     <Compile Include="Model\BizUserInfo.cs" />
     <Compile Include="Model\BizResultInfo.cs" />
@@ -56,6 +57,7 @@
     <Compile Include="Service\BookmarkInfoBo.cs" />
     <Compile Include="Service\ImportBookmarkHelper.cs" />
     <Compile Include="Service\UserInfoBo.cs" />
+    <Compile Include="Service\UserRelationshipBo.cs" />
     <Compile Include="Service\UserWebFolderBo.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -57,7 +57,7 @@ namespace WebBookmarkService.DAL
 		 #endregion
 		
 				
-
+        
 		
         #region 根据传入Model更新数据并返回更新后的Model
         /// <summary>
@@ -233,5 +233,73 @@ namespace WebBookmarkService.DAL
 			}
 		}
         #endregion
+
+
+
+        #region 
+        /// <summary>
+        //获取用户的关系记录
+        /// </summary>
+        public IEnumerable<UserRelationship> GetByFollowUserID(long followerID)
+        {
+            string sql = "SELECT * FROM tblUserRelationship WHERE FollowerID = @FollowerID";
+            using (MySqlDataReader reader = MyDBHelper.ExecuteDataReader(sql, new MySqlParameter("@FollowerID", followerID)))
+            {
+                return ToModels(reader);
+            }
+        }
+
+        /// <summary>
+        //获取用户的关系记录
+        /// </summary>
+        public IEnumerable<UserRelationship> GetByBeFollowUserID(long beFollwedUID)
+        {
+            string sql = "SELECT * FROM tblUserRelationship WHERE BeFollwedUID = @BeFollwedUID";
+            using (MySqlDataReader reader = MyDBHelper.ExecuteDataReader(sql, new MySqlParameter("@BeFollwedUID", beFollwedUID)))
+            {
+                return ToModels(reader);
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="follwerID"></param>
+        /// <param name="beFollwedUID"></param>
+        /// <returns></returns>
+        public bool CheckFollowStatus(long follwerID,long beFollwedUID)
+        {
+            string sql = "SELECT * FROM tblUserRelationship WHERE BeFollwedUID = @BeFollwedUID and FollowerID = @FollowerID";
+            using (MySqlDataReader reader = MyDBHelper.ExecuteDataReader(sql,new MySqlParameter[]{
+                new MySqlParameter("@BeFollwedUID", beFollwedUID),
+                new MySqlParameter("@FollowerID", follwerID)}))
+            {
+                return (reader.Read());
+                
+            }
+        }
+
+        /// <summary>
+        /// 删除关注关系
+        /// </summary>
+        /// <param name="follwerID"></param>
+        /// <param name="beFollwedUID"></param>
+        /// <returns></returns>
+        public bool DeleteFollowRelationship(long follwerID, long beFollwedUID)
+        {
+
+            string sql = "DELETE from tblUserRelationship WHERE BeFollwedUID = @BeFollwedUID and FollowerID = @FollowerID";
+
+            MySqlParameter[] para = new MySqlParameter[]
+			{
+				  new MySqlParameter("@BeFollwedUID", beFollwedUID),
+                  new MySqlParameter("@FollowerID", follwerID)
+			};
+
+            return MyDBHelper.ExecuteNonQuery(sql, para)>0;
+        }
+
+        #endregion
+
 	}
 }

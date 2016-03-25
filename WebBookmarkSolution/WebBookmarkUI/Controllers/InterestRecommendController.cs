@@ -3,8 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using WebBookmarkBo.Model;
 using WebBookmarkBo.Service;
 using WebBookmarkUI.Models;
+using WebfolderBo.Model;
+using WebfolderBo.Service;
 
 namespace WebBookmarkUI.Controllers
 {
@@ -22,21 +25,97 @@ namespace WebBookmarkUI.Controllers
         [HttpPost]
         public ActionResult SearchUser(string nameOrEmail)
         {
-            var lstUserInfoModel = new List< UIUserInfo>();
+            var dicBeFollowerID = UserRelationshipBo.GetByFollowUserID(UILoginHelper.GetUIDInCookie(Request));
+            
+            var lstUserInfoModel = new List<SearchUserInfo>();
             var lstModel = UserInfoBo.SearchUserList(nameOrEmail);
             if(lstModel!=null && lstModel.Count>0)
             {
-                lstUserInfoModel.AddRange( lstModel.Select(model => new UIUserInfo()
+                lstUserInfoModel.AddRange(lstModel.Select(model => new SearchUserInfo()
                 {
                     UserImagURL = model.UserImagURL,
                     UserEmail = model.UserEmail,
                     UserInfoComment = model.UserInfoComment,
                     UserName = model.UserName,
                     CreateTime = model.CreateTime,
+                    UserInfoID = model.UserInfoID,
+                    IsFollow = dicBeFollowerID.ContainsKey(model.UserInfoID)
                 }));
             }
             return PartialView("SearchUser", lstUserInfoModel);
         } 
+
+        public ActionResult FollowUser(long beFollowUserID)
+        {
+            BizResultInfo result = new BizResultInfo();
+            if(beFollowUserID==0)
+            {
+                result.IsSuccess = false;
+                result.ErrorMessage = "关注者ID为空，这是一条垃圾数据呀。";
+                return Json(result);
+            }
+            long userID = UILoginHelper.GetUIDInCookie(Request);
+            var status = UserRelationshipBo.CheckFollowStatus(beFollowUserID,userID);
+
+            if(status)
+            {
+                result.IsSuccess = false;
+                result.ErrorMessage = "您已经关注了此用户，不能重复关注。";
+                return Json(result);
+            }
+
+            var userRelationship = new BizUserRelationship() 
+            {
+                BeFollwedUID = beFollowUserID,
+                FollowerID = userID,
+                CreateTime = DateTime.Now,
+            };
+            userRelationship.Save();
+            result.IsSuccess = true;
+
+            return Json(result);
+
+
+        }
+
+        public ActionResult UnFollowUser(long beFollowUserID)
+        {
+            BizResultInfo result = new BizResultInfo();
+            if (beFollowUserID == 0)
+            {
+                result.IsSuccess = false;
+                result.ErrorMessage = "ID为空，这是一条垃圾数据呀。";
+                return Json(result);
+            }
+            long userID = UILoginHelper.GetUIDInCookie(Request);
+            result.IsSuccess = UserRelationshipBo.UnFollowUser(beFollowUserID, userID);
+            return Json(result);
+        }
+
+
+        public ActionResult ShowUserInfo(long showUserInfoID)
+        {
+            SearchUserInfo showUserInfo = null;
+            var model = BizUserInfo.LoadByUserInfoID(showUserInfoID);
+
+            if(showUserInfoID==0 || model==null)
+                return PartialView("ShowUserInfo", showUserInfo);
+
+            var dicBeFollowerID = UserRelationshipBo.GetByFollowUserID(UILoginHelper.GetUIDInCookie(Request));
+            showUserInfo = new SearchUserInfo() 
+            {
+                UserImagURL = model.UserImagURL,
+                UserEmail = model.UserEmail,
+                UserInfoComment = model.UserInfoComment,
+                UserName = model.UserName,
+                CreateTime = model.CreateTime,
+                UserInfoID = model.UserInfoID,
+                IsFollow = dicBeFollowerID.ContainsKey(model.UserInfoID)
+            };
+
+
+            return PartialView("ShowUserInfo", showUserInfo);
+        }
 
     }
 }
