@@ -120,19 +120,7 @@
         e.preventDefault();
         var $this = $(this);
         var showUserInfoID = $this.attr("data-id");
-
-        $.ajax({
-            type: "post",
-            url: showUserInfoURL,
-            data: { showUserInfoID: showUserInfoID },
-            success:
-                function (data) {
-                    $("#content").html(data);
-                    ShowFolder(showUserInfoID, 0);
-                }
-        });
-
-
+        ShowUserInfo(showUserInfoID);
         e.stopPropagation();
 
     })
@@ -145,7 +133,51 @@
 
     });
 
+
+    $('body').on("click", "[id='allfolder']", function ()
+    {
+        var $this = $(this);
+        $("#follower").parent().removeClass("am-active");
+        $("#befollwed").parent().removeClass("am-active");
+        $this.parent().addClass("am-active");
+        var uid = $this.attr("data-uid");
+        ShowFolder(uid, 0);
+    })
+
+    $('body').on("click", "[id='follower']", function ()
+    {
+        var $this = $(this);
+        $("#befollwed").parent().removeClass("am-active");
+        $("#allfolder").parent().removeClass("am-active");
+        $this.parent().addClass("am-active");
+        var uid = $this.attr("data-uid");
+        ShowFollow(uid);
+    })
+
+    $('body').on("click", "[id='befollwed']", function () {
+        var $this = $(this);
+        $("#follower").parent().removeClass("am-active");
+        $("#allfolder").parent().removeClass("am-active");
+        $this.parent().addClass("am-active");
+        var uid = $this.attr("data-uid");
+        ShowBefollwed(uid);
+    })
 })
+
+
+function ShowUserInfo(showUserInfoID)
+{
+    $.ajax({
+        type: "post",
+        url: showUserInfoURL,
+        data: { showUserInfoID: showUserInfoID },
+        success:
+            function (data) {
+                $("#content").html(data);
+                ShowFolder(showUserInfoID, 0);
+            }
+    });
+}
 
 
 function ShowFolder(showUserInfoID, folderID) {
@@ -166,3 +198,44 @@ function ShowFolder(showUserInfoID, folderID) {
             }
     });
 }
+
+
+function ShowFollow(uid)
+{
+    $("#loadfollow").addClass("am-icon-spinner").addClass("am-icon-spin");
+
+    $.ajax({
+        type: "post",
+        url: showUserFollowURL,
+        data: { uid:uid },
+        success:
+            function (data) {
+                if (data != null) {
+
+                    $("#overview").html(data);
+                    $("#overview").show();
+                }
+                $("#loadfollow").removeClass("am-icon-spinner").removeClass("am-icon-spin");
+            }
+    });
+}
+
+
+function ShowBefollwed(uid) {
+    $("#loadbefollwed").addClass("am-icon-spinner").addClass("am-icon-spin");
+
+    $.ajax({
+        type: "post",
+        url: showUserBeFollwedUR,
+        data: { uid: uid },
+        success:
+            function (data) {
+                if (data != null) {
+
+                    $("#overview").html(data);
+                }
+                $("#loadbefollwed").removeClass("am-icon-spinner").removeClass("am-icon-spin");
+            }
+    });
+}
+

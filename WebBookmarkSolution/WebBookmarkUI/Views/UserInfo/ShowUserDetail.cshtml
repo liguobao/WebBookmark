@@ -1,0 +1,26 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@model long
+
+<script src="~/DomainJS/interestrecommend.js"></script>
+<script>
+    var followUserURL = "@Url.Action("../InterestRecommend/FollowUser")";
+    var showUserInfoURL = "@Url.Action("../InterestRecommend/ShowUserInfo")";
+    var unFollowUserURL = "@Url.Action("../InterestRecommend/UnFollowUser")";
+    var showUserFolderURL = "@Url.Action("../InterestRecommend/ShowUserFolder")";
+    var showUserFollowURL = "@Url.Action("../Follower/ShowUserFollow")";
+    var showUserBeFollwedUR = "@Url.Action("../Follower/ShowUserBeFollwed")";
+    var userId = '@Model';
+    ShowUserInfo(userId);
+</script>
+
+<div class="am-cf am-padding">
+    <div class="am-fl am-cf"><strong class="am-text-primary am-text-lg">个人资料</strong> / <small>User Info</small></div>
+</div>
+<div class="am-g" id="content">
+    <div class="am-u-sm-12">
+    </div>
+</div>

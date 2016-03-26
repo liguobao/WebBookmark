@@ -1,0 +1,27 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<script>
+    var showUserFollowURL = "@Url.Action("ShowUserFollow")";
+    var showUserBeFollwedUR = "@Url.Action("ShowUserBeFollwed")";
+</script>
+<link href="~/assets/login/common.css" rel="stylesheet" />
+<link href="~/assets/login/link.css" rel="stylesheet" />
+<link href="~/assets/login/style.css" rel="stylesheet" />
+<link href="~/assets/login/new.css" rel="stylesheet" />
+
+<ul class="am-tabs-nav am-nav am-nav-tabs aw-nav-tabs">
+    <li>关注了</li>
+    <li>被关注</li>
+    <li><span id="loadStatus" class=""></span></li>
+</ul>
+
+
+<div id="ShowFollowUser">
+
+</div>
+
+<div id="ShowBeFollwed">
+
+</div>

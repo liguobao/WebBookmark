@@ -1,0 +1,68 @@
+﻿@model List<WebBookmarkUI.Models.SearchUserInfo>
+
+
+<div class="am-g">
+    <div class="am-u-sm-12">
+        <div class="aw-mod aw-mod-search-result">
+            <div class="mod-body">
+                <div class="tab-content">
+                    <div class="tab-pane active">
+                        <div id="search_result">
+                            <div class="aw-item"></div>
+                            @if (Model != null)
+                            {
+                                foreach (var userInfo in Model)
+                                {
+                                    <div class="aw-item">
+
+                                        @if (!string.IsNullOrEmpty(userInfo.UserImagURL))
+                                        {
+                                            <a href='@Url.Content(@userInfo.UserImagURL)' class="aw-user-img" data-id="322"><img src='@Url.Content(@userInfo.UserImagURL)' alt="" width="60" height="60"></a>
+                                        }
+                                        else
+                                        {
+                                            <a href='http://s.amazeui.org/media/i/demos/bw-2014-06-19.jpg?imageView/1/w/200/h/200/q/80' class="aw-user-img"><img src='http://s.amazeui.org/media/i/demos/bw-2014-06-19.jpg?imageView/1/w/200/h/200/q/80' alt="" width="50" height="50"></a>
+                                        }
+
+                                        @if (!userInfo.IsFollow)
+                                        {
+                                            <button id="follow" class="am-btn btn-success"><span>关注</span><div id="userid" hidden>@userInfo.UserInfoID</div></button>
+                                        }
+                                        else
+                                        {
+                                            <button class="am-btn am-btn-primary" disabled><span>已关注</span></button>
+
+                                        }
+
+                                        <p class="aw-title">
+                                            <a href="#" id="showUserInfo" data-id='@userInfo.UserInfoID'>@userInfo.UserName / @userInfo.UserEmail</a>
+                                        </p>
+
+                                        <p class="aw-article-content">
+                                            @if (!string.IsNullOrEmpty(userInfo.UserInfoComment))
+                                            {
+                                                <span>
+                                                    简介： @userInfo.UserInfoComment
+                                                </span>
+                                            }
+                                            else
+                                            {
+                                                <span>
+                                                    简介： 这个用户还没来得及给自己写简介呢。
+                                                </span>
+                                            }
+
+                                        </p>
+                                    </div>
+                                }
+
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+

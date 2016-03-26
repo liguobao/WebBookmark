@@ -20,13 +20,16 @@
         }
         <div>
             <h1>@Model.UserName /@Model.UserEmail &nbsp;&nbsp;&nbsp;
-            @if (Model.IsFollow)
+            @if(Model.UserInfoID != WebBookmarkUI.UILoginHelper.GetUIDInCookie(Request))
             {
-                 <button data-id='@Model.UserInfoID' class="am-btn am-btn-primary" id="unFollowUser"><span>取消关注</span></button>
-            }
-            else
-            {
-                <button class="am-btn btn-success" data-id='@Model.UserInfoID' id="followUser"><span>关注</span></button>
+                    if(Model.IsFollow)
+                    {
+                            <button data-id='@Model.UserInfoID' class="am-btn am-btn-primary" id="unFollowUser"><span>取消关注</span></button>
+                    }
+                    else
+                    {
+                        <button class="am-btn btn-success" data-id='@Model.UserInfoID' id="followUser"><span>关注</span></button>
+                    }
             }
             </h1>
         </div>
@@ -42,10 +45,13 @@
     <div class="mod-footer">
         <div class="am-tabs" data-am-tabs="">
             <ul class="am-tabs-nav am-nav am-nav-tabs aw-nav-tabs">
-                <li>公开书签夹 <span id="loadfolder"></span></li>
+                <li class="am-active"><a href="#" id="allfolder" data-uid='@Model.UserInfoID'>公开书签夹 <span id="loadfolder"></span></a></li>
+                <li class=""><a href="#" id="follower" data-uid='@Model.UserInfoID'>关注了 <span id="loadfollow"></span></a></li>
+                <li class=""><a href="#" id="befollwed" data-uid='@Model.UserInfoID'>关注者 <span id="loadbefollwed"></span></a></li>
             </ul>
+
             <div class="am-tabs-bd aw-user-center-tab" style="touch-action: pan-y; -webkit-user-select: none; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);">
-                <div class="am-tab-panel am-active am-in" id="overview">
+                <div class="am-active am-in" id="overview">
                    
                 </div>
             </div>

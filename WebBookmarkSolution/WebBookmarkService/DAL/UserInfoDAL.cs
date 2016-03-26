@@ -287,5 +287,19 @@ namespace WebBookmarkService.DAL
                 return ToModels(reader);
             }
         }
+
+        /// <summary>
+        /// 获取一批的用户信息
+        /// </summary>
+        /// <param name="lstUID"></param>
+        /// <returns></returns>
+        public IEnumerable<UserInfo> SearchByUID(List<long> lstUID)
+        {
+            string sql = string.Format("SELECT * FROM tblUserInfo WHERE UserInfoID IN ({0})",string.Join(",",lstUID));
+            using (MySqlDataReader reader = MyDBHelper.ExecuteDataReader(sql))
+            {
+                return ToModels(reader);
+            }
+        }
     }
 }

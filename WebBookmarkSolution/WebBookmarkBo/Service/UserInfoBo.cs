@@ -173,7 +173,11 @@ namespace WebBookmarkBo.Service
 
         }
 
-
+        /// <summary>
+        /// 邮箱/用户名搜索用户
+        /// </summary>
+        /// <param name="nameOrEmail"></param>
+        /// <returns></returns>
         public static List<BizUserInfo> SearchUserList(string nameOrEmail)
         {
             var list = new UserInfoDAL().SearchByNameOrEmail(nameOrEmail);
@@ -182,6 +186,20 @@ namespace WebBookmarkBo.Service
                 return new List<BizUserInfo>();
             return list.Select(model => new BizUserInfo(model)).ToList();
         }
+
+        /// <summary>
+        /// 用户ID获取用户信息
+        /// </summary>
+        /// <param name="lstUID"></param>
+        /// <returns></returns>
+        public static List<BizUserInfo> GetListByUIDList(List<long> lstUID)
+        {
+            var list = new UserInfoDAL().SearchByUID(lstUID);
+            if (list == null || list.Count() == 0)
+                return new List<BizUserInfo>();
+            return list.Select(model => new BizUserInfo(model)).ToList();
+        }
+
 
     }
 }

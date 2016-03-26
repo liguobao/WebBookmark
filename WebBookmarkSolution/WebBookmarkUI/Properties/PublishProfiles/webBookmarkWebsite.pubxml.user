@@ -181,13 +181,13 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>03/19/2016 14:58:40</publishTime>
     </File>
     <File Include="bin/WebBookmarkUI.dll">
-      <publishTime>03/26/2016 18:44:56</publishTime>
+      <publishTime>03/27/2016 01:05:24</publishTime>
     </File>
     <File Include="bin/WebfolderBo.dll">
-      <publishTime>03/26/2016 16:54:26</publishTime>
+      <publishTime>03/27/2016 01:05:23</publishTime>
     </File>
     <File Include="bin/WebfolderService.dll">
-      <publishTime>03/26/2016 16:54:25</publishTime>
+      <publishTime>03/27/2016 01:05:22</publishTime>
     </File>
     <File Include="bin/zh-Hans/System.Net.Http.Formatting.resources.dll">
       <publishTime>03/19/2016 14:58:54</publishTime>
@@ -217,7 +217,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>03/19/2016 15:25:57</publishTime>
     </File>
     <File Include="DomainJS/interestrecommend.js">
-      <publishTime>03/26/2016 17:30:23</publishTime>
+      <publishTime>03/27/2016 00:42:14</publishTime>
     </File>
     <File Include="DomainJS/login.js">
       <publishTime>03/19/2016 17:34:28</publishTime>
@@ -357,17 +357,26 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="Views/Default/Index.cshtml">
       <publishTime>03/19/2016 15:23:04</publishTime>
     </File>
+    <File Include="Views/Follower/Index.cshtml">
+      <publishTime>03/27/2016 00:36:49</publishTime>
+    </File>
+    <File Include="Views/Follower/ShowUserBeFollwed.cshtml">
+      <publishTime>03/27/2016 00:33:33</publishTime>
+    </File>
+    <File Include="Views/Follower/ShowUserFollow.cshtml">
+      <publishTime>03/27/2016 00:33:09</publishTime>
+    </File>
     <File Include="Views/InterestRecommend/Index.cshtml">
-      <publishTime>03/26/2016 14:02:02</publishTime>
+      <publishTime>03/26/2016 23:27:07</publishTime>
     </File>
     <File Include="Views/InterestRecommend/SearchUser.cshtml">
-      <publishTime>03/25/2016 23:34:52</publishTime>
+      <publishTime>03/27/2016 00:59:09</publishTime>
     </File>
     <File Include="Views/InterestRecommend/ShowUserFolder.cshtml">
       <publishTime>03/26/2016 17:32:12</publishTime>
     </File>
     <File Include="Views/InterestRecommend/ShowUserInfo.cshtml">
-      <publishTime>03/26/2016 15:12:03</publishTime>
+      <publishTime>03/27/2016 00:57:25</publishTime>
     </File>
     <File Include="Views/Login/Index.cshtml">
       <publishTime>03/19/2016 21:44:56</publishTime>
@@ -382,7 +391,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>03/19/2016 15:23:04</publishTime>
     </File>
     <File Include="Views/Shared/_Layout.cshtml">
-      <publishTime>03/24/2016 21:00:13</publishTime>
+      <publishTime>03/27/2016 01:05:01</publishTime>
     </File>
     <File Include="Views/Shared/_LoginPartial.cshtml">
       <publishTime>03/19/2016 15:23:04</publishTime>
@@ -392,6 +401,9 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     </File>
     <File Include="Views/UserInfo/ModifyPasswordIndex.cshtml">
       <publishTime>03/23/2016 23:50:33</publishTime>
+    </File>
+    <File Include="Views/UserInfo/ShowUserDetail.cshtml">
+      <publishTime>03/27/2016 00:55:05</publishTime>
     </File>
     <File Include="Views/Web.config">
       <publishTime>03/19/2016 14:55:00</publishTime>
@@ -412,7 +424,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>03/26/2016 18:08:37</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>03/26/2016 18:44:57</publishTime>
+      <publishTime>03/27/2016 01:05:25</publishTime>
     </File>
   </ItemGroup>
 </Project>

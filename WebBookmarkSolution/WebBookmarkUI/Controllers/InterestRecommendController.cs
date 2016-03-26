@@ -116,6 +116,7 @@ namespace WebBookmarkUI.Controllers
 
             return PartialView("ShowUserInfo", showUserInfo);
         }
+       
         public ActionResult ShowUserFolder(long showUserInfoID, long folderID = 0)
         {
             UIWebFolderInfo model = null;
@@ -139,10 +140,6 @@ namespace WebBookmarkUI.Controllers
             }
             return View("ShowUserFolder", model);
         }
-
-      
-
-
 
 
     }

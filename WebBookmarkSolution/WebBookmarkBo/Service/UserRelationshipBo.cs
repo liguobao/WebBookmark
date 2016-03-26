@@ -35,7 +35,11 @@ namespace WebfolderBo.Service
             return DAL.DeleteFollowRelationship(followerID, beFollwedUID);
         }
 
-
+        /// <summary>
+        /// 获取用户所关注的人
+        /// </summary>
+        /// <param name="followUserID"></param>
+        /// <returns>返回Dictionary,key为所关注的人，value为BizUserRelationship</returns>
         public static Dictionary<long,BizUserRelationship> GetByFollowUserID(long followUserID)
         {
             var lst = DAL.GetByFollowUserID(followUserID);
@@ -46,6 +50,21 @@ namespace WebfolderBo.Service
 
         }
 
+        /// <summary>
+        /// 获取关注了此用户的人
+        /// </summary>
+        /// <param name="beFollwedUID"></param>
+        /// <returns></returns>
+        public static Dictionary<long, BizUserRelationship> GetByBeFollwedUID(long beFollwedUID)
+        {
+            var lst = DAL.GetByBeFollowUserID(beFollwedUID);
+            if (lst == null || lst.Count() == 0)
+                return new Dictionary<long, BizUserRelationship>();
+
+            return lst.Select(model => new BizUserRelationship(model))
+                .ToDictionary(model => model.FollowerID, model => model);
+
+        }
 
     }
 }

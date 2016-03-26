@@ -114,6 +114,7 @@
     <Compile Include="Commom\UILoginHelper.cs" />
     <Compile Include="Commom\UploadFileHelper.cs" />
     <Compile Include="Controllers\DefaultController.cs" />
+    <Compile Include="Controllers\FollowerController.cs" />
     <Compile Include="Controllers\InterestRecommendController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\RegisterController.cs" />
@@ -279,6 +280,10 @@
     <Content Include="Views\InterestRecommend\ShowUserFolder.cshtml" />
     <Content Include="Views\WebBookmarkTable\ShowFolderTable.cshtml" />
     <Content Include="Views\WebBookmarkTable\ShowAddFolderOrBookmarkView.cshtml" />
+    <Content Include="Views\Follower\Index.cshtml" />
+    <Content Include="Views\Follower\ShowUserFollow.cshtml" />
+    <Content Include="Views\Follower\ShowUserBeFollwed.cshtml" />
+    <Content Include="Views\UserInfo\ShowUserDetail.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
