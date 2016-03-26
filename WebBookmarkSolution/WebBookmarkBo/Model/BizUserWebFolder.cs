@@ -117,7 +117,38 @@ namespace WebBookmarkBo.Model
            var dataInfo= new UserWebFolderDAL().GetByUserWebFolderID(infoID);
            if (dataInfo != null)
                return new BizUserWebFolder(dataInfo);
+           
+
            return new BizUserWebFolder();
+        }
+
+        /// <summary>
+        /// 通过书签夹ID获取书签数据（包括子书签夹和书签数据）
+        /// </summary>
+        /// <param name="folderID"></param>
+        /// <returns></returns>
+        public static BizUserWebFolder LoadContainsChirdrenAndBookmark(long folderID)
+        {
+            var dataInfo = new UserWebFolderDAL().GetByUserWebFolderID(folderID);
+            if (dataInfo != null)
+            {
+                return new BizUserWebFolder(dataInfo) 
+                {
+                    ChildrenFolderList = LoadByParentWebfolderID(folderID),
+                    BizBookmarkInfoList = BizBookmarkInfo.LoadByFolderID(folderID)
+                };
+            }
+               
+            return new BizUserWebFolder();
+        }
+
+        public static List<BizUserWebFolder> LoadByParentWebfolderID(long parentWebfolderID)
+        {
+            var list = new UserWebFolderDAL().GetByParentWebfolderID(parentWebfolderID);
+            if (list == null)
+                return new List<BizUserWebFolder>();
+            return list.Select(info=>new BizUserWebFolder(info)).ToList();
+           
         }
 
 
@@ -132,7 +163,7 @@ namespace WebBookmarkBo.Model
             return list;
         }
 
-
+        
 
     }
 }

@@ -110,6 +110,31 @@ namespace WebBookmarkBo.Model
             return new BizBookmarkInfo();
         }
 
+
+        /// <summary>
+        /// 通过FolderID 加载书签数据
+        /// </summary>
+        /// <param name="folderID"></param>
+        /// <returns></returns>
+        public static List<BizBookmarkInfo> LoadByFolderID(long folderID)
+        {
+            var lstModel = new BookmarkInfoDAL().GetListByFolderID(folderID);
+            if (lstModel == null)
+                return new List<BizBookmarkInfo>();
+            return lstModel.Select(model=>new BizBookmarkInfo(model)).ToList();
+            
+        }
+
+
+        public static List<BizBookmarkInfo> LoadByUID(long uid)
+        {
+            var lstBiz = new List<BizBookmarkInfo>();
+            var lstModel = new BookmarkInfoDAL().GetListByUID(uid);
+            lstBiz = lstModel.Select(model => new BizBookmarkInfo(model)).ToList();
+            return lstBiz;
+        }
+
+
         public void Save()
         {
             if(BookmarkInfoID!=0)

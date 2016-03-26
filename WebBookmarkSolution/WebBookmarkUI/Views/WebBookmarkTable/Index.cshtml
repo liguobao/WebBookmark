@@ -115,6 +115,14 @@
                 <tbody>
                  @if (Model != null && Model.ChildrenFolderList != null)
                  {
+                     
+                      <tr>
+                            <td><span class="am-icon-folder"></span></td>
+                            <td><span class="am-icon-reply" name="openfolder"><div name="divFolderID" style="display:none">@Model.ParentWebfolderID</div></span>
+                            <td></td>
+                            <td></td>
+                     </tr>
+                     
                      foreach (var folder in Model.ChildrenFolderList)
                      {
                         <tr>

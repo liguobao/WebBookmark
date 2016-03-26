@@ -18,67 +18,21 @@ namespace WebBookmarkUI.Controllers
         // GET: WebBookmarkTable
         public ActionResult Index(long folderID=0)
         {
-            UIWebFolderInfo model = null;
-            var uid = UILoginHelper.GetUIDInCookie(Request);
-            if (uid != default(long))
+            long uid = UILoginHelper.GetUIDInCookie(Request);
+            if (folderID == 0)
             {
-                var result = UserWebFolderBo.LoadWebfolderByUID(uid);
-                if (!result.IsSuccess)
-                    return View();
-                model = new UIWebFolderInfo();
-                var allWebFolderInfo = new List<UIWebFolderInfo>();
-                foreach (var bizWebfolder in (result.Target as List<BizUserWebFolder>).OrderBy(folder => folder.ParentWebfolderID))
+                var lst = BizUserWebFolder.LoadAllByUID(uid);
+                if (lst != null)
                 {
-                    UIWebFolderInfo uiModel = ToUIModel(bizWebfolder);
-                    allWebFolderInfo.Add(uiModel);
+                    var firstFolder = lst.Where(folder => folder.ParentWebfolderID == 0);
+                    if (firstFolder == null)
+                        return View();
+                    folderID = firstFolder.FirstOrDefault().UserWebFolderID;
                 }
-                model = allWebFolderInfo.Find(folder => folder.ParentWebfolderID == folderID);
             }
+            var folderInfo = BizUserWebFolder.LoadContainsChirdrenAndBookmark(folderID);
+            var model = new UIWebFolderInfo(folderInfo);
             return View(model);
-        }
-
-        private static UIWebFolderInfo ToUIModel(BizUserWebFolder bizWebfolder)
-        {
-            var uiModel = new UIWebFolderInfo();
-            uiModel.ParentWebfolderID = bizWebfolder.ParentWebfolderID;
-            uiModel.UserInfoID = bizWebfolder.UserInfoID;
-            uiModel.UserWebFolderID = bizWebfolder.UserWebFolderID;
-            uiModel.WebFolderName = bizWebfolder.WebFolderName;
-            uiModel.Visible = bizWebfolder.Visible;
-            //uiModel.IntroContent = bizWebfolder.IntroContent;
-            //uiModel.IElementJSON = bizWebfolder.IElementJSON;
-            uiModel.CreateTime = bizWebfolder.CreateTime;
-            uiModel.ChildrenFolderList = new List<UIWebFolderInfo>();
-            uiModel.UIBookmarkInfoList = new List<UIBookmarkInfo>();
-
-            if (bizWebfolder.ChildrenFolderList!=null && bizWebfolder.ChildrenFolderList.Count!=0)
-            {
-                uiModel.ChildrenFolderList.AddRange(
-                    bizWebfolder.ChildrenFolderList.
-                    Select(childeren=>ToUIModel(childeren)));
-            }
-
-            if(bizWebfolder.BizBookmarkInfoList!=null && bizWebfolder.BizBookmarkInfoList.Count!=0)
-            {
-              
-
-                foreach(var bookmark in bizWebfolder.BizBookmarkInfoList)
-                {
-                    var uiBookmarkInfo = new UIBookmarkInfo()
-                    {
-                        UserInfoID = bookmark.UserInfoID,
-                        UserWebFolderID = bookmark.UserWebFolderID,
-                        Host = bookmark.Host,
-                        Href = bookmark.Href,
-                        BookmarkName = bookmark.BookmarkName,
-                        CreateTime = bookmark.CreateTime,
-                        BookmarkInfoID = bookmark.BookmarkInfoID,
-                    };
-
-                    uiModel.UIBookmarkInfoList.Add(uiBookmarkInfo);
-                } 
-            }
-            return uiModel;
         }
 
 

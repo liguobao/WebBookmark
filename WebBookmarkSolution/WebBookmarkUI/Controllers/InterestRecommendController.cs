@@ -95,14 +95,15 @@ namespace WebBookmarkUI.Controllers
 
         public ActionResult ShowUserInfo(long showUserInfoID)
         {
-            SearchUserInfo showUserInfo = null;
+            UIShowUserInfo showUserInfo = null;
             var model = BizUserInfo.LoadByUserInfoID(showUserInfoID);
 
             if(showUserInfoID==0 || model==null)
                 return PartialView("ShowUserInfo", showUserInfo);
 
-            var dicBeFollowerID = UserRelationshipBo.GetByFollowUserID(UILoginHelper.GetUIDInCookie(Request));
-            showUserInfo = new SearchUserInfo() 
+            var uid = UILoginHelper.GetUIDInCookie(Request);
+            var dicBeFollowerID = UserRelationshipBo.GetByFollowUserID(uid);
+            showUserInfo = new UIShowUserInfo() 
             {
                 UserImagURL = model.UserImagURL,
                 UserEmail = model.UserEmail,
@@ -113,9 +114,36 @@ namespace WebBookmarkUI.Controllers
                 IsFollow = dicBeFollowerID.ContainsKey(model.UserInfoID)
             };
 
-
             return PartialView("ShowUserInfo", showUserInfo);
         }
+        public ActionResult ShowUserFolder(long showUserInfoID, long folderID = 0)
+        {
+            UIWebFolderInfo model = null;
+
+            if (showUserInfoID != default(long))
+            {
+                if(folderID==0)
+                {
+                    var lst = BizUserWebFolder.LoadAllByUID(showUserInfoID);
+                    if(lst!=null)
+                    {
+                        var firstFolder = lst.Where(folder=>folder.ParentWebfolderID==0);
+                        if(firstFolder==null)
+                            return View("ShowUserFolder", model);
+
+                        folderID = firstFolder.FirstOrDefault().UserWebFolderID;
+                    }
+                }
+               var folderInfo = BizUserWebFolder.LoadContainsChirdrenAndBookmark(folderID);
+               model = new UIWebFolderInfo(folderInfo);
+            }
+            return View("ShowUserFolder", model);
+        }
+
+      
+
+
+
 
     }
 }

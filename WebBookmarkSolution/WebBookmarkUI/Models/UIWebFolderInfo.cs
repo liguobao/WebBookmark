@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using WebBookmarkBo.Model;
 
 namespace WebBookmarkUI.Models
 {
@@ -41,24 +42,54 @@ namespace WebBookmarkUI.Models
         /// </summary>
         public long ParentWebfolderID { get; set; }
 
-        /// <summary>
-        /// 收藏夹描述
-        /// </summary>
-        public string IntroContent { get; set; }
-
-        /// <summary>
-        /// IElement 序列化数据
-        /// </summary>
-        public string IElementJSON { get; set; }
-
-
-        public int IElementHashcode { get; set; }
-
 
         public List<UIBookmarkInfo> UIBookmarkInfoList { get; set; }
 
 
         public List<UIWebFolderInfo> ChildrenFolderList { get; set; }
+
+
+        public UIWebFolderInfo()
+        {
+
+        }
+
+        public UIWebFolderInfo(BizUserWebFolder folderInfo)
+        {
+           if (folderInfo == null)
+                return;
+           UserWebFolderID = folderInfo.UserWebFolderID;
+           UserInfoID = folderInfo.UserInfoID;
+           ParentWebfolderID = folderInfo.ParentWebfolderID;
+           CreateTime = folderInfo.CreateTime;
+           Visible = folderInfo.Visible;
+           WebFolderName = folderInfo.WebFolderName;
+
+           UIBookmarkInfoList = folderInfo.BizBookmarkInfoList != null ?
+                folderInfo.BizBookmarkInfoList.Select(info => new UIBookmarkInfo()
+                {
+                    UserInfoID = info.UserInfoID,
+                    UserWebFolderID = info.UserWebFolderID,
+                    BookmarkInfoID = info.BookmarkInfoID,
+                    BookmarkName = info.BookmarkName,
+                    CreateTime = info.CreateTime,
+                    Href = info.Href,
+                    Host = info.Host,
+                }).ToList() : null;
+
+            ChildrenFolderList = folderInfo.ChildrenFolderList != null ?
+                folderInfo.ChildrenFolderList.Select(info => new UIWebFolderInfo()
+                {
+                    WebFolderName = info.WebFolderName,
+                    ParentWebfolderID = info.ParentWebfolderID,
+                    UserWebFolderID = info.UserWebFolderID,
+                    CreateTime = info.CreateTime,
+                    UserInfoID = info.UserInfoID,
+                    Visible = info.Visible,
+                }).ToList() : null;
+
+        }
+
     }
 
     /// <summary>

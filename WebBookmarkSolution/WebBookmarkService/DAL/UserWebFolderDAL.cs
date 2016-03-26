@@ -301,6 +301,15 @@ namespace WebBookmarkService.DAL
         #endregion
 
 
+        public IEnumerable<UserWebFolder> GetByParentWebfolderID(long parentWebfolderID)
+        {
+            string sql = "SELECT * FROM tblUserWebFolder where ParentWebfolderID =@ParentWebfolderID";
+            using (MySqlDataReader reader = MyDBHelper.ExecuteDataReader(sql, new MySqlParameter("@ParentWebfolderID", parentWebfolderID)))
+            {
+                return ToModels(reader);
+            }
+        }
+
 
         #region 获得总记录集IEnumerable<>
         ///<summary>

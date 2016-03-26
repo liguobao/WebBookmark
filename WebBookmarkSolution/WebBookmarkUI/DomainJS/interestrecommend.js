@@ -42,7 +42,10 @@
             success:
                 function (result) {
                     if (result.IsSuccess) {
-                        $("#followUser").attr("hidden", false);
+                        $this.removeClass("am-btn-primary");
+                        $this.addClass("btn-success");
+                        $this.attr("id", "followUser");
+                        $this.html("<span>关注</span>");
                     } else {
                         alert(result.ErrorMessage);
                     }
@@ -55,7 +58,7 @@
     $('body').on('click', "[id='followUser']", function (e) {
         e.preventDefault();
         var $this = $(this);
-        var befollowUserID = $this.parent().find("[id='userid']").html();;
+        var befollowUserID = $this.attr("data-id");;
 
         $.ajax({
             type: "post",
@@ -64,7 +67,10 @@
             success:
                 function (result) {
                     if (result.IsSuccess) {
-                        $("#unFollowUser").attr("hidden",false);
+                        $this.removeClass("btn-success");
+                        $this.addClass("am-btn-primary");
+                        $this.html("<span>取消关注</span>");
+                        $this.attr("id", "unFollowUser");
                     } else {
                         alert(result.ErrorMessage);
                     }
@@ -122,6 +128,7 @@
             success:
                 function (data) {
                     $("#content").html(data);
+                    ShowFolder(showUserInfoID, 0);
                 }
         });
 
@@ -130,5 +137,32 @@
 
     })
 
+    $('body').on('click', "[name='openfolder']", function () {
+        var $this = $(this);
+        var folderID = $this.attr("data-folderid");
+        var userInfoID = $this.attr("data-uid");
+        ShowFolder(userInfoID,folderID);
+
+    });
 
 })
+
+
+function ShowFolder(showUserInfoID, folderID) {
+
+    $("#loadfolder").addClass("am-icon-spinner").addClass("am-icon-spin");
+
+    $.ajax({
+        type: "post",
+        url: showUserFolderURL,
+        data: { showUserInfoID: showUserInfoID, folderID: folderID },
+        success:
+            function (data) {
+                if (data != null) {
+                    $("#loadfolder").removeClass("am-icon-spinner").removeClass("am-icon-spin");
+                    $("#overview").html(data);
+                }
+                $("#overview").html(data);
+            }
+    });
+}

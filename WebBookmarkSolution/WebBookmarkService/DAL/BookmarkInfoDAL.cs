@@ -244,7 +244,7 @@ namespace WebBookmarkService.DAL
 		}
         #endregion
 
-        #region 根据字段名获取数据记录IEnumerable<>
+        #region 通过Uid 获取书签数据
         ///<summary>
         ///根据字段名获取数据记录IEnumerable<>
         ///</summary>              
@@ -256,6 +256,21 @@ namespace WebBookmarkService.DAL
                 return ToModels(reader);
             }
         }
+
+        /// <summary>
+        /// 通过书签夹ID获取书签数据
+        /// </summary>
+        /// <param name="folderID"></param>
+        /// <returns></returns>
+        public IEnumerable<BookmarkInfo> GetListByFolderID(long folderID)
+        {
+            string sql = "SELECT * FROM tblBookmarkInfo where UserWebFolderID=" + folderID;
+            using (MySqlDataReader reader = MyDBHelper.ExecuteDataReader(sql))
+            {
+                return ToModels(reader);
+            }
+        }
+
         #endregion
 
         #region 获得总记录集IEnumerable<>

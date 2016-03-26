@@ -1,0 +1,53 @@
+﻿@model WebBookmarkUI.Models.UIWebFolderInfo
+<script type="text/javascript">
+</script>
+<div class="admin-content">
+    <div class="am-g">
+        <div class="am-u-sm-12">
+            <table class="am-table am-table-striped am-table-hover table-main ">
+                <thead>
+                    <tr>
+                        <th class="table-id">类型</th>
+                        <th class="table-main">名称</th>
+                        <th class="table-date am-hide-sm-only">修改日期</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (Model != null && Model.ChildrenFolderList != null)
+                    {
+                         <tr>
+                            <td><span class="am-icon-folder"></span></td>
+                            <td>上一级  <span class="am-icon-reply" name="openfolder" data-uid='@Model.UserInfoID' data-folderid='@ViewBag.ParentWebfolderID'></span>
+                            <td></td>
+                         </tr>
+                        
+                        foreach (var folder in Model.ChildrenFolderList)
+                        {
+                            <tr>
+                                <td><span class="am-icon-folder"></span></td>
+                                <td>@folder.WebFolderName  <span class="am-icon-folder-open-o" name="openfolder" data-uid='@folder.UserInfoID' data-folderid='@folder.UserWebFolderID'></span>
+                                <td>@folder.CreateTime</td>
+                            </tr>
+                        }
+
+
+                        foreach (var bookmark in Model.UIBookmarkInfoList)
+                        {
+                            <tr>
+                                <td><samp class="am-icon-bookmark"></samp></td>
+                                <td><a href='@bookmark.Href' target='_blank'>@bookmark.BookmarkName  </a></td>
+                                <td>@bookmark.CreateTime</td>
+                            </tr>
+                        }
+                    }
+                    else
+                    {
+
+                    }
+
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+</div>

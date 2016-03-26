@@ -46,6 +46,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Microsoft.CSharp" />
     <Reference Include="Microsoft.Web.Infrastructure">
       <HintPath>..\..\..\..\..\..\Desktop\WebBookmarkUI\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
     </Reference>
@@ -122,6 +123,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\SearchUserInfo.cs" />
+    <Compile Include="Models\UIShowUserInfo.cs" />
     <Compile Include="Models\UIUserInfo.cs" />
     <Compile Include="Models\UIWebFolderInfo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -274,6 +276,8 @@
     <Content Include="Views\InterestRecommend\Index.cshtml" />
     <Content Include="Views\InterestRecommend\SearchUser.cshtml" />
     <Content Include="Views\InterestRecommend\ShowUserInfo.cshtml" />
+    <Content Include="Views\InterestRecommend\ShowUserFolder.cshtml" />
+    <Content Include="Views\WebBookmarkTable\ShowFolderTable.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
