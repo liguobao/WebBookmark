@@ -278,6 +278,7 @@
     <Content Include="Views\InterestRecommend\ShowUserInfo.cshtml" />
     <Content Include="Views\InterestRecommend\ShowUserFolder.cshtml" />
     <Content Include="Views\WebBookmarkTable\ShowFolderTable.cshtml" />
+    <Content Include="Views\WebBookmarkTable\ShowAddFolderOrBookmarkView.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

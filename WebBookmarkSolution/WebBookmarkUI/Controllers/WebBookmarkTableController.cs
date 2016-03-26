@@ -36,6 +36,46 @@ namespace WebBookmarkUI.Controllers
         }
 
 
+        public ActionResult ShowFolderTable(long folderID)
+        {
+            long uid = UILoginHelper.GetUIDInCookie(Request);
+            if (folderID == 0)
+            {
+                var lst = BizUserWebFolder.LoadAllByUID(uid);
+                if (lst != null)
+                {
+                    var firstFolder = lst.Where(folder => folder.ParentWebfolderID == 0);
+                    if (firstFolder == null)
+                        return View();
+                    folderID = firstFolder.FirstOrDefault().UserWebFolderID;
+                }
+            }
+            var folderInfo = BizUserWebFolder.LoadContainsChirdrenAndBookmark(folderID);
+            var model = new UIWebFolderInfo(folderInfo);
+            return View("ShowFolderTable", model);
+        }
+
+        public ActionResult ShowAddFolderOrBookmarkView(long folderID)
+        {
+            long uid = UILoginHelper.GetUIDInCookie(Request);
+            if (folderID == 0)
+            {
+                var lst = BizUserWebFolder.LoadAllByUID(uid);
+                if (lst != null)
+                {
+                    var firstFolder = lst.Where(folder => folder.ParentWebfolderID == 0);
+                    if (firstFolder == null)
+                        return View();
+                    folderID = firstFolder.FirstOrDefault().UserWebFolderID;
+                }
+            }
+            var folderInfo = BizUserWebFolder.LoadContainsChirdrenAndBookmark(folderID);
+            var model = new UIWebFolderInfo(folderInfo);
+            return View("ShowAddFolderOrBookmarkView", model);
+        }
+
+
+
         public ActionResult ConvertToUIWebFolderInfo(string strModel)
         {
             UIWebFolderInfo folderInfo = null;

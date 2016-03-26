@@ -1,0 +1,33 @@
+﻿@model WebBookmarkUI.Models.UIWebFolderInfo
+<ul class="am-list">
+    <li class="am-text-left" style="margin: 5px 20px;">
+        <input type="text" id="bookmarkname" class="am-form-field am-radius" placeholder="名称">
+    </li>
+    <li class="am-text-left" style="margin: 5px 20px; border:none">
+
+        <select id="bookmarkSelect" class="am-form-field am-radius" data-am-selected>
+            <option value="bookmark">书签</option>
+            <option value="folder">书签夹</option>
+        </select>
+
+        <select id="folderSelect" class="am-form-field am-radius am-text-right" data-am-selected>
+            @if (Model != null && Model.ChildrenFolderList != null && Model.ChildrenFolderList != null)
+            {
+                <option value='@Model.UserWebFolderID'>@Model.WebFolderName</option>
+                foreach (var folder in Model.ChildrenFolderList)
+                {
+                    <option value='@folder.UserWebFolderID'>@folder.WebFolderName</option>
+                }
+
+            }
+            else
+            {
+                <option value="0">书签栏</option>
+            }
+        </select>
+
+    </li>
+    <li class="am-text-left" style="margin: 5px 20px;" id="bookmarkURL">
+        <input type="text" id="bookmarkhref" class="am-form-field am-radius" placeholder="URL地址">
+    </li>
+</ul>

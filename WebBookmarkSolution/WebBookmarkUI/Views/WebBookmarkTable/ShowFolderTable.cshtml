@@ -1,57 +1,15 @@
 ﻿
 @model WebBookmarkUI.Models.UIWebFolderInfo
 
-<div class="am-modal-bd" id="addFolderOrBookmark">
-    <div class="content am-center">
-        <h5 style="font-size:xx-large">新增书签/书签夹</h5>
-        <div id="editID" hidden></div>
-        <ul class="am-list">
-            <li class="am-text-left" style="margin: 5px 20px;">
-                <input type="text" id="bookmarkname" class="am-form-field am-radius" placeholder="名称">
-            </li>
-            <li class="am-text-left" style="margin: 5px 20px; border:none">
-
-                <select id="bookmarkSelect" class="am-form-field am-radius" data-am-selected>
-                    <option value="bookmark">书签</option>
-                    <option value="folder">书签夹</option>
-                </select>
-
-                <select id="folderSelect" class="am-form-field am-radius am-text-right" data-am-selected>
-                    @if (Model != null && Model.ChildrenFolderList != null && Model.ChildrenFolderList != null)
-                    {
-                        <option value='@Model.UserWebFolderID'>@Model.WebFolderName</option>
-                        foreach (var folder in Model.ChildrenFolderList)
-                        {
-                            <option value='@folder.UserWebFolderID'>@folder.WebFolderName</option>
-                        }
-
-                    }
-                    else
-                    {
-                        <option value="0">书签栏</option>
-                    }
-                </select>
-
-            </li>
-            <li class="am-text-left" style="margin: 5px 20px;" id="bookmarkURL">
-                <input type="text" id="bookmarkhref" class="am-form-field am-radius" placeholder="URL地址">
-            </li>
-        </ul>
-        <div class="am-text-center" style="margin: 20px 20px;">
-
-            <button class="am-btn am-btn-secondary am-radius" id="btnSaveBookmark">保存</button>
-            <button class="am-btn am-btn-secondary am-radius" id="btnBookmarkCancel" onclick="javascript:void(0)" data-am-modal-close>取消</button>
-        </div>
-
-        <div class="am-form-group">
-
-        </div>
-    </div>
-
-</div>
-
  @if (Model != null && Model.ChildrenFolderList != null)
     {
+     
+           <tr>
+                <td><span class="am-icon-folder"></span></td>
+                <td><span name="openfolder" class="am-icon-reply" ><div name="divFolderID" style="display:none"> @Model.ParentWebfolderID</div></span>
+            </tr>
+     
+     
         foreach (var folder in Model.ChildrenFolderList)
         {
             <tr>
@@ -67,6 +25,7 @@
                             </button>
                             <button class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only delete" id="delete" value="folder">
                                 <div name="infoID" style="display:none"> @folder.UserWebFolderID</div>
+                                <div name="ParentWebfolderID" hidden>@folder.ParentWebfolderID</div>
                                 <span class="am-icon-trash-o"></span> 删除
                             </button>
                         </div>
@@ -91,6 +50,7 @@
                             </button>
                             <button class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only" id="delete" value="bookmark">
                                 <div name="infoID" style="display:none"> @bookmark.BookmarkInfoID</div>
+                                <div name="ParentWebfolderID" hidden>@bookmark.UserWebFolderID</div>
                                 <span class="am-icon-trash-o"></span> 删除
                             </button>
                         </div>

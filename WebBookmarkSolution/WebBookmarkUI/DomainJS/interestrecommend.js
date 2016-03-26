@@ -159,10 +159,10 @@ function ShowFolder(showUserInfoID, folderID) {
         success:
             function (data) {
                 if (data != null) {
-                    $("#loadfolder").removeClass("am-icon-spinner").removeClass("am-icon-spin");
+                   
                     $("#overview").html(data);
                 }
-                $("#overview").html(data);
+                $("#loadfolder").removeClass("am-icon-spinner").removeClass("am-icon-spin");
             }
     });
 }
