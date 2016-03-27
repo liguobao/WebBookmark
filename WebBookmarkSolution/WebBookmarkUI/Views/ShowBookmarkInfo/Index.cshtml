@@ -1,0 +1,35 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@model WebBookmarkUI.Models.UIBookmarkInfo 
+
+<script>
+    var showHTML = "@Url.Action("ShowBookmarkHTML")";
+    var bookmarkID = '@Model.BookmarkInfoID';
+    var url = '@Model.Href';
+</script>
+<script src="~/DomainJS/bookmarkdetail.js"></script>
+
+
+<div class="aw-mod aw-user-detail-box">
+    <div class="am-cf am-padding">
+        <div class="am-text-primary am-text-lg">书签名称：@Model.BookmarkName</div>
+        <div class="">创建日期：@Model.CreateTime &nbsp;&nbsp;&nbsp;&nbsp; URL：<a href='@Model.Href'>@Model.Href</a></div>
+       
+    </div>
+        <div class="mod-footer">
+            <div class="am-tabs" data-am-tabs="">
+                <ul class="am-tabs-nav am-nav am-nav-tabs aw-nav-tabs">
+                    <li class="am-active"><a href="#" id="bookmarkHTML" data-id='@Model.BookmarkInfoID' data-url='@Model.Href'>HTML <span id="loadHTML"></span></a></li>
+                    <li class=""><a href="#" id="befollwed" data-id='@Model.BookmarkInfoID'>相关评论 <span id="loadcomment"></span></a></li>
+                </ul>
+
+                <div class="am-tabs-bd aw-user-center-tab" style="touch-action: pan-y; -webkit-user-select: none; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);">
+                    <div class="am-active am-in" id="overview">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>

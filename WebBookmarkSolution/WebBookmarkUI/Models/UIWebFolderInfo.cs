@@ -131,11 +131,6 @@ namespace WebBookmarkUI.Models
         public DateTime CreateTime { get; set; }
 
         /// <summary>
-        /// 导入XML信息
-        /// </summary>
-        public string IElementJSON { get; set; }
-
-        /// <summary>
         /// 
         /// </summary>
         public string BookmarkName { get; set; }

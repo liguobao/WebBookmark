@@ -1,0 +1,88 @@
+﻿<%@ CodeTemplate Language="C#" TargetLanguage="C#" 
+	Src="ToolsCodeTemplate.cs" Inherits="ToolsCodeTemplate"%>
+<%@ Property Name="TargetTable" Type="SchemaExplorer.TableSchema" Category="Context" Description="TargetTable that the object is based on." %>
+<%@ Property Name="ModelsNamespace" Default="Model" Type="System.String" Category="Context" Description="TargetTable that the object is based on." %>
+<%@ Assembly Name="SchemaExplorer" %>
+<%@ Assembly Name="System.Data" %>
+<%@ Import Namespace="SchemaExplorer" %>
+<%@ Import Namespace="System.Data" %>
+<% PrintHeader(); %>
+using System;
+using System.Collections.Generic;
+using System.Text;
+
+namespace <%= ModelsNamespace %>
+{	
+	[Serializable()]
+    
+    /// <summary>
+    /// 
+    /// </summary>
+	public class <%= GetBizModelClassName() %>
+	{
+		<% 
+		foreach (ColumnSchema column in TargetTable.Columns)
+ 		{
+		%>
+        /// <summary>
+        /// <%= column.Description %>
+        /// </summary>
+		public <%= GetPropertyType(column) %> <%= GetPropertyName(column) %>{get;set;}
+            
+		<%
+		}
+		%>
+        
+        /// <summary>
+        /// Biz Convert To DB Model
+        /// </summary>
+        public <%= GetModelClassName() %> ToModel()
+        {
+            return new <%= GetModelClassName() %>()
+            {
+                <% foreach (ColumnSchema column in TargetTable.Columns)
+                {
+                %>
+                <%= GetPropertyName(column) %> =  <%= GetPropertyName(column) %>,
+                <%
+                }
+                %>
+            };
+        }
+        
+        
+        public <%= GetBizModelClassName() %> (<%= GetModelClassName() %> dataInfo)
+        {
+             <% foreach (ColumnSchema column in TargetTable.Columns)
+             {
+             %>
+             <%= GetPropertyName(column) %> =  dataInfo.<%= GetPropertyName(column) %>;
+             <%
+             }
+             %>
+        }
+        
+        public  <%= GetBizModelClassName() %> ()
+        {
+        
+        } 
+        
+	}
+}
+<script runat="template">
+public string GetBizModelClassName()
+{
+	return "Biz"+GetModelClassName(TargetTable);
+}
+
+public string GetModelClassName()
+{
+	return GetModelClassName(TargetTable);
+}
+
+public override string GetFileName()
+{
+	return "Biz"+this.GetModelClassName(this.TargetTable) + ".cs";
+}
+
+</script>

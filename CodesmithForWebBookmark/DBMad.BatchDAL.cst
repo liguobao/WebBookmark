@@ -1,0 +1,289 @@
+﻿<%@ CodeTemplate Language="C#" TargetLanguage="C#" ResponseEncoding="UTF-8"	Src="ToolsCodeTemplate.cs" Inherits="ToolsCodeTemplate"%>
+<%@ Property Name="TargetTable" Type="SchemaExplorer.TableSchema" Category="Context" Description="TargetTable that the object is based on." %>
+<%@ Property Name="ModelsNamespace" Default="MyOffice.Models" Type="System.String" Category="Context" Description="TargetTable that the object is based on." %>
+<%@ Property Name="DALNamespace" Default="MyOffice.DAL" Type="System.String" Category="Context" Description="TargetTable that the object is based on." %>
+<%@ Property Name="DALClassNameSurfix" Default="Service" Type="System.String" Category="Context" Description="TargetTable that the object is based on." %>
+<%@ Assembly Name="SchemaExplorer" %>
+<%@ Assembly Name="System.Data" %>
+<%@ Import Namespace="SchemaExplorer" %>
+<%@ Import Namespace="System.Data" %>
+<%@ Import Namespace="System.Text.RegularExpressions" %>
+<% PrintHeader(); %>
+using System;
+using System.Collections.Generic;
+using System.Text;
+using System.Data;
+using MySql.Data.MySqlClient;
+using <%= ModelsNamespace %>;
+
+namespace <%= DALNamespace %>
+{
+	public partial class <%= GetDALClassName() %>
+	{
+		
+        <%-- public static Book AddBook(Book book) --%>
+        #region
+        /// <summary>
+        /// 根据传入Model，并返回Model
+        /// </summary>        
+        public bool BacthInsert (List<<%= GetModelClassName() %>> list)
+		{
+            StringBuilder sbSQL = new StringBuilder();
+            int index = 0;
+
+            List<MySqlParameter> lstPara = new List<MySqlParameter>();
+            
+            foreach (var one in list)
+            {
+                  sbSQL.AppendLine("<%= GetCommonInsertSQLLineByIndex(index)%>");
+                   
+                  MySqlParameter[] paramater = new MySqlParameter[]
+    			  {
+    				<%
+    				for(int i=0; i<TargetTable.NonPrimaryKeyColumns.Count; i++)
+    				{
+    					ColumnSchema column = TargetTable.NonPrimaryKeyColumns[i];
+    					
+    				%>
+    				new MySqlParameter("@<%= column.Name %>"+index, ToDBValue(<%= GetModelParamName() %>.<%= column.Name %>)),
+    				<%
+    				}
+    				%>
+    			  };
+                  lstPara.AddRange(paramater);
+                  index = index + 1;
+            }
+            
+			int AddId = (int)MyDBHelper.ExecuteScalar(sql, para);
+			if(AddId >0)
+			{
+				return true;
+			}else
+			{
+				return false;					
+			}
+		}
+        #endregion    
+        
+		
+		<%-- public static bool ModifyBook(Book book) --%>
+        #region 根据传入Model更新数据并返回更新后的Model
+        /// <summary>
+        /// 根据传入Model更新数据并返回更新后的Model
+        /// </summary>
+        public int Update(<%= GetModelClassName() %> <%= GetModelParamName() %>)
+        {
+            string sql =
+                "UPDATE <%= TargetTable.Name %> " +
+                "SET " +
+			" <%= TargetTable.NonPrimaryKeyColumns[0].Name %> = @<%= TargetTable.NonPrimaryKeyColumns[0].Name %>" 
+			<%
+			for(int i=1; i<TargetTable.NonPrimaryKeyColumns.Count; i++)
+			{
+				ColumnSchema column = TargetTable.NonPrimaryKeyColumns[i];				
+			%>
+                +", <%= column.Name %> = @<%= column.Name %>" 
+			<%
+			}
+			%>
+               
+            +" WHERE <%= GetPKName() %> = @<%= GetPKName() %>";
+
+
+			MySqlParameter[] para = new MySqlParameter[]
+			{
+				new MySqlParameter("@<%= GetPKName() %>", <%= GetModelParamName() %>.<%= GetPKName() %>)
+				<%
+				for(int i=0; i<TargetTable.NonPrimaryKeyColumns.Count; i++)
+				{
+					ColumnSchema column = TargetTable.NonPrimaryKeyColumns[i];
+				%>
+					,new MySqlParameter("@<%= column.Name %>", ToDBValue(<%= GetModelParamName() %>.<%= column.Name %>))
+				<%
+				}
+				%>
+			};
+
+			return MyDBHelper.ExecuteNonQuery(sql, para);
+        }
+        #endregion
+		
+        
+        #region 把DataRow转换成Model
+        /// <summary>
+        /// 把DataRow转换成Model
+        /// </summary>
+		public <%= GetModelClassName() %> ToModel(MySqlDataReader dr)
+		{
+			<%= GetModelClassName() %> <%= GetModelParamName() %> = new <%= GetModelClassName() %>();
+
+			<% foreach(ColumnSchema column in TargetTable.Columns) %>
+			<% { %>
+			<%= GetModelParamName() %>.<%= GetPropertyName(column) %> = (<%=GetPropertyType(column)%>)ToModelValue(dr,"<%=column.Name%>");
+			<% } %>
+			return <%= GetModelParamName() %>;
+		}
+		#endregion
+        
+        
+        #region 把MySqlDataReader转换成IEnumerable<>
+        ///<summary>
+        /// 把MySqlDataReader转换成IEnumerable<>
+        ///</summary> 
+		protected IEnumerable<<%= GetModelClassName() %>> ToModels(MySqlDataReader reader)
+		{
+			var list = new List<<%= GetModelClassName() %>>();
+			while(reader.Read())
+			{
+				list.Add(ToModel(reader));
+			}	
+			return list;
+		}		
+		#endregion
+        
+	}
+}
+<script runat="template">
+public bool IsIdentityPK()
+{
+	foreach(ColumnSchema column in TargetTable.Columns)
+	{
+		if((bool)column.ExtendedProperties["CS_IsIdentity"].Value) 
+		{
+			return true;
+		}
+	}
+	return false;
+}
+
+///////////////////////////////////////////////////////////////
+// CLASS NAMES by Shen Bo
+///////////////////////////////////////////////////////////////
+// UserService
+public string GetDALClassName()
+{
+	return 	GetModelClassName() + DALClassNameSurfix;
+}
+// User
+public string GetModelClassName()
+{
+	return 	GetModelClassName(TargetTable);
+}
+// user
+public string GetModelMemberVarName()
+{
+	return GetModelParamName();
+}
+// user
+public string GetModelParamName()
+{
+	return MakeCamel(GetModelClassName());
+}
+
+
+///////////////////////////////////////////////////////////////
+// INSERT SQL LINES by Shen Bo
+///////////////////////////////////////////////////////////////
+public string GetAutoIncInsertSQLLine()
+{
+	string result;
+	result = "INSERT INTO " + TargetTable.Name + " (";
+	foreach(ColumnSchema column in TargetTable.NonPrimaryKeyColumns)
+	{
+		result += column.Name + ", ";
+	}
+	result = result.Substring(0, result.Length-2);
+	result += ") ";
+	result += " VALUES (";
+	foreach(ColumnSchema column in TargetTable.NonPrimaryKeyColumns)
+	{
+		result += "@" + column.Name + ", ";
+	}
+	result = result.Substring(0, result.Length-2);
+	result += ")";
+	//result += ");select @@IDENTITY";
+	return result;
+}
+
+public string GetCommonInsertSQLLine()
+{
+	string result;
+	result = "INSERT INTO " + TargetTable.Name + " (";
+	foreach(ColumnSchema column in TargetTable.Columns)
+	{
+		result += column.Name + ", ";
+	}
+	result = result.Substring(0, result.Length-2);
+	result += ") ";
+	result += " VALUES (";
+	foreach(ColumnSchema column in TargetTable.Columns)
+	{
+		result += "@" + column.Name + ", ";
+	}
+	result = result.Substring(0, result.Length-2);
+	result += ")";
+	return result;
+}
+
+
+public string GetCommonInsertSQLLineByIndex(int index)
+{
+	string result;
+	result = "INSERT INTO " + TargetTable.Name + " (";
+	foreach(ColumnSchema column in TargetTable.Columns)
+	{
+		result += column.Name + ", ";
+	}
+	result = result.Substring(0, result.Length-2);
+	result += ") ";
+	result += " VALUES (";
+	foreach(ColumnSchema column in TargetTable.Columns)
+	{
+		result += "@" + column.Name + index+", ";
+	}
+	result = result.Substring(0, result.Length-2);
+	result += ")";
+	return result;
+}
+
+
+
+///////////////////////////////////////////////////////////////
+// PRIMARY KEY TYPE by Shen Bo
+///////////////////////////////////////////////////////////////
+// int
+public string GetPKPropertyType()
+{
+	return 	GetPKType(TargetTable);
+}
+
+///////////////////////////////////////////////////////////////
+// PRIMARY KEY NAME by Shen Bo
+///////////////////////////////////////////////////////////////
+// Id
+public string GetPKPropertyName()
+{
+	return MakePascal(GetPKName());
+}
+// id
+public string GetPKParamName()
+{
+	return GetPKMemberVarName();	
+}
+// id
+public string GetPKMemberVarName()
+{
+	return MakeCamel(GetPKName());	
+}
+// Id
+public string GetPKName()
+{
+	return GetPKName(TargetTable);
+}
+
+public override string GetFileName()
+{
+	return this.GetDALClassName() + ".cs";
+}
+
+</script>

@@ -1,0 +1,9 @@
+﻿@model WebBookmarkUI.Models.UIBookmarkInfo
+
+<blockquote>
+    @if(Model!=null)
+    {
+        <div id="divHTML">@Html.Raw(Model.HTML)</div>
+        <small id="url">来源于<a href='@Model.Href'>@Model.BookmarkName</a></small>
+    }
+</blockquote>
