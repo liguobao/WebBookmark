@@ -36,9 +36,9 @@ namespace WebBookmarkService.Model
 		public DateTime CreateTime{get;set;}
             
         /// <summary>
-        /// 对外是否可见
+        /// 等级,0:对外公开，1：对关注者公开，2对群组公开，3：仅自己可见
         /// </summary>
-		public sbyte Visible{get;set;}
+		public int Grade{get;set;}
             
         /// <summary>
         /// 父收藏夹ID
@@ -54,9 +54,11 @@ namespace WebBookmarkService.Model
         /// IElement 序列化数据
         /// </summary>
 		public string IElementJSON{get;set;}
-
-
-        public int IElementHashcode { get; set; }
-
-    }
+            
+        /// <summary>
+        /// IElementHashcode
+        /// </summary>
+		public int IElementHashcode{get;set;}
+            
+	}
 }

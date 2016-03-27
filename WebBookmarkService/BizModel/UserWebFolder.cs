@@ -6,14 +6,14 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace WebBookmarkService.Model
+namespace WebBookmarkService.BizModel
 {	
 	[Serializable()]
     
     /// <summary>
     /// 
     /// </summary>
-	public class UserWebFolder
+	public class BizUserWebFolder
 	{
         /// <summary>
         /// 
@@ -60,5 +60,44 @@ namespace WebBookmarkService.Model
         /// </summary>
 		public int IElementHashcode{get;set;}
             
+        
+        /// <summary>
+        /// Biz Convert To DB Model
+        /// </summary>
+        public UserWebFolder ToModel()
+        {
+            return new UserWebFolder()
+            {
+                UserWebFolderID =  UserWebFolderID,
+                WebFolderName =  WebFolderName,
+                UserInfoID =  UserInfoID,
+                CreateTime =  CreateTime,
+                Grade =  Grade,
+                ParentWebfolderID =  ParentWebfolderID,
+                IntroContent =  IntroContent,
+                IElementJSON =  IElementJSON,
+                IElementHashcode =  IElementHashcode,
+            };
+        }
+        
+        
+        public BizUserWebFolder (UserWebFolder dataInfo)
+        {
+             UserWebFolderID =  dataInfo.UserWebFolderID;
+             WebFolderName =  dataInfo.WebFolderName;
+             UserInfoID =  dataInfo.UserInfoID;
+             CreateTime =  dataInfo.CreateTime;
+             Grade =  dataInfo.Grade;
+             ParentWebfolderID =  dataInfo.ParentWebfolderID;
+             IntroContent =  dataInfo.IntroContent;
+             IElementJSON =  dataInfo.IElementJSON;
+             IElementHashcode =  dataInfo.IElementHashcode;
+        }
+        
+        public  BizUserWebFolder ()
+        {
+        
+        } 
+        
 	}
 }

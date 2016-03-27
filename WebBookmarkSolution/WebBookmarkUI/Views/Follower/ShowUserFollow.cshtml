@@ -11,6 +11,8 @@
 
                                 @if (Model != null)
                                 {
+                                    var loginUid = WebBookmarkUI.UILoginHelper.GetUIDInCookie(Request);
+                                    
                                     foreach (var userInfo in Model)
                                     {
                                         <div class="aw-item">
@@ -23,16 +25,19 @@
                                             {
                                                 <a href='http://s.amazeui.org/media/i/demos/bw-2014-06-19.jpg?imageView/1/w/200/h/200/q/80' class="aw-user-img"><img src='http://s.amazeui.org/media/i/demos/bw-2014-06-19.jpg?imageView/1/w/200/h/200/q/80' alt="" width="50" height="50"></a>
                                             }
-
-                                            @if (!userInfo.IsFollow)
+                                            @if (loginUid != userInfo.UserInfoID)
                                             {
-                                                <button id="follow" class="am-btn btn-success"><span>关注</span><div id="userid" hidden>@userInfo.UserInfoID</div></button>
-                                            }
-                                            else
-                                            {
-                                                <button class="am-btn am-btn-primary" disabled><span>已关注</span></button>
+                                                if (!userInfo.IsFollow)
+                                                {
+                                                    <button id="follow" class="am-btn btn-success"><span>关注</span><div id="userid" hidden>@userInfo.UserInfoID</div></button>
+                                                }
+                                                else
+                                                {
+                                                    <button class="am-btn am-btn-primary" disabled><span>已关注</span></button>
 
+                                                }
                                             }
+                                           
 
                                             <p class="aw-title">
                                                 <a href="#" id="showUserInfo" data-id='@userInfo.UserInfoID'>@userInfo.UserName / @userInfo.UserEmail</a>

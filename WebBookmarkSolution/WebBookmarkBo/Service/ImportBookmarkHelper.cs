@@ -159,7 +159,7 @@ namespace WebfolderBo.Service
                 {
                     WebFolderName = element.TextContent,
                     UserInfoID = uid,
-                    Visible = 0,
+                    Grade = 0,
                     CreateTime = DateTime.Now,
                     IntroContent = "",
                     ParentWebfolderID = 0,

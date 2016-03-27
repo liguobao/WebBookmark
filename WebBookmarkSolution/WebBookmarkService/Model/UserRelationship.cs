@@ -33,7 +33,7 @@ namespace WebBookmarkService.Model
         /// <summary>
         /// 是否互相关注
         /// </summary>
-		public sbyte IsMutuallyFollwe{get;set;}
+		public int IsMutuallyFollwe{get;set;}
             
         /// <summary>
         /// 创建时间

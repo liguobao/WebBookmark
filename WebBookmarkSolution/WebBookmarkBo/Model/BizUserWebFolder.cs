@@ -34,9 +34,9 @@ namespace WebBookmarkBo.Model
         public DateTime CreateTime { get; set; }
 
         /// <summary>
-        /// 对外是否可见
+        /// 等级,0:对外公开，1：对关注者公开，2对群组公开，3：仅自己可见
         /// </summary>
-        public sbyte Visible { get; set; }
+        public int Grade { get; set; }
 
         /// <summary>
         /// 父收藏夹ID
@@ -73,7 +73,7 @@ namespace WebBookmarkBo.Model
                 IntroContent = IntroContent,
                 CreateTime=CreateTime,
                 ParentWebfolderID = ParentWebfolderID,
-                Visible = Visible,
+                Grade = Grade,
                 WebFolderName = WebFolderName,
                 IElementJSON = IElementJSON,
                 IElementHashcode = IElementHashcode,
@@ -88,7 +88,7 @@ namespace WebBookmarkBo.Model
             IntroContent = dataInfo.IntroContent;
             CreateTime = dataInfo.CreateTime;
             ParentWebfolderID = dataInfo.ParentWebfolderID;
-            Visible = dataInfo.Visible;
+            Grade = dataInfo.Grade;
             WebFolderName = dataInfo.WebFolderName;
             IElementJSON = dataInfo.IElementJSON;
             IElementHashcode = dataInfo.IElementHashcode;

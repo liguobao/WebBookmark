@@ -194,6 +194,8 @@ namespace WebBookmarkBo.Service
         /// <returns></returns>
         public static List<BizUserInfo> GetListByUIDList(List<long> lstUID)
         {
+            if (lstUID == null || lstUID.Count == 0)
+                return new List<BizUserInfo>();
             var list = new UserInfoDAL().SearchByUID(lstUID);
             if (list == null || list.Count() == 0)
                 return new List<BizUserInfo>();

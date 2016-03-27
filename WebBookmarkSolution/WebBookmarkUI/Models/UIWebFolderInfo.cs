@@ -32,10 +32,8 @@ namespace WebBookmarkUI.Models
         /// </summary>
         public DateTime CreateTime { get; set; }
 
-        /// <summary>
-        /// 对外是否可见
-        /// </summary>
-        public sbyte Visible { get; set; }
+      
+        public int Grade { get; set; }
 
         /// <summary>
         /// 父收藏夹ID
@@ -62,7 +60,7 @@ namespace WebBookmarkUI.Models
            UserInfoID = folderInfo.UserInfoID;
            ParentWebfolderID = folderInfo.ParentWebfolderID;
            CreateTime = folderInfo.CreateTime;
-           Visible = folderInfo.Visible;
+           Grade = folderInfo.Grade;
            WebFolderName = folderInfo.WebFolderName;
 
            UIBookmarkInfoList = folderInfo.BizBookmarkInfoList != null ?
@@ -85,7 +83,7 @@ namespace WebBookmarkUI.Models
                     UserWebFolderID = info.UserWebFolderID,
                     CreateTime = info.CreateTime,
                     UserInfoID = info.UserInfoID,
-                    Visible = info.Visible,
+                    Grade = info.Grade,
                 }).ToList() : null;
 
         }

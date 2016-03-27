@@ -19,13 +19,13 @@ namespace WebBookmarkService.DAL
         /// </summary>        
         public bool Add (UserWebFolder userWebFolder)
 		{
-				string sql ="INSERT INTO tblUserWebFolder (WebFolderName, UserInfoID, CreateTime, Visible, ParentWebfolderID, IntroContent, IElementJSON, IElementHashcode)  VALUES (@WebFolderName, @UserInfoID, @CreateTime, @Visible, @ParentWebfolderID, @IntroContent, @IElementJSON, @IElementHashcode)";
+				string sql ="INSERT INTO tblUserWebFolder (WebFolderName, UserInfoID, CreateTime, Grade, ParentWebfolderID, IntroContent, IElementJSON, IElementHashcode)  VALUES (@WebFolderName, @UserInfoID, @CreateTime, @Grade, @ParentWebfolderID, @IntroContent, @IElementJSON, @IElementHashcode)";
 				MySqlParameter[] para = new MySqlParameter[]
 					{
 						new MySqlParameter("@WebFolderName", ToDBValue(userWebFolder.WebFolderName)),
 						new MySqlParameter("@UserInfoID", ToDBValue(userWebFolder.UserInfoID)),
 						new MySqlParameter("@CreateTime", ToDBValue(userWebFolder.CreateTime)),
-						new MySqlParameter("@Visible", ToDBValue(userWebFolder.Visible)),
+						new MySqlParameter("@Grade", ToDBValue(userWebFolder.Grade)),
 						new MySqlParameter("@ParentWebfolderID", ToDBValue(userWebFolder.ParentWebfolderID)),
 						new MySqlParameter("@IntroContent", ToDBValue(userWebFolder.IntroContent)),
 						new MySqlParameter("@IElementJSON", ToDBValue(userWebFolder.IElementJSON)),
@@ -76,7 +76,7 @@ namespace WebBookmarkService.DAL
 			" WebFolderName = @WebFolderName" 
                 +", UserInfoID = @UserInfoID" 
                 +", CreateTime = @CreateTime" 
-                +", Visible = @Visible" 
+                +", Grade = @Grade" 
                 +", ParentWebfolderID = @ParentWebfolderID" 
                 +", IntroContent = @IntroContent" 
                 +", IElementJSON = @IElementJSON" 
@@ -91,7 +91,7 @@ namespace WebBookmarkService.DAL
 					,new MySqlParameter("@WebFolderName", ToDBValue(userWebFolder.WebFolderName))
 					,new MySqlParameter("@UserInfoID", ToDBValue(userWebFolder.UserInfoID))
 					,new MySqlParameter("@CreateTime", ToDBValue(userWebFolder.CreateTime))
-					,new MySqlParameter("@Visible", ToDBValue(userWebFolder.Visible))
+					,new MySqlParameter("@Grade", ToDBValue(userWebFolder.Grade))
 					,new MySqlParameter("@ParentWebfolderID", ToDBValue(userWebFolder.ParentWebfolderID))
 					,new MySqlParameter("@IntroContent", ToDBValue(userWebFolder.IntroContent))
 					,new MySqlParameter("@IElementJSON", ToDBValue(userWebFolder.IElementJSON))
@@ -135,11 +135,11 @@ namespace WebBookmarkService.DAL
 			userWebFolder.WebFolderName = (string)ToModelValue(dr,"WebFolderName");
 			userWebFolder.UserInfoID = (long)ToModelValue(dr,"UserInfoID");
 			userWebFolder.CreateTime = (DateTime)ToModelValue(dr,"CreateTime");
-			userWebFolder.Visible = (sbyte)ToModelValue(dr,"Visible");
-			userWebFolder.ParentWebfolderID = (long?)ToModelValue(dr,"ParentWebfolderID");
+			userWebFolder.Grade = (int)ToModelValue(dr,"Grade");
+			userWebFolder.ParentWebfolderID = (long)ToModelValue(dr,"ParentWebfolderID");
 			userWebFolder.IntroContent = (string)ToModelValue(dr,"IntroContent");
 			userWebFolder.IElementJSON = (string)ToModelValue(dr,"IElementJSON");
-			userWebFolder.IElementHashcode = (int?)ToModelValue(dr,"IElementHashcode");
+			userWebFolder.IElementHashcode = (int)ToModelValue(dr,"IElementHashcode");
 			return userWebFolder;
 		}
 		#endregion

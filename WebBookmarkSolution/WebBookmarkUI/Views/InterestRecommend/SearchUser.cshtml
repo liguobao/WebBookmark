@@ -22,6 +22,8 @@
 
                             @if(Model!=null)
                             {
+                                var loginUid = WebBookmarkUI.UILoginHelper.GetUIDInCookie(Request);
+                                
                                 foreach(var userInfo in Model)
                                 {
                                      <div class="aw-item">
@@ -35,7 +37,7 @@
                                             <a href='http://s.amazeui.org/media/i/demos/bw-2014-06-19.jpg?imageView/1/w/200/h/200/q/80' class="aw-user-img"><img src='http://s.amazeui.org/media/i/demos/bw-2014-06-19.jpg?imageView/1/w/200/h/200/q/80' alt="" width="50" height="50"></a>
                                         }
                                        
-                                         @if (userInfo.UserInfoID != WebBookmarkUI.UILoginHelper.GetUIDInCookie(Request))
+                                         @if (userInfo.UserInfoID != loginUid)
                                          {
                                              if (!userInfo.IsFollow)
                                             {
