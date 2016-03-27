@@ -53,6 +53,7 @@
     <Compile Include="Model\BizUserWebFolder.cs" />
     <Compile Include="Model\BizUserWebBookmarkImportLog.cs" />
     <Compile Include="LogHelper.cs" />
+    <Compile Include="Model\BizBookmarkComment.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Service\BookmarkInfoBo.cs" />
     <Compile Include="Service\ImportBookmarkHelper.cs" />

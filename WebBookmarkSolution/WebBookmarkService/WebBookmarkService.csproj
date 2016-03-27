@@ -68,6 +68,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DAL\BookmarkCommentDAL.cs" />
     <Compile Include="DAL\BookmarkInfoDAL.cs" />
     <Compile Include="DAL\GroupDAL.cs" />
     <Compile Include="DAL\GroupUserDAL.cs" />
@@ -80,6 +81,7 @@
     <Compile Include="DAL\UserWebBookmarkImportLogDAL.cs" />
     <Compile Include="DAL\UserWebpageLabelDAL.cs" />
     <Compile Include="DAL\WebpageCommentDAL.cs" />
+    <Compile Include="Model\BookmarkComment.cs" />
     <Compile Include="Model\BookmarkInfo.cs" />
     <Compile Include="Model\Group.cs" />
     <Compile Include="Model\GroupUser.cs" />

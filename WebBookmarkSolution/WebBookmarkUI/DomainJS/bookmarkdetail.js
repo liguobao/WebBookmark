@@ -1,12 +1,51 @@
 ﻿$(function ()
 {
-    ShowBefollwed(bookmarkID,url);
+   // ShowBookmarkHTML(bookmarkID, url);
+    ShowBookmarkComment(bookmarkID);
+  
+
+    $('body').on("click", "[id='bookmarkHTML']", function () {
+        var $this = $(this);
+        $("#commentInfo").parent().removeClass("am-active");
+        $this.parent().addClass("am-active");
+        ShowBookmarkHTML(bookmarkID, url);
+    })
+
+    $('body').on("click", "[id='commentInfo']", function () {
+        var $this = $(this);
+       
+        $("#bookmarkHTML").parent().removeClass("am-active");
+        $this.parent().addClass("am-active");
+        ShowBookmarkComment(bookmarkID);
+    })
+   
 
 })
 
 
+function SaveComment()
+{
+    var title = $("#title").val();
+    var content = $("#content").val();
 
-function ShowBefollwed(bookmarkID,url) {
+    $.ajax({
+        type: "post",
+        url: saveComment,
+        data: { strbookmark: strbookmark, title: title, content: content },
+        success:
+            function (result) {
+                if (result.IsSuccess) {
+                    ShowBookmarkComment(bookmarkID);
+                }
+                else {
+                    alert(result.ErrorMessage);
+                }
+            }
+    });
+}
+
+
+function ShowBookmarkHTML(bookmarkID, url) {
     $("#loadHTML").addClass("am-icon-spinner").addClass("am-icon-spin");
 
     $.ajax({
@@ -24,3 +63,23 @@ function ShowBefollwed(bookmarkID,url) {
     });
 }
 
+
+
+
+function ShowBookmarkComment(bookmarkID) {
+    $("#loadcomment").addClass("am-icon-spinner").addClass("am-icon-spin");
+
+    $.ajax({
+        type: "post",
+        url: showBookmarkComment,
+        data: { bookmarkID: bookmarkID},
+        success:
+            function (data) {
+                if (data != null) {
+
+                    $("#overview").html(data);
+                }
+                $("#loadcomment").removeClass("am-icon-spinner").removeClass("am-icon-spin");
+            }
+    });
+}

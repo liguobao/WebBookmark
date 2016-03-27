@@ -1,0 +1,88 @@
+﻿@model Tuple<IEnumerable <WebBookmarkUI.Models.UICommentInfo>,WebBookmarkUI.Models.UIUserInfo>
+
+<blockquote>
+
+    <ul class="am-comments-list am-comments-list-flip">
+        @if(Model!=null && Model.Item1.Count()>0)
+        {
+            foreach (var commentInfo in Model.Item1)
+            {
+                 <li class="am-comment">
+                   <article class="am-comment">
+                <a href="#link-to-user-home">
+                    <img src='@Url.Action(commentInfo.CriticsUserInfo.UserImagURL)' alt="" class="am-comment-avatar" width="48" height="48" />
+                </a>
+
+                    <div class="am-comment-main">
+                        <header class="am-comment-hd">
+                            <div class="am-comment-meta">
+                                <a href="#" id="showUserInfo" data-id='@commentInfo.CriticsUserInfo.UserInfoID' class="am-comment-author">@commentInfo.CriticsUserInfo.UserName</a>
+                                评论于 <time >@commentInfo.CreateTime</time>
+                            </div>
+                        </header>
+                      
+                        <div class="am-comment-bd">
+                            <h3 class="am-comment-title">@commentInfo.CommentTitle</h3>
+                            @commentInfo.CommentContent
+                        </div>
+                    </div>
+                   </article>
+                 </li>
+            }
+            
+        }else
+        {
+            <p>还没有人评论过呢。</p>
+        }
+
+        @if (Model.Item2 != null)
+        {
+
+            var userInfo = Model.Item2;
+           <li class="am-comment">
+                    <article class="am-comment">
+                        <a href="#link-to-user-home">
+                            @if (!string.IsNullOrEmpty(userInfo.UserImagURL))
+                            {
+                              <img src='@Url.Action(userInfo.UserImagURL)' alt="" class="am-comment-avatar" width="48" height="48" />
+                            }
+                            else
+                            {
+                            <img src='http://s.amazeui.org/media/i/demos/bw-2014-06-19.jpg?imageView/1/w/200/h/200/q/80' alt="" class="am-comment-avatar" width="48" height="48" />
+                           
+                            }
+                        </a>
+
+                        <div class="am-comment-main">
+                            <header class="am-comment-hd">
+                                <h3 class="am-comment-title">添加评论：</h3>
+                            </header>
+
+                            <div class="content am-center">
+                                <ul>
+                                    <li style="margin: 1px 20px;">
+                                        <div class="am-form-group">
+                                            <label for="doc-ta-1">标题：</label>
+                                            <input type="text" id="title" class="am-radius" placeholder="请输入标题" >
+                                        </div>
+
+                                        <div class="am-form-group">
+                                            <label for="doc-ta-1">内容：</label>
+                                            <textarea class="" rows="5" id="content"></textarea>
+                                        </div>
+                                        <div class="am-form-group">
+                                            <button type="button" class="am-btn am-btn-primary" id="btnsubmitcomment" style="margin-left:7%;" onclick="SaveComment()">发布评论</button>
+                                        </div>
+                                       
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </article>
+                </li>
+
+        }
+
+
+    </ul>
+</blockquote>

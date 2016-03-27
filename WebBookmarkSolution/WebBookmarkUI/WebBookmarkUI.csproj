@@ -126,6 +126,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\SearchUserInfo.cs" />
+    <Compile Include="Models\UICommentInfo.cs" />
     <Compile Include="Models\UIShowUserInfo.cs" />
     <Compile Include="Models\UIUserInfo.cs" />
     <Compile Include="Models\UIWebFolderInfo.cs" />
@@ -289,6 +290,7 @@
     <Content Include="Views\UserInfo\ShowUserDetail.cshtml" />
     <Content Include="Views\ShowBookmarkInfo\Index.cshtml" />
     <Content Include="Views\ShowBookmarkInfo\ShowBookmarkHTML.cshtml" />
+    <Content Include="Views\ShowBookmarkInfo\ShowBookmarkComment.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
