@@ -114,14 +114,14 @@ namespace WebBookmarkUI.Controllers
         }
 
 
-        public ActionResult SaveBookmarkComment(string strbookmark,string title,string content)
+        public ActionResult SaveBookmarkComment(long bookmarkID, string content)
         {
 
             BizResultInfo result = new BizResultInfo();
             try
             {
-                var bookmark = Newtonsoft.Json.JsonConvert.DeserializeObject<BizBookmarkInfo>(strbookmark);
-                if (bookmark == null)
+                var bookmark = BizBookmarkInfo.LoadByID(bookmarkID);
+                if (bookmark == null || bookmark.BookmarkInfoID==0)
                 {
                     result.IsSuccess = false;
                     result.ErrorMessage = "序列化书签数据失败，目测你要重新加载页面。";
@@ -129,7 +129,7 @@ namespace WebBookmarkUI.Controllers
                 }
                 BizBookmarkComment comment = new BizBookmarkComment();
                 comment.CriticsUserID = UILoginHelper.GetUIDInCookie(Request);
-                comment.CommentTitle = title;
+                comment.CommentTitle = "";
                 comment.CommentContent = content;
                 comment.BookmarkInfoID = bookmark.BookmarkInfoID;
                 comment.CreateTime = DateTime.Now;
@@ -141,9 +141,8 @@ namespace WebBookmarkUI.Controllers
             }catch(Exception ex)
             {
                 LogHelper.WriteException("SaveBookmarkComment",ex,new {
-                    Strbookmark = strbookmark,
+                    BookmarkID = bookmarkID,
                     SubmitUser = UILoginHelper.GetUIDInCookie(Request),
-                    Title = title,
                     Content = content,
                 });
                 result.ErrorMessage = "提交失败，目测网络挂了或者别的....";

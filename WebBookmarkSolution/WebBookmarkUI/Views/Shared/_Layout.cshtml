@@ -52,7 +52,7 @@ else
                             <span class="am-icon-gears"></span> 设置相关 <span class="am-icon-caret-down"></span>
                         </a>
                         <ul class="am-dropdown-content">
-                            <li><a href="~/UserInfo/ShowUserDetail"><span class="am-icon-user"></span> 个人资料</a></li>
+                            <li><a href="~/UserInfo/ShowUserDetail?uid=@UILoginHelper.GetUIDInCookie(Request)"><span class="am-icon-user"></span> 个人资料</a></li>
                             <li><a href="#"><span class="am-icon-cog"></span> 设置</a></li>
                             <li><a href="#"><span class="am-icon-power-off"></span> 退出</a></li>
                         </ul>
@@ -78,10 +78,10 @@ else
                         </li>
                         <li>
                             <a class="am-cf" data-am-collapse="{target: '#WebBookmarkcollapse-nav'}">
-                            <span class="am-icon-bookmark"></span> 我的收藏夹 
+                            <span class="am-icon-bookmark"></span> 个人书签夹 
                             <span class="am-icon-angle-right am-fr am-margin-right"></span></a>
                             <ul class="am-list am-collapse admin-sidebar-sub am-in" id="WebBookmarkcollapse-nav">
-                                <li><a href="~/WebBookmarkTable"><span class="am-icon-th"></span> 全部收藏页<span class="am-badge am-badge-secondary am-margin-right am-fr">12</span></a></li>
+                                <li><a href="~/WebBookmarkTable"><span class="am-icon-th"></span> 全部书签夹</a></li>
                                 <li><a href="~/WebBookmarkTable/ImportWebBookmark"><span class="am-icon-calendar"></span> 导入数据</a></li>
                             </ul>
                         </li>

@@ -135,9 +135,8 @@ namespace WebBookmarkUI.Controllers
         }
 
 
-        public ActionResult ShowUserDetail()
+        public ActionResult ShowUserDetail(long uid)
         {
-            long uid = UILoginHelper.GetUIDInCookie(Request);
             return View(uid);
         }
 

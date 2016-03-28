@@ -35,7 +35,7 @@
                         {
                             <tr>
                                 <td><samp class="am-icon-bookmark"></samp></td>
-                                <td><a href='@bookmark.Href' target='_blank'>@bookmark.BookmarkName  </a></td>
+                                <td><a href='@Url.Content("~/ShowBookmarkInfo?bookmarkID="+@bookmark.BookmarkInfoID)' target='_blank'>@bookmark.BookmarkName  </a></td>
                                 <td>@bookmark.CreateTime</td>
                             </tr>
                         }

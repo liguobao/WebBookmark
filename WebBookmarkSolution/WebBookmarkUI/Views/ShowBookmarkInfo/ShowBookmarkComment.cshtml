@@ -9,9 +9,9 @@
             {
                  <li class="am-comment">
                    <article class="am-comment">
-                <a href="#link-to-user-home">
-                    <img src='@Url.Action(commentInfo.CriticsUserInfo.UserImagURL)' alt="" class="am-comment-avatar" width="48" height="48" />
-                </a>
+                       <a href="~/UserInfo/ShowUserDetail?uid=@commentInfo.CriticsUserID">
+                           <img src='@Url.Content(commentInfo.CriticsUserInfo.UserImagURL)' alt="" class="am-comment-avatar" width="60" height="60" />
+                       </a>
 
                     <div class="am-comment-main">
                         <header class="am-comment-hd">
@@ -22,7 +22,7 @@
                         </header>
                       
                         <div class="am-comment-bd">
-                            <h3 class="am-comment-title">@commentInfo.CommentTitle</h3>
+                            @*<h3 class="am-comment-title">@commentInfo.CommentTitle</h3>*@
                             @commentInfo.CommentContent
                         </div>
                     </div>
@@ -44,7 +44,7 @@
                         <a href="#link-to-user-home">
                             @if (!string.IsNullOrEmpty(userInfo.UserImagURL))
                             {
-                              <img src='@Url.Action(userInfo.UserImagURL)' alt="" class="am-comment-avatar" width="48" height="48" />
+                              <img src='@Url.Content(userInfo.UserImagURL)' alt="" class="am-comment-avatar" width="80" height="80" />
                             }
                             else
                             {
@@ -62,16 +62,10 @@
                                 <ul>
                                     <li style="margin: 1px 20px;">
                                         <div class="am-form-group">
-                                            <label for="doc-ta-1">标题：</label>
-                                            <input type="text" id="title" class="am-radius" placeholder="请输入标题" >
-                                        </div>
-
-                                        <div class="am-form-group">
-                                            <label for="doc-ta-1">内容：</label>
-                                            <textarea class="" rows="5" id="content"></textarea>
+                                            <textarea class="" rows="5" id="content" style="width:30%"></textarea>
                                         </div>
                                         <div class="am-form-group">
-                                            <button type="button" class="am-btn am-btn-primary" id="btnsubmitcomment" style="margin-left:7%;" onclick="SaveComment()">发布评论</button>
+                                            <button type="button" class="am-btn am-btn-primary" id="btnsubmitcomment" style="margin-left:23%;" onclick="SaveComment()">发布评论</button>
                                         </div>
                                        
                                     </li>

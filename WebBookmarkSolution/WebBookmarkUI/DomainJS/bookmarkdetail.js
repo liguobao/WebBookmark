@@ -25,13 +25,13 @@
 
 function SaveComment()
 {
-    var title = $("#title").val();
+   // var title = $("#title").val();
     var content = $("#content").val();
 
     $.ajax({
         type: "post",
         url: saveComment,
-        data: { strbookmark: strbookmark, title: title, content: content },
+        data: { bookmarkID: bookmarkID, content: content },
         success:
             function (result) {
                 if (result.IsSuccess) {
