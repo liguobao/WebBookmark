@@ -1,0 +1,111 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<script>
+    var saveUserGroupInfoURL = "@Url.Action("SaveUserGroupInfo")";
+    var showUserGroupListURL = "@Url.Action("ShowUserGroupList")";
+    var createUserID = '@WebBookmarkUI.UILoginHelper.GetUIDInCookie(Request)';
+</script>
+<script src="~/DomainJS/groupinfo.js"></script>
+
+
+
+<div class="am-cf am-padding">
+    <div class="am-fl am-cf"><strong class="am-text-primary am-text-lg">我的全部群组</strong> / <small>User GroupInfo</small></div>
+</div>
+<div class="am-g">
+    <div class="am-u-sm-12 am-u-md-6">
+        <div class="am-btn-toolbar">
+            <div class="am-btn-group am-btn-group-xs">
+                    <div class="am-footer-switch">
+                        <span class="am-footer-ysp" data-rel="mobile">
+                            <button type="button" class="am-btn am-btn-default" id="btnAdd" data-am-modal="{target: '#addgroup'}"><span class="am-icon-plus"></span> 新增群组</button>
+                        </span>
+                    </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="mod-footer">
+    <div class="am-tabs" data-am-tabs="">
+        <ul class="am-tabs-nav am-nav am-nav-tabs aw-nav-tabs">
+            <li class="am-active"><a href="#" id="mygroup" data-uid='18'>我创建的群组 <span id="mygrouploading"></span></a></li>
+            <li class=""><a href="#" id="groupuser" data-uid=''>我加入的群组 <span id="groupuserloading"></span></a></li>
+            <li class=""><a href="#" id="groupmessage" data-uid='18'>群组消息 <span id="groupmessageloading"></span></a></li>
+        </ul>
+
+        <div class="am-tabs-bd aw-user-center-tab" style="touch-action: pan-y; -webkit-user-select: none; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);">
+            <div class="am-active am-in" id="overview">
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="am-modal am-modal-no-btn" tabindex="-1" id="addgroup">
+    <div class="am-modal-dialog">
+        <div class="am-modal-hd">
+            新增群组
+            <a href="javascript: void(0)" class="am-close am-close-spin" data-am-modal-close>&times;</a>
+        </div>
+        <div class="am-modal-bd">
+            <div id="divUIContent">
+                <ul class="am-list">
+                    <li class="am-text-left" style="margin: 5px 20px;">
+                        <input type="text" id="groupName" class="am-form-field am-radius" placeholder="群组名称">
+                    </li>
+                    <li class="am-text-left" style="margin: 5px 20px;">
+                        <textarea id="groupIntro" rows="4" style="width:100%">写一句介绍吧...</textarea>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="am-text-center" style="margin: 20px 20px;">
+
+                <button class="am-btn am-btn-secondary am-radius" id="btnSave">保存</button>
+                <button class="am-btn am-btn-secondary am-radius" id="btnCancel" onclick="javascript:void(0)" data-am-modal-close>取消</button>
+            </div>
+
+            <div class="am-form-group">
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="am-modal am-modal-no-btn" tabindex="-1" id="modal-modifygroup">
+    <div class="am-modal-dialog">
+        <div class="am-modal-hd">
+            修改群组
+            <a href="javascript: void(0)" class="am-close am-close-spin" data-am-modal-close>&times;</a>
+        </div>
+        <div class="am-modal-bd">
+            <div id="divUIContent">
+                <ul class="am-list">
+                    <li class="am-text-left" style="margin: 5px 20px;">
+                        <input type="text" id="groupName" class="am-form-field am-radius" placeholder="群组名称">
+                    </li>
+                    <li class="am-text-left" style="margin: 5px 20px;">
+                        <textarea id="groupIntro" rows="4" style="width:100%"></textarea>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="am-text-center" style="margin: 20px 20px;">
+
+                <button class="am-btn am-btn-secondary am-radius" id="btnModify">保存</button>
+                <button class="am-btn am-btn-secondary am-radius" id="btnCancel" onclick="javascript:void(0)" data-am-modal-close>取消</button>
+            </div>
+
+            <div class="am-form-group">
+
+            </div>
+        </div>
+    </div>
+</div>

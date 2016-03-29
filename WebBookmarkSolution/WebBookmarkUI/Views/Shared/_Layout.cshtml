@@ -49,12 +49,13 @@ else
                     <li><a href="javascript:;"><span class="am-icon-envelope-o"></span> 收件箱 <span class="am-badge am-badge-warning">5</span></a></li>
                     <li class="am-dropdown" data-am-dropdown>
                         <a class="am-dropdown-toggle" data-am-dropdown-toggle href="javascript:;">
-                            <span class="am-icon-gears"></span> 设置相关 <span class="am-icon-caret-down"></span>
+                            <span class="am-icon-gears"></span> 设置 <span class="am-icon-caret-down"></span>
                         </a>
                         <ul class="am-dropdown-content">
-                            <li><a href="~/UserInfo/ShowUserDetail?uid=@UILoginHelper.GetUIDInCookie(Request)"><span class="am-icon-user"></span> 个人资料</a></li>
-                            <li><a href="#"><span class="am-icon-cog"></span> 设置</a></li>
-                            <li><a href="#"><span class="am-icon-power-off"></span> 退出</a></li>
+                            <li><a href="~/UserInfo/ShowUserDetail?uid=@UILoginHelper.GetUIDInCookie(Request)"><span class="am-icon-user"></span> 我的资料</a></li>
+                            <li><a href="~/UserInfo"><span class="am-icon-edit"></span>修改资料</a></li>
+                            <li><a href="~/UserInfo/ModifyPasswordIndex"><span class="am-icon-bug"></span> 修改密码</a></li>
+                            <li><a href="~/Login"><span class="am-icon-power-off"></span> 退出</a></li>
                         </ul>
                     </li>
                     <li class="am-hide-sm-only"><a href="javascript:;" id="admin-fullscreen"><span class="am-icon-arrows-alt"></span> <span class="admin-fullText">开启全屏</span></a></li>
@@ -69,11 +70,11 @@ else
                         <li><a href="~/Default"><span class="am-icon-home"></span> 首页</a></li>
                         <li><a href="~/InterestRecommend"><span class="am-icon-search"></span> 探索/发现</a></li>
                         <li class="admin-parent">
-                            <a class="am-cf" data-am-collapse="{target: '#collapse-nav'}"><span class="am-icon-file"></span> 用户中心 <span class="am-icon-angle-right am-fr am-margin-right"></span></a>
+                            <a class="am-cf" data-am-collapse="{target: '#collapse-nav'}"><span class="am-icon-file"></span> 用户群组 <span class="am-icon-angle-right am-fr am-margin-right"></span></a>
                             <ul class="am-list am-collapse admin-sidebar-sub am-in" id="collapse-nav">
-                                <li><a href="~/UserInfo" class=" am-cf"><span class="am-icon-check"></span> 修改信息<span class="am-icon-star am-fr am-margin-right admin-icon-yellow"></span></a></li>
+                                <li><a href="~/GroupInfo" class=" am-cf"><span class="am-icon-group"></span> 我的群组</a></li>
 
-                                <li><a href="~/UserInfo/ModifyPasswordIndex"><span class="am-icon-bug"></span> 修改密码</a></li>
+                                <li><a href="#"><span class="am-icon-bug"></span>我的申请</a></li>
                             </ul>
                         </li>
                         <li>

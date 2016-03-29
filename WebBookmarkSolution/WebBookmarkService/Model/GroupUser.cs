@@ -23,7 +23,7 @@ namespace WebBookmarkService.Model
         /// <summary>
         /// 用户群组ID
         /// </summary>
-		public long GroupID{get;set;}
+		public long GroupInfoID{get;set;}
             
         /// <summary>
         /// 用户ID
@@ -33,7 +33,7 @@ namespace WebBookmarkService.Model
         /// <summary>
         /// 是否通过
         /// </summary>
-		public sbyte IsPass{get;set;}
+		public int IsPass{get;set;}
             
         /// <summary>
         /// 创建时间

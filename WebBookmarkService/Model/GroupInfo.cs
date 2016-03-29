@@ -13,12 +13,12 @@ namespace WebBookmarkService.Model
     /// <summary>
     /// 
     /// </summary>
-	public class Group
+	public class GroupInfo
 	{
         /// <summary>
         /// 主键，自增
         /// </summary>
-		public long GroupID{get;set;}
+		public long GroupInfoID{get;set;}
             
         /// <summary>
         /// 用户群组名称

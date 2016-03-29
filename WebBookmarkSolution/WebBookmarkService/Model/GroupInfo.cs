@@ -13,27 +13,27 @@ namespace WebBookmarkService.Model
     /// <summary>
     /// 
     /// </summary>
-	public class GroupUser
+	public class GroupInfo
 	{
         /// <summary>
         /// 主键，自增
         /// </summary>
-		public long GroupUserID{get;set;}
-            
-        /// <summary>
-        /// 用户群组ID
-        /// </summary>
 		public long GroupInfoID{get;set;}
             
         /// <summary>
-        /// 用户ID
+        /// 用户群组名称
         /// </summary>
-		public long UserInfoID{get;set;}
+		public string GroupName{get;set;}
             
         /// <summary>
-        /// 是否通过
+        /// 用户群组介绍
         /// </summary>
-		public int IsPass{get;set;}
+		public string GroupIntro{get;set;}
+            
+        /// <summary>
+        /// UID
+        /// </summary>
+		public long CreateUesrID{get;set;}
             
         /// <summary>
         /// 创建时间

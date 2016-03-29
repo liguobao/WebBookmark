@@ -45,6 +45,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Extend.cs" />
+    <Compile Include="Model\BizGroupInfo.cs" />
     <Compile Include="Model\BizUserRelationship.cs" />
     <Compile Include="Model\BizBookmarkInfo.cs" />
     <Compile Include="Model\BizUserInfo.cs" />

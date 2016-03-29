@@ -1,0 +1,55 @@
+﻿@model List<WebBookmarkUI.Models.UIGroupInfo>
+
+<script type="text/javascript">
+</script>
+
+
+<div class="admin-content">
+    <div class="am-g">
+        <div class="am-u-sm-12">
+            <table class="am-table am-table-striped am-table-hover table-main ">
+                <thead>
+                    <tr>
+                        <th class="table-id">序号</th>
+                        <th class="table-main">群组名称</th>
+                        <th class="table-date am-hide-sm-only">创建时间</th>
+                        <th class="table-set">操作</th>
+
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (Model != null && Model.Count > 0)
+                    {
+                        int index =1;
+                        foreach (var groupInfo in Model)
+                        {
+                            <tr>
+                                <td>@index</td>
+                                <td>@groupInfo.GroupName <span class="am-icon-folder-open-o"></span>
+                                <td>@groupInfo.CreateTime</td>
+                                <td>
+                                    <div class="am-btn-toolbar">
+                                        <div class="am-btn-group am-btn-group-xs">
+                                            <button type="button"
+                                                    class="am-btn am-btn-default am-btn-xs am-text-secondary" id="modifygroup" data-id='@groupInfo.GroupInfoID'
+                                                    data-am-modal="{target: '#modal-modifygroup', closeViaDimmer: 0, width: 400, height: 225}">
+                                                <div id="model" hidden>@Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(groupInfo))</div>
+                                                <span class="am-icon-pencil-square-o"></span> 修改
+                                            </button>
+
+                                            <button class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only delete" id="deletegroup" data-id='@groupInfo.GroupInfoID'>
+                                                <span class="am-icon-trash-o"></span> 删除
+                                            </button>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                            index++;
+                        }
+                    }
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+</div>

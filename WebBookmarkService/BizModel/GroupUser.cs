@@ -6,14 +6,14 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace WebBookmarkService.Model
+namespace WebBookmarkService.BizModel
 {	
 	[Serializable()]
     
     /// <summary>
     /// 
     /// </summary>
-	public class GroupUser
+	public class BizGroupUser
 	{
         /// <summary>
         /// 主键，自增
@@ -40,5 +40,36 @@ namespace WebBookmarkService.Model
         /// </summary>
 		public DateTime CreateTime{get;set;}
             
+        
+        /// <summary>
+        /// Biz Convert To DB Model
+        /// </summary>
+        public GroupUser ToModel()
+        {
+            return new GroupUser()
+            {
+                GroupUserID =  GroupUserID,
+                GroupInfoID =  GroupInfoID,
+                UserInfoID =  UserInfoID,
+                IsPass =  IsPass,
+                CreateTime =  CreateTime,
+            };
+        }
+        
+        
+        public BizGroupUser (GroupUser dataInfo)
+        {
+             GroupUserID =  dataInfo.GroupUserID;
+             GroupInfoID =  dataInfo.GroupInfoID;
+             UserInfoID =  dataInfo.UserInfoID;
+             IsPass =  dataInfo.IsPass;
+             CreateTime =  dataInfo.CreateTime;
+        }
+        
+        public  BizGroupUser ()
+        {
+        
+        } 
+        
 	}
 }

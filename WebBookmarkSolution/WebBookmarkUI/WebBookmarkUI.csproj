@@ -118,6 +118,7 @@
     <Compile Include="Controllers\FollowerController.cs" />
     <Compile Include="Controllers\InterestRecommendController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
+    <Compile Include="Controllers\GroupInfoController.cs" />
     <Compile Include="Controllers\RegisterController.cs" />
     <Compile Include="Controllers\ShowBookmarkInfoController.cs" />
     <Compile Include="Controllers\UserInfoController.cs" />
@@ -127,6 +128,7 @@
     </Compile>
     <Compile Include="Models\SearchUserInfo.cs" />
     <Compile Include="Models\UICommentInfo.cs" />
+    <Compile Include="Models\UIGroupInfo.cs" />
     <Compile Include="Models\UIShowUserInfo.cs" />
     <Compile Include="Models\UIUserInfo.cs" />
     <Compile Include="Models\UIWebFolderInfo.cs" />
@@ -176,6 +178,7 @@
     <Content Include="assets\login\style.css" />
     <Content Include="assets\login\user.css" />
     <Content Include="DomainJS\bookmarkdetail.js" />
+    <Content Include="DomainJS\groupinfo.js" />
     <Content Include="DomainJS\importbookmark.js" />
     <Content Include="DomainJS\interestrecommend.js" />
     <Content Include="DomainJS\login.js" />
@@ -291,6 +294,8 @@
     <Content Include="Views\ShowBookmarkInfo\Index.cshtml" />
     <Content Include="Views\ShowBookmarkInfo\ShowBookmarkHTML.cshtml" />
     <Content Include="Views\ShowBookmarkInfo\ShowBookmarkComment.cshtml" />
+    <Content Include="Views\GroupInfo\Index.cshtml" />
+    <Content Include="Views\GroupInfo\ShowUserGroupList.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
@@ -311,6 +316,8 @@
           <DevelopmentServerPort>2047</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
           <IISUrl>http://localhost:2047/</IISUrl>
+          <OverrideIISAppRootUrl>True</OverrideIISAppRootUrl>
+          <IISAppRootUrl>http://localhost:2047/</IISAppRootUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

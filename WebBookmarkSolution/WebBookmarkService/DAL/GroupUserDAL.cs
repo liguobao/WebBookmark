@@ -13,16 +13,18 @@ namespace WebBookmarkService.DAL
 {
 	public partial class GroupUserDAL
 	{
+		#region 自动生成方法
+		
         #region 根据传入Model，并返回Model
         /// <summary>
         /// 根据传入Model，并返回Model
         /// </summary>        
         public bool Add (GroupUser groupUser)
 		{
-				string sql ="INSERT INTO tblGroupUser (GroupID, UserInfoID, IsPass, CreateTime)  VALUES (@GroupID, @UserInfoID, @IsPass, @CreateTime)";
+				string sql ="INSERT INTO tblGroupUser (GroupInfoID, UserInfoID, IsPass, CreateTime)  VALUES (@GroupInfoID, @UserInfoID, @IsPass, @CreateTime)";
 				MySqlParameter[] para = new MySqlParameter[]
 					{
-						new MySqlParameter("@GroupID", ToDBValue(groupUser.GroupID)),
+						new MySqlParameter("@GroupInfoID", ToDBValue(groupUser.GroupInfoID)),
 						new MySqlParameter("@UserInfoID", ToDBValue(groupUser.UserInfoID)),
 						new MySqlParameter("@IsPass", ToDBValue(groupUser.IsPass)),
 						new MySqlParameter("@CreateTime", ToDBValue(groupUser.CreateTime)),
@@ -38,6 +40,7 @@ namespace WebBookmarkService.DAL
 				}
 		}
          #endregion
+         
 
         #region  根据Id删除数据记录
         /// <summary>
@@ -68,7 +71,7 @@ namespace WebBookmarkService.DAL
             string sql =
                 "UPDATE tblGroupUser " +
                 "SET " +
-			" GroupID = @GroupID" 
+			" GroupInfoID = @GroupInfoID" 
                 +", UserInfoID = @UserInfoID" 
                 +", IsPass = @IsPass" 
                 +", CreateTime = @CreateTime" 
@@ -79,7 +82,7 @@ namespace WebBookmarkService.DAL
 			MySqlParameter[] para = new MySqlParameter[]
 			{
 				new MySqlParameter("@GroupUserID", groupUser.GroupUserID)
-					,new MySqlParameter("@GroupID", ToDBValue(groupUser.GroupID))
+					,new MySqlParameter("@GroupInfoID", ToDBValue(groupUser.GroupInfoID))
 					,new MySqlParameter("@UserInfoID", ToDBValue(groupUser.UserInfoID))
 					,new MySqlParameter("@IsPass", ToDBValue(groupUser.IsPass))
 					,new MySqlParameter("@CreateTime", ToDBValue(groupUser.CreateTime))
@@ -119,9 +122,9 @@ namespace WebBookmarkService.DAL
 			GroupUser groupUser = new GroupUser();
 
 			groupUser.GroupUserID = (long)ToModelValue(dr,"GroupUserID");
-			groupUser.GroupID = (long)ToModelValue(dr,"GroupID");
+			groupUser.GroupInfoID = (long)ToModelValue(dr,"GroupInfoID");
 			groupUser.UserInfoID = (long)ToModelValue(dr,"UserInfoID");
-			groupUser.IsPass = (sbyte)ToModelValue(dr,"IsPass");
+			groupUser.IsPass = (int)ToModelValue(dr,"IsPass");
 			groupUser.CreateTime = (DateTime)ToModelValue(dr,"CreateTime");
 			return groupUser;
 		}
@@ -233,5 +236,7 @@ namespace WebBookmarkService.DAL
 			}
 		}
         #endregion
+	
+	    #endregion
 	}
 }

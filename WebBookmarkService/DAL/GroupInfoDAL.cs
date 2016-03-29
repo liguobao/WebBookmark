@@ -11,7 +11,7 @@ using WebBookmarkService.Model;
 
 namespace WebBookmarkService.DAL
 {
-	public partial class GroupUserDAL
+	public partial class GroupInfoDAL
 	{
 		#region 自动生成方法
 		
@@ -19,15 +19,15 @@ namespace WebBookmarkService.DAL
         /// <summary>
         /// 根据传入Model，并返回Model
         /// </summary>        
-        public bool Add (GroupUser groupUser)
+        public bool Add (GroupInfo groupInfo)
 		{
-				string sql ="INSERT INTO tblGroupUser (GroupInfoID, UserInfoID, IsPass, CreateTime)  VALUES (@GroupInfoID, @UserInfoID, @IsPass, @CreateTime)";
+				string sql ="INSERT INTO tblGroupInfo (GroupName, GroupIntro, CreateUesrID, CreateTime)  VALUES (@GroupName, @GroupIntro, @CreateUesrID, @CreateTime)";
 				MySqlParameter[] para = new MySqlParameter[]
 					{
-						new MySqlParameter("@GroupInfoID", ToDBValue(groupUser.GroupInfoID)),
-						new MySqlParameter("@UserInfoID", ToDBValue(groupUser.UserInfoID)),
-						new MySqlParameter("@IsPass", ToDBValue(groupUser.IsPass)),
-						new MySqlParameter("@CreateTime", ToDBValue(groupUser.CreateTime)),
+						new MySqlParameter("@GroupName", ToDBValue(groupInfo.GroupName)),
+						new MySqlParameter("@GroupIntro", ToDBValue(groupInfo.GroupIntro)),
+						new MySqlParameter("@CreateUesrID", ToDBValue(groupInfo.CreateUesrID)),
+						new MySqlParameter("@CreateTime", ToDBValue(groupInfo.CreateTime)),
 					};
 					
 				int AddId = (int)MyDBHelper.ExecuteScalar(sql, para);
@@ -46,13 +46,13 @@ namespace WebBookmarkService.DAL
         /// <summary>
         /// 根据Id删除数据记录
         /// </summary>
-        public int DeleteByGroupUserID(long groupUserID)
+        public int DeleteByGroupInfoID(long groupInfoID)
 		{
-            string sql = "DELETE from tblGroupUser WHERE GroupUserID = @GroupUserID";
+            string sql = "DELETE from tblGroupInfo WHERE GroupInfoID = @GroupInfoID";
 
             MySqlParameter[] para = new MySqlParameter[]
 			{
-				new MySqlParameter("@GroupUserID", groupUserID)
+				new MySqlParameter("@GroupInfoID", groupInfoID)
 			};
 		
             return MyDBHelper.ExecuteNonQuery(sql, para);
@@ -66,26 +66,26 @@ namespace WebBookmarkService.DAL
         /// <summary>
         /// 根据传入Model更新数据并返回更新后的Model
         /// </summary>
-        public int Update(GroupUser groupUser)
+        public int Update(GroupInfo groupInfo)
         {
             string sql =
-                "UPDATE tblGroupUser " +
+                "UPDATE tblGroupInfo " +
                 "SET " +
-			" GroupInfoID = @GroupInfoID" 
-                +", UserInfoID = @UserInfoID" 
-                +", IsPass = @IsPass" 
+			" GroupName = @GroupName" 
+                +", GroupIntro = @GroupIntro" 
+                +", CreateUesrID = @CreateUesrID" 
                 +", CreateTime = @CreateTime" 
                
-            +" WHERE GroupUserID = @GroupUserID";
+            +" WHERE GroupInfoID = @GroupInfoID";
 
 
 			MySqlParameter[] para = new MySqlParameter[]
 			{
-				new MySqlParameter("@GroupUserID", groupUser.GroupUserID)
-					,new MySqlParameter("@GroupInfoID", ToDBValue(groupUser.GroupInfoID))
-					,new MySqlParameter("@UserInfoID", ToDBValue(groupUser.UserInfoID))
-					,new MySqlParameter("@IsPass", ToDBValue(groupUser.IsPass))
-					,new MySqlParameter("@CreateTime", ToDBValue(groupUser.CreateTime))
+				new MySqlParameter("@GroupInfoID", groupInfo.GroupInfoID)
+					,new MySqlParameter("@GroupName", ToDBValue(groupInfo.GroupName))
+					,new MySqlParameter("@GroupIntro", ToDBValue(groupInfo.GroupIntro))
+					,new MySqlParameter("@CreateUesrID", ToDBValue(groupInfo.CreateUesrID))
+					,new MySqlParameter("@CreateTime", ToDBValue(groupInfo.CreateTime))
 			};
 
 			return MyDBHelper.ExecuteNonQuery(sql, para);
@@ -96,10 +96,10 @@ namespace WebBookmarkService.DAL
         /// <summary>
         /// 传入Id，获得Model实体
         /// </summary>
-        public GroupUser GetByGroupUserID(long groupUserID)
+        public GroupInfo GetByGroupInfoID(long groupInfoID)
         {
-            string sql = "SELECT * FROM tblGroupUser WHERE GroupUserID = @GroupUserID";
-            using(MySqlDataReader reader = MyDBHelper.ExecuteDataReader(sql, new MySqlParameter("@GroupUserID", groupUserID)))
+            string sql = "SELECT * FROM tblGroupInfo WHERE GroupInfoID = @GroupInfoID";
+            using(MySqlDataReader reader = MyDBHelper.ExecuteDataReader(sql, new MySqlParameter("@GroupInfoID", groupInfoID)))
 			{
 				if (reader.Read())
 				{
@@ -117,16 +117,16 @@ namespace WebBookmarkService.DAL
         /// <summary>
         /// 把DataRow转换成Model
         /// </summary>
-		public GroupUser ToModel(MySqlDataReader dr)
+		public GroupInfo ToModel(MySqlDataReader dr)
 		{
-			GroupUser groupUser = new GroupUser();
+			GroupInfo groupInfo = new GroupInfo();
 
-			groupUser.GroupUserID = (long)ToModelValue(dr,"GroupUserID");
-			groupUser.GroupInfoID = (long)ToModelValue(dr,"GroupInfoID");
-			groupUser.UserInfoID = (long)ToModelValue(dr,"UserInfoID");
-			groupUser.IsPass = (int)ToModelValue(dr,"IsPass");
-			groupUser.CreateTime = (DateTime)ToModelValue(dr,"CreateTime");
-			return groupUser;
+			groupInfo.GroupInfoID = (long)ToModelValue(dr,"GroupInfoID");
+			groupInfo.GroupName = (string)ToModelValue(dr,"GroupName");
+			groupInfo.GroupIntro = (string)ToModelValue(dr,"GroupIntro");
+			groupInfo.CreateUesrID = (long)ToModelValue(dr,"CreateUesrID");
+			groupInfo.CreateTime = (DateTime)ToModelValue(dr,"CreateTime");
+			return groupInfo;
 		}
 		#endregion
         
@@ -136,7 +136,7 @@ namespace WebBookmarkService.DAL
         ///</summary>        
 		public int GetTotalCount()
 		{
-			string sql = "SELECT count(*) FROM tblGroupUser";
+			string sql = "SELECT count(*) FROM tblGroupInfo";
 			return (int)MyDBHelper.ExecuteScalar(sql);
 		}
 		#endregion
@@ -145,9 +145,9 @@ namespace WebBookmarkService.DAL
         ///<summary>
         /// 获得分页记录集IEnumerable<>
         ///</summary>              
-		public IEnumerable<GroupUser> GetPagedData(int minrownum,int maxrownum)
+		public IEnumerable<GroupInfo> GetPagedData(int minrownum,int maxrownum)
 		{
-			string sql = "SELECT * from(SELECT *,(row_number() over(order by GroupUserID))-1 rownum FROM tblGroupUser) t where rownum>=@minrownum and rownum<=@maxrownum";
+			string sql = "SELECT * from(SELECT *,(row_number() over(order by GroupInfoID))-1 rownum FROM tblGroupInfo) t where rownum>=@minrownum and rownum<=@maxrownum";
 			using(MySqlDataReader reader = MyDBHelper.ExecuteDataReader(sql,
 				new MySqlParameter("@minrownum",minrownum),
 				new MySqlParameter("@maxrownum",maxrownum)))
@@ -162,9 +162,9 @@ namespace WebBookmarkService.DAL
         ///<summary>
         ///根据字段名获取数据记录IEnumerable<>
         ///</summary>              
-		public IEnumerable<GroupUser> GetBycolumnName(string columnName,string columnContent)
+		public IEnumerable<GroupInfo> GetBycolumnName(string columnName,string columnContent)
 		{
-			string sql = "SELECT * FROM tblGroupUser where "+columnName+"="+columnContent;
+			string sql = "SELECT * FROM tblGroupInfo where "+columnName+"="+columnContent;
 			using(MySqlDataReader reader = MyDBHelper.ExecuteDataReader(sql))
 			{
 				return ToModels(reader);			
@@ -178,9 +178,9 @@ namespace WebBookmarkService.DAL
         ///<summary>
         /// 获得总记录集IEnumerable<>
         ///</summary> 
-		public IEnumerable<GroupUser> GetAll()
+		public IEnumerable<GroupInfo> GetAll()
 		{
-			string sql = "SELECT * FROM tblGroupUser";
+			string sql = "SELECT * FROM tblGroupInfo";
 			using(MySqlDataReader reader = MyDBHelper.ExecuteDataReader(sql))
 			{
 				return ToModels(reader);			
@@ -192,9 +192,9 @@ namespace WebBookmarkService.DAL
         ///<summary>
         /// 把MySqlDataReader转换成IEnumerable<>
         ///</summary> 
-		protected IEnumerable<GroupUser> ToModels(MySqlDataReader reader)
+		protected IEnumerable<GroupInfo> ToModels(MySqlDataReader reader)
 		{
-			var list = new List<GroupUser>();
+			var list = new List<GroupInfo>();
 			while(reader.Read())
 			{
 				list.Add(ToModel(reader));
