@@ -10,151 +10,151 @@ by editing this MSBuild file. In order to learn more about this please visit htt
   </PropertyGroup>
   <ItemGroup>
     <File Include="assets/css/admin.css">
-      <publishTime>03/19/2016 15:20:54</publishTime>
+      <publishTime>03/29/2016 00:03:27</publishTime>
     </File>
     <File Include="assets/css/amazeui.css">
-      <publishTime>03/27/2016 12:53:47</publishTime>
+      <publishTime>03/29/2016 00:03:27</publishTime>
     </File>
     <File Include="assets/css/amazeui.flat.css">
-      <publishTime>03/27/2016 12:53:47</publishTime>
+      <publishTime>03/29/2016 00:03:27</publishTime>
     </File>
     <File Include="assets/css/amazeui.flat.min.css">
-      <publishTime>03/27/2016 12:53:47</publishTime>
+      <publishTime>03/29/2016 00:03:27</publishTime>
     </File>
     <File Include="assets/css/amazeui.min.css">
-      <publishTime>03/27/2016 12:53:48</publishTime>
+      <publishTime>03/29/2016 00:03:27</publishTime>
     </File>
     <File Include="assets/css/app.css">
-      <publishTime>03/19/2016 15:20:54</publishTime>
+      <publishTime>03/29/2016 00:03:27</publishTime>
     </File>
     <File Include="assets/fonts/fontawesome-webfont.eot">
-      <publishTime>03/19/2016 15:20:54</publishTime>
+      <publishTime>03/29/2016 00:03:27</publishTime>
     </File>
     <File Include="assets/fonts/fontawesome-webfont.svg">
-      <publishTime>03/19/2016 15:20:54</publishTime>
+      <publishTime>03/29/2016 00:03:27</publishTime>
     </File>
     <File Include="assets/fonts/fontawesome-webfont.ttf">
-      <publishTime>03/19/2016 15:20:54</publishTime>
+      <publishTime>03/29/2016 00:03:27</publishTime>
     </File>
     <File Include="assets/fonts/fontawesome-webfont.woff">
-      <publishTime>03/19/2016 15:20:54</publishTime>
+      <publishTime>03/29/2016 00:03:27</publishTime>
     </File>
     <File Include="assets/fonts/fontawesome-webfont.woff2">
-      <publishTime>03/19/2016 15:20:54</publishTime>
+      <publishTime>03/29/2016 00:03:27</publishTime>
     </File>
     <File Include="assets/fonts/FontAwesome.otf">
-      <publishTime>03/19/2016 15:20:54</publishTime>
+      <publishTime>03/29/2016 00:03:27</publishTime>
     </File>
     <File Include="assets/i/app-icon72x72%402x.png">
-      <publishTime>03/19/2016 15:20:54</publishTime>
+      <publishTime>03/29/2016 00:03:27</publishTime>
     </File>
     <File Include="assets/i/examples/admin-chrome.png">
-      <publishTime>03/19/2016 15:20:54</publishTime>
+      <publishTime>03/29/2016 00:03:27</publishTime>
     </File>
     <File Include="assets/i/examples/admin-firefox.png">
-      <publishTime>03/19/2016 15:20:54</publishTime>
+      <publishTime>03/29/2016 00:03:27</publishTime>
     </File>
     <File Include="assets/i/examples/admin-ie.png">
-      <publishTime>03/19/2016 15:20:54</publishTime>
+      <publishTime>03/29/2016 00:03:27</publishTime>
     </File>
     <File Include="assets/i/examples/admin-opera.png">
-      <publishTime>03/19/2016 15:20:54</publishTime>
+      <publishTime>03/29/2016 00:03:27</publishTime>
     </File>
     <File Include="assets/i/examples/admin-safari.png">
-      <publishTime>03/19/2016 15:20:54</publishTime>
+      <publishTime>03/29/2016 00:03:27</publishTime>
     </File>
     <File Include="assets/i/examples/adminPage.png">
-      <publishTime>03/19/2016 15:20:54</publishTime>
+      <publishTime>03/29/2016 00:03:27</publishTime>
     </File>
     <File Include="assets/i/examples/blogPage.png">
-      <publishTime>03/19/2016 15:20:54</publishTime>
+      <publishTime>03/29/2016 00:03:27</publishTime>
     </File>
     <File Include="assets/i/examples/landing.png">
-      <publishTime>03/19/2016 15:20:54</publishTime>
+      <publishTime>03/29/2016 00:03:27</publishTime>
     </File>
     <File Include="assets/i/examples/landingPage.png">
-      <publishTime>03/19/2016 15:20:54</publishTime>
+      <publishTime>03/29/2016 00:03:27</publishTime>
     </File>
     <File Include="assets/i/examples/loginPage.png">
-      <publishTime>03/19/2016 15:20:54</publishTime>
+      <publishTime>03/29/2016 00:03:27</publishTime>
     </File>
     <File Include="assets/i/examples/sidebarPage.png">
-      <publishTime>03/19/2016 15:20:54</publishTime>
+      <publishTime>03/29/2016 00:03:27</publishTime>
     </File>
     <File Include="assets/i/favicon.png">
-      <publishTime>03/19/2016 15:20:54</publishTime>
+      <publishTime>03/29/2016 00:03:27</publishTime>
     </File>
     <File Include="assets/i/login_bg.jpg">
-      <publishTime>03/19/2016 15:20:54</publishTime>
+      <publishTime>03/29/2016 00:03:27</publishTime>
     </File>
     <File Include="assets/i/startup-640x1096.png">
-      <publishTime>03/19/2016 15:20:54</publishTime>
+      <publishTime>03/29/2016 00:03:27</publishTime>
     </File>
     <File Include="assets/js/amazeui.ie8polyfill.js">
-      <publishTime>03/19/2016 15:20:54</publishTime>
+      <publishTime>03/29/2016 00:03:27</publishTime>
     </File>
     <File Include="assets/js/amazeui.ie8polyfill.min.js">
-      <publishTime>03/19/2016 15:20:54</publishTime>
+      <publishTime>03/29/2016 00:03:27</publishTime>
     </File>
     <File Include="assets/js/amazeui.js">
-      <publishTime>03/27/2016 12:53:48</publishTime>
+      <publishTime>03/29/2016 00:03:27</publishTime>
     </File>
     <File Include="assets/js/amazeui.min.js">
-      <publishTime>03/27/2016 12:53:49</publishTime>
+      <publishTime>03/29/2016 00:03:27</publishTime>
     </File>
     <File Include="assets/js/amazeui.widgets.helper.js">
-      <publishTime>03/19/2016 15:20:54</publishTime>
+      <publishTime>03/29/2016 00:03:27</publishTime>
     </File>
     <File Include="assets/js/amazeui.widgets.helper.min.js">
-      <publishTime>03/19/2016 15:20:54</publishTime>
+      <publishTime>03/29/2016 00:03:27</publishTime>
     </File>
     <File Include="assets/js/app.js">
-      <publishTime>03/19/2016 15:20:54</publishTime>
+      <publishTime>03/29/2016 00:03:27</publishTime>
     </File>
     <File Include="assets/js/handlebars.min.js">
-      <publishTime>03/19/2016 15:20:54</publishTime>
+      <publishTime>03/29/2016 00:03:27</publishTime>
     </File>
     <File Include="assets/js/jquery.min.js">
-      <publishTime>03/27/2016 12:53:49</publishTime>
+      <publishTime>03/29/2016 00:03:27</publishTime>
     </File>
     <File Include="assets/login/common.css">
-      <publishTime>03/19/2016 15:20:54</publishTime>
+      <publishTime>03/29/2016 00:03:27</publishTime>
     </File>
     <File Include="assets/login/icon.css">
-      <publishTime>03/19/2016 15:20:54</publishTime>
+      <publishTime>03/29/2016 00:03:27</publishTime>
     </File>
     <File Include="assets/login/link.css">
-      <publishTime>03/19/2016 15:20:54</publishTime>
+      <publishTime>03/29/2016 00:03:27</publishTime>
     </File>
     <File Include="assets/login/login.css">
-      <publishTime>03/19/2016 15:20:54</publishTime>
+      <publishTime>03/29/2016 00:03:27</publishTime>
     </File>
     <File Include="assets/login/new.css">
-      <publishTime>03/19/2016 15:20:54</publishTime>
+      <publishTime>03/29/2016 00:03:27</publishTime>
     </File>
     <File Include="assets/login/register.css">
-      <publishTime>03/19/2016 21:47:55</publishTime>
+      <publishTime>03/29/2016 00:03:27</publishTime>
     </File>
     <File Include="assets/login/style.css">
-      <publishTime>03/27/2016 12:53:49</publishTime>
+      <publishTime>03/29/2016 00:03:28</publishTime>
     </File>
     <File Include="assets/login/user.css">
-      <publishTime>03/25/2016 23:51:16</publishTime>
+      <publishTime>03/29/2016 00:03:28</publishTime>
     </File>
     <File Include="bin/AngleSharp.dll">
-      <publishTime>03/19/2016 15:59:46</publishTime>
+      <publishTime>03/29/2016 00:03:28</publishTime>
     </File>
     <File Include="bin/Microsoft.Web.Infrastructure.dll">
       <publishTime>03/19/2016 14:58:30</publishTime>
     </File>
     <File Include="bin/Microsoft.Web.Mvc.FixedDisplayModes.dll">
-      <publishTime>03/19/2016 14:58:27</publishTime>
+      <publishTime>03/29/2016 00:03:28</publishTime>
     </File>
     <File Include="bin/MySql.Data.dll">
-      <publishTime>03/30/2015 12:40:10</publishTime>
+      <publishTime>03/29/2016 00:03:27</publishTime>
     </File>
     <File Include="bin/Newtonsoft.Json.dll">
-      <publishTime>03/19/2016 16:46:39</publishTime>
+      <publishTime>03/29/2016 00:03:29</publishTime>
     </File>
     <File Include="bin/System.Net.Http.Formatting.dll">
       <publishTime>03/19/2016 14:58:29</publishTime>
@@ -166,28 +166,28 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>03/19/2016 14:58:29</publishTime>
     </File>
     <File Include="bin/System.Web.Mvc.dll">
-      <publishTime>03/19/2016 14:58:39</publishTime>
+      <publishTime>03/29/2016 00:03:28</publishTime>
     </File>
     <File Include="bin/System.Web.Razor.dll">
-      <publishTime>03/19/2016 14:58:33</publishTime>
+      <publishTime>03/29/2016 00:03:28</publishTime>
     </File>
     <File Include="bin/System.Web.WebPages.Deployment.dll">
-      <publishTime>03/19/2016 14:58:39</publishTime>
+      <publishTime>03/29/2016 00:03:28</publishTime>
     </File>
     <File Include="bin/System.Web.WebPages.dll">
-      <publishTime>03/19/2016 14:58:40</publishTime>
+      <publishTime>03/29/2016 00:03:28</publishTime>
     </File>
     <File Include="bin/System.Web.WebPages.Razor.dll">
-      <publishTime>03/19/2016 14:58:40</publishTime>
+      <publishTime>03/29/2016 00:03:28</publishTime>
     </File>
     <File Include="bin/WebBookmarkUI.dll">
-      <publishTime>03/28/2016 00:13:12</publishTime>
+      <publishTime>03/30/2016 01:19:32</publishTime>
     </File>
     <File Include="bin/WebfolderBo.dll">
-      <publishTime>03/28/2016 00:13:11</publishTime>
+      <publishTime>03/30/2016 01:19:31</publishTime>
     </File>
     <File Include="bin/WebfolderService.dll">
-      <publishTime>03/28/2016 00:13:10</publishTime>
+      <publishTime>03/30/2016 01:19:31</publishTime>
     </File>
     <File Include="bin/zh-Hans/System.Net.Http.Formatting.resources.dll">
       <publishTime>03/19/2016 14:58:54</publishTime>
@@ -199,244 +199,253 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>03/19/2016 14:58:54</publishTime>
     </File>
     <File Include="bin/zh-Hans/System.Web.Mvc.resources.dll">
-      <publishTime>03/19/2016 14:58:54</publishTime>
+      <publishTime>03/29/2016 00:03:28</publishTime>
     </File>
     <File Include="bin/zh-Hans/System.Web.Razor.resources.dll">
-      <publishTime>03/19/2016 14:58:54</publishTime>
+      <publishTime>03/29/2016 00:03:28</publishTime>
     </File>
     <File Include="bin/zh-Hans/System.Web.WebPages.Deployment.resources.dll">
-      <publishTime>03/19/2016 14:58:54</publishTime>
+      <publishTime>03/29/2016 00:03:28</publishTime>
     </File>
     <File Include="bin/zh-Hans/System.Web.WebPages.Razor.resources.dll">
-      <publishTime>03/19/2016 14:58:54</publishTime>
+      <publishTime>03/29/2016 00:03:28</publishTime>
     </File>
     <File Include="bin/zh-Hans/System.Web.WebPages.resources.dll">
-      <publishTime>03/19/2016 14:58:54</publishTime>
+      <publishTime>03/29/2016 00:03:28</publishTime>
     </File>
     <File Include="DomainJS/bookmarkdetail.js">
-      <publishTime>03/28/2016 00:07:43</publishTime>
+      <publishTime>03/29/2016 00:03:27</publishTime>
+    </File>
+    <File Include="DomainJS/groupinfo.js">
+      <publishTime>03/30/2016 01:19:16</publishTime>
     </File>
     <File Include="DomainJS/importbookmark.js">
-      <publishTime>03/19/2016 15:25:57</publishTime>
+      <publishTime>03/29/2016 00:03:27</publishTime>
     </File>
     <File Include="DomainJS/interestrecommend.js">
-      <publishTime>03/28/2016 00:02:10</publishTime>
+      <publishTime>03/29/2016 00:03:27</publishTime>
     </File>
     <File Include="DomainJS/login.js">
-      <publishTime>03/19/2016 17:34:28</publishTime>
+      <publishTime>03/29/2016 00:03:27</publishTime>
     </File>
     <File Include="DomainJS/modifypassword.js">
-      <publishTime>03/23/2016 23:51:42</publishTime>
+      <publishTime>03/29/2016 00:03:27</publishTime>
     </File>
     <File Include="DomainJS/register.js">
-      <publishTime>03/27/2016 12:53:49</publishTime>
+      <publishTime>03/29/2016 00:03:27</publishTime>
     </File>
     <File Include="DomainJS/userInfo.js">
-      <publishTime>03/19/2016 17:53:58</publishTime>
+      <publishTime>03/29/2016 00:03:27</publishTime>
     </File>
     <File Include="DomainJS/webbookmarktable.js">
-      <publishTime>03/26/2016 18:42:43</publishTime>
+      <publishTime>03/29/2016 00:03:27</publishTime>
     </File>
     <File Include="Global.asax">
-      <publishTime>03/19/2016 14:55:00</publishTime>
+      <publishTime>03/29/2016 00:03:27</publishTime>
     </File>
     <File Include="packages.config">
-      <publishTime>03/19/2016 16:46:41</publishTime>
+      <publishTime>03/29/2016 00:03:28</publishTime>
     </File>
     <File Include="Scripts/jQueryFileUpload/jquery.fileupload.js">
-      <publishTime>03/19/2016 16:27:45</publishTime>
+      <publishTime>03/29/2016 00:03:27</publishTime>
     </File>
     <File Include="Scripts/jQueryFileUpload/jquery.iframe-transport.js">
-      <publishTime>03/19/2016 16:27:45</publishTime>
+      <publishTime>03/29/2016 00:03:27</publishTime>
     </File>
     <File Include="Scripts/jQueryFileUpload/vendor/jquery.ui.widget.js">
-      <publishTime>03/19/2016 16:27:45</publishTime>
+      <publishTime>03/29/2016 00:03:27</publishTime>
     </File>
     <File Include="Scripts/layer/extend/layer.ext.js">
-      <publishTime>03/23/2016 22:01:05</publishTime>
+      <publishTime>03/29/2016 00:03:27</publishTime>
     </File>
     <File Include="Scripts/layer/layer.js">
-      <publishTime>03/27/2016 12:53:50</publishTime>
+      <publishTime>03/29/2016 00:03:27</publishTime>
     </File>
     <File Include="Scripts/layer/skin/default/icon-ext.png">
-      <publishTime>03/23/2016 22:01:05</publishTime>
+      <publishTime>03/29/2016 00:03:27</publishTime>
     </File>
     <File Include="Scripts/layer/skin/default/icon.png">
-      <publishTime>03/23/2016 22:01:05</publishTime>
+      <publishTime>03/29/2016 00:03:27</publishTime>
     </File>
     <File Include="Scripts/layer/skin/default/loading-0.gif">
-      <publishTime>03/23/2016 22:01:05</publishTime>
+      <publishTime>03/29/2016 00:03:27</publishTime>
     </File>
     <File Include="Scripts/layer/skin/default/loading-1.gif">
-      <publishTime>03/23/2016 22:01:06</publishTime>
+      <publishTime>03/29/2016 00:03:27</publishTime>
     </File>
     <File Include="Scripts/layer/skin/default/loading-2.gif">
-      <publishTime>03/23/2016 22:01:06</publishTime>
+      <publishTime>03/29/2016 00:03:27</publishTime>
     </File>
     <File Include="Scripts/layer/skin/layer.css">
-      <publishTime>03/23/2016 22:01:06</publishTime>
+      <publishTime>03/29/2016 00:03:27</publishTime>
     </File>
     <File Include="Scripts/layer/skin/layer.ext.css">
-      <publishTime>03/27/2016 12:53:50</publishTime>
+      <publishTime>03/29/2016 00:03:27</publishTime>
     </File>
     <File Include="UploadFiles/UserImg/2016031458672QQ图片20160309215908.jpg">
-      <publishTime>03/19/2016 15:24:40</publishTime>
+      <publishTime>03/29/2016 00:03:27</publishTime>
     </File>
     <File Include="UploadFiles/UserImportFile/201603131332bookmark.html">
-      <publishTime>03/19/2016 15:24:40</publishTime>
+      <publishTime>03/29/2016 00:03:27</publishTime>
     </File>
     <File Include="UploadFiles/UserImportFile/2016031314161bookmarks_16_3_13.html">
-      <publishTime>03/19/2016 15:24:40</publishTime>
+      <publishTime>03/29/2016 00:03:27</publishTime>
     </File>
     <File Include="UploadFiles/UserImportFile/2016031331767bookmark.html">
-      <publishTime>03/19/2016 15:24:40</publishTime>
+      <publishTime>03/29/2016 00:03:27</publishTime>
     </File>
     <File Include="UploadFiles/UserImportFile/2016031345848bookmarks_16_3_13.html">
-      <publishTime>03/19/2016 15:24:40</publishTime>
+      <publishTime>03/29/2016 00:03:27</publishTime>
     </File>
     <File Include="UploadFiles/UserImportFile/2016031349732bookmark.html">
-      <publishTime>03/19/2016 15:24:40</publishTime>
+      <publishTime>03/29/2016 00:03:27</publishTime>
     </File>
     <File Include="UploadFiles/UserImportFile/2016031359693bookmark.html">
-      <publishTime>03/19/2016 15:24:40</publishTime>
+      <publishTime>03/29/2016 00:03:27</publishTime>
     </File>
     <File Include="UploadFiles/UserImportFile/201603136535bookmarks_16_3_13.html">
-      <publishTime>03/19/2016 15:24:40</publishTime>
+      <publishTime>03/29/2016 00:03:27</publishTime>
     </File>
     <File Include="UploadFiles/UserImportFile/2016031366059bookmark.html">
-      <publishTime>03/19/2016 15:24:40</publishTime>
+      <publishTime>03/29/2016 00:03:27</publishTime>
     </File>
     <File Include="UploadFiles/UserImportFile/2016031381858bookmarks_16_3_13.html">
-      <publishTime>03/19/2016 15:24:40</publishTime>
+      <publishTime>03/29/2016 00:03:27</publishTime>
     </File>
     <File Include="UploadFiles/UserImportFile/2016031383379bookmarks_16_3_13.html">
-      <publishTime>03/19/2016 15:24:40</publishTime>
+      <publishTime>03/29/2016 00:03:27</publishTime>
     </File>
     <File Include="UploadFiles/UserImportFile/2016031387318bookmark.html">
-      <publishTime>03/19/2016 15:24:40</publishTime>
+      <publishTime>03/29/2016 00:03:27</publishTime>
     </File>
     <File Include="UploadFiles/UserImportFile/2016031391659bookmarks_16_3_13.html">
-      <publishTime>03/19/2016 15:24:40</publishTime>
+      <publishTime>03/29/2016 00:03:27</publishTime>
     </File>
     <File Include="UploadFiles/UserImportFile/2016031398616bookmark.html">
-      <publishTime>03/19/2016 15:24:40</publishTime>
+      <publishTime>03/29/2016 00:03:27</publishTime>
     </File>
     <File Include="UploadFiles/UserImportFile/2016031399806bookmarks_16_3_13.html">
-      <publishTime>03/19/2016 15:24:40</publishTime>
+      <publishTime>03/29/2016 00:03:27</publishTime>
     </File>
     <File Include="UploadFiles/UserImportFile/2016031417172bookmark.html">
-      <publishTime>03/19/2016 15:24:40</publishTime>
+      <publishTime>03/29/2016 00:03:27</publishTime>
     </File>
     <File Include="UploadFiles/UserImportFile/2016031425678bookmarks_16_3_13.html">
-      <publishTime>03/19/2016 15:24:40</publishTime>
+      <publishTime>03/29/2016 00:03:27</publishTime>
     </File>
     <File Include="UploadFiles/UserImportFile/2016031439086bookmarks_16_3_13.html">
-      <publishTime>03/19/2016 15:24:40</publishTime>
+      <publishTime>03/29/2016 00:03:27</publishTime>
     </File>
     <File Include="UploadFiles/UserImportFile/2016031454925bookmarks_16_3_13.html">
-      <publishTime>03/19/2016 15:24:40</publishTime>
+      <publishTime>03/29/2016 00:03:27</publishTime>
     </File>
     <File Include="UploadFiles/UserImportFile/2016031460916bookmarks_16_3_13.html">
-      <publishTime>03/19/2016 15:24:40</publishTime>
+      <publishTime>03/29/2016 00:03:27</publishTime>
     </File>
     <File Include="UploadFiles/UserImportFile/2016031485864bookmark.html">
-      <publishTime>03/19/2016 15:24:40</publishTime>
+      <publishTime>03/29/2016 00:03:27</publishTime>
     </File>
     <File Include="UploadFiles/UserImportFile/2016031555144bookmarks_16_3_13.html">
-      <publishTime>03/19/2016 15:24:41</publishTime>
+      <publishTime>03/29/2016 00:03:27</publishTime>
     </File>
     <File Include="UploadFiles/UserImportFile/2016031665059bookmarks_16_3_13.html">
-      <publishTime>03/19/2016 15:24:41</publishTime>
+      <publishTime>03/29/2016 00:03:27</publishTime>
     </File>
     <File Include="UploadFiles/UserImportFile/2016031922031学生-白854748548-bookmarks_16_3_17.html">
-      <publishTime>03/19/2016 15:24:41</publishTime>
+      <publishTime>03/29/2016 00:03:27</publishTime>
     </File>
     <File Include="UploadFiles/UserImportFile/201603192724学生-白若冰-674988272bookmarks_16_3_17.html">
-      <publishTime>03/19/2016 15:24:41</publishTime>
+      <publishTime>03/29/2016 00:03:27</publishTime>
     </File>
     <File Include="UploadFiles/UserImportFile/2016031953749周德阳-zhdyly%40qq.com%28369557272%29-bookmarks_16_3_17.html">
-      <publishTime>03/19/2016 15:24:41</publishTime>
+      <publishTime>03/29/2016 00:03:27</publishTime>
     </File>
     <File Include="Views/Default/Index.cshtml">
-      <publishTime>03/19/2016 15:23:04</publishTime>
+      <publishTime>03/29/2016 00:03:27</publishTime>
     </File>
     <File Include="Views/Follower/Index.cshtml">
-      <publishTime>03/27/2016 12:53:50</publishTime>
+      <publishTime>03/29/2016 00:03:27</publishTime>
     </File>
     <File Include="Views/Follower/ShowUserBeFollwed.cshtml">
-      <publishTime>03/27/2016 13:19:04</publishTime>
+      <publishTime>03/29/2016 00:03:27</publishTime>
     </File>
     <File Include="Views/Follower/ShowUserFollow.cshtml">
-      <publishTime>03/27/2016 13:17:52</publishTime>
+      <publishTime>03/29/2016 00:03:27</publishTime>
+    </File>
+    <File Include="Views/GroupInfo/Index.cshtml">
+      <publishTime>03/30/2016 01:18:51</publishTime>
+    </File>
+    <File Include="Views/GroupInfo/ShowUserGroupList.cshtml">
+      <publishTime>03/30/2016 00:52:08</publishTime>
     </File>
     <File Include="Views/InterestRecommend/Index.cshtml">
-      <publishTime>03/27/2016 13:09:57</publishTime>
+      <publishTime>03/29/2016 00:03:27</publishTime>
     </File>
     <File Include="Views/InterestRecommend/SearchUser.cshtml">
-      <publishTime>03/27/2016 00:59:09</publishTime>
+      <publishTime>03/29/2016 00:03:27</publishTime>
     </File>
     <File Include="Views/InterestRecommend/ShowUserFolder.cshtml">
-      <publishTime>03/26/2016 17:32:12</publishTime>
+      <publishTime>03/29/2016 00:03:27</publishTime>
     </File>
     <File Include="Views/InterestRecommend/ShowUserInfo.cshtml">
-      <publishTime>03/27/2016 13:10:32</publishTime>
+      <publishTime>03/29/2016 00:03:27</publishTime>
     </File>
     <File Include="Views/Login/Index.cshtml">
-      <publishTime>03/19/2016 21:44:56</publishTime>
+      <publishTime>03/29/2016 00:03:27</publishTime>
     </File>
     <File Include="Views/Register/Index.cshtml">
-      <publishTime>03/19/2016 23:33:44</publishTime>
+      <publishTime>03/29/2016 00:03:27</publishTime>
     </File>
     <File Include="Views/Shared/Error.cshtml">
-      <publishTime>03/19/2016 15:23:04</publishTime>
+      <publishTime>03/29/2016 00:03:27</publishTime>
     </File>
     <File Include="Views/Shared/Lockout.cshtml">
-      <publishTime>03/19/2016 15:23:04</publishTime>
+      <publishTime>03/29/2016 00:03:27</publishTime>
     </File>
     <File Include="Views/Shared/_Layout.cshtml">
-      <publishTime>03/27/2016 16:04:49</publishTime>
+      <publishTime>03/29/2016 21:21:38</publishTime>
     </File>
     <File Include="Views/Shared/_LoginPartial.cshtml">
-      <publishTime>03/19/2016 15:23:04</publishTime>
+      <publishTime>03/29/2016 00:03:27</publishTime>
     </File>
     <File Include="Views/ShowBookmarkInfo/Index.cshtml">
-      <publishTime>03/27/2016 23:54:41</publishTime>
+      <publishTime>03/29/2016 00:03:27</publishTime>
     </File>
     <File Include="Views/ShowBookmarkInfo/ShowBookmarkComment.cshtml">
-      <publishTime>03/28/2016 00:12:15</publishTime>
+      <publishTime>03/29/2016 00:03:27</publishTime>
     </File>
     <File Include="Views/ShowBookmarkInfo/ShowBookmarkHTML.cshtml">
-      <publishTime>03/27/2016 16:33:52</publishTime>
+      <publishTime>03/29/2016 00:03:27</publishTime>
     </File>
     <File Include="Views/UserInfo/Index.cshtml">
-      <publishTime>03/23/2016 23:26:09</publishTime>
+      <publishTime>03/29/2016 00:03:27</publishTime>
     </File>
     <File Include="Views/UserInfo/ModifyPasswordIndex.cshtml">
-      <publishTime>03/23/2016 23:50:33</publishTime>
+      <publishTime>03/29/2016 00:03:27</publishTime>
     </File>
     <File Include="Views/UserInfo/ShowUserDetail.cshtml">
-      <publishTime>03/27/2016 00:55:05</publishTime>
+      <publishTime>03/29/2016 00:03:27</publishTime>
     </File>
     <File Include="Views/Web.config">
-      <publishTime>03/19/2016 14:55:00</publishTime>
+      <publishTime>03/29/2016 00:03:27</publishTime>
     </File>
     <File Include="Views/WebBookmarkTable/ImportWebBookmark.cshtml">
-      <publishTime>03/23/2016 23:13:02</publishTime>
+      <publishTime>03/29/2016 00:03:27</publishTime>
     </File>
     <File Include="Views/WebBookmarkTable/Index.cshtml">
-      <publishTime>03/26/2016 17:46:06</publishTime>
+      <publishTime>03/29/2016 00:03:27</publishTime>
     </File>
     <File Include="Views/WebBookmarkTable/ShowAddFolderOrBookmarkView.cshtml">
-      <publishTime>03/26/2016 17:42:41</publishTime>
+      <publishTime>03/29/2016 00:03:27</publishTime>
     </File>
     <File Include="Views/WebBookmarkTable/ShowFolderInfo.cshtml">
       <publishTime>03/21/2016 20:56:38</publishTime>
     </File>
     <File Include="Views/WebBookmarkTable/ShowFolderTable.cshtml">
-      <publishTime>03/27/2016 14:51:18</publishTime>
+      <publishTime>03/29/2016 00:03:27</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>03/28/2016 00:13:14</publishTime>
+      <publishTime>03/30/2016 01:19:32</publishTime>
     </File>
   </ItemGroup>
 </Project>

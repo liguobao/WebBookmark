@@ -16,9 +16,6 @@ namespace WebBookmarkUI.Controllers
 
         public ActionResult Index()
         {
-            long uid = UILoginHelper.GetUIDInCookie(Request);
-
-
             return View();
         }
 
@@ -61,12 +58,59 @@ namespace WebBookmarkUI.Controllers
             groupInfo.GroupIntro = !string.IsNullOrEmpty(groupIntro) ? groupIntro : "";
             groupInfo.Save();
 
+
+
             result.IsSuccess = true;
             result.SuccessMessage = "创建成功！";
             return Json(result);
 
         }
 
+
+        public ActionResult ModifyUserGroupInfo(string groupName, string groupIntro,long groupID)
+        {
+            long uid = UILoginHelper.GetUIDInCookie(Request);
+            BizResultInfo result = new BizResultInfo();
+
+            if (string.IsNullOrEmpty(groupName))
+            {
+                result.IsSuccess = false;
+                result.ErrorMessage = "群组名称不能为空呀....";
+                return Json(result);
+            }
+
+
+            if (groupID==0)
+            {
+                result.IsSuccess = false;
+                result.ErrorMessage = "群组ID不能为空呀,这个数据目测有问题....";
+                return Json(result);
+            }
+
+            BizGroupInfo groupInfo = BizGroupInfo.LoadByGroupID(groupID);
+            if (groupInfo!=null)
+            {
+                groupInfo.GroupName = groupName;
+                groupInfo.GroupIntro = !string.IsNullOrEmpty(groupIntro) ? groupIntro : "";
+                groupInfo.Save();
+            }
+
+            result.IsSuccess = true;
+            result.SuccessMessage = "保存成功！";
+            return Json(result);
+
+        }
+
+
+        public ActionResult DeleteUserGroupInfo(long groupID)
+        {
+            BizResultInfo result = new BizResultInfo();
+
+
+
+
+            return Json(result);
+        }
 
     }
 }

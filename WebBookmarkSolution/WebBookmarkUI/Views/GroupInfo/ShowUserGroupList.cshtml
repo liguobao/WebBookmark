@@ -32,8 +32,8 @@
                                         <div class="am-btn-group am-btn-group-xs">
                                             <button type="button"
                                                     class="am-btn am-btn-default am-btn-xs am-text-secondary" id="modifygroup" data-id='@groupInfo.GroupInfoID'
+                                                    data-name='@groupInfo.GroupName' data-intro='@groupInfo.GroupIntro'
                                                     data-am-modal="{target: '#modal-modifygroup', closeViaDimmer: 0, width: 400, height: 225}">
-                                                <div id="model" hidden>@Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(groupInfo))</div>
                                                 <span class="am-icon-pencil-square-o"></span> 修改
                                             </button>
 

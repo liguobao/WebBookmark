@@ -7,25 +7,33 @@
     $('body').on("click", "[id='modifygroup']", function (e) {
         e.preventDefault();
         var $this = $(this);
-        var groupInfoID = $this.attr("data-id");
-
-        $('#my-confirm').modal({
-            relatedTarget: this,
-            onConfirm: function (options) {
-                var $link = $(this.relatedTarget).prev('a');
-                var msg = $link.length ? '你要删除的链接 ID 为 ' + $link.data('id') :
-                  '确定了，但不知道要整哪样';
-                alert(msg);
-            },
-            // closeOnConfirm: false,
-            onCancel: function () {
-                alert('算求，不弄了');
-            }
-        });
-
+        $("#modifyID").html($this.attr("data-id"));
+        $("#modifyName").val($this.attr("data-name"));
+        $("#modifyIntro").val($this.attr("data-intro"));
+        $('#modal-modifygroup').modal('toggle');
         e.stopPropagation();
-    })
+    });
 
+
+    $('body').on("click", "[id='deletegroup']", function (e) {
+       $('#my-confirm').modal({
+           relatedTarget: this,
+           onConfirm: function (options) {
+              
+           },
+           // closeOnConfirm: false,
+           onCancel: function () {
+               $("my-confirm").modal("close");
+           }
+       });
+   });
+
+
+
+
+    $("#btnModify").on('click', function () {
+        ModifyUserGroupInfo();
+    });
 
     ShowGroupList(createUserID);
 
@@ -61,6 +69,57 @@ function SaveGroupInfo()
             }
     });
 }
+
+
+function ModifyUserGroupInfo() {
+    var groupName = $("#modifyName").val();
+    var groupIntro = $("#modifyIntro").val();
+    var groupID = $("#modifyID").html();
+    if (groupName == "") {
+        alert("没有群组名称不能保存呀....");
+        return;
+    }
+
+    if (groupID == "") {
+        alert("没有群组ID不能保存呀....");
+        return;
+    }
+
+    $.ajax({
+        type: "post",
+        url: modifyUserGroupInfo,
+        data: { groupName: groupName, groupIntro: groupIntro, groupID: groupID },
+        success:
+            function (result) {
+                if (result.IsSuccess) {
+                    ShowGroupList(createUserID);
+                }
+                else {
+                    alert(result.ErrorMessage);
+                }
+                $('#modal-modifygroup').modal('close');
+            }
+    });
+}
+
+function DeleteUserGroupInfo() {
+    $.ajax({
+        type: "post",
+        url: deleteUserGroupInfo,
+        data: {  },
+        success:
+            function (result) {
+                if (result.IsSuccess) {
+                    ShowGroupList(createUserID);
+                }
+                else {
+                    alert(result.ErrorMessage);
+                }
+                $('#modal-modifygroup').modal('close');
+            }
+    });
+}
+
 
 
 function ShowGroupList(createUserID)

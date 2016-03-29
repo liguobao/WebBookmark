@@ -7,6 +7,9 @@
     var saveUserGroupInfoURL = "@Url.Action("SaveUserGroupInfo")";
     var showUserGroupListURL = "@Url.Action("ShowUserGroupList")";
     var createUserID = '@WebBookmarkUI.UILoginHelper.GetUIDInCookie(Request)';
+    var modifyUserGroupInfo = "@Url.Action("ModifyUserGroupInfo")";
+    var deleteUserGroupInfo = "@Url.Action("DeleteUserGroupInfo")";
+    
 </script>
 <script src="~/DomainJS/groupinfo.js"></script>
 
@@ -89,10 +92,11 @@
             <div id="divUIContent">
                 <ul class="am-list">
                     <li class="am-text-left" style="margin: 5px 20px;">
-                        <input type="text" id="groupName" class="am-form-field am-radius" placeholder="群组名称">
+                        <div id="modifyID" hidden></div>
+                        <input type="text" id="modifyName" class="am-form-field am-radius" placeholder="群组名称">
                     </li>
                     <li class="am-text-left" style="margin: 5px 20px;">
-                        <textarea id="groupIntro" rows="4" style="width:100%"></textarea>
+                        <textarea id="modifyIntro" rows="4" style="width:100%"></textarea>
                     </li>
                 </ul>
             </div>
@@ -106,6 +110,20 @@
             <div class="am-form-group">
 
             </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="am-modal am-modal-confirm" tabindex="-1" id="my-confirm">
+    <div class="am-modal-dialog">
+        <div class="am-modal-hd">删除群组</div>
+        <div class="am-modal-bd">
+            你，确定要删除这条记录吗？
+        </div>
+        <div class="am-modal-footer">
+            <span class="am-modal-btn" data-am-modal-cancel>取消</span>
+            <span class="am-modal-btn" data-am-modal-confirm>确定</span>
         </div>
     </div>
 </div>
