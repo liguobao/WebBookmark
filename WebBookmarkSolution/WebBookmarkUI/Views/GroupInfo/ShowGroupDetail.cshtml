@@ -8,6 +8,10 @@
 <script>
     var showGroupUserList = "@Url.Action("ShowGroupUserList")";
     var groupID = '@Model.GroupInfoID';
+    var applyToGroupURL = "@Url.Action("ApplyToGroup")";
+    var showGroupUserListNotPass = "@Url.Action("ShowGroupUserListNotPass")";
+
+   var passGroupUserURL= "@Url.Action("PassGroupUser")";
 
 </script>
 <script src="~/DomainJS/showgroupdetail.js"></script>
@@ -16,9 +20,9 @@
     <div class="am-fl am-cf"><strong class="am-text-primary am-text-lg">@Model.GroupName</strong> / <small>
         <a href='@Url.Content("~/UserInfo/ShowUserDetail?uid="+Model.CreateUesrID)'>@Model.CreateUesrInfo.UserName</a></small>
     @if (Model.CreateUesrID != WebBookmarkUI.UILoginHelper.GetUIDInCookie(Request))
-    {
-       <button class="am-btn-primary">申请加入</button>
-    }
+{
+    <button class="am-btn-primary" data-id='@Model.GroupInfoID' id="applytogroup" onclick="ApplyToGroup()">申请加入</button>
+}
     </div>
 </div>
 <div class="am-cf" style="margin-left:1%">
@@ -29,7 +33,8 @@
     <div class="am-tabs" data-am-tabs="">
         <ul class="am-tabs-nav am-nav am-nav-tabs aw-nav-tabs">
             <li class="am-active"><a href="#" id="groupuser" data-id='@Model.GroupInfoID'>群组成员 <span id="groupuserload"></span></a></li>
-            <li ><a href="#" id="groupinfo" data-id='@Model.GroupInfoID'>相关资料 <span id="infoload"></span></a></li>
+            <li class=""><a href="#" id="groupusernopass" data-id='@Model.GroupInfoID'>未通过成员<span id="groupusernopassload"></span></a></li>
+            <li ><a href="#" id="groupinfo" data-id='@Model.GroupInfoID'>相关资料 <span id="groupinfoload"></span></a></li>
         </ul>
 
         <div class="am-tabs-bd aw-user-center-tab" style="touch-action: pan-y; -webkit-user-select: none; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0); margin-left:2%" >

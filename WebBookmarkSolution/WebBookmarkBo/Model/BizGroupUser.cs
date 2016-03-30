@@ -100,6 +100,15 @@ namespace WebfolderBo.Model
             return lstModel.Select(mode => new BizGroupUser(mode)).ToList();
         }
 
+
+        public static BizGroupUser LoadByGroupUserID(long infoID)
+        {
+            var model = new GroupUserDAL().GetByGroupUserID(infoID);
+            if (model == null)
+                return null;
+            return new BizGroupUser(model);
+        }
+
 	}
 
     public enum AuditStatus

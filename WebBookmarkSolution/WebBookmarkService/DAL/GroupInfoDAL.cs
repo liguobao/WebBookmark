@@ -270,6 +270,8 @@ namespace WebBookmarkService.DAL
         /// <returns></returns>
         public IEnumerable<GroupInfo> GetByGroupIDList(List<long> lstGroupID)
         {
+            if (lstGroupID == null || lstGroupID.Count == 0)
+                return new List<GroupInfo>();
             string sql =string.Format( "SELECT * FROM tblGroupInfo WHERE GroupInfoID IN ({0})",string.Join(",",lstGroupID));
             using (MySqlDataReader reader = MyDBHelper.ExecuteDataReader(sql))
             {

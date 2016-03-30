@@ -22,10 +22,10 @@ namespace WebBookmarkUI.Controllers
             if (folderID == 0)
             {
                 var lst = BizUserWebFolder.LoadAllByUID(uid);
-                if (lst != null)
+                if (lst != null && lst.Count>0)
                 {
                     var firstFolder = lst.Where(folder => folder.ParentWebfolderID == 0);
-                    if (firstFolder == null)
+                    if (firstFolder == null || firstFolder.Count()==0)
                         return View();
                     folderID = firstFolder.FirstOrDefault().UserWebFolderID;
                 }
@@ -42,10 +42,10 @@ namespace WebBookmarkUI.Controllers
             if (folderID == 0)
             {
                 var lst = BizUserWebFolder.LoadAllByUID(uid);
-                if (lst != null)
+                if (lst != null && lst.Count >0)
                 {
                     var firstFolder = lst.Where(folder => folder.ParentWebfolderID == 0);
-                    if (firstFolder == null)
+                    if (firstFolder == null || firstFolder.Count()==0)
                         return View();
                     folderID = firstFolder.FirstOrDefault().UserWebFolderID;
                 }
@@ -61,10 +61,10 @@ namespace WebBookmarkUI.Controllers
             if (folderID == 0)
             {
                 var lst = BizUserWebFolder.LoadAllByUID(uid);
-                if (lst != null)
+                if (lst != null && lst.Count >0 )
                 {
                     var firstFolder = lst.Where(folder => folder.ParentWebfolderID == 0);
-                    if (firstFolder == null)
+                    if (firstFolder == null || firstFolder.Count()==0)
                         return View();
                     folderID = firstFolder.FirstOrDefault().UserWebFolderID;
                 }

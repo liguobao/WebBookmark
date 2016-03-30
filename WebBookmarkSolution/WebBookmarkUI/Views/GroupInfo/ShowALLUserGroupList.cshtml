@@ -22,7 +22,7 @@
                         {
                             <tr>
                                 <td>@index</td>
-                                <td>@userGroup.GroupInfo.GroupName <span class="am-icon-folder-open-o"></span>
+                                <td>@userGroup.GroupInfo.GroupName <span class="am-icon-folder-open-o" data-id='@userGroup.GroupInfoID' id="showGroupDetail"></span>
                                 <td>@userGroup.GroupInfo.CreateTime</td>
                                 <td>
                                     @if(userGroup.GroupInfo.CreateUesrInfo!=null)
@@ -32,12 +32,15 @@
                                     }
                                 </td>
                                 <td>
-                                   @if(userGroup.IsPass ==1)
+                                   @if (userGroup.IsPass == 1)
                                    {
-                                       <span class="am-icon-check">已通过</span>
-                                   }else
+                                       <div class="am-text-success"> 已通过<span class="am-icon-check"></span></div>
+
+                                   }
+                                   else
                                    {
-                                         <span class="am-icon-bolt">等待审核</span>
+                                      <div class="am-text-danger"> 等待审核 <span class="am-icon-bolt"></span></div>
+
                                    }
                                 </td>
                             </tr>

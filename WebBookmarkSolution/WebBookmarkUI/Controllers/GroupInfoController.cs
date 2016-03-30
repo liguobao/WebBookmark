@@ -191,7 +191,7 @@ namespace WebBookmarkUI.Controllers
             }
 
 
-            lstUIUserGroupInfo = lstGroupUser.Select(model => new UIUserGroupInfo()
+            lstUIUserGroupInfo = lstGroupUser.Where(model=>model.IsPass==(int)AuditStatus.Pass).Select(model => new UIUserGroupInfo()
             {
                 GroupInfo = new UIGroupInfo() 
                 {
@@ -214,12 +214,58 @@ namespace WebBookmarkUI.Controllers
         }
 
 
+        public ActionResult ShowGroupUserListNotPass(long groupID)
+        {
+
+            if (groupID == 0)
+                return View("ShowGroupUserList", null);
+            List<UIUserGroupInfo> lstUIUserGroupInfo = null;
+
+            var lstGroupUser = BizGroupUser.LoadByGroupID(groupID);
+            var groupInfo = BizGroupInfo.LoadByGroupID(groupID);
+
+            var lstUID = lstGroupUser.Select(model => model.UserInfoID).ToList();
+            lstUID.Add(groupInfo.CreateUesrID);
+            var lstUserInfo = UserInfoBo.GetListByUIDList(lstUID.Distinct().ToList());
+            Dictionary<long, BizUserInfo> dicUserInfo = new Dictionary<long, BizUserInfo>();
+            if (lstUserInfo != null)
+            {
+                dicUserInfo = lstUserInfo.ToDictionary(model => model.UserInfoID, model => model);
+            }
+
+
+            lstUIUserGroupInfo = lstGroupUser.Where(model => model.IsPass == (int)AuditStatus.NotPass).Select(model => new UIUserGroupInfo()
+            {
+                GroupInfo = new UIGroupInfo()
+                {
+                    CreateTime = groupInfo.CreateTime,
+                    CreateUesrID = groupInfo.CreateUesrID,
+                    CreateUesrInfo = ToUIUserInfo(groupInfo.CreateUesrID, dicUserInfo),
+                    GroupInfoID = groupInfo.GroupInfoID,
+                    GroupName = groupInfo.GroupName,
+                },
+                GroupInfoID = model.GroupInfoID,
+                GroupUserID = model.GroupUserID,
+                CreateTime = model.CreateTime,
+                IsPass = model.IsPass,
+                UserInfoID = model.UserInfoID,
+                GroupUserInfo = ToUIUserInfo(model.UserInfoID, dicUserInfo),
+            }).ToList();
+
+            return View("ShowGroupUserList", lstUIUserGroupInfo);
+
+        }
+
+
+
         public ActionResult ShowGroupDetail(long groupID)
         {
             UIGroupInfo groupInfo = null;
             if (groupID == 0)
                 return View(groupInfo);
             var bizGroupInfo = BizGroupInfo.LoadByGroupID(groupID);
+            if(bizGroupInfo==null)
+                return View(groupInfo);
             var createUser = BizUserInfo.LoadByUserInfoID(bizGroupInfo.CreateUesrID);
             groupInfo = new UIGroupInfo()
             {
@@ -250,6 +296,67 @@ namespace WebBookmarkUI.Controllers
                    UserImagURL = dicUserInfo[userID].UserImagURL,
                    UserInfoComment = dicUserInfo[userID].UserInfoComment,
                } : null;
+        }
+
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="groupID"></param>
+        /// <returns></returns>
+        public ActionResult ApplyToGroup(long groupID)
+        {
+            BizResultInfo result = new BizResultInfo();
+            if (groupID == 0 || BizGroupInfo.LoadByGroupID(groupID)==null)
+            {
+                result.IsSuccess = false;
+                result.ErrorMessage = "群组ID不能为空呀，这个数据肯定有问题...不要逗我玩吧。";
+                return Json(result);
+            }
+            var lstGroupUser = BizGroupUser.LoadGroupUser(UILoginHelper.GetUIDInCookie(Request));
+            if(lstGroupUser!=null && lstGroupUser.Any(model=>model.GroupInfoID == groupID))
+            {
+                result.IsSuccess = false;
+                result.ErrorMessage = "已经申请加入了，再等等吧....";
+                return Json(result);
+            }
+
+
+            BizGroupUser groupUser = new BizGroupUser();
+            groupUser.GroupInfoID = groupID;
+            groupUser.IsPass = (int)AuditStatus.NotPass;
+            groupUser.CreateTime = DateTime.Now;
+            groupUser.UserInfoID = UILoginHelper.GetUIDInCookie(Request);
+            groupUser.Save();
+
+            result.IsSuccess = true;
+            result.SuccessMessage = "申请成功....";
+          
+
+            return Json(result);
+
+
+        }
+
+
+        public ActionResult PassGroupUser(long groupUserID)
+        {
+            BizResultInfo result = new BizResultInfo();
+           
+            var bizModel = BizGroupUser.LoadByGroupUserID(groupUserID);
+             if (groupUserID == 0 || bizModel==null)
+            {
+                result.IsSuccess = false;
+                result.ErrorMessage = "取不到这个数据啊呀...不要逗我玩吧。";
+                return Json(result);
+            }
+             bizModel.IsPass = (int)AuditStatus.Pass;
+             bizModel.Save();
+
+             result.IsSuccess = true;
+             result.SuccessMessage = "审核成功！";
+             return Json(result );
+            
         }
     }
 }

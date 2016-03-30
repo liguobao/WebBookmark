@@ -181,13 +181,13 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>03/29/2016 00:03:28</publishTime>
     </File>
     <File Include="bin/WebBookmarkUI.dll">
-      <publishTime>03/30/2016 01:19:32</publishTime>
+      <publishTime>03/31/2016 01:55:23</publishTime>
     </File>
     <File Include="bin/WebfolderBo.dll">
-      <publishTime>03/30/2016 01:19:31</publishTime>
+      <publishTime>03/31/2016 01:55:22</publishTime>
     </File>
     <File Include="bin/WebfolderService.dll">
-      <publishTime>03/30/2016 01:19:31</publishTime>
+      <publishTime>03/31/2016 01:55:22</publishTime>
     </File>
     <File Include="bin/zh-Hans/System.Net.Http.Formatting.resources.dll">
       <publishTime>03/19/2016 14:58:54</publishTime>
@@ -217,7 +217,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>03/29/2016 00:03:27</publishTime>
     </File>
     <File Include="DomainJS/groupinfo.js">
-      <publishTime>03/30/2016 01:19:16</publishTime>
+      <publishTime>03/30/2016 23:53:21</publishTime>
     </File>
     <File Include="DomainJS/importbookmark.js">
       <publishTime>03/29/2016 00:03:27</publishTime>
@@ -233,6 +233,9 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     </File>
     <File Include="DomainJS/register.js">
       <publishTime>03/29/2016 00:03:27</publishTime>
+    </File>
+    <File Include="DomainJS/showgroupdetail.js">
+      <publishTime>03/31/2016 01:52:30</publishTime>
     </File>
     <File Include="DomainJS/userInfo.js">
       <publishTime>03/29/2016 00:03:27</publishTime>
@@ -373,7 +376,19 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>03/29/2016 00:03:27</publishTime>
     </File>
     <File Include="Views/GroupInfo/Index.cshtml">
-      <publishTime>03/30/2016 01:18:51</publishTime>
+      <publishTime>03/30/2016 23:51:06</publishTime>
+    </File>
+    <File Include="Views/GroupInfo/ShowALLUserGroupList.cshtml">
+      <publishTime>03/31/2016 00:59:39</publishTime>
+    </File>
+    <File Include="Views/GroupInfo/ShowGroupDetail.cshtml">
+      <publishTime>03/31/2016 01:36:46</publishTime>
+    </File>
+    <File Include="Views/GroupInfo/ShowGroupUserList.cshtml">
+      <publishTime>03/31/2016 01:48:13</publishTime>
+    </File>
+    <File Include="Views/GroupInfo/ShowMyGroupList.cshtml">
+      <publishTime>03/30/2016 23:50:18</publishTime>
     </File>
     <File Include="Views/GroupInfo/ShowUserGroupList.cshtml">
       <publishTime>03/30/2016 00:52:08</publishTime>
@@ -445,7 +460,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>03/29/2016 00:03:27</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>03/30/2016 01:19:32</publishTime>
+      <publishTime>03/31/2016 01:55:24</publishTime>
     </File>
   </ItemGroup>
 </Project>

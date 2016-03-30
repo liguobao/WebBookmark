@@ -1,7 +1,7 @@
 ﻿@model List<WebBookmarkUI.Models.UIUserGroupInfo>
 
 <div class="mod-body">
-    <div class="tab-content">
+    <div class="tab-content" style="margin-top:10px;">
         <div class="tab-pane active">
             <div id="search_result">
 
@@ -11,30 +11,39 @@
 
                     foreach (var userGroup in Model)
                     {
+                       
                         <div class="aw-item">
+                            <div class="am-u-md-1">
+                                @if (!string.IsNullOrEmpty(userGroup.GroupUserInfo.UserImagURL))
+                                {
 
-                            @if (!string.IsNullOrEmpty(userGroup.GroupUserInfo.UserImagURL))
-                            {
-                                <a href='@Url.Content(@userGroup.GroupUserInfo.UserImagURL)' class="aw-user-img" ><img src='@Url.Content(@userGroup.GroupUserInfo.UserImagURL)' alt="" width="60" height="60"></a>
-                            }
-                            else
-                            {
-                                <a href='http://s.amazeui.org/media/i/demos/bw-2014-06-19.jpg?imageView/1/w/200/h/200/q/80' class="aw-user-img"><img src='http://s.amazeui.org/media/i/demos/bw-2014-06-19.jpg?imageView/1/w/200/h/200/q/80' alt="" width="50" height="50"></a>
-                            }
+                                    <a href='@Url.Content(@userGroup.GroupUserInfo.UserImagURL)' class="aw-user-img"><img src='@Url.Content(@userGroup.GroupUserInfo.UserImagURL)' alt="" width="60" height="60"></a>
+                                }
+                                else
+                                {
+                                    <a href='http://s.amazeui.org/media/i/demos/bw-2014-06-19.jpg?imageView/1/w/200/h/200/q/80' class="aw-user-img"><img src='http://s.amazeui.org/media/i/demos/bw-2014-06-19.jpg?imageView/1/w/200/h/200/q/80' alt="" width="50" height="50"></a>
+                                }
+                            </div>
 
-                            @if (userGroup.IsPass == 1)
-                            {
-                                <span class="am-icon-check">已通过</span>
-                            }
-                            else
-                            {
-                                <span class="am-icon-bolt">等待审核</span>
-                            }
-                            
-
+                          
                             <p class="aw-title">
                                 <a href="#" id="showUserInfo" data-id='@userGroup.GroupUserInfo.UserInfoID'>@userGroup.GroupUserInfo.UserName / @userGroup.GroupUserInfo.UserEmail</a>
                             </p>
+
+                            @if (userGroup.IsPass == 1)
+                            {
+                                <div class="am-text-success" >已通过 &nbsp; &nbsp;&nbsp;<span class="am-icon-check"></span></div>
+
+                            }
+                            else
+                            {
+                                <div class="am-text-danger">等待审核 &nbsp;&nbsp;&nbsp;<span class="am-icon-bolt"></span>
+                                 @if (userGroup.GroupInfo.CreateUesrID == loginUid)
+                                 {
+                                    <button id="btnPass" data-id='@userGroup.GroupUserID'><span class="am-icon-check">通过</span></button>
+                                 }
+                                 </div>
+                            }
 
                             <p class="aw-article-content">
                                 @if (!string.IsNullOrEmpty(userGroup.GroupUserInfo.UserInfoComment))
@@ -51,6 +60,11 @@
                                 }
 
                             </p>
+
+                           
+                            
+
+                            
                         </div>
                     }
 
