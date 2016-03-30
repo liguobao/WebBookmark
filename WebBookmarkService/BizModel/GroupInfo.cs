@@ -40,6 +40,11 @@ namespace WebBookmarkService.BizModel
         /// </summary>
 		public DateTime CreateTime{get;set;}
             
+        /// <summary>
+        /// 记录当前对象创建时候的Hashcode，以便取出来
+        /// </summary>
+		public int ObjectHashcode{get;set;}
+            
         
         /// <summary>
         /// Biz Convert To DB Model
@@ -53,6 +58,7 @@ namespace WebBookmarkService.BizModel
                 GroupIntro =  GroupIntro,
                 CreateUesrID =  CreateUesrID,
                 CreateTime =  CreateTime,
+                ObjectHashcode =  ObjectHashcode,
             };
         }
         
@@ -64,6 +70,7 @@ namespace WebBookmarkService.BizModel
              GroupIntro =  dataInfo.GroupIntro;
              CreateUesrID =  dataInfo.CreateUesrID;
              CreateTime =  dataInfo.CreateTime;
+             ObjectHashcode =  dataInfo.ObjectHashcode;
         }
         
         public  BizGroupInfo ()

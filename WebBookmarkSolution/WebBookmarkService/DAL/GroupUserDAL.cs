@@ -238,5 +238,44 @@ namespace WebBookmarkService.DAL
         #endregion
 	
 	    #endregion
+
+        /// <summary>
+        /// 删除用户群组下的所有数据
+        /// </summary>
+        /// <param name="groupID"></param>
+        /// <returns></returns>
+        public bool DeleteByGroupID(long groupID)
+        {
+            string sql = "DELETE from tblGroupUser WHERE GroupInfoID = @GroupInfoID";
+
+            MySqlParameter[] para = new MySqlParameter[]
+			{
+				new MySqlParameter("@GroupInfoID", groupID)
+			};
+
+            return MyDBHelper.ExecuteNonQuery(sql, para) >=0;
+        }
+
+
+        public IEnumerable<GroupUser> GetListByUserID(long userID)
+        {
+            string sql = "SELECT * FROM tblGroupUser WHERE UserInfoID = @UserInfoID";
+            using (MySqlDataReader reader = MyDBHelper.ExecuteDataReader(sql,
+                new MySqlParameter("@UserInfoID", userID)))
+            {
+                return ToModels(reader);
+            }
+        }
+
+
+        public IEnumerable<GroupUser> GetListByGroupInfoID(long groupInfoID)
+        {
+            string sql = "SELECT * FROM tblGroupUser WHERE GroupInfoID = @GroupInfoID";
+            using (MySqlDataReader reader = MyDBHelper.ExecuteDataReader(sql,
+                new MySqlParameter("@GroupInfoID", groupInfoID)))
+            {
+                return ToModels(reader);
+            }
+        }
 	}
 }

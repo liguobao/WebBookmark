@@ -5,10 +5,13 @@
 
 <script>
     var saveUserGroupInfoURL = "@Url.Action("SaveUserGroupInfo")";
-    var showUserGroupListURL = "@Url.Action("ShowUserGroupList")";
+    var showMyGroupList = "@Url.Action("ShowMyGroupList")";
     var createUserID = '@WebBookmarkUI.UILoginHelper.GetUIDInCookie(Request)';
     var modifyUserGroupInfo = "@Url.Action("ModifyUserGroupInfo")";
     var deleteUserGroupInfo = "@Url.Action("DeleteUserGroupInfo")";
+    var showALLUserGroupList = "@Url.Action("ShowALLUserGroupList")";
+    var showGroupDetail = "@Url.Content("~/GroupInfo/ShowGroupDetail?groupID=")";
+    
     
 </script>
 <script src="~/DomainJS/groupinfo.js"></script>
@@ -24,7 +27,7 @@
             <div class="am-btn-group am-btn-group-xs">
                     <div class="am-footer-switch">
                         <span class="am-footer-ysp" data-rel="mobile">
-                            <button type="button" class="am-btn am-btn-default" id="btnAdd" data-am-modal="{target: '#addgroup'}"><span class="am-icon-plus"></span> 新增群组</button>
+                            <button type="button" class="am-btn am-btn-default" id="btnAddGroup" data-am-modal="{target: '#addgroup'}"><span class="am-icon-plus"></span> 新增群组</button>
                         </span>
                     </div>
             </div>

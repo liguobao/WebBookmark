@@ -130,6 +130,7 @@
     <Compile Include="Models\UICommentInfo.cs" />
     <Compile Include="Models\UIGroupInfo.cs" />
     <Compile Include="Models\UIShowUserInfo.cs" />
+    <Compile Include="Models\UIUserGroupInfo.cs" />
     <Compile Include="Models\UIUserInfo.cs" />
     <Compile Include="Models\UIWebFolderInfo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -184,6 +185,7 @@
     <Content Include="DomainJS\login.js" />
     <Content Include="DomainJS\modifypassword.js" />
     <Content Include="DomainJS\register.js" />
+    <Content Include="DomainJS\showgroupdetail.js" />
     <Content Include="DomainJS\userInfo.js" />
     <Content Include="DomainJS\webbookmarktable.js" />
     <Content Include="Global.asax" />
@@ -295,7 +297,10 @@
     <Content Include="Views\ShowBookmarkInfo\ShowBookmarkHTML.cshtml" />
     <Content Include="Views\ShowBookmarkInfo\ShowBookmarkComment.cshtml" />
     <Content Include="Views\GroupInfo\Index.cshtml" />
-    <Content Include="Views\GroupInfo\ShowUserGroupList.cshtml" />
+    <Content Include="Views\GroupInfo\ShowALLUserGroupList.cshtml" />
+    <Content Include="Views\GroupInfo\ShowGroupUserList.cshtml" />
+    <Content Include="Views\GroupInfo\ShowGroupDetail.cshtml" />
+    <Content Include="Views\GroupInfo\ShowMyGroupList.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

@@ -38,6 +38,11 @@ namespace WebfolderBo.Model
         /// </summary>
         public DateTime CreateTime { get; set; }
 
+        /// <summary>
+        /// 记录当前对象创建时候的Hashcode，以便取出来
+        /// </summary>
+        public int ObjectHascode { get; set; }
+
 
         /// <summary>
         /// Biz Convert To DB Model
@@ -51,6 +56,7 @@ namespace WebfolderBo.Model
                 GroupIntro = GroupIntro,
                 CreateUesrID = CreateUesrID,
                 CreateTime = CreateTime,
+                ObjectHashcode = ObjectHascode,
             };
         }
 
@@ -62,24 +68,13 @@ namespace WebfolderBo.Model
             GroupIntro = dataInfo.GroupIntro;
             CreateUesrID = dataInfo.CreateUesrID;
             CreateTime = dataInfo.CreateTime;
+            ObjectHascode = dataInfo.ObjectHashcode;
         }
 
         public BizGroupInfo()
         {
 
-        }
-
-        public GroupInfo ToModle()
-        {
-            return new GroupInfo()
-            {
-                GroupName = GroupName,
-                GroupInfoID = GroupInfoID,
-                GroupIntro = GroupIntro,
-                CreateTime = CreateTime,
-                CreateUesrID = CreateUesrID,
-            };
-        }
+        } 
 
 
 
@@ -87,11 +82,19 @@ namespace WebfolderBo.Model
         {
             if (GroupInfoID != 0)
             {
-                new GroupInfoDAL().Update(ToModle());
+                new GroupInfoDAL().Update(ToModel());
             }
             else
             {
-                new GroupInfoDAL().Add(ToModle());
+                var DAL = new GroupInfoDAL();
+                DAL.Add(ToModel());
+                if(ObjectHascode!=0)
+                {
+                    var model = DAL.GetByObjectHashCode(ObjectHascode);
+                    if (model == null)
+                        return;
+                    GroupInfoID = model.GroupInfoID;
+                }
             }
         }
 
@@ -120,6 +123,18 @@ namespace WebfolderBo.Model
                 return new List<BizGroupInfo>();
             return groupInfos.Select(model => new BizGroupInfo(model)).ToList();
         }
+
+
+        public static  List<BizGroupInfo> LoadByGroupIDList(List<long> groupIDs)
+        {
+            var groupInfos = new GroupInfoDAL().GetByGroupIDList(groupIDs);
+            if (groupInfos == null)
+                return new List<BizGroupInfo>();
+            return groupInfos.Select(model => new BizGroupInfo(model)).ToList();
+        }
+      
+
+        
 
     }
 }

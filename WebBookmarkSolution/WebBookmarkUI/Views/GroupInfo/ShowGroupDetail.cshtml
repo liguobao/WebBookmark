@@ -1,0 +1,41 @@
+﻿@{
+    ViewBag.Title = "ShowGroupDetail";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@model WebBookmarkUI.Models.UIGroupInfo
+
+<script>
+    var showGroupUserList = "@Url.Action("ShowGroupUserList")";
+    var groupID = '@Model.GroupInfoID';
+
+</script>
+<script src="~/DomainJS/showgroupdetail.js"></script>
+
+<div class="am-cf am-padding">
+    <div class="am-fl am-cf"><strong class="am-text-primary am-text-lg">@Model.GroupName</strong> / <small>
+        <a href='@Url.Content("~/UserInfo/ShowUserDetail?uid="+Model.CreateUesrID)'>@Model.CreateUesrInfo.UserName</a></small>
+    @if (Model.CreateUesrID != WebBookmarkUI.UILoginHelper.GetUIDInCookie(Request))
+    {
+       <button class="am-btn-primary">申请加入</button>
+    }
+    </div>
+</div>
+<div class="am-cf" style="margin-left:1%">
+    <div class="">创建日期：@Model.CreateTime &nbsp;&nbsp;&nbsp;&nbsp;</div>
+    <div class="">简介：@Model.GroupIntro</div>
+</div>
+<div class="mod-footer">
+    <div class="am-tabs" data-am-tabs="">
+        <ul class="am-tabs-nav am-nav am-nav-tabs aw-nav-tabs">
+            <li class="am-active"><a href="#" id="groupuser" data-id='@Model.GroupInfoID'>群组成员 <span id="groupuserload"></span></a></li>
+            <li ><a href="#" id="groupinfo" data-id='@Model.GroupInfoID'>相关资料 <span id="infoload"></span></a></li>
+        </ul>
+
+        <div class="am-tabs-bd aw-user-center-tab" style="touch-action: pan-y; -webkit-user-select: none; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0); margin-left:2%" >
+            <div class="am-active am-in" id="overview">
+
+            </div>
+        </div>
+    </div>
+</div>

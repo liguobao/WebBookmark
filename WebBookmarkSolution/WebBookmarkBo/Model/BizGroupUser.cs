@@ -5,7 +5,9 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using WebBookmarkService.DAL;
 using WebBookmarkService.Model;
+using System.Linq;
 
 namespace WebfolderBo.Model
 {	
@@ -32,7 +34,7 @@ namespace WebfolderBo.Model
 		public long UserInfoID{get;set;}
             
         /// <summary>
-        /// 是否通过
+        /// 是否通过(0：未通过，1已通过)
         /// </summary>
 		public int IsPass{get;set;}
             
@@ -70,7 +72,46 @@ namespace WebfolderBo.Model
         public  BizGroupUser ()
         {
         
-        } 
+        }
+
+
+        public void Save()
+        {
+            if(GroupUserID!=0)
+            {
+                new GroupUserDAL().Update(ToModel());
+            }else
+            {
+                new GroupUserDAL().Add(ToModel());
+            }
+        }
+
+
+        public static List<BizGroupUser> LoadGroupUser(long userID)
+        {
+            var lstModel = new GroupUserDAL().GetListByUserID(userID);
+            return lstModel.Select(mode=>new BizGroupUser(mode)).ToList();
+        }
+
         
+        public static List<BizGroupUser> LoadByGroupID(long groupID)
+        {
+            var lstModel = new GroupUserDAL().GetListByGroupInfoID(groupID);
+            return lstModel.Select(mode => new BizGroupUser(mode)).ToList();
+        }
+
 	}
+
+    public enum AuditStatus
+    {
+        /// <summary>
+        /// 通过
+        /// </summary>
+        Pass =1,
+
+        /// <summary>
+        /// 未通过
+        /// </summary>
+        NotPass = 0,
+    }
 }

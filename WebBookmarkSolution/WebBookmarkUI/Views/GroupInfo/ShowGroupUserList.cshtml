@@ -1,0 +1,61 @@
+﻿@model List<WebBookmarkUI.Models.UIUserGroupInfo>
+
+<div class="mod-body">
+    <div class="tab-content">
+        <div class="tab-pane active">
+            <div id="search_result">
+
+                @if (Model != null)
+                {
+                    var loginUid = WebBookmarkUI.UILoginHelper.GetUIDInCookie(Request);
+
+                    foreach (var userGroup in Model)
+                    {
+                        <div class="aw-item">
+
+                            @if (!string.IsNullOrEmpty(userGroup.GroupUserInfo.UserImagURL))
+                            {
+                                <a href='@Url.Content(@userGroup.GroupUserInfo.UserImagURL)' class="aw-user-img" ><img src='@Url.Content(@userGroup.GroupUserInfo.UserImagURL)' alt="" width="60" height="60"></a>
+                            }
+                            else
+                            {
+                                <a href='http://s.amazeui.org/media/i/demos/bw-2014-06-19.jpg?imageView/1/w/200/h/200/q/80' class="aw-user-img"><img src='http://s.amazeui.org/media/i/demos/bw-2014-06-19.jpg?imageView/1/w/200/h/200/q/80' alt="" width="50" height="50"></a>
+                            }
+
+                            @if (userGroup.IsPass == 1)
+                            {
+                                <span class="am-icon-check">已通过</span>
+                            }
+                            else
+                            {
+                                <span class="am-icon-bolt">等待审核</span>
+                            }
+                            
+
+                            <p class="aw-title">
+                                <a href="#" id="showUserInfo" data-id='@userGroup.GroupUserInfo.UserInfoID'>@userGroup.GroupUserInfo.UserName / @userGroup.GroupUserInfo.UserEmail</a>
+                            </p>
+
+                            <p class="aw-article-content">
+                                @if (!string.IsNullOrEmpty(userGroup.GroupUserInfo.UserInfoComment))
+                                {
+                                    <span>
+                                        简介： @userGroup.GroupUserInfo.UserInfoComment
+                                    </span>
+                                }
+                                else
+                                {
+                                    <span>
+                                        简介： 这个用户还没来得及给自己写简介呢。
+                                    </span>
+                                }
+
+                            </p>
+                        </div>
+                    }
+
+                }
+            </div>
+        </div>
+    </div>
+</div>

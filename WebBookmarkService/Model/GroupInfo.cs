@@ -40,5 +40,10 @@ namespace WebBookmarkService.Model
         /// </summary>
 		public DateTime CreateTime{get;set;}
             
+        /// <summary>
+        /// 记录当前对象创建时候的Hashcode，以便取出来
+        /// </summary>
+		public int ObjectHashcode{get;set;}
+            
 	}
 }

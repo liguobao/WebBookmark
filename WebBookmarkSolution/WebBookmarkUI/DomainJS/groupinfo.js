@@ -4,6 +4,21 @@
         SaveGroupInfo();
     });
 
+
+    $("#btnAddGroup").on('click', function () {
+         $("#groupName").val("");
+         $("#groupIntro").val("");
+    });
+
+    $('body').on("click", "[id='showGroupDetail']", function (e) {
+        e.preventDefault();
+        var $this = $(this);
+        var groupID = $this.attr("data-id");
+        window.location = showGroupDetail + groupID;
+        e.stopPropagation();
+    });
+
+
     $('body').on("click", "[id='modifygroup']", function (e) {
         e.preventDefault();
         var $this = $(this);
@@ -16,10 +31,13 @@
 
 
     $('body').on("click", "[id='deletegroup']", function (e) {
+        var $this = $(this);
+        var deleteId = $this.attr("data-id");
+
        $('#my-confirm').modal({
            relatedTarget: this,
            onConfirm: function (options) {
-              
+               DeleteUserGroupInfo(deleteId);
            },
            // closeOnConfirm: false,
            onCancel: function () {
@@ -35,9 +53,32 @@
         ModifyUserGroupInfo();
     });
 
-    ShowGroupList(createUserID);
+    ShowMyGroupList(createUserID);
 
 
+    $('body').on("click", "[id='mygroup']", function () {
+        var $this = $(this);
+        $("#groupuser").parent().removeClass("am-active");
+        $("#groupmessage").parent().removeClass("am-active");
+        $this.parent().addClass("am-active");
+        ShowMyGroupList(createUserID);
+    });
+
+    $('body').on("click", "[id='groupuser']", function () {
+        var $this = $(this);
+        $("#mygroup").parent().removeClass("am-active");
+        $("#groupmessage").parent().removeClass("am-active");
+        $this.parent().addClass("am-active");
+        ShowALLUserGroupList(createUserID);
+    });
+
+    $('body').on("click", "[id='groupmessage']", function () {
+        var $this = $(this);
+        $("#mygroup").parent().removeClass("am-active");
+        $("#groupuser").parent().removeClass("am-active");
+        $this.parent().addClass("am-active");
+        ShowALLUserGroupList(createUserID);
+    })
 
 
 
@@ -60,7 +101,7 @@ function SaveGroupInfo()
         success:
             function (result) {
                 if (result.IsSuccess) {
-                    ShowGroupList(createUserID);
+                    ShowMyGroupList(createUserID);
                 }
                 else {
                     alert(result.ErrorMessage);
@@ -92,7 +133,7 @@ function ModifyUserGroupInfo() {
         success:
             function (result) {
                 if (result.IsSuccess) {
-                    ShowGroupList(createUserID);
+                    ShowMyGroupList(createUserID);
                 }
                 else {
                     alert(result.ErrorMessage);
@@ -102,15 +143,15 @@ function ModifyUserGroupInfo() {
     });
 }
 
-function DeleteUserGroupInfo() {
+function DeleteUserGroupInfo(deleteId) {
     $.ajax({
         type: "post",
         url: deleteUserGroupInfo,
-        data: {  },
+        data: { groupID: deleteId },
         success:
             function (result) {
                 if (result.IsSuccess) {
-                    ShowGroupList(createUserID);
+                    ShowMyGroupList(createUserID);
                 }
                 else {
                     alert(result.ErrorMessage);
@@ -122,13 +163,13 @@ function DeleteUserGroupInfo() {
 
 
 
-function ShowGroupList(createUserID)
+function ShowMyGroupList(createUserID)
 {
     $("#mygrouploading").addClass("am-icon-spinner").addClass("am-icon-spin");
 
     $.ajax({
         type: "post",
-        url: showUserGroupListURL,
+        url: showMyGroupList,
         data: { createUserID: createUserID },
         success:
             function (data) {
@@ -137,6 +178,24 @@ function ShowGroupList(createUserID)
                     $("#overview").html(data);
                 }
                 $("#mygrouploading").removeClass("am-icon-spinner").removeClass("am-icon-spin");
+            }
+    });
+}
+
+
+function ShowALLUserGroupList(userID) {
+    $("#groupuserloading").addClass("am-icon-spinner").addClass("am-icon-spin");
+
+    $.ajax({
+        type: "post",
+        url: showALLUserGroupList,
+        data: { userID: userID },
+        success:
+            function (data) {
+                if (data != "") {
+                    $("#overview").html(data);
+                }
+                $("#groupuserloading").removeClass("am-icon-spinner").removeClass("am-icon-spin");
             }
     });
 }

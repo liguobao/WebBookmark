@@ -21,13 +21,14 @@ namespace WebBookmarkService.DAL
         /// </summary>        
         public bool Add (GroupInfo groupInfo)
 		{
-				string sql ="INSERT INTO tblGroupInfo (GroupName, GroupIntro, CreateUesrID, CreateTime)  VALUES (@GroupName, @GroupIntro, @CreateUesrID, @CreateTime)";
+				string sql ="INSERT INTO tblGroupInfo (GroupName, GroupIntro, CreateUesrID, CreateTime, ObjectHashcode)  VALUES (@GroupName, @GroupIntro, @CreateUesrID, @CreateTime, @ObjectHashcode)";
 				MySqlParameter[] para = new MySqlParameter[]
 					{
 						new MySqlParameter("@GroupName", ToDBValue(groupInfo.GroupName)),
 						new MySqlParameter("@GroupIntro", ToDBValue(groupInfo.GroupIntro)),
 						new MySqlParameter("@CreateUesrID", ToDBValue(groupInfo.CreateUesrID)),
 						new MySqlParameter("@CreateTime", ToDBValue(groupInfo.CreateTime)),
+						new MySqlParameter("@ObjectHashcode", ToDBValue(groupInfo.ObjectHashcode)),
 					};
 					
 				int AddId = (int)MyDBHelper.ExecuteScalar(sql, para);
@@ -75,6 +76,7 @@ namespace WebBookmarkService.DAL
                 +", GroupIntro = @GroupIntro" 
                 +", CreateUesrID = @CreateUesrID" 
                 +", CreateTime = @CreateTime" 
+                +", ObjectHashcode = @ObjectHashcode" 
                
             +" WHERE GroupInfoID = @GroupInfoID";
 
@@ -86,6 +88,7 @@ namespace WebBookmarkService.DAL
 					,new MySqlParameter("@GroupIntro", ToDBValue(groupInfo.GroupIntro))
 					,new MySqlParameter("@CreateUesrID", ToDBValue(groupInfo.CreateUesrID))
 					,new MySqlParameter("@CreateTime", ToDBValue(groupInfo.CreateTime))
+					,new MySqlParameter("@ObjectHashcode", ToDBValue(groupInfo.ObjectHashcode))
 			};
 
 			return MyDBHelper.ExecuteNonQuery(sql, para);
@@ -126,6 +129,7 @@ namespace WebBookmarkService.DAL
 			groupInfo.GroupIntro = (string)ToModelValue(dr,"GroupIntro");
 			groupInfo.CreateUesrID = (long)ToModelValue(dr,"CreateUesrID");
 			groupInfo.CreateTime = (DateTime)ToModelValue(dr,"CreateTime");
+			groupInfo.ObjectHashcode = (int)ToModelValue(dr,"ObjectHashcode");
 			return groupInfo;
 		}
 		#endregion

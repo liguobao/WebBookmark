@@ -20,12 +20,12 @@
                 <tbody>
                     @if (Model != null && Model.Count > 0)
                     {
-                        int index =1;
+                        int index = 1;
                         foreach (var groupInfo in Model)
                         {
                             <tr>
                                 <td>@index</td>
-                                <td>@groupInfo.GroupName <span class="am-icon-folder-open-o"></span>
+                                <td>@groupInfo.GroupName <span class="am-icon-folder-open-o" data-id='@groupInfo.GroupInfoID' id="showGroupDetail"></span>
                                 <td>@groupInfo.CreateTime</td>
                                 <td>
                                     <div class="am-btn-toolbar">
