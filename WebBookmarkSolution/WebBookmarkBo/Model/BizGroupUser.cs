@@ -9,7 +9,7 @@ using WebBookmarkService.DAL;
 using WebBookmarkService.Model;
 using System.Linq;
 
-namespace WebfolderBo.Model
+namespace WebBookmarkBo.Model
 {	
 	[Serializable()]
     
@@ -109,6 +109,14 @@ namespace WebfolderBo.Model
             return new BizGroupUser(model);
         }
 
+
+        public static BizGroupUser LoadByUserIDAndGroupID(long uid, long groupID)
+        {
+            var model = new GroupUserDAL().GetByUserIDAndGroupInfoID(uid,groupID);
+            if (model == null)
+                return null;
+            return new BizGroupUser(model);
+        }
 	}
 
     public enum AuditStatus

@@ -129,7 +129,7 @@ namespace WebBookmarkUI.Controllers
                     if(lst!=null)
                     {
                         var firstFolder = lst.Where(folder=>folder.ParentWebfolderID==0);
-                        if(firstFolder==null)
+                        if (firstFolder == null || firstFolder.Count()==0)
                             return View("ShowUserFolder", model);
 
                         folderID = firstFolder.FirstOrDefault().UserWebFolderID;

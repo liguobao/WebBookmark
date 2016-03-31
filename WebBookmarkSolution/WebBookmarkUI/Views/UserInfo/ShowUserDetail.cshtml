@@ -5,7 +5,7 @@
 
 @model long
 
-<script src="~/DomainJS/interestrecommend.js"></script>
+<script src="~/DomainJS/showuserdetail.js"></script>
 <script>
     var followUserURL = "@Url.Action("../InterestRecommend/FollowUser")";
     var showUserInfoURL = "@Url.Action("../InterestRecommend/ShowUserInfo")";
@@ -15,6 +15,7 @@
     var showUserBeFollwedUR = "@Url.Action("../Follower/ShowUserBeFollwed")";
     var userId = '@Model';
     ShowUserInfo(userId);
+  
 </script>
 
 <div class="am-cf am-padding">

@@ -277,5 +277,24 @@ namespace WebBookmarkService.DAL
                 return ToModels(reader);
             }
         }
+
+        public GroupUser GetByUserIDAndGroupInfoID(long uid,long groupID)
+        {
+            string sql = "SELECT * FROM tblGroupUser WHERE GroupInfoID = @GroupInfoID and UserInfoID = @UserInfoID";
+            using (MySqlDataReader reader = MyDBHelper.ExecuteDataReader(sql, 
+                new MySqlParameter("@GroupInfoID", groupID),
+                new MySqlParameter("@UserInfoID", uid)))
+            {
+                if (reader.Read())
+                {
+                    return ToModel(reader);
+                }
+                else
+                {
+                    return null;
+                }
+            }
+        }
+
 	}
 }

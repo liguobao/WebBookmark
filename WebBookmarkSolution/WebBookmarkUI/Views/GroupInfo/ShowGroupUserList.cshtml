@@ -27,13 +27,19 @@
 
                           
                             <p class="aw-title">
-                                <a href="#" id="showUserInfo" data-id='@userGroup.GroupUserInfo.UserInfoID'>@userGroup.GroupUserInfo.UserName / @userGroup.GroupUserInfo.UserEmail</a>
+                                <a href='@Url.Content("~/UserInfo/ShowUserDetail?uid=" + userGroup.GroupUserInfo.UserInfoID)' id="showUserInfo" data-id='@userGroup.GroupUserInfo.UserInfoID'>@userGroup.GroupUserInfo.UserName / @userGroup.GroupUserInfo.UserEmail</a>
                             </p>
 
                             @if (userGroup.IsPass == 1)
                             {
-                                <div class="am-text-success" >已通过 &nbsp; &nbsp;&nbsp;<span class="am-icon-check"></span></div>
-
+                                <div class="am-text-success" >已通过 &nbsp; &nbsp;&nbsp;<span class="am-icon-check"></span>&nbsp; &nbsp;&nbsp;
+                                @if (userGroup.GroupInfo.CreateUesrID == loginUid && userGroup.UserInfoID != loginUid)
+                                 {
+                                     <a><span class="am-icon-remove" id="btnRemove" data-id='@userGroup.GroupUserID'>移出群组</span></a>
+                                 }
+                            
+                                 </div>
+                                
                             }
                             else
                             {

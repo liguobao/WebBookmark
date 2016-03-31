@@ -1,0 +1,57 @@
+﻿@model List<WebBookmarkUI.Models.UIUserGroupInfo>
+
+<div class="admin-content">
+    <div class="am-g">
+        <div class="am-u-sm-12">
+            <table class="am-table am-table-striped am-table-hover table-main ">
+                <thead>
+                    <tr>
+                        <th class="table-id">序号</th>
+                        <th class="table-main">群组名称</th>
+                        <th class="table-date am-hide-sm-only">创建时间</th>
+                        <th class="table-set">所属用户</th>
+                        <th class="table-set">当前状态</th>
+
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (Model != null && Model.Count > 0)
+                    {
+                        int index = 1;
+                        foreach (var userGroup in Model)
+                        {
+                            <tr>
+                                <td>@index</td>
+                                <td>
+                                    <a href='@Url.Content("~/GroupInfo/ShowGroupDetail?groupID=" + userGroup.GroupInfo.GroupInfoID)'>@userGroup.GroupInfo.GroupName</a>
+                                <td>@userGroup.GroupInfo.CreateTime</td>
+                                <td>
+                                    @if (userGroup.GroupInfo.CreateUesrInfo != null)
+                                    {
+                                        <a href='@Url.Content("~/UserInfo/ShowUserDetail?uid=" +userGroup.GroupInfo.CreateUesrInfo.UserInfoID )'>
+                                            @userGroup.GroupInfo.CreateUesrInfo.UserName
+                                        </a>
+                                    }
+                                </td>
+                                <td>
+                                    @if (userGroup.IsPass == 1)
+                                    {
+                                        <div class="am-text-success"> 已通过<span class="am-icon-check"></span></div>
+
+                                    }
+                                    else
+                                    {
+                                        <div class="am-text-danger"> 等待审核 <span class="am-icon-bolt"></span></div>
+
+                                    }
+                                </td>
+                            </tr>
+                                    index++;
+                        }
+                    }
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+</div>

@@ -1,0 +1,38 @@
+﻿@model List<WebBookmarkUI.Models.UIGroupInfo>
+
+<script type="text/javascript">
+</script>
+
+
+<div class="admin-content">
+    <div class="am-g">
+        <div class="am-u-sm-12">
+            <table class="am-table am-table-striped am-table-hover table-main ">
+                <thead>
+                    <tr>
+                        <th class="table-id">序号</th>
+                        <th class="table-main">群组名称</th>
+                        <th class="table-date am-hide-sm-only">创建时间</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (Model != null && Model.Count > 0)
+                    {
+                        int index = 1;
+                        foreach (var groupInfo in Model)
+                        {
+                            <tr>
+                                <td>@index</td>
+                                <td>
+                                    <a href='@Url.Content("~/GroupInfo/ShowGroupDetail?groupID="+groupInfo.GroupInfoID)'>@groupInfo.GroupName</a>
+                                <td>@groupInfo.CreateTime</td>
+                            </tr>
+                            index++;
+                        }
+                    }
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+</div>

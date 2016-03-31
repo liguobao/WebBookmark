@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using WebBookmarkService.DAL;
 using WebBookmarkService.Model;
 
-namespace WebfolderBo.Model
+namespace WebBookmarkBo.Model
 {
     /// <summary>
     /// 

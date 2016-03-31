@@ -1,6 +1,13 @@
 ﻿@model WebBookmarkUI.Models.SearchUserInfo
 
 <link href="~/assets/login/user.css" rel="stylesheet" />
+<script>
+    var showUserCreateGroupListURL = "@Url.Action("../ShowGroup/ShowUserCreateGroupList")";
+    var showUserGroupListAndPassURL = "@Url.Action("../ShowGroup/ShowUserGroupListAndPass")";
+    
+
+</script>
+
 @if(Model!=null)
 {
     <div class="aw-mod aw-user-detail-box">
@@ -43,6 +50,8 @@
                 <li class="am-active"><a href="#" id="allfolder" data-uid='@Model.UserInfoID'>公开书签夹 <span id="loadfolder"></span></a></li>
                 <li class=""><a href="#" id="follower" data-uid='@Model.UserInfoID'>关注了 <span id="loadfollow"></span></a></li>
                 <li class=""><a href="#" id="befollwed" data-uid='@Model.UserInfoID'>关注者 <span id="loadbefollwed"></span></a></li>
+                <li class=""><a href="#" id="groupinfo" data-uid='@Model.UserInfoID'>他的群组 <span id="loadgroupinfo"></span></a></li>
+                <li class=""><a href="#" id="groupuser" data-uid='@Model.UserInfoID'>他加入的群组 <span id="loadgroupuser"></span></a></li>
             </ul>
 
             <div class="am-tabs-bd aw-user-center-tab" style="touch-action: pan-y; -webkit-user-select: none; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);">

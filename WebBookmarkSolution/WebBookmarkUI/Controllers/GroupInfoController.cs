@@ -21,6 +21,11 @@ namespace WebBookmarkUI.Controllers
             return View();
         }
 
+        /// <summary>
+        /// 展示用户创建的群组
+        /// </summary>
+        /// <param name="createUserID"></param>
+        /// <returns></returns>
         public ActionResult ShowMyGroupList(long createUserID)
         {
             if(createUserID==0)
@@ -41,7 +46,12 @@ namespace WebBookmarkUI.Controllers
             return View("ShowMyGroupList", lstModel);
         }
 
-
+        /// <summary>
+        /// 保存群组信息
+        /// </summary>
+        /// <param name="groupName"></param>
+        /// <param name="groupIntro"></param>
+        /// <returns></returns>
         public ActionResult SaveUserGroupInfo(string groupName,string groupIntro)
         {
             long uid = UILoginHelper.GetUIDInCookie(Request);
@@ -74,6 +84,13 @@ namespace WebBookmarkUI.Controllers
         }
 
 
+        /// <summary>
+        /// 修改群组信息
+        /// </summary>
+        /// <param name="groupName"></param>
+        /// <param name="groupIntro"></param>
+        /// <param name="groupID"></param>
+        /// <returns></returns>
         public ActionResult ModifyUserGroupInfo(string groupName, string groupIntro,long groupID)
         {
             long uid = UILoginHelper.GetUIDInCookie(Request);
@@ -108,7 +125,11 @@ namespace WebBookmarkUI.Controllers
 
         }
 
-
+        /// <summary>
+        /// 删除群组
+        /// </summary>
+        /// <param name="groupID"></param>
+        /// <returns></returns>
         public ActionResult DeleteUserGroupInfo(long groupID)
         {
             BizResultInfo result = new BizResultInfo();
@@ -125,7 +146,11 @@ namespace WebBookmarkUI.Controllers
             return Json(result);
         }
 
-
+        /// <summary>
+        /// 展示用户的所有群组（包括未通过申请的）
+        /// </summary>
+        /// <param name="userID"></param>
+        /// <returns></returns>
         public ActionResult ShowALLUserGroupList(long userID)
         {
             if (userID == 0)
@@ -170,7 +195,11 @@ namespace WebBookmarkUI.Controllers
             return View("ShowALLUserGroupList", lstUIUserGroupInfo);
         }
 
-
+        /// <summary>
+        /// 展示群组当前用户
+        /// </summary>
+        /// <param name="groupID"></param>
+        /// <returns></returns>
         public ActionResult ShowGroupUserList(long groupID)
         {
 
@@ -213,7 +242,11 @@ namespace WebBookmarkUI.Controllers
 
         }
 
-
+        /// <summary>
+        /// 未通过审核的群组用户
+        /// </summary>
+        /// <param name="groupID"></param>
+        /// <returns></returns>
         public ActionResult ShowGroupUserListNotPass(long groupID)
         {
 
@@ -257,7 +290,11 @@ namespace WebBookmarkUI.Controllers
         }
 
 
-
+        /// <summary>
+        /// 群组详细信息
+        /// </summary>
+        /// <param name="groupID"></param>
+        /// <returns></returns>
         public ActionResult ShowGroupDetail(long groupID)
         {
             UIGroupInfo groupInfo = null;
@@ -300,7 +337,7 @@ namespace WebBookmarkUI.Controllers
 
 
         /// <summary>
-        /// 
+        /// 申请加入群组
         /// </summary>
         /// <param name="groupID"></param>
         /// <returns></returns>
@@ -338,7 +375,11 @@ namespace WebBookmarkUI.Controllers
 
         }
 
-
+        /// <summary>
+        /// 通过申请
+        /// </summary>
+        /// <param name="groupUserID"></param>
+        /// <returns></returns>
         public ActionResult PassGroupUser(long groupUserID)
         {
             BizResultInfo result = new BizResultInfo();
@@ -357,6 +398,45 @@ namespace WebBookmarkUI.Controllers
              result.SuccessMessage = "审核成功！";
              return Json(result );
             
+        }
+
+        /// <summary>
+        /// 移除用户
+        /// </summary>
+        /// <param name="groupUserID"></param>
+        /// <returns></returns>
+        public ActionResult RemoveGroupUser(long groupUserID)
+        {
+            BizResultInfo result = new BizResultInfo();
+          
+
+            var bizModel = BizGroupUser.LoadByGroupUserID(groupUserID);
+            if (groupUserID == 0 || bizModel == null)
+            {
+                result.IsSuccess = false;
+                result.ErrorMessage = "取不到这个数据啊呀...不要逗我玩吧。";
+                return Json(result);
+            }
+
+            if (UILoginHelper.GetUIDInCookie(Request) == bizModel.UserInfoID)
+            {
+                result.IsSuccess = false;
+                result.ErrorMessage = "不允许移除自己....";
+                return Json(result);
+            }
+
+            var isSuccess = GroupUserBo.RemoverGroupUser(groupUserID);
+
+            result.IsSuccess = isSuccess;
+            if(isSuccess)
+            {
+                result.SuccessMessage = "移除成功！";
+            }else
+            {
+                result.ErrorMessage ="移除失败，可能是数据库挂了吧。";
+            }
+            
+            return Json(result);
         }
     }
 }

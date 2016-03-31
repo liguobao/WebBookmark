@@ -33,6 +33,21 @@
         var $this = $(this);
         PassGroupUser($this.attr("data-id"));
     });
+
+    $('body').on("click", "[id='btnRemove']", function () {
+        var $this = $(this);
+        var groupUserID = $this.attr("data-id");
+        $('#remover-confirm').modal({
+            relatedTarget: this,
+            onConfirm: function (options) {
+                RemoveGroupUser(groupUserID);
+            },
+            // closeOnConfirm: false,
+            onCancel: function () {
+                $("remover-confirm").modal("close");
+            }
+        });
+    });
 });
 
 function ApplyToGroup()
@@ -108,4 +123,24 @@ function PassGroupUser(groupUserID)
 
             }
     });
+}
+
+
+function RemoveGroupUser(groupUserID)
+{
+    $.ajax({
+        type: "post",
+        url: removeGroupUserURL,
+        data: { groupUserID: groupUserID },
+        success:
+            function (result) {
+                if (result.IsSuccess) {
+                    ShowGroupUserList(groupID);
+                } else {
+                    alert(result.ErrorMessage);
+                }
+
+            }
+    });
+    
 }

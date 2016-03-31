@@ -121,6 +121,7 @@
     <Compile Include="Controllers\GroupInfoController.cs" />
     <Compile Include="Controllers\RegisterController.cs" />
     <Compile Include="Controllers\ShowBookmarkInfoController.cs" />
+    <Compile Include="Controllers\ShowGroupController.cs" />
     <Compile Include="Controllers\UserInfoController.cs" />
     <Compile Include="Controllers\WebBookmarkTableController.cs" />
     <Compile Include="Global.asax.cs">
@@ -186,6 +187,7 @@
     <Content Include="DomainJS\modifypassword.js" />
     <Content Include="DomainJS\register.js" />
     <Content Include="DomainJS\showgroupdetail.js" />
+    <Content Include="DomainJS\showuserdetail.js" />
     <Content Include="DomainJS\userInfo.js" />
     <Content Include="DomainJS\webbookmarktable.js" />
     <Content Include="Global.asax" />
@@ -301,6 +303,8 @@
     <Content Include="Views\GroupInfo\ShowGroupUserList.cshtml" />
     <Content Include="Views\GroupInfo\ShowGroupDetail.cshtml" />
     <Content Include="Views\GroupInfo\ShowMyGroupList.cshtml" />
+    <Content Include="Views\ShowGroup\ShowUserCreateGroupList.cshtml" />
+    <Content Include="Views\ShowGroup\ShowUserGroupListAndPass.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
