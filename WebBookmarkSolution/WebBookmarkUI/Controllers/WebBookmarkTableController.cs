@@ -18,7 +18,7 @@ namespace WebBookmarkUI.Controllers
         // GET: WebBookmarkTable
         public ActionResult Index(long folderID=0)
         {
-            long uid = UILoginHelper.GetUIDInCookie(Request);
+            long uid = UILoginHelper.GetUIDFromHttpContext(HttpContext);
             if (folderID == 0)
             {
                 var lst = BizUserWebFolder.LoadAllByUID(uid);
@@ -38,7 +38,7 @@ namespace WebBookmarkUI.Controllers
 
         public ActionResult ShowFolderTable(long folderID)
         {
-            long uid = UILoginHelper.GetUIDInCookie(Request);
+            long uid = UILoginHelper.GetUIDFromHttpContext(HttpContext);
             if (folderID == 0)
             {
                 var lst = BizUserWebFolder.LoadAllByUID(uid);
@@ -57,7 +57,7 @@ namespace WebBookmarkUI.Controllers
 
         public ActionResult ShowAddFolderOrBookmarkView(long folderID)
         {
-            long uid = UILoginHelper.GetUIDInCookie(Request);
+            long uid = UILoginHelper.GetUIDFromHttpContext(HttpContext);
             if (folderID == 0)
             {
                 var lst = BizUserWebFolder.LoadAllByUID(uid);
@@ -133,7 +133,7 @@ namespace WebBookmarkUI.Controllers
                     bookmark.UserWebFolderID = folderID;
                     bookmark.CreateTime = DateTime.Now;
                     bookmark.Host = href.GetHost();
-                    bookmark.UserInfoID = UILoginHelper.GetUIDInCookie(Request);
+                    bookmark.UserInfoID = UILoginHelper.GetUIDFromHttpContext(HttpContext);
                     bookmark.Save();
                 }else
                 {
@@ -143,7 +143,7 @@ namespace WebBookmarkUI.Controllers
                         folder = BizUserWebFolder.LoadByID(infoID);
                     }
 
-                    folder.UserInfoID = UILoginHelper.GetUIDInCookie(Request);
+                    folder.UserInfoID = UILoginHelper.GetUIDFromHttpContext(HttpContext);
                     folder.WebFolderName = name;
                     folder.ParentWebfolderID = folderID;
                     folder.CreateTime = DateTime.Now;
@@ -208,7 +208,7 @@ namespace WebBookmarkUI.Controllers
                 result.IsSuccess = false;
                 result.ErrorMessage = "先上传文件呀。";
             }
-            long uid = UILoginHelper.GetUIDInCookie(Request);
+            long uid = UILoginHelper.GetUIDFromHttpContext(HttpContext);
 
             var path = Server.MapPath(filePath);
 
@@ -228,7 +228,7 @@ namespace WebBookmarkUI.Controllers
             {
                 BizUserWebBookmarkImportLog importLog = new BizUserWebBookmarkImportLog();
                 importLog.CreateTime = DateTime.Now;
-                importLog.UserInfoID = UILoginHelper.GetUIDInCookie(Request);
+                importLog.UserInfoID = UILoginHelper.GetUIDFromHttpContext(HttpContext);
                 importLog.Path = result.ResultID;
                 importLog.FileName = result.ResultID;
                 importLog.Save();

@@ -74,7 +74,7 @@ namespace WebBookmarkUI.Controllers
         {
             var lstBookmarkComment = BizBookmarkComment.LoadByBookmarkInfoID(bookmarkID);
 
-            var loginUserInfo = BizUserInfo.LoadByUserInfoID(UILoginHelper.GetUIDInCookie(Request));
+            var loginUserInfo = BizUserInfo.LoadByUserInfoID(UILoginHelper.GetUIDFromHttpContext(HttpContext));
 
             UIUserInfo uiLoginUserInfo = new UIUserInfo()
             {
@@ -127,7 +127,7 @@ namespace WebBookmarkUI.Controllers
                     return Json(result);
                 }
                 BizBookmarkComment comment = new BizBookmarkComment();
-                comment.CriticsUserID = UILoginHelper.GetUIDInCookie(Request);
+                comment.CriticsUserID = UILoginHelper.GetUIDFromHttpContext(HttpContext);
                 comment.CommentTitle = "";
                 comment.CommentContent = content;
                 comment.BookmarkInfoID = bookmark.BookmarkInfoID;
@@ -141,7 +141,7 @@ namespace WebBookmarkUI.Controllers
             {
                 LogHelper.WriteException("SaveBookmarkComment",ex,new {
                     BookmarkID = bookmarkID,
-                    SubmitUser = UILoginHelper.GetUIDInCookie(Request),
+                    SubmitUser = UILoginHelper.GetUIDFromHttpContext(HttpContext),
                     Content = content,
                 });
                 result.ErrorMessage = "提交失败，目测网络挂了或者别的....";

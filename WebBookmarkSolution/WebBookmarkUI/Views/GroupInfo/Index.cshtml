@@ -6,7 +6,7 @@
 <script>
     var saveUserGroupInfoURL = "@Url.Action("SaveUserGroupInfo")";
     var showMyGroupList = "@Url.Action("ShowMyGroupList")";
-    var createUserID = '@WebBookmarkUI.UILoginHelper.GetUIDInCookie(Request)';
+    var createUserID = '@WebBookmarkUI.UILoginHelper.GetUIDFromHttpContext(this.Context)';
     var modifyUserGroupInfo = "@Url.Action("ModifyUserGroupInfo")";
     var deleteUserGroupInfo = "@Url.Action("DeleteUserGroupInfo")";
     var showUserGroupListHasPassURL = "@Url.Action("ShowUserGroupListHasPass")";

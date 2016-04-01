@@ -28,12 +28,12 @@ namespace WebBookmarkUI.Controllers
         {
             if(uid==0)//当前登录用户
             {
-                uid = UILoginHelper.GetUIDInCookie(Request);
+                uid = UILoginHelper.GetUIDFromHttpContext(HttpContext);
             }
 
             var dicFollower = UserRelationshipBo.GetByFollowUserID(uid);
 
-            var dicLoginUserFollower = UserRelationshipBo.GetByFollowUserID(UILoginHelper.GetUIDInCookie(Request));
+            var dicLoginUserFollower = UserRelationshipBo.GetByFollowUserID(UILoginHelper.GetUIDFromHttpContext(HttpContext));
 
             var lstUserInfoModel = new List<SearchUserInfo>();
             var lstModel = UserInfoBo.GetListByUIDList(dicFollower.Keys.ToList());
@@ -62,9 +62,9 @@ namespace WebBookmarkUI.Controllers
 
             if (uid == 0)//当前登录用户
             {
-                uid = UILoginHelper.GetUIDInCookie(Request);
+                uid = UILoginHelper.GetUIDFromHttpContext(HttpContext);
             }
-            var dicLoginUserFollower = UserRelationshipBo.GetByFollowUserID(UILoginHelper.GetUIDInCookie(Request));
+            var dicLoginUserFollower = UserRelationshipBo.GetByFollowUserID(UILoginHelper.GetUIDFromHttpContext(HttpContext));
 
             var dicBeFollower = UserRelationshipBo.GetByBeFollwedUID(uid);
 

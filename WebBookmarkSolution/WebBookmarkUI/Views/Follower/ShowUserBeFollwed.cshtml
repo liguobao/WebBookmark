@@ -11,7 +11,7 @@
                             <div class="aw-item"></div>
                             @if (Model != null)
                             {
-                                var loginUid = WebBookmarkUI.UILoginHelper.GetUIDInCookie(Request);
+                                var loginUid = WebBookmarkUI.UILoginHelper.GetUIDFromHttpContext(HttpContext);
                                 
                                 foreach (var userInfo in Model)
                                 {

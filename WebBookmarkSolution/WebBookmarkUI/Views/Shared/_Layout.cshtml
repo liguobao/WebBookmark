@@ -1,6 +1,6 @@
 ﻿@using WebBookmarkUI
 
-@if (UILoginHelper.CheckUserLogin(Request) == false)
+@if (UILoginHelper.CheckUserLogin(this.Context) == false)
 {
     Response.Redirect("login");
 }
@@ -52,7 +52,7 @@ else
                             <span class="am-icon-gears"></span> 设置 <span class="am-icon-caret-down"></span>
                         </a>
                         <ul class="am-dropdown-content">
-                            <li><a href="~/UserInfo/ShowUserDetail?uid=@UILoginHelper.GetUIDInCookie(Request)"><span class="am-icon-user"></span> 我的资料</a></li>
+                            <li><a href="~/UserInfo/ShowUserDetail?uid=@UILoginHelper.GetUIDFromHttpContext(this.Context)"><span class="am-icon-user"></span> 我的资料</a></li>
                             <li><a href="~/UserInfo"><span class="am-icon-edit"></span>修改资料</a></li>
                             <li><a href="~/UserInfo/ModifyPasswordIndex"><span class="am-icon-bug"></span> 修改密码</a></li>
                             <li><a href="~/Login"><span class="am-icon-power-off"></span> 退出</a></li>

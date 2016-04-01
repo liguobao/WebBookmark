@@ -41,7 +41,8 @@ namespace WebBookmarkUI.Controllers
             if(rsp.IsSuccess)
             {
 
-                UILoginHelper.WriteUserInfo(rsp.ResultID, logionName, uiUserInfo.Password, Response);
+                UILoginHelper.WriteUserInfo(rsp.ResultID, logionName, uiUserInfo.Password, HttpContext);
+                
             }
             return Json(rsp);
         }

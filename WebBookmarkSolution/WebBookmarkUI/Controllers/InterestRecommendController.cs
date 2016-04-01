@@ -25,7 +25,7 @@ namespace WebBookmarkUI.Controllers
         [HttpPost]
         public ActionResult SearchUser(string nameOrEmail)
         {
-            var dicBeFollowerID = UserRelationshipBo.GetByFollowUserID(UILoginHelper.GetUIDInCookie(Request));
+            var dicBeFollowerID = UserRelationshipBo.GetByFollowUserID(UILoginHelper.GetUIDFromHttpContext(HttpContext));
             
             var lstUserInfoModel = new List<SearchUserInfo>();
             var lstModel = UserInfoBo.SearchUserList(nameOrEmail);
@@ -54,7 +54,7 @@ namespace WebBookmarkUI.Controllers
                 result.ErrorMessage = "关注者ID为空，这是一条垃圾数据呀。";
                 return Json(result);
             }
-            long userID = UILoginHelper.GetUIDInCookie(Request);
+            long userID = UILoginHelper.GetUIDFromHttpContext(HttpContext);
             var status = UserRelationshipBo.CheckFollowStatus(beFollowUserID,userID);
 
             if(status)
@@ -87,7 +87,7 @@ namespace WebBookmarkUI.Controllers
                 result.ErrorMessage = "ID为空，这是一条垃圾数据呀。";
                 return Json(result);
             }
-            long userID = UILoginHelper.GetUIDInCookie(Request);
+            long userID = UILoginHelper.GetUIDFromHttpContext(HttpContext);
             result.IsSuccess = UserRelationshipBo.UnFollowUser(beFollowUserID, userID);
             return Json(result);
         }
@@ -101,7 +101,7 @@ namespace WebBookmarkUI.Controllers
             if(showUserInfoID==0 || model==null)
                 return PartialView("ShowUserInfo", showUserInfo);
 
-            var uid = UILoginHelper.GetUIDInCookie(Request);
+            var uid = UILoginHelper.GetUIDFromHttpContext(HttpContext);
             var dicBeFollowerID = UserRelationshipBo.GetByFollowUserID(uid);
             showUserInfo = new UIShowUserInfo() 
             {

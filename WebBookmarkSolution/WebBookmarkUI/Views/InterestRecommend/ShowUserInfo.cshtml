@@ -22,7 +22,7 @@
         }
         <div>
             <h1>@Model.UserName /@Model.UserEmail &nbsp;&nbsp;&nbsp;
-            @if(Model.UserInfoID != WebBookmarkUI.UILoginHelper.GetUIDInCookie(Request))
+            @if(Model.UserInfoID != WebBookmarkUI.UILoginHelper.GetUIDFromHttpContext(this.Context))
             {
                     if(Model.IsFollow)
                     {

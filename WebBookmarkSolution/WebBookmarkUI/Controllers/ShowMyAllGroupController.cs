@@ -16,7 +16,7 @@ namespace WebBookmarkUI.Controllers
 
         public ActionResult Index()
         {
-            var userID = UILoginHelper.GetUIDInCookie(Request);
+            var userID = UILoginHelper.GetUIDFromHttpContext(HttpContext);
             List<UIUserGroupInfo> lstUIUserGroupInfo = null;
 
             var lstGroupUser = BizGroupUser.LoadGroupUser(userID);
@@ -71,7 +71,7 @@ namespace WebBookmarkUI.Controllers
             }
 
             var groupInfo = BizGroupInfo.LoadByGroupID(bizModel.GroupInfoID);
-            if (UILoginHelper.GetUIDInCookie(Request) == groupInfo.CreateUesrID)
+            if (UILoginHelper.GetUIDFromHttpContext(HttpContext) == groupInfo.CreateUesrID)
             {
                 result.IsSuccess = false;
                 result.ErrorMessage = "不允许移除自己....";

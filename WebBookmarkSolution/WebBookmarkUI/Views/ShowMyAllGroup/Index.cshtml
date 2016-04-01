@@ -30,7 +30,7 @@
                 <tbody>
                     @if (Model != null && Model.Count > 0)
                     {
-                        var loginUid = WebBookmarkUI.UILoginHelper.GetUIDInCookie(Request);
+                        var loginUid = WebBookmarkUI.UILoginHelper.GetUIDFromHttpContext(this.Context);
                         int index = 1;
                         foreach (var userGroup in Model)
                         {

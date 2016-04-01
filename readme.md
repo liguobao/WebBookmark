@@ -1,6 +1,11 @@
 
 #MyWebFolder Commit log
 
+##2016.4.2
+1. 用户状态验证cookie session双保证，有限验证cookie，cookie无效验证session
+2. 改代码改了N多...
+3. 新加拦截器逻辑，还没做....
+
 
 ##2016.4.1
 1. 用户群组、点评功能 基本完成、消息通知、主页推荐、还没开始

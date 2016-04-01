@@ -17,6 +17,7 @@ namespace WebBookmarkUI.Controllers
             return View();
         }
 
+        
         public ActionResult RegisterUser(UIUserInfo uiUserInfo)
         {
             var bizUserInfo = new BizUserInfo();

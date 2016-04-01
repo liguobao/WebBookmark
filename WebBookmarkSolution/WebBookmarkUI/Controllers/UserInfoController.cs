@@ -17,10 +17,10 @@ namespace WebBookmarkUI.Controllers
         {
             UIUserInfo uiUserInfo = null;
 
-            if (!UILoginHelper.CheckUserLogin(Request))
+            if (!UILoginHelper.CheckUserLogin(HttpContext))
                 return View(uiUserInfo);
-          
-            var result =  UserInfoBo.GetUserInfoByLoginNameOrEmail(UILoginHelper.GetUIUserLoginNameOrEmail(Request));
+
+            var result = UserInfoBo.GetUserInfoByLoginNameOrEmail(UILoginHelper.GetUIUserLoginNameOrEmail(HttpContext));
             if (result.IsSuccess)
             {
                 var bizUserInfo = result.Target as BizUserInfo;
@@ -42,14 +42,14 @@ namespace WebBookmarkUI.Controllers
 
         public ActionResult SaveUserInfo(UIUserInfo uiUserInfo)
         {
-            var loginEmail = UILoginHelper.GetUIUserLoginNameOrEmail(Request);
+            var loginEmail = UILoginHelper.GetUIUserLoginNameOrEmail(HttpContext);
             return Json(SaveUserToDB(loginEmail, uiUserInfo));
         }
 
 
         public ActionResult CheckUserEmail(string email)
         {
-            var cookieLoginName= UILoginHelper.GetUIUserLoginNameOrEmail(Request);
+            var cookieLoginName = UILoginHelper.GetUIUserLoginNameOrEmail(HttpContext);
             if(!cookieLoginName.Contains('@'))
             {
                var userInfo = UserInfoBo.GetUserInfoByLoginNameOrEmail(cookieLoginName).Target as BizUserInfo;
@@ -71,7 +71,7 @@ namespace WebBookmarkUI.Controllers
 
         public ActionResult CheckUserLoginName(string loginName)
         {
-            var cookieLoginName = UILoginHelper.GetUIUserLoginNameOrEmail(Request);
+            var cookieLoginName = UILoginHelper.GetUIUserLoginNameOrEmail(HttpContext);
             BizResultInfo result = UserInfoBo.GetUserInfoByLoginNameOrEmail(cookieLoginName);
             if (result.IsSuccess)
             {
@@ -119,7 +119,7 @@ namespace WebBookmarkUI.Controllers
             BizResultInfo result = UploadFileHelper.UploadFileToUserImg(Request);
             if(result.IsSuccess)
             {
-                var loginEmail = UILoginHelper.GetUIUserLoginNameOrEmail(Request);
+                var loginEmail = UILoginHelper.GetUIUserLoginNameOrEmail(HttpContext);
                 var res=  UserInfoBo.GetUserInfoByLoginNameOrEmail(loginEmail);
                 var bizUserInfo = res.Target as BizUserInfo;
                 var path = Server.MapPath(bizUserInfo.UserImagURL);
@@ -146,10 +146,10 @@ namespace WebBookmarkUI.Controllers
         {
             UIUserInfo uiUserInfo = null;
 
-            if (!UILoginHelper.CheckUserLogin(Request))
+            if (!UILoginHelper.CheckUserLogin(HttpContext))
                 return View(uiUserInfo);
 
-            var result = UserInfoBo.GetUserInfoByLoginNameOrEmail(UILoginHelper.GetUIUserLoginNameOrEmail(Request));
+            var result = UserInfoBo.GetUserInfoByLoginNameOrEmail(UILoginHelper.GetUIUserLoginNameOrEmail(HttpContext));
             if (result.IsSuccess)
             {
                 var bizUserInfo = result.Target as BizUserInfo;
@@ -181,7 +181,7 @@ namespace WebBookmarkUI.Controllers
 
             }
 
-            string password = UILoginHelper.GetUIUserPassword(Request);
+            string password = UILoginHelper.GetUIUserPassword(HttpContext);
 
             if(password != oldpassword)
             {
@@ -190,7 +190,7 @@ namespace WebBookmarkUI.Controllers
                 return Json(result);
             }
 
-            long uid = UILoginHelper.GetUIDInCookie(Request);
+            long uid = UILoginHelper.GetUIDFromHttpContext(HttpContext);
 
             var userInfo = BizUserInfo.LoadByUserInfoID(uid);
             if(userInfo!=null && userInfo.UserInfoID!=0)

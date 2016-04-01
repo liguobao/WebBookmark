@@ -112,6 +112,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Commom\HTTPHelper.cs" />
+    <Compile Include="Commom\SessionUserParameterAttribute .cs" />
     <Compile Include="Commom\UILoginHelper.cs" />
     <Compile Include="Commom\UploadFileHelper.cs" />
     <Compile Include="Controllers\DefaultController.cs" />

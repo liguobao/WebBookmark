@@ -7,7 +7,7 @@
 
                 @if (Model != null)
                 {
-                    var loginUid = WebBookmarkUI.UILoginHelper.GetUIDInCookie(Request);
+                    var loginUid = WebBookmarkUI.UILoginHelper.GetUIDFromHttpContext(this.Context);
 
                     foreach (var userGroup in Model)
                     {

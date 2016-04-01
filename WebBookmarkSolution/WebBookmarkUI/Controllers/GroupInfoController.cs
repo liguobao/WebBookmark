@@ -54,7 +54,7 @@ namespace WebBookmarkUI.Controllers
         /// <returns></returns>
         public ActionResult SaveUserGroupInfo(string groupName,string groupIntro)
         {
-            long uid = UILoginHelper.GetUIDInCookie(Request);
+            long uid = UILoginHelper.GetUIDFromHttpContext(HttpContext);
             BizResultInfo result = new BizResultInfo();
 
             if(string.IsNullOrEmpty(groupName))
@@ -93,7 +93,7 @@ namespace WebBookmarkUI.Controllers
         /// <returns></returns>
         public ActionResult ModifyUserGroupInfo(string groupName, string groupIntro,long groupID)
         {
-            long uid = UILoginHelper.GetUIDInCookie(Request);
+            long uid = UILoginHelper.GetUIDFromHttpContext(HttpContext);
             BizResultInfo result = new BizResultInfo();
 
             if (string.IsNullOrEmpty(groupName))
@@ -445,7 +445,7 @@ namespace WebBookmarkUI.Controllers
                 result.ErrorMessage = "群组ID不能为空呀，这个数据肯定有问题...不要逗我玩吧。";
                 return Json(result);
             }
-            var lstGroupUser = BizGroupUser.LoadGroupUser(UILoginHelper.GetUIDInCookie(Request));
+            var lstGroupUser = BizGroupUser.LoadGroupUser(UILoginHelper.GetUIDFromHttpContext(HttpContext));
             if(lstGroupUser!=null && lstGroupUser.Any(model=>model.GroupInfoID == groupID))
             {
                 result.IsSuccess = false;
@@ -458,7 +458,7 @@ namespace WebBookmarkUI.Controllers
             groupUser.GroupInfoID = groupID;
             groupUser.IsPass = (int)ApplyStatus.Waiting;
             groupUser.CreateTime = DateTime.Now;
-            groupUser.UserInfoID = UILoginHelper.GetUIDInCookie(Request);
+            groupUser.UserInfoID = UILoginHelper.GetUIDFromHttpContext(HttpContext);
             groupUser.Save();
 
             result.IsSuccess = true;
@@ -513,7 +513,7 @@ namespace WebBookmarkUI.Controllers
                 return Json(result);
             }
 
-            if (UILoginHelper.GetUIDInCookie(Request) == bizModel.UserInfoID)
+            if (UILoginHelper.GetUIDFromHttpContext(HttpContext) == bizModel.UserInfoID)
             {
                 result.IsSuccess = false;
                 result.ErrorMessage = "不允许移除自己....";

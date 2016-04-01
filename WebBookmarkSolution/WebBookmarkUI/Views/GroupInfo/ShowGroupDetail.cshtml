@@ -21,7 +21,7 @@
 
 @if(Model!=null)
 {
-    var loginUid = WebBookmarkUI.UILoginHelper.GetUIDInCookie(Request);
+    var loginUid = WebBookmarkUI.UILoginHelper.GetUIDFromHttpContext(this.Context);
     <div class="am-cf am-padding">
     <div class="am-fl am-cf"><strong class="am-text-primary am-text-lg">@Model.GroupName</strong> / <small>
         <a href='@Url.Content("~/UserInfo/ShowUserDetail?uid="+Model.CreateUesrID)'>@Model.CreateUesrInfo.UserName</a></small>
