@@ -71,7 +71,7 @@ namespace WebBookmarkUI.Controllers
                 GroupName = info.GroupName,
                 CreateUesrInfo = ToUIUserInfo(info.CreateUesrID, dicUserInfo),
             }).ToDictionary(model => model.GroupInfoID, model => model);
-            lstUIUserGroupInfo = lstGroupUser.Where(model=>model.IsPass==(int)AuditStatus.Pass).Select(model => new UIUserGroupInfo()
+            lstUIUserGroupInfo = lstGroupUser.Where(model=>model.IsPass==(int)ApplyStatus.Pass).Select(model => new UIUserGroupInfo()
             {
                 GroupInfo = dicGroupInfo.ContainsKey(model.GroupInfoID) ? dicGroupInfo[model.GroupInfoID] : null,
                 GroupInfoID = model.GroupInfoID,

@@ -60,7 +60,7 @@ function ApplyToGroup()
         success:
             function (result) {
                 if (result.IsSuccess) {
-                   
+                    $("#applytogroup").hide();
                 }else
                 {
                     alert(result.ErrorMessage);

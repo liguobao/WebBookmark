@@ -40,7 +40,8 @@
                                            
 
                                             <p class="aw-title">
-                                                <a href="#" id="showUserInfo" data-id='@userInfo.UserInfoID'>@userInfo.UserName / @userInfo.UserEmail</a>
+                                                <a href='@Url.Content("~/UserInfo/ShowUserDetail?uid=" + userInfo.UserInfoID)' 
+                                                   id="showUserInfo" data-id='@userInfo.UserInfoID'>@userInfo.UserName / @userInfo.UserEmail</a>
                                             </p>
 
                                             <p class="aw-article-content">

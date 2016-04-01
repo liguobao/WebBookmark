@@ -1,0 +1,102 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@model List<WebBookmarkUI.Models.UIUserGroupInfo>
+
+<script>
+    var quitgroupURL = "@Url.Action("QuitGroup")";
+    var addToGroupAgainURL = "@Url.Action("AddToGroupAgain")";
+    
+</script>
+<script src="~/DomainJS/quitgroup.js"></script>
+
+<div class="admin-content">
+    <div class="am-g">
+        <div class="am-u-sm-12">
+            <table class="am-table am-table-striped am-table-hover table-main ">
+                <thead>
+                    <tr>
+                        <th class="table-id">序号</th>
+                        <th class="table-main">群组名称</th>
+                        <th class="table-date am-hide-sm-only">创建时间</th>
+                        <th class="table-set">所属用户</th>
+                        <th class="table-set">当前状态</th>
+                        <th class="table-set">操作</th>
+
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (Model != null && Model.Count > 0)
+                    {
+                        var loginUid = WebBookmarkUI.UILoginHelper.GetUIDInCookie(Request);
+                        int index = 1;
+                        foreach (var userGroup in Model)
+                        {
+                            <tr>
+                                <td>@index</td>
+                                <td><a href='@Url.Content("~/GroupInfo/ShowGroupDetail?groupID=" + userGroup.GroupInfo.GroupInfoID)'>@userGroup.GroupInfo.GroupName</a> </td>
+                                <td>@userGroup.GroupInfo.CreateTime</td>
+                                <td>
+                                    @if (userGroup.GroupInfo.CreateUesrInfo != null)
+                                    {
+                                        <a href='@Url.Content("~/UserInfo/ShowUserDetail?uid=" +userGroup.GroupInfo.CreateUesrInfo.UserInfoID )'>
+                                            @userGroup.GroupInfo.CreateUesrInfo.UserName
+                                        </a>
+                                    }
+                                </td>
+                                <td>
+                                    @if (userGroup.IsPass == 1)
+                                    {
+                                        <div class="am-text-success"> <span class="am-icon-check">已通过</span>  
+                                       </div>
+                                    }
+                                    else if (userGroup.IsPass ==0)
+                                    {
+                                        <div class="am-text-danger"> <span class="am-icon-bolt">等待审核</span>
+                                        </div>
+                                    }
+                                    else if (userGroup.IsPass==3)
+                                    {
+                                         <div class="am-text-danger"> <span class="am-icon-bolt">已被驳回</span></div>
+                                    }
+                                    else if (userGroup.IsPass == 4)
+                                    {
+                                         <div class="am-text-danger"> <span class="am-icon-times">已退出</span></div>
+                                    }
+                                </td>
+
+                                <td>
+                                    @if (userGroup.IsPass == 1 || userGroup.IsPass == 0)
+                                    {
+                                        <div class="am-text-success">
+                                            @if (userGroup.GroupInfo.CreateUesrID != loginUid)
+                                            {
+
+                                                <a id="quitgroup" data-id='@userGroup.GroupUserID'><span class="am-icon-remove">退出</span></a>
+                                            }
+                                        </div>
+                                    }
+                                    else if (userGroup.IsPass == 2 || userGroup.IsPass == 3 || userGroup.IsPass == 4)
+                                    {
+                                        <div class="am-text-success">
+                                            @if (userGroup.GroupInfo.CreateUesrID != loginUid)
+                                            {
+
+                                                <a id="addgroupagain" data-id='@userGroup.GroupUserID'><span class="am-icon-plus">加入</span></a>
+                                            }
+                                        </div>
+                                    }
+                                </td>
+                            </tr>
+                                    index++;
+                        }
+                    }
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+</div>
+

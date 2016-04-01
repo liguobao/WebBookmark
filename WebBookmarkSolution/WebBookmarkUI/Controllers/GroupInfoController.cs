@@ -74,7 +74,7 @@ namespace WebBookmarkUI.Controllers
             BizGroupUser groupUser = new BizGroupUser();
             groupUser.UserInfoID = uid;
             groupUser.GroupInfoID = groupInfo.GroupInfoID;
-            groupUser.IsPass = (int)AuditStatus.Pass;
+            groupUser.IsPass = (int)ApplyStatus.Pass;
             groupUser.CreateTime = DateTime.Now;
             groupUser.Save();
             result.IsSuccess = true;
@@ -196,6 +196,101 @@ namespace WebBookmarkUI.Controllers
         }
 
         /// <summary>
+        /// 用户已通过的群组
+        /// </summary>
+        /// <param name="userID"></param>
+        /// <returns></returns>
+        public ActionResult ShowUserGroupListHasPass(long userID)
+        {
+            if (userID == 0)
+                return View("ShowALLUserGroupList", null);
+            List<UIUserGroupInfo> lstUIUserGroupInfo = null;
+
+            var lstGroupUser = BizGroupUser.LoadGroupUser(userID);
+
+
+
+            if (lstGroupUser == null)
+                return View("ShowALLUserGroupList", null);
+
+            var lstGroupInfo = BizGroupInfo.LoadByGroupIDList(lstGroupUser.Select(model => model.GroupInfoID).ToList());
+            var lstUserInfo = UserInfoBo.GetListByUIDList(lstGroupInfo.Select(model => model.CreateUesrID).Distinct().ToList());
+            Dictionary<long, BizUserInfo> dicUserInfo = new Dictionary<long, BizUserInfo>();
+            if (lstUserInfo != null)
+            {
+                dicUserInfo = lstUserInfo.ToDictionary(model => model.UserInfoID, model => model);
+            }
+
+            var dicGroupInfo = lstGroupInfo.Select(info => new UIGroupInfo()
+            {
+                CreateTime = info.CreateTime,
+                CreateUesrID = info.CreateUesrID,
+                GroupInfoID = info.GroupInfoID,
+                GroupIntro = info.GroupIntro,
+                GroupName = info.GroupName,
+                CreateUesrInfo = ToUIUserInfo(info.CreateUesrID, dicUserInfo),
+            }).ToDictionary(model => model.GroupInfoID, model => model);
+            lstUIUserGroupInfo = lstGroupUser.Where(model => model.IsPass == (int)ApplyStatus.Pass).Select(model => new UIUserGroupInfo()
+            {
+                GroupInfo = dicGroupInfo.ContainsKey(model.GroupInfoID) ? dicGroupInfo[model.GroupInfoID] : null,
+                GroupInfoID = model.GroupInfoID,
+                GroupUserID = model.GroupUserID,
+                CreateTime = model.CreateTime,
+                IsPass = model.IsPass,
+                UserInfoID = model.UserInfoID,
+            }).ToList();
+
+
+            return View("ShowALLUserGroupList", lstUIUserGroupInfo);
+        }
+
+
+        public ActionResult ShowUserGroupListNotPass(long userID)
+        {
+            if (userID == 0)
+                return View("ShowALLUserGroupList", null);
+            List<UIUserGroupInfo> lstUIUserGroupInfo = null;
+
+            var lstGroupUser = BizGroupUser.LoadGroupUser(userID);
+
+
+
+            if (lstGroupUser == null)
+                return View("ShowALLUserGroupList", null);
+
+            var lstGroupInfo = BizGroupInfo.LoadByGroupIDList(lstGroupUser.Select(model => model.GroupInfoID).ToList());
+            var lstUserInfo = UserInfoBo.GetListByUIDList(lstGroupInfo.Select(model => model.CreateUesrID).Distinct().ToList());
+            Dictionary<long, BizUserInfo> dicUserInfo = new Dictionary<long, BizUserInfo>();
+            if (lstUserInfo != null)
+            {
+                dicUserInfo = lstUserInfo.ToDictionary(model => model.UserInfoID, model => model);
+            }
+
+            var dicGroupInfo = lstGroupInfo.Select(info => new UIGroupInfo()
+            {
+                CreateTime = info.CreateTime,
+                CreateUesrID = info.CreateUesrID,
+                GroupInfoID = info.GroupInfoID,
+                GroupIntro = info.GroupIntro,
+                GroupName = info.GroupName,
+                CreateUesrInfo = ToUIUserInfo(info.CreateUesrID, dicUserInfo),
+            }).ToDictionary(model => model.GroupInfoID, model => model);
+            lstUIUserGroupInfo = lstGroupUser.Where(model => model.IsPass == (int)ApplyStatus.Waiting).Select(model => new UIUserGroupInfo()
+            {
+                GroupInfo = dicGroupInfo.ContainsKey(model.GroupInfoID) ? dicGroupInfo[model.GroupInfoID] : null,
+                GroupInfoID = model.GroupInfoID,
+                GroupUserID = model.GroupUserID,
+                CreateTime = model.CreateTime,
+                IsPass = model.IsPass,
+                UserInfoID = model.UserInfoID,
+            }).ToList();
+
+
+            return View("ShowALLUserGroupList", lstUIUserGroupInfo);
+        }
+
+
+        /// <summary>
         /// 展示群组当前用户
         /// </summary>
         /// <param name="groupID"></param>
@@ -220,7 +315,7 @@ namespace WebBookmarkUI.Controllers
             }
 
 
-            lstUIUserGroupInfo = lstGroupUser.Where(model=>model.IsPass==(int)AuditStatus.Pass).Select(model => new UIUserGroupInfo()
+            lstUIUserGroupInfo = lstGroupUser.Where(model => model.IsPass == (int)ApplyStatus.Pass).Select(model => new UIUserGroupInfo()
             {
                 GroupInfo = new UIGroupInfo() 
                 {
@@ -267,7 +362,7 @@ namespace WebBookmarkUI.Controllers
             }
 
 
-            lstUIUserGroupInfo = lstGroupUser.Where(model => model.IsPass == (int)AuditStatus.NotPass).Select(model => new UIUserGroupInfo()
+            lstUIUserGroupInfo = lstGroupUser.Where(model => model.IsPass == (int)ApplyStatus.Waiting).Select(model => new UIUserGroupInfo()
             {
                 GroupInfo = new UIGroupInfo()
                 {
@@ -323,7 +418,7 @@ namespace WebBookmarkUI.Controllers
         }
 
 
-        private UIUserInfo ToUIUserInfo(long userID ,Dictionary<long, BizUserInfo> dicUserInfo)
+        public static UIUserInfo ToUIUserInfo(long userID ,Dictionary<long, BizUserInfo> dicUserInfo)
         {
             return dicUserInfo.ContainsKey(userID) ? new UIUserInfo()
                {
@@ -361,7 +456,7 @@ namespace WebBookmarkUI.Controllers
 
             BizGroupUser groupUser = new BizGroupUser();
             groupUser.GroupInfoID = groupID;
-            groupUser.IsPass = (int)AuditStatus.NotPass;
+            groupUser.IsPass = (int)ApplyStatus.Waiting;
             groupUser.CreateTime = DateTime.Now;
             groupUser.UserInfoID = UILoginHelper.GetUIDInCookie(Request);
             groupUser.Save();
@@ -391,7 +486,7 @@ namespace WebBookmarkUI.Controllers
                 result.ErrorMessage = "取不到这个数据啊呀...不要逗我玩吧。";
                 return Json(result);
             }
-             bizModel.IsPass = (int)AuditStatus.Pass;
+             bizModel.IsPass = (int)ApplyStatus.Pass;
              bizModel.Save();
 
              result.IsSuccess = true;
@@ -424,18 +519,9 @@ namespace WebBookmarkUI.Controllers
                 result.ErrorMessage = "不允许移除自己....";
                 return Json(result);
             }
-
-            var isSuccess = GroupUserBo.RemoverGroupUser(groupUserID);
-
-            result.IsSuccess = isSuccess;
-            if(isSuccess)
-            {
-                result.SuccessMessage = "移除成功！";
-            }else
-            {
-                result.ErrorMessage ="移除失败，可能是数据库挂了吧。";
-            }
-            
+            bizModel.IsPass = (int)ApplyStatus.Remove;
+            bizModel.Save();
+            result.IsSuccess = true;
             return Json(result);
         }
     }

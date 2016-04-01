@@ -36,12 +36,12 @@
                                 <td>
                                     @if (userGroup.IsPass == 1)
                                     {
-                                        <div class="am-text-success"> 已通过<span class="am-icon-check"></span></div>
+                                        <div class="am-text-success">已通过<span class="am-icon-check"></span></div>
 
                                     }
-                                    else
+                                    else if (userGroup.IsPass == 0)
                                     {
-                                        <div class="am-text-danger"> 等待审核 <span class="am-icon-bolt"></span></div>
+                                        <div class="am-text-danger">等待审核<span class="am-icon-bolt"></span></div>
 
                                     }
                                 </td>

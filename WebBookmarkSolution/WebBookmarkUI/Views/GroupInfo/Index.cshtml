@@ -9,7 +9,7 @@
     var createUserID = '@WebBookmarkUI.UILoginHelper.GetUIDInCookie(Request)';
     var modifyUserGroupInfo = "@Url.Action("ModifyUserGroupInfo")";
     var deleteUserGroupInfo = "@Url.Action("DeleteUserGroupInfo")";
-    var showALLUserGroupList = "@Url.Action("ShowALLUserGroupList")";
+    var showUserGroupListHasPassURL = "@Url.Action("ShowUserGroupListHasPass")";
     var showGroupDetail = "@Url.Content("~/GroupInfo/ShowGroupDetail?groupID=")";
     
     
@@ -40,7 +40,7 @@
     <div class="am-tabs" data-am-tabs="">
         <ul class="am-tabs-nav am-nav am-nav-tabs aw-nav-tabs">
             <li class="am-active"><a href="#" id="mygroup" data-uid='18'>我创建的群组 <span id="mygrouploading"></span></a></li>
-            <li class=""><a href="#" id="groupuser" data-uid=''>我加入的群组 <span id="groupuserloading"></span></a></li>
+            <li class=""><a href="#" id="groupuser" data-uid=''>我所在的群组 <span id="groupuserloading"></span></a></li>
             <li class=""><a href="#" id="groupmessage" data-uid='18'>群组消息 <span id="groupmessageloading"></span></a></li>
         </ul>
 

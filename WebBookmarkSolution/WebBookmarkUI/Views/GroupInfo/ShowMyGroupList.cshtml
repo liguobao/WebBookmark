@@ -25,7 +25,8 @@
                         {
                             <tr>
                                 <td>@index</td>
-                                <td>@groupInfo.GroupName <span class="am-icon-folder-open-o" data-id='@groupInfo.GroupInfoID' id="showGroupDetail"></span>
+                                <td>
+                                    <a href='@Url.Content("~/GroupInfo/ShowGroupDetail?groupID=" + groupInfo.GroupInfoID)'>@groupInfo.GroupName</a>
                                 <td>@groupInfo.CreateTime</td>
                                 <td>
                                     <div class="am-btn-toolbar">
@@ -36,8 +37,9 @@
                                                     data-am-modal="{target: '#modal-modifygroup', closeViaDimmer: 0, width: 400, height: 225}">
                                                 <span class="am-icon-pencil-square-o"></span> 修改
                                             </button>
-
-                                            <button class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only delete" id="deletegroup" data-id='@groupInfo.GroupInfoID'>
+                                             
+                                            <button class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only delete" id="deletegroup" data-id='@groupInfo.GroupInfoID' 
+                                                    style="margin-left:5px;">
                                                 <span class="am-icon-trash-o"></span> 删除
                                             </button>
                                         </div>

@@ -41,12 +41,14 @@
                                  </div>
                                 
                             }
-                            else
+                            else if (userGroup.IsPass==0)
                             {
-                                <div class="am-text-danger">等待审核 &nbsp;&nbsp;&nbsp;<span class="am-icon-bolt"></span>
+                                <div class="am-text-success">等待审核 &nbsp;&nbsp;<span class="am-icon-bolt">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
                                  @if (userGroup.GroupInfo.CreateUesrID == loginUid)
                                  {
-                                    <button id="btnPass" data-id='@userGroup.GroupUserID'><span class="am-icon-check">通过</span></button>
+                                      <a id="btnPass" data-id='@userGroup.GroupUserID'><span class="am-icon-check">通过</span></a>
+                                      <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                                      <a id="btnReject" data-id='@userGroup.GroupUserID'><span class="am-icon-remove am-text-danger">驳回</span></a>
                                  }
                                  </div>
                             }

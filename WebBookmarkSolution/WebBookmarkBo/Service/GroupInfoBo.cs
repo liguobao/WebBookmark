@@ -28,13 +28,13 @@ namespace WebBookmarkBo.Service
         /// <param name="userID"></param>
         /// <param name="auditStatus">通过/未通过</param>
         /// <returns></returns>
-        public static List<BizGroupInfo> GetUserGroupList(long userID, AuditStatus auditStatus)
+        public static List<BizGroupInfo> GetUserGroupList(long userID, ApplyStatus status)
         {
             var lstGroupUser = BizGroupUser.LoadGroupUser(userID);
             if (lstGroupUser == null)
                 return new List<BizGroupInfo>();
 
-            var groupUsers = lstGroupUser.Where(user => user.IsPass == (int)auditStatus);
+            var groupUsers = lstGroupUser.Where(user => user.IsPass == (int)status);
 
             var lstGroupInfo = BizGroupInfo.LoadByGroupIDList(groupUsers.Select(model => model.GroupInfoID).ToList());
             return lstGroupInfo;

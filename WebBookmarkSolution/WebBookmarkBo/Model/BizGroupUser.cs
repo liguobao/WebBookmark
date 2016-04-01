@@ -119,16 +119,34 @@ namespace WebBookmarkBo.Model
         }
 	}
 
-    public enum AuditStatus
+    public enum ApplyStatus
     {
+
+        /// <summary>
+        /// 等待审核
+        /// </summary>
+        Waiting = 0,
+
+
         /// <summary>
         /// 通过
         /// </summary>
-        Pass =1,
+        Pass = 1,
 
         /// <summary>
-        /// 未通过
+        /// 驳回
         /// </summary>
-        NotPass = 0,
+        Reject =2,
+
+        /// <summary>
+        /// 移除
+        /// </summary>
+        Remove = 3,
+
+        /// <summary>
+        /// 退出
+        /// </summary>
+        Quit = 4,
+
     }
 }

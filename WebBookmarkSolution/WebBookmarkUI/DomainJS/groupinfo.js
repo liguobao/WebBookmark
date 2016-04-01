@@ -69,7 +69,7 @@
         $("#mygroup").parent().removeClass("am-active");
         $("#groupmessage").parent().removeClass("am-active");
         $this.parent().addClass("am-active");
-        ShowALLUserGroupList(createUserID);
+        ShowUserGroupListHasPass(createUserID);
     });
 
     $('body').on("click", "[id='groupmessage']", function () {
@@ -183,12 +183,12 @@ function ShowMyGroupList(createUserID)
 }
 
 
-function ShowALLUserGroupList(userID) {
+function ShowUserGroupListHasPass(userID) {
     $("#groupuserloading").addClass("am-icon-spinner").addClass("am-icon-spin");
 
     $.ajax({
         type: "post",
-        url: showALLUserGroupList,
+        url: showUserGroupListHasPassURL,
         data: { userID: userID },
         success:
             function (data) {

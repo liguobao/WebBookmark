@@ -22,7 +22,8 @@
                         {
                             <tr>
                                 <td>@index</td>
-                                <td>@userGroup.GroupInfo.GroupName <span class="am-icon-folder-open-o" data-id='@userGroup.GroupInfoID' id="showGroupDetail"></span>
+                                <td>
+                                    <a href='@Url.Content("~/GroupInfo/ShowGroupDetail?groupID=" + userGroup.GroupInfoID)'>@userGroup.GroupInfo.GroupName </a>
                                 <td>@userGroup.GroupInfo.CreateTime</td>
                                 <td>
                                     @if(userGroup.GroupInfo.CreateUesrInfo!=null)
@@ -37,7 +38,7 @@
                                        <div class="am-text-success"> 已通过<span class="am-icon-check"></span></div>
 
                                    }
-                                   else
+                                   else if (userGroup.IsPass ==0)
                                    {
                                       <div class="am-text-danger"> 等待审核 <span class="am-icon-bolt"></span></div>
 
