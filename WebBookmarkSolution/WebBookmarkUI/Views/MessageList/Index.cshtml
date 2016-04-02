@@ -1,0 +1,24 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@model List<WebBookmarkBo.Model.BizMessageInfo>
+
+<div class="am-cf am-padding">
+    <div class="am-fl am-cf"><strong class="am-text-primary am-text-lg">消息通知</strong> / <small>User Message</small></div>
+</div>
+<div class="mod-footer">
+    <div class="am-tabs" data-am-tabs="">
+        <ul class="am-tabs-nav am-nav am-nav-tabs aw-nav-tabs">
+            <li class="am-active"><a href="#" id="allmessaeg" data-uid='18'>所有的消息 <span id="allmessaegloadn"></span></a></li>
+            <li class=""><a href="#" id="notreadmessage" data-uid=''>未读消息 <span id="notreadmessageloading"></span></a></li>
+            <li class=""><a href="#" id="readmessage" data-uid='18'>已读消息 <span id="notreadmessageloading"></span></a></li>
+        </ul>
+
+        <div class="am-tabs-bd aw-user-center-tab" style="touch-action: pan-y; -webkit-user-select: none; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);">
+            <div class="am-active am-in" id="overview">
+
+            </div>
+        </div>
+    </div>
+</div>

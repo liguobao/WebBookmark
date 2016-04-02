@@ -13,13 +13,15 @@ namespace WebBookmarkService.DAL
 {
 	public partial class MessageInfoDAL
 	{
+		#region 自动生成方法
+		
         #region 根据传入Model，并返回Model
         /// <summary>
         /// 根据传入Model，并返回Model
         /// </summary>        
         public bool Add (MessageInfo messageInfo)
 		{
-				string sql ="INSERT INTO tblMessageInfo (MessageTitle, MessageContent, UserInfoID, IsRead, MessageInfoType, CreateTime)  VALUES (@MessageTitle, @MessageContent, @UserInfoID, @IsRead, @MessageInfoType, @CreateTime)";
+				string sql ="INSERT INTO tblMessageInfo (MessageTitle, MessageContent, UserInfoID, IsRead, MessageInfoType, CreateTime, MessageURL)  VALUES (@MessageTitle, @MessageContent, @UserInfoID, @IsRead, @MessageInfoType, @CreateTime, @MessageURL)";
 				MySqlParameter[] para = new MySqlParameter[]
 					{
 						new MySqlParameter("@MessageTitle", ToDBValue(messageInfo.MessageTitle)),
@@ -28,6 +30,7 @@ namespace WebBookmarkService.DAL
 						new MySqlParameter("@IsRead", ToDBValue(messageInfo.IsRead)),
 						new MySqlParameter("@MessageInfoType", ToDBValue(messageInfo.MessageInfoType)),
 						new MySqlParameter("@CreateTime", ToDBValue(messageInfo.CreateTime)),
+						new MySqlParameter("@MessageURL", ToDBValue(messageInfo.MessageURL)),
 					};
 					
 				int AddId = (int)MyDBHelper.ExecuteScalar(sql, para);
@@ -40,6 +43,7 @@ namespace WebBookmarkService.DAL
 				}
 		}
          #endregion
+         
 
         #region  根据Id删除数据记录
         /// <summary>
@@ -76,6 +80,7 @@ namespace WebBookmarkService.DAL
                 +", IsRead = @IsRead" 
                 +", MessageInfoType = @MessageInfoType" 
                 +", CreateTime = @CreateTime" 
+                +", MessageURL = @MessageURL" 
                
             +" WHERE MessageInfoID = @MessageInfoID";
 
@@ -89,6 +94,7 @@ namespace WebBookmarkService.DAL
 					,new MySqlParameter("@IsRead", ToDBValue(messageInfo.IsRead))
 					,new MySqlParameter("@MessageInfoType", ToDBValue(messageInfo.MessageInfoType))
 					,new MySqlParameter("@CreateTime", ToDBValue(messageInfo.CreateTime))
+					,new MySqlParameter("@MessageURL", ToDBValue(messageInfo.MessageURL))
 			};
 
 			return MyDBHelper.ExecuteNonQuery(sql, para);
@@ -128,9 +134,10 @@ namespace WebBookmarkService.DAL
 			messageInfo.MessageTitle = (string)ToModelValue(dr,"MessageTitle");
 			messageInfo.MessageContent = (string)ToModelValue(dr,"MessageContent");
 			messageInfo.UserInfoID = (long)ToModelValue(dr,"UserInfoID");
-			messageInfo.IsRead = (sbyte)ToModelValue(dr,"IsRead");
+			messageInfo.IsRead = (int)ToModelValue(dr,"IsRead");
 			messageInfo.MessageInfoType = (int)ToModelValue(dr,"MessageInfoType");
 			messageInfo.CreateTime = (DateTime)ToModelValue(dr,"CreateTime");
+			messageInfo.MessageURL = (string)ToModelValue(dr,"MessageURL");
 			return messageInfo;
 		}
 		#endregion
@@ -241,5 +248,40 @@ namespace WebBookmarkService.DAL
 			}
 		}
         #endregion
+	
+	    #endregion
+
+
+        /// <summary>
+        /// 根据UserInfoID获取信息
+        /// </summary>
+        /// <param name="userInfoID"></param>
+        /// <returns></returns>
+        public IEnumerable<MessageInfo> GetListByUserInfoID(long userInfoID)
+        {
+            string sql = "SELECT * FROM tblMessageInfo WHERE UserInfoID = @UserInfoID order by CreateTime desc";
+            using (MySqlDataReader reader = MyDBHelper.ExecuteDataReader(sql, new MySqlParameter("@UserInfoID", userInfoID)))
+            {
+                return ToModels(reader);
+            }
+        }
+
+
+        /// <summary>
+        /// 根据未读消息
+        /// </summary>
+        /// <param name="userInfoID"></param>
+        /// <returns></returns>
+        public IEnumerable<MessageInfo> GetNotReadListByUserInfoID(long userInfoID)
+        {
+            string sql = "SELECT * FROM tblMessageInfo WHERE UserInfoID = @UserInfoID and IsRead =0 order by CreateTime desc";
+            using (MySqlDataReader reader = MyDBHelper.ExecuteDataReader(sql, new MySqlParameter("@UserInfoID", userInfoID)))
+            {
+                return ToModels(reader);
+            }
+        }
+
+        
+
 	}
 }

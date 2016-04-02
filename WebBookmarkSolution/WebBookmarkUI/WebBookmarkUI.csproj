@@ -121,6 +121,7 @@
     <Compile Include="Controllers\InterestRecommendController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\GroupInfoController.cs" />
+    <Compile Include="Controllers\MessageListController.cs" />
     <Compile Include="Controllers\RegisterController.cs" />
     <Compile Include="Controllers\ShowBookmarkInfoController.cs" />
     <Compile Include="Controllers\ShowGroupController.cs" />
@@ -311,6 +312,7 @@
     <Content Include="Views\ShowGroup\ShowUserGroupListAndPass.cshtml" />
     <Content Include="Views\ShowMyAllGroup\Index.cshtml" />
     <Content Include="Views\Error\Index.cshtml" />
+    <Content Include="Views\MessageList\Index.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

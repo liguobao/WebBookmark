@@ -6,14 +6,14 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace WebBookmarkService.Model
+namespace WebBookmarkService.BizModel
 {	
 	[Serializable()]
     
     /// <summary>
     /// 
     /// </summary>
-	public class MessageInfo
+	public class BizMessageInfo
 	{
         /// <summary>
         /// 主键，自增
@@ -55,5 +55,42 @@ namespace WebBookmarkService.Model
         /// </summary>
 		public string MessageURL{get;set;}
             
+        
+        /// <summary>
+        /// Biz Convert To DB Model
+        /// </summary>
+        public MessageInfo ToModel()
+        {
+            return new MessageInfo()
+            {
+                MessageInfoID =  MessageInfoID,
+                MessageTitle =  MessageTitle,
+                MessageContent =  MessageContent,
+                UserInfoID =  UserInfoID,
+                IsRead =  IsRead,
+                MessageInfoType =  MessageInfoType,
+                CreateTime =  CreateTime,
+                MessageURL =  MessageURL,
+            };
+        }
+        
+        
+        public BizMessageInfo (MessageInfo dataInfo)
+        {
+             MessageInfoID =  dataInfo.MessageInfoID;
+             MessageTitle =  dataInfo.MessageTitle;
+             MessageContent =  dataInfo.MessageContent;
+             UserInfoID =  dataInfo.UserInfoID;
+             IsRead =  dataInfo.IsRead;
+             MessageInfoType =  dataInfo.MessageInfoType;
+             CreateTime =  dataInfo.CreateTime;
+             MessageURL =  dataInfo.MessageURL;
+        }
+        
+        public  BizMessageInfo ()
+        {
+        
+        } 
+        
 	}
 }

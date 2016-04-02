@@ -38,7 +38,7 @@ namespace WebBookmarkService.Model
         /// <summary>
         /// 是否已读
         /// </summary>
-		public sbyte IsRead{get;set;}
+		public int IsRead{get;set;}
             
         /// <summary>
         /// 消息类型
@@ -49,6 +49,11 @@ namespace WebBookmarkService.Model
         /// 创建时间
         /// </summary>
 		public DateTime CreateTime{get;set;}
+            
+        /// <summary>
+        /// 消息相关URL
+        /// </summary>
+		public string MessageURL{get;set;}
             
 	}
 }

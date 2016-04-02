@@ -4,6 +4,7 @@ using WebBookmarkService.DAL;
 using WebfolderBo;
 using System.Linq;
 using System.Collections.Generic;
+using WebfolderBo.Service;
 
 namespace WebBookmarkBo.Service
 {
@@ -28,6 +29,7 @@ namespace WebBookmarkBo.Service
                     result.IsSuccess = true;
                     result.ResultID = newUserInfo.UserInfoID.ConvertToCiphertext();
                     result.SuccessMessage = "注册成功";
+                    MessageBo.CreateMessage(newUserInfo.UserInfoID, MessageTypeEnum.WelcomeToWebBookmark, newUserInfo);
                 }
                 else
                 {
