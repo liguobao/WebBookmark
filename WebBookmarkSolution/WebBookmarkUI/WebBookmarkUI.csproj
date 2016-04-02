@@ -116,6 +116,7 @@
     <Compile Include="Commom\UILoginHelper.cs" />
     <Compile Include="Commom\UploadFileHelper.cs" />
     <Compile Include="Controllers\DefaultController.cs" />
+    <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\FollowerController.cs" />
     <Compile Include="Controllers\InterestRecommendController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
@@ -309,6 +310,7 @@
     <Content Include="Views\ShowGroup\ShowUserCreateGroupList.cshtml" />
     <Content Include="Views\ShowGroup\ShowUserGroupListAndPass.cshtml" />
     <Content Include="Views\ShowMyAllGroup\Index.cshtml" />
+    <Content Include="Views\Error\Index.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

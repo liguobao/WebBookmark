@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using WebBookmarkBo.Service;
+using WebBookmarkUI.Commom;
 using WebBookmarkUI.Models;
 using WebfolderBo.Service;
 
@@ -24,6 +25,7 @@ namespace WebBookmarkUI.Controllers
         /// 用户所关注的人
         /// </summary>
         /// <returns></returns>
+        [SessionUserParameterAttribute]
         public ActionResult ShowUserFollow(long uid=0)
         {
             if(uid==0)//当前登录用户
@@ -57,6 +59,7 @@ namespace WebBookmarkUI.Controllers
         /// 关注用户的人
         /// </summary>
         /// <returns></returns>
+        [SessionUserParameterAttribute]
         public ActionResult ShowUserBeFollwed(long uid = 0)
         {
 

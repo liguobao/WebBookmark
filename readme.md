@@ -2,6 +2,11 @@
 #MyWebFolder Commit log
 
 ##2016.4.2
+1. 完成error页面，以用于收集程序错误信息
+2. 完成拦截器逻辑，其中加入权限验证
+
+
+##2016.4.2
 1. 用户状态验证cookie session双保证，有限验证cookie，cookie无效验证session
 2. 改代码改了N多...
 3. 新加拦截器逻辑，还没做....

@@ -5,6 +5,8 @@ using System.Web;
 using System.Web.Http;
 using System.Web.Mvc;
 using System.Web.Routing;
+using WebBookmarkService;
+using WebBookmarkUI.Controllers;
 
 namespace WebBookmarkUI
 {
@@ -20,5 +22,26 @@ namespace WebBookmarkUI
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
         }
+
+        protected void Application_Error(object sender, EventArgs e)
+        {
+            var ex = Server.GetLastError();
+            
+            LogHelper.WriteException("Application_Error", ex, new { Message="应用程序引发异常。"});
+
+            var httpStatusCode = (ex is HttpException) ? (ex as HttpException).GetHttpCode() : 500; //这里仅仅区分两种错误
+            var httpContext = ((MvcApplication)sender).Context;
+            httpContext.ClearError();
+            httpContext.Response.Clear();
+            httpContext.Response.StatusCode = httpStatusCode;
+            var routeData = new RouteData();
+            routeData.Values["controller"] = "Error";
+            routeData.Values["action"] = "Index";  
+            var controller = new ErrorController();
+            controller.ViewData.Model = null; //通过代码路由到指定的路径
+            ((IController)controller).Execute(new RequestContext(new HttpContextWrapper(httpContext), routeData));
+        }
+
+
     }
 }
