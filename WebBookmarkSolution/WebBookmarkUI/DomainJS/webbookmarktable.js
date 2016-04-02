@@ -18,12 +18,13 @@
             data: { strModel: strModel },
             success: function (model) {
                 if (model != null) {
+                    $("#h5title").html("编辑书签夹");
                     $("#editID").html(model.UserWebFolderID);
                     $("#bookmarkname").val(model.WebFolderName);
                     $("#folderSelect").attr("value",model.ParentWebfolderID);
                     $("#bookmarkSelect").attr("value", "folder");
                     $("#bookmarkSelect option[value='folder']").attr("selected", true);
-                    $("#btnAddFolderOrBookmark").click();
+                    $('#AddfolderOrbookmarkModal').modal('toggle');
                     $("#bookmarkhref").hide();
                   
                 } else {
@@ -44,12 +45,13 @@
             data: { strModel: strModel },
             success: function (model) {
                 if (model != null) {
+                    $("#h5title").html("编辑书签");
                     $("#editID").html(model.BookmarkInfoID);
                     $("#bookmarkname").val(model.BookmarkName);
                     $("#folderSelect").attr("value", model.UserWebFolderID);
                     $("#bookmarkSelect").attr("value", "bookmark");
                     $("#bookmarkSelect option[value='bookmark']").attr("selected", true);
-                    $("#btnAddFolderOrBookmark").click();
+                    $('#AddfolderOrbookmarkModal').modal('toggle');
                     $("#bookmarkhref").val(model.Href);
                     $("#bookmarkhref").show();
 
@@ -140,6 +142,20 @@
 
 
     });
+
+    $("#btnAddFolderOrBookmark").on('click', function ()
+    {
+        $("#h5title").html("新增书签/书签夹");
+        $('#AddfolderOrbookmarkModal').modal('toggle');
+        $("#editID").html("");
+        $("#bookmarkname").val("");
+        $("#folderSelect").attr("value", 0);
+        $("#bookmarkSelect").attr("value", "bookmark");
+        $("#bookmarkSelect option[value='bookmark']").attr("selected", true);
+        $("#bookmarkhref").val("");
+        $("#bookmarkhref").show();
+    })
+
 
     ShowFolder(0);
     ShowAddFolderOrBookmarkView(0);

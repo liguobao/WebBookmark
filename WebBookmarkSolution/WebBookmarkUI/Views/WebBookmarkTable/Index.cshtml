@@ -21,7 +21,7 @@
     </div>
 
 
-    <div id="am-footer-modal"
+    <div id="AddfolderOrbookmarkModal"
          class="am-modal am-modal-no-btn am-switch-mode-m am-switch-mode-m-default">
         <div class="am-modal-dialog">
             <div class="am-modal-hd am-modal-footer-hd">
@@ -29,7 +29,7 @@
             </div>
             <div class="am-modal-bd" id="addFolderOrBookmark">
                 <div class="content am-center">
-                    <h5 style="font-size:xx-large">新增书签/书签夹</h5>
+                    <h5 style="font-size:xx-large" id="h5title">新增书签/书签夹</h5>
                     <div id="editID" hidden></div>
 
                     <div id="divUIContent">
@@ -52,20 +52,18 @@
         </div>
     </div>
 
+
+
     <div class="am-g">
         <div class="am-u-sm-12 am-u-md-6">
             <div class="am-btn-toolbar">
                 <div class="am-btn-group am-btn-group-xs">
-                   
-                     <footer data-am-widget="footer" data-am-footer="{  }">
                         <div class="am-footer-switch">
                             <span class="am-footer-ysp" data-rel="mobile"
-                                  data-am-modal="{target: '#am-switch-mode'}">
-                            <button type="button" class="am-btn am-btn-default" id="btnAddFolderOrBookmark"><span class="am-icon-plus"></span> 新增书签/书签夹</button>
+                                  data-am-modal="{target: '#addfolderOrbookmark'}">
+                                <button type="button" class="am-btn am-btn-default" id="btnAddFolderOrBookmark"><span class="am-icon-plus"></span> 新增书签/书签夹</button>
                             </span>
                         </div>
-
-                    </footer>
                 </div>
             </div>
         </div>
