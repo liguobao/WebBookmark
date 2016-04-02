@@ -21,7 +21,7 @@
                     $("#h5title").html("编辑书签夹");
                     $("#editID").html(model.UserWebFolderID);
                     $("#bookmarkname").val(model.WebFolderName);
-                    $("#folderSelect").attr("value",model.ParentWebfolderID);
+                    $("#folderSelect").find("option[value='"+model.ParentWebfolderID+"']").attr("selected", true);
                     $("#bookmarkSelect").attr("value", "folder");
                     $("#bookmarkSelect option[value='folder']").attr("selected", true);
                     $('#AddfolderOrbookmarkModal').modal('toggle');
@@ -48,7 +48,7 @@
                     $("#h5title").html("编辑书签");
                     $("#editID").html(model.BookmarkInfoID);
                     $("#bookmarkname").val(model.BookmarkName);
-                    $("#folderSelect").attr("value", model.UserWebFolderID);
+                    $("#folderSelect").find("option[value='" + model.UserWebFolderID + "']").attr("selected", true);
                     $("#bookmarkSelect").attr("value", "bookmark");
                     $("#bookmarkSelect option[value='bookmark']").attr("selected", true);
                     $('#AddfolderOrbookmarkModal').modal('toggle');
