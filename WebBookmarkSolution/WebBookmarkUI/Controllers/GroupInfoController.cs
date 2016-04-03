@@ -525,5 +525,38 @@ namespace WebBookmarkUI.Controllers
             result.IsSuccess = true;
             return Json(result);
         }
+
+
+
+        /// <summary>
+        /// 驳回用户
+        /// </summary>
+        /// <param name="groupUserID"></param>
+        /// <returns></returns>
+        public ActionResult RejectGroupUser(long groupUserID)
+        {
+            BizResultInfo result = new BizResultInfo();
+
+
+            var bizModel = BizGroupUser.LoadByGroupUserID(groupUserID);
+            if (groupUserID == 0 || bizModel == null)
+            {
+                result.IsSuccess = false;
+                result.ErrorMessage = "取不到这个数据啊呀...不要逗我玩吧。";
+                return Json(result);
+            }
+
+            if (UILoginHelper.GetUIDFromHttpContext(HttpContext) == bizModel.UserInfoID)
+            {
+                result.IsSuccess = false;
+                result.ErrorMessage = "不允许驳回自己....";
+                return Json(result);
+            }
+            bizModel.IsPass = (int)ApplyStatus.Reject;
+            bizModel.Save();
+            MessageBo.CreateMessage(0, MessageTypeEnum.RejecrApplyJoinGroup, bizModel);
+            result.IsSuccess = true;
+            return Json(result);
+        }
     }
 }

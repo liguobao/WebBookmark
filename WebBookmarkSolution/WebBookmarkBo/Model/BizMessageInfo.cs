@@ -204,25 +204,61 @@ namespace WebBookmarkBo.Model
 
     public enum MessageTypeEnum 
     {
+        /// <summary>
+        /// 欢迎加入
+        /// </summary>
         WelcomeToWebBookmark = 0,
 
+        /// <summary>
+        /// 关注用户
+        /// </summary>
         FollowUser = 1,
 
+        /// <summary>
+        /// 新的关注者
+        /// </summary>
         NewBeFollow = 2,
 
+        /// <summary>
+        /// 新的留言
+        /// </summary>
         NewBookmarkComment = 3,
 
+        /// <summary>
+        /// 加入群组成功
+        /// </summary>
         JoinGroupSuccess = 4,
 
+        /// <summary>
+        /// 退出群组成功
+        /// </summary>
         QuitGroupSuccess =5,
 
+
+        /// <summary>
+        /// 被移除
+        /// </summary>
         RemoveGroup = 6,
 
+        /// <summary>
+        /// 导入书签成功
+        /// </summary>
         ImportBookmarkSuccess = 7,
 
+        /// <summary>
+        /// 导入书签失败
+        /// </summary>
         ImportBookmarkFail = 8,
 
+        /// <summary>
+        /// 申请加入群组
+        /// </summary>
         ApplyJoinGroup = 9,
+
+        /// <summary>
+        /// 加入群组被驳回
+        /// </summary>
+        RejecrApplyJoinGroup = 10,
 
 
     }

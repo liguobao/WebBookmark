@@ -34,6 +34,11 @@
         PassGroupUser($this.attr("data-id"));
     });
 
+    $('body').on("click", "[id='btnReject']", function () {
+        var $this = $(this);
+        RejectGroupUser($this.attr("data-id"));
+    });
+
     $('body').on("click", "[id='btnRemove']", function () {
         var $this = $(this);
         var groupUserID = $this.attr("data-id");
@@ -123,6 +128,25 @@ function PassGroupUser(groupUserID)
 
             }
     });
+}
+
+
+function RejectGroupUser(groupUserID) {
+    $.ajax({
+        type: "post",
+        url: rejectGroupUserURL,
+        data: { groupUserID: groupUserID },
+        success:
+            function (result) {
+                if (result.IsSuccess) {
+                    ShowGroupUserList(groupID);
+                } else {
+                    alert(result.ErrorMessage);
+                }
+
+            }
+    });
+
 }
 
 

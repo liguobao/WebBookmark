@@ -46,6 +46,9 @@ namespace WebBookmarkBo.Service
                         case MessageTypeEnum.RemoveGroup:
                             RemoveGroupUser(info);
                             return;
+                        case MessageTypeEnum.RejecrApplyJoinGroup:
+                            RejectGroupUser(info);
+                            return;
                     }
                 }catch(Exception ex)
                 {
@@ -247,6 +250,28 @@ namespace WebBookmarkBo.Service
 
         }
 
+
+        private static void RejectGroupUser(object info)
+        {
+            var groupUser = info as BizGroupUser;
+            if (groupUser != null)
+            {
+                var groupInfo = BizGroupInfo.LoadByGroupID(groupUser.GroupInfoID);
+                var applyUserInfo = BizUserInfo.LoadByUserInfoID(groupUser.UserInfoID);
+
+                BizMessageInfo messageInfo = new BizMessageInfo();
+                messageInfo.CreateTime = DateTime.Now;
+                messageInfo.IsRead = (int)MessageReadStatus.NotRead;
+                messageInfo.MessageTitle = string.Format("加入群组【{0}】申请被驳回", groupInfo.GroupName);
+                messageInfo.MessageContent = string.Format("很遗憾告诉您，你的加入群组【{0}】申请被驳回了。点击下面的链接可以查看你的申请记录。",
+                    groupInfo.GroupName);
+                messageInfo.MessageURL = "~/ShowMyAllGroup";
+                messageInfo.UserInfoID = applyUserInfo.UserInfoID;
+                messageInfo.MessageInfoType = (int)MessageTypeEnum.RejecrApplyJoinGroup;
+                messageInfo.Save();
+            }
+
+        }
 
 
 

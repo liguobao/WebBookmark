@@ -57,9 +57,13 @@
                                         <div class="am-text-danger"> <span class="am-icon-bolt">等待审核</span>
                                         </div>
                                     }
-                                    else if (userGroup.IsPass==3)
+                                    else if (userGroup.IsPass==2)
                                     {
                                          <div class="am-text-danger"> <span class="am-icon-bolt">已被驳回</span></div>
+                                        
+                                    }else if (userGroup.IsPass==3)
+                                    {
+                                         <div class="am-text-danger"> <span class="am-icon-bolt">已被移除</span></div>
                                     }
                                     else if (userGroup.IsPass == 4)
                                     {
