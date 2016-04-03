@@ -7,8 +7,8 @@
     <ProjectGuid>{81AACAF8-C34F-42C6-8689-7289C33DAA91}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>WebfolderService</RootNamespace>
-    <AssemblyName>WebfolderService</AssemblyName>
+    <RootNamespace>WebBookmarkService</RootNamespace>
+    <AssemblyName>WebBookmarkService</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />

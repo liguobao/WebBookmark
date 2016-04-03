@@ -7,8 +7,8 @@
     <ProjectGuid>{9CBB6D15-1C1A-4746-A943-5805F773A433}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>WebfolderBo</RootNamespace>
-    <AssemblyName>WebfolderBo</AssemblyName>
+    <RootNamespace>WebBookmarkBo</RootNamespace>
+    <AssemblyName>WebBookmarkBo</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
