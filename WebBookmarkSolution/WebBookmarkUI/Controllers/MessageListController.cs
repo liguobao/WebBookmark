@@ -14,9 +14,39 @@ namespace WebBookmarkUI.Controllers
 
         public ActionResult Index()
         {
+            return View();
+        }
+
+        public ActionResult ShowAllMessage()
+        {
             var loginUID = UILoginHelper.GetUIDFromHttpContext(HttpContext);
             var lstModel = BizMessageInfo.LoadByUserID(loginUID);
-            return View(lstModel);
+            return View("ShowAllMessage", lstModel);
+        }
+
+        public ActionResult ShowNotReadMessage()
+        {
+            var loginUID = UILoginHelper.GetUIDFromHttpContext(HttpContext);
+            var lstModel = BizMessageInfo.LoadNotReadListByUserID(loginUID);
+            return View("ShowNotReadMessage", lstModel);
+        }
+
+        public ActionResult ShowHasReadMessage()
+        {
+            var loginUID = UILoginHelper.GetUIDFromHttpContext(HttpContext);
+            var lstModel = BizMessageInfo.LoadHasReadListByUserID(loginUID);
+            return View("ShowHasReadMessage", lstModel);
+        }
+
+
+        public ActionResult ShowMessageContent(long messageID)
+        {
+            var model = BizMessageInfo.LoadByMessageID(messageID);
+            if(model!=null && model.IsRead ==(int) MessageReadStatus.NotRead)
+            {
+                model.SetToHasRead();
+            }
+            return View(model);
         }
 
     }

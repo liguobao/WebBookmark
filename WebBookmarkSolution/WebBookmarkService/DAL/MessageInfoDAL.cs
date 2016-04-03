@@ -281,7 +281,16 @@ namespace WebBookmarkService.DAL
             }
         }
 
-        
+     
+
+        public IEnumerable<MessageInfo> GetHasReadListByUserInfoID(long userInfoID)
+        {
+            string sql = "SELECT * FROM tblMessageInfo WHERE UserInfoID = @UserInfoID and IsRead =1 order by CreateTime desc";
+            using (MySqlDataReader reader = MyDBHelper.ExecuteDataReader(sql, new MySqlParameter("@UserInfoID", userInfoID)))
+            {
+                return ToModels(reader);
+            }
+        }
 
 	}
 }

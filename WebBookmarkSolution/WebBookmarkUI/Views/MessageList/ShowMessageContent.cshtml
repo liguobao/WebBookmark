@@ -1,0 +1,20 @@
+﻿@{
+    ViewBag.Title = "ShowMessageContent";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@model WebBookmarkBo.Model.BizMessageInfo
+
+
+@if(Model!=null)
+{
+    <div class="am-text-center" style="margin-top:10px;">
+      <h1>@Model.MessageTitle </h1>
+        <hr />
+    </div>
+    <div class="am-text-left" style="margin-left:5%">
+        <p>@Model.MessageContent</p>
+        <a href='@Url.Content( Model.MessageURL)'>点我^-^</a>
+    </div>
+    <div class="am-text-right" style="margin-right:1%">时间：@Model.CreateTime</div>
+    
+}

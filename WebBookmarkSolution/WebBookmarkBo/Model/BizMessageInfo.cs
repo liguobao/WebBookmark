@@ -153,6 +153,29 @@ namespace WebBookmarkBo.Model
             return lstModel.Select(model => new BizMessageInfo(model)).ToList();
         }
 
+
+        /// <summary>
+        ///加载已读消息
+        /// </summary>
+        /// <param name="userID"></param>
+        /// <returns></returns>
+        public static List<BizMessageInfo> LoadHasReadListByUserID(long userID)
+        {
+            var lstModel = DAL.GetHasReadListByUserInfoID(userID);
+            if (lstModel == null)
+                return new List<BizMessageInfo>();
+            return lstModel.Select(model => new BizMessageInfo(model)).ToList();
+        }
+
+        public static int GetNotReadMessageCount(long userID)
+        {
+            var lstModel = DAL.GetNotReadListByUserInfoID(userID);
+            if (lstModel == null)
+                return 0;
+            return lstModel.Count();
+          
+        }
+
         public static BizMessageInfo LoadByMessageID(long messageID)
         {
             var model = DAL.GetByMessageInfoID(messageID);
@@ -185,15 +208,21 @@ namespace WebBookmarkBo.Model
 
         FollowUser = 1,
 
-        BeFollow = 2,
+        NewBeFollow = 2,
 
-        BookmarkComment = 3,
+        NewBookmarkComment = 3,
 
         JoinGroupSuccess = 4,
 
         QuitGroupSuccess =5,
 
         RemoveGroup = 6,
+
+        ImportBookmarkSuccess = 7,
+
+        ImportBookmarkFail = 8,
+
+        ApplyJoinGroup = 9,
 
 
     }

@@ -77,6 +77,11 @@ namespace WebBookmarkUI.Controllers
                 result.ErrorMessage = "不允许移除自己....";
                 return Json(result);
             }
+
+            if (bizModel.IsPass == (int)ApplyStatus.Pass)
+            {
+                MessageBo.CreateMessage(0, MessageTypeEnum.QuitGroupSuccess, bizModel);
+            }
             bizModel.IsPass = (int)ApplyStatus.Quit;
             bizModel.Save();
             result.IsSuccess = true;
@@ -98,6 +103,7 @@ namespace WebBookmarkUI.Controllers
             }
             bizModel.IsPass = (int)ApplyStatus.Waiting;
             bizModel.Save();
+            MessageBo.CreateMessage(0, MessageTypeEnum.ApplyJoinGroup, bizModel);
             result.IsSuccess = true;
             return Json(result);
         }

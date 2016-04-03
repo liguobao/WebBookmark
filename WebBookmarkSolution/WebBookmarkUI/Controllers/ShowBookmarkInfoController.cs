@@ -134,7 +134,7 @@ namespace WebBookmarkUI.Controllers
                 comment.CreateTime = DateTime.Now;
                 comment.BookmarkUserID = bookmark.UserInfoID;
                 comment.Save();
-
+                MessageBo.CreateMessage(bookmark.UserInfoID, MessageTypeEnum.NewBookmarkComment, comment);
                 result.IsSuccess = true;
                 result.SuccessMessage = "提交成功。";
             }catch(Exception ex)

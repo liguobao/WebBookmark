@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using WebBookmarkBo.Model;
 using WebBookmarkService.DAL;
-using WebfolderBo.Model;
 
-namespace WebfolderBo.Service
+namespace WebBookmarkBo.Service
 {
     public class UserRelationshipBo
     {

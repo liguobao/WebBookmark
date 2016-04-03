@@ -6,7 +6,6 @@ using System.Web.Mvc;
 using WebBookmarkBo.Model;
 using WebBookmarkBo.Service;
 using WebBookmarkUI.Models;
-using WebfolderBo.Model;
 using WebfolderBo.Service;
 
 namespace WebBookmarkUI.Controllers
@@ -460,7 +459,7 @@ namespace WebBookmarkUI.Controllers
             groupUser.CreateTime = DateTime.Now;
             groupUser.UserInfoID = UILoginHelper.GetUIDFromHttpContext(HttpContext);
             groupUser.Save();
-
+            MessageBo.CreateMessage(0,MessageTypeEnum.ApplyJoinGroup,groupUser);
             result.IsSuccess = true;
             result.SuccessMessage = "申请成功....";
           
@@ -489,6 +488,7 @@ namespace WebBookmarkUI.Controllers
              bizModel.IsPass = (int)ApplyStatus.Pass;
              bizModel.Save();
 
+             MessageBo.CreateMessage(0,MessageTypeEnum.JoinGroupSuccess,bizModel);
              result.IsSuccess = true;
              result.SuccessMessage = "审核成功！";
              return Json(result );
@@ -521,6 +521,7 @@ namespace WebBookmarkUI.Controllers
             }
             bizModel.IsPass = (int)ApplyStatus.Remove;
             bizModel.Save();
+            MessageBo.CreateMessage(0, MessageTypeEnum.RemoveGroup, bizModel);
             result.IsSuccess = true;
             return Json(result);
         }

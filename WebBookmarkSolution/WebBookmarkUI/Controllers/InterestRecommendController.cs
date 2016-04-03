@@ -6,7 +6,6 @@ using System.Web.Mvc;
 using WebBookmarkBo.Model;
 using WebBookmarkBo.Service;
 using WebBookmarkUI.Models;
-using WebfolderBo.Model;
 using WebfolderBo.Service;
 
 namespace WebBookmarkUI.Controllers
@@ -71,6 +70,7 @@ namespace WebBookmarkUI.Controllers
                 CreateTime = DateTime.Now,
             };
             userRelationship.Save();
+            MessageBo.CreateMessage(userID, MessageTypeEnum.NewBeFollow, userRelationship);
             result.IsSuccess = true;
 
             return Json(result);

@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using WebBookmarkBo.Model;
+using WebBookmarkBo.Service;
 using WebBookmarkService;
 
 namespace WebfolderBo.Service
@@ -48,9 +49,11 @@ namespace WebfolderBo.Service
                 FillBookmarkModelAndWebfolderInfo(tree.FirstElementChild, uid, lstBizHrefInfo, dicHashcodeToModel);
 
                 AsyncSaveBookmarkAndUpdataWebfolderToDB(dicHashcodeToModel, lstBizHrefInfo);
+                MessageBo.CreateMessage(uid, MessageTypeEnum.ImportBookmarkSuccess, null);
             }
             catch (Exception ex)
             {
+                MessageBo.CreateMessage(uid, MessageTypeEnum.ImportBookmarkFail, null);
                 LogHelper.WriteException("遍历书签文件失败",ex,new {UserInfoID= uid,Path= path });
                 return (new BizResultInfo() { IsSuccess = false, ErrorMessage = "发生了一些意外，反正你是看不懂的...." });
             }
@@ -116,6 +119,7 @@ namespace WebfolderBo.Service
                 try
                 {
                     UserWebFolderBo.BatchUpdateWebfolder(dicHashcodeToModel.Values.ToList());
+
                 }
                 catch (Exception ex)
                 {

@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using WebBookmarkService.DAL;
-using WebfolderBo.Model;
+using WebBookmarkBo.Model;
 
-namespace WebfolderBo.Service
+namespace WebBookmarkBo.Service
 {
     
     public class GroupUserBo
