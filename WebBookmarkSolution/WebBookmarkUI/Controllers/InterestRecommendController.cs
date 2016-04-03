@@ -47,7 +47,8 @@ namespace WebBookmarkUI.Controllers
         public ActionResult FollowUser(long beFollowUserID)
         {
             BizResultInfo result = new BizResultInfo();
-            if(beFollowUserID==0)
+             var befollower = BizUserInfo.LoadByUserInfoID(beFollowUserID);
+            if(beFollowUserID==0 || befollower==null || befollower.UserInfoID==0)
             {
                 result.IsSuccess = false;
                 result.ErrorMessage = "关注者ID为空，这是一条垃圾数据呀。";
@@ -70,7 +71,9 @@ namespace WebBookmarkUI.Controllers
                 CreateTime = DateTime.Now,
             };
             userRelationship.Save();
+
             MessageBo.CreateMessage(userID, MessageTypeEnum.NewBeFollow, userRelationship);
+            UserDynamicInfoBo.CreateDynamicInfoMessage(userID, DynamicInfoType.NewFollower, befollower);
             result.IsSuccess = true;
 
             return Json(result);

@@ -74,6 +74,7 @@
     <Compile Include="DAL\GroupUserDAL.cs" />
     <Compile Include="DAL\MessageInfoDAL.cs" />
     <Compile Include="DAL\SystemLogDAL.cs" />
+    <Compile Include="DAL\UserDynamicInfoDAL.cs" />
     <Compile Include="DAL\UserInfoDAL.cs" />
     <Compile Include="DAL\UserLabelInfologDAL.cs" />
     <Compile Include="DAL\UserRelationshipDAL.cs" />
@@ -87,6 +88,7 @@
     <Compile Include="Model\GroupUser.cs" />
     <Compile Include="Model\MessageInfo.cs" />
     <Compile Include="Model\SystemLog.cs" />
+    <Compile Include="Model\UserDynamicInfo.cs" />
     <Compile Include="Model\UserInfo.cs" />
     <Compile Include="Model\UserLabelInfolog.cs" />
     <Compile Include="Model\UserRelationship.cs" />

@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using WebBookmarkBo.Model;
 using WebBookmarkService;
-using WebBookmarkService.BizModel;
+using WebBookmarkService.Model;
 
 namespace WebBookmarkBo.Service
 {

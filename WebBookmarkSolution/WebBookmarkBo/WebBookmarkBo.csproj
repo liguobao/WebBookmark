@@ -57,12 +57,14 @@
     <Compile Include="Model\BizBookmarkComment.cs" />
     <Compile Include="Model\BizGroupUser.cs" />
     <Compile Include="Model\BizMessageInfo.cs" />
+    <Compile Include="Model\BizUserDynamicInfo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Service\BookmarkInfoBo.cs" />
     <Compile Include="Service\GroupInfoBo.cs" />
     <Compile Include="Service\GroupUserBo.cs" />
     <Compile Include="Service\ImportBookmarkHelper.cs" />
     <Compile Include="Service\MessageBo.cs" />
+    <Compile Include="Service\UserDynamicInfoBo.cs" />
     <Compile Include="Service\UserInfoBo.cs" />
     <Compile Include="Service\UserRelationshipBo.cs" />
     <Compile Include="Service\UserWebFolderBo.cs" />

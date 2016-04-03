@@ -4,9 +4,50 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<!DOCTYPE html>
-<html class="js cssanimations">
-<body>
-    <h1>什么都没有的主页.....</h1>
-</body>
-</html>
+@model List<WebBookmarkBo.Model.BizUserDynamicInfo>
+<div class="am-cf am-padding">
+    <div class="am-fl am-cf"><strong class="am-text-primary am-text-lg">主页动态</strong> / <small>WebBookmark DynamicInfo</small></div>
+</div>
+
+<div style="margin-left:1%;margin-bottom:1%;">
+    <ul class="am-comments-list am-comments-list-flip">
+        @if (Model != null && Model.Count > 0)
+        {
+            foreach (var userDynamicInfo in Model)
+            {
+                <li class="am-comment">
+                    <article class="am-comment">
+                        <a href="~/UserInfo/ShowUserDetail?uid=@userDynamicInfo.UserInfoID">
+                            @if (string.IsNullOrEmpty(userDynamicInfo.UserInfo.UserImagURL))
+                            {
+                                 <img src='http://s.amazeui.org/media/i/demos/bw-2014-06-19.jpg?imageView/1/w/200/h/200/q/80' alt="" class="am-comment-avatar" width="60" height="60" />
+                            }else
+                            {
+                                 <img src='@Url.Content(userDynamicInfo.UserInfo.UserImagURL)' alt="" class="am-comment-avatar" width="60" height="60" />
+                            }
+                           
+                        </a>
+
+                        <div class="am-comment-main">
+                            <header class="am-comment-hd">
+                                <div class="am-comment-meta">
+                                    <a href ='@Url.Content("~/UserInfo/ShowUserDetail?uid="+userDynamicInfo.UserInfoID)' class="am-comment-author">
+                                        @userDynamicInfo.UserInfo.UserName</a>于 <time>@userDynamicInfo.CreateTime</time>
+                                </div>
+                            </header>
+
+                            <div class="am-comment-bd">
+                                @*<h3 class="am-comment-title">@commentInfo.CommentTitle</h3>*@
+                                <a href='@Url.Content(userDynamicInfo.UserDynamicURL)'>@userDynamicInfo.UserDynamicContent</a>
+                               
+                            </div>
+                        </div>
+                    </article>
+                </li>
+            }
+
+        }
+    </ul>
+</div>
+
+

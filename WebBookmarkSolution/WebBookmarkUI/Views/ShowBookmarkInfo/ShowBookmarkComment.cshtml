@@ -1,36 +1,35 @@
 ﻿@model Tuple<IEnumerable <WebBookmarkUI.Models.UICommentInfo>,WebBookmarkUI.Models.UIUserInfo>
-
-<blockquote>
-
+<div style="margin-left:2%">
     <ul class="am-comments-list am-comments-list-flip">
-        @if(Model!=null && Model.Item1.Count()>0)
+        @if (Model != null && Model.Item1.Count() > 0)
         {
             foreach (var commentInfo in Model.Item1)
             {
-                 <li class="am-comment">
-                   <article class="am-comment">
-                       <a href="~/UserInfo/ShowUserDetail?uid=@commentInfo.CriticsUserID">
-                           <img src='@Url.Content(commentInfo.CriticsUserInfo.UserImagURL)' alt="" class="am-comment-avatar" width="60" height="60" />
-                       </a>
+                <li class="am-comment">
+                    <article class="am-comment">
+                        <a href="~/UserInfo/ShowUserDetail?uid=@commentInfo.CriticsUserID">
+                            <img src='@Url.Content(commentInfo.CriticsUserInfo.UserImagURL)' alt="" class="am-comment-avatar" width="60" height="60" />
+                        </a>
 
-                    <div class="am-comment-main">
-                        <header class="am-comment-hd">
-                            <div class="am-comment-meta">
-                                <a href="#" id="showUserInfo" data-id='@commentInfo.CriticsUserInfo.UserInfoID' class="am-comment-author">@commentInfo.CriticsUserInfo.UserName</a>
-                                评论于 <time >@commentInfo.CreateTime</time>
+                        <div class="am-comment-main">
+                            <header class="am-comment-hd">
+                                <div class="am-comment-meta">
+                                    <a href="#" id="showUserInfo" data-id='@commentInfo.CriticsUserInfo.UserInfoID' class="am-comment-author">@commentInfo.CriticsUserInfo.UserName</a>
+                                    评论于 <time>@commentInfo.CreateTime</time>
+                                </div>
+                            </header>
+
+                            <div class="am-comment-bd">
+                                @*<h3 class="am-comment-title">@commentInfo.CommentTitle</h3>*@
+                                @commentInfo.CommentContent
                             </div>
-                        </header>
-                      
-                        <div class="am-comment-bd">
-                            @*<h3 class="am-comment-title">@commentInfo.CommentTitle</h3>*@
-                            @commentInfo.CommentContent
                         </div>
-                    </div>
-                   </article>
-                 </li>
+                    </article>
+                </li>
             }
-            
-        }else
+
+        }
+        else
         {
             <p>还没有人评论过呢。</p>
         }
@@ -39,44 +38,45 @@
         {
 
             var userInfo = Model.Item2;
-           <li class="am-comment">
-                    <article class="am-comment">
-                        <a href="#link-to-user-home">
-                            @if (!string.IsNullOrEmpty(userInfo.UserImagURL))
-                            {
-                              <img src='@Url.Content(userInfo.UserImagURL)' alt="" class="am-comment-avatar" width="80" height="80" />
-                            }
-                            else
-                            {
+            <li class="am-comment">
+                <article class="am-comment">
+                    <a href="#link-to-user-home">
+                        @if (!string.IsNullOrEmpty(userInfo.UserImagURL))
+                        {
+                            <img src='@Url.Content(userInfo.UserImagURL)' alt="" class="am-comment-avatar" width="80" height="80" />
+                        }
+                        else
+                        {
                             <img src='http://s.amazeui.org/media/i/demos/bw-2014-06-19.jpg?imageView/1/w/200/h/200/q/80' alt="" class="am-comment-avatar" width="48" height="48" />
-                           
-                            }
-                        </a>
 
-                        <div class="am-comment-main">
-                            <header class="am-comment-hd">
-                                <h3 class="am-comment-title">添加评论：</h3>
-                            </header>
+                        }
+                    </a>
 
-                            <div class="content am-center">
-                                <ul>
-                                    <li style="margin: 1px 20px;">
-                                        <div class="am-form-group">
-                                            <textarea class="" rows="5" id="content" style="width:30%"></textarea>
-                                        </div>
-                                        <div class="am-form-group">
-                                            <button type="button" class="am-btn am-btn-primary" id="btnsubmitcomment" style="margin-left:23%;" onclick="SaveComment()">发布评论</button>
-                                        </div>
-                                       
-                                    </li>
-                                </ul>
-                            </div>
+                    <div class="am-comment-main">
+                        <header class="am-comment-hd">
+                            <h3 class="am-comment-title">添加评论：</h3>
+                        </header>
+
+                        <div class="content am-center">
+                            <ul>
+                                <li style="margin: 1px 20px;">
+                                    <div class="am-form-group">
+                                        <textarea class="" rows="5" id="content" style="width:30%"></textarea>
+                                    </div>
+                                    <div class="am-form-group">
+                                        <button type="button" class="am-btn am-btn-primary" id="btnsubmitcomment" style="margin-left:23%;" onclick="SaveComment()">发布评论</button>
+                                    </div>
+
+                                </li>
+                            </ul>
                         </div>
-                    </article>
-                </li>
+                    </div>
+                </article>
+            </li>
 
         }
 
-
     </ul>
-</blockquote>
+
+
+</div>

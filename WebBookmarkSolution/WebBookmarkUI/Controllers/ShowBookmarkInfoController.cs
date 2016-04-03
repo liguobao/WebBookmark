@@ -5,7 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using WebBookmarkBo.Model;
 using WebBookmarkBo.Service;
-using WebBookmarkService.BizModel;
+using WebBookmarkService.Model;
 using WebBookmarkUI.Commom;
 using WebBookmarkUI.Models;
 using WebBookmarkService;
@@ -134,7 +134,10 @@ namespace WebBookmarkUI.Controllers
                 comment.CreateTime = DateTime.Now;
                 comment.BookmarkUserID = bookmark.UserInfoID;
                 comment.Save();
+                var loginUID = UILoginHelper.GetUIDFromHttpContext(HttpContext);
                 MessageBo.CreateMessage(bookmark.UserInfoID, MessageTypeEnum.NewBookmarkComment, comment);
+                UserDynamicInfoBo.CreateDynamicInfoMessage(loginUID, DynamicInfoType.NewBookmarkComment, bookmark);
+
                 result.IsSuccess = true;
                 result.SuccessMessage = "提交成功。";
             }catch(Exception ex)
