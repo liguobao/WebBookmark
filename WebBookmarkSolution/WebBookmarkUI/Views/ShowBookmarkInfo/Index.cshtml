@@ -16,10 +16,12 @@
 
 <div class="aw-mod aw-user-detail-box">
     <div class="am-cf am-padding">
-        <div class="am-fl am-cf"><strong class="am-text-primary am-text-lg">@Model.BookmarkName</strong> / <small>Bookmark Info</small></div>
+        <div class="am-fl am-cf"><strong class="am-text-primary am-text-lg">@Model.BookmarkName</strong> / <small><a href='@Url.Content(Model.Href)'>@Model.Href</a></small></div>
     </div>
-    <div class="am-fl am-cf" style="margin-left:1%">创建日期：@Model.CreateTime &nbsp;&nbsp;&nbsp;&nbsp; URL：<a href='@Model.Href'>@Model.Href</a></div>
-        <div class="mod-footer">
+    <div class="am-fl am-cf" style="margin-left:1%;">
+       创建日期：@Model.CreateTime &nbsp;&nbsp;&nbsp;&nbsp;
+    </div>
+   <div class="mod-footer">
             <div class="am-tabs" data-am-tabs="">
                 <ul class="am-tabs-nav am-nav am-nav-tabs aw-nav-tabs">
                     <li class=""><a href="#" id="bookmarkHTML" data-id='@Model.BookmarkInfoID' data-url='@Model.Href'>HTML <span id="loadHTML"></span></a></li>

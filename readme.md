@@ -2,6 +2,9 @@
 #MyWebFolder Commit log
 
 ##2016.4.3
+1. 修复Bokmark页面无法点击URL问题
+
+##2016.4.3
 1. 新增加入群组申请，新增对应的消息推送。
 2. 消息类型：WelcomeToWebBookmark = 0,FollowUser = 1,NewBeFollow = 2,NewBookmarkComment = 3,JoinGroupSuccess = 4,QuitGroupSuccess =5,RemoveGroup = 6,ImportBookmarkSuccess = 7,ImportBookmarkFail = 8,ApplyJoinGroup = 9,RejecrApplyJoinGroup = 10,
 
