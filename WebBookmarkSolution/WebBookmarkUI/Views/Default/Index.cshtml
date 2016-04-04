@@ -5,15 +5,17 @@
 }
 
 @model List<WebBookmarkBo.Model.BizUserDynamicInfo>
+
 <div class="am-cf am-padding">
     <div class="am-fl am-cf"><strong class="am-text-primary am-text-lg">主页动态</strong> / <small>WebBookmark DynamicInfo</small></div>
 </div>
 
+@if (Model != null && Model.Count > 0)
+{
+    
 <div style="margin-left:1%;margin-bottom:1%;">
     <ul class="am-comments-list am-comments-list-flip">
-        @if (Model != null && Model.Count > 0)
-        {
-            foreach (var userDynamicInfo in Model)
+            @foreach (var userDynamicInfo in Model)
             {
                 <li class="am-comment">
                     <article class="am-comment">
@@ -45,9 +47,15 @@
                     </article>
                 </li>
             }
-
-        }
     </ul>
 </div>
 
+}else
+{
+    <div class="am-text-center" style="margin-bottom:1%">
+        <p>没有动态...</p>
+        <p>去【探索/发现】看看？</p><a href='@Url.Content("~/InterestRecommend")'>点我^-^</a>
+      
+    </div>
+}
 

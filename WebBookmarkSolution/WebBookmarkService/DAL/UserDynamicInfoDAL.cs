@@ -252,7 +252,7 @@ namespace WebBookmarkService.DAL
         /// <returns></returns>
         public IEnumerable< UserDynamicInfo> GetListByUserIDs(List<long> userIDs)
         {
-            if (userIDs == null && userIDs.Count == 0)
+            if (userIDs == null || userIDs.Count == 0)
                 return new List<UserDynamicInfo>();
             string sql = string.Format("SELECT * FROM tblUserDynamicInfo WHERE UserInfoID in ({0}) order by CreateTime desc", string.Join(",", userIDs));
             using (MySqlDataReader reader = MyDBHelper.ExecuteDataReader(sql))
