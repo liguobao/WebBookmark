@@ -1,6 +1,11 @@
 
 #MyWebFolder Commit log
 
+##2016.4.5
+1. 新增用户推荐，此版本一次网络请求需要5秒以上，SQL需要优化
+2. 推荐内容考虑引入推荐算法，简单实现“协同过滤”就算了（或者不做，优化上面的做法算了）。http://www.infoq.com/cn/articles/recommendation-algorithm-overview-part02
+3. 书签推荐还没做，下次做吧。
+4. 优化思路:提前生成数据，直接取数据就好
 
 ##2016.4.4
 1. 修正主页没有消息的时候SQL报错的bug

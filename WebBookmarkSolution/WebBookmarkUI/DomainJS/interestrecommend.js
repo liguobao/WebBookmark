@@ -7,8 +7,13 @@
         btnSearch.attr("disabled", true);
         btnSearch.html("<i class='am-icon-spinner am-icon-spin'></i>正在努力寻找...");
         var nameOrEmail = $("#searchname").val();
-        var divContent = $("#content");
+        var divContent = $("#overview");
 
+        $("#bookmarkrecommend").parent().removeClass("am-active");
+        $("#userrecommend").parent().removeClass("am-active");
+        $("#searchuser").parent().addClass("am-active");
+
+        $("#searchuserloading").addClass("am-icon-spinner").addClass("am-icon-spin");
 
         $.ajax({
             type: "post",
@@ -22,6 +27,7 @@
                     }
                     btnSearch.html(" <i class='am-icon-search'></i>搜索");
                     btnSearch.attr("disabled", false);
+                    $("#searchuserloading").removeClass("am-icon-spinner").removeClass("am-icon-spin");
                 }
         });
         e.stopPropagation();
@@ -29,10 +35,59 @@
 
     })
 
+    $('body').on("click", "[id='userrecommend']", function () {
+        var $this = $(this);
+        $("#bookmarkrecommend").parent().removeClass("am-active");
+        $("#searchuser").parent().removeClass("am-active");
+        $this.parent().addClass("am-active");
+        ShowUserRecommend();
+    })
 
-  
+    $('body').on("click", "[id='bookmarkrecommend']", function () {
+        var $this = $(this);
+        $("#userrecommend").parent().removeClass("am-active");
+        $("#searchuser").parent().removeClass("am-active");
+        $this.parent().addClass("am-active");
+        ShowBookmarkRecommend();
+    })
+
+
+    ShowUserRecommend();
 })
 
+function ShowUserRecommend()
+{
+    $("#userrecommendloading").addClass("am-icon-spinner").addClass("am-icon-spin");
+
+    $.ajax({
+        type: "post",
+        url: showUserRecommendURL,
+        success:
+            function (data) {
+                if (data != null) {
+                    $("#overview").html(data);
+                }
+                $("#userrecommendloading").removeClass("am-icon-spinner").removeClass("am-icon-spin");
+            }
+    });
+}
+
+
+function ShowBookmarkRecommend() {
+    $("#bookmarkrecommendloading").addClass("am-icon-spinner").addClass("am-icon-spin");
+
+    $.ajax({
+        type: "post",
+        url: showBookmarkRecommendURL,
+        success:
+            function (data) {
+                if (data != null) {
+                    $("#overview").html(data);
+                }
+                $("#bookmarkrecommendloading").removeClass("am-icon-spinner").removeClass("am-icon-spin");
+            }
+    });
+}
 
 
 

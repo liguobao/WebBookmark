@@ -51,5 +51,7 @@ namespace WebfolderBo.Service
         {
             return DAL.DeleteByBookmarkInfoID(bookmarkInfoID) >= 0;
         }
+
+
     }
 }

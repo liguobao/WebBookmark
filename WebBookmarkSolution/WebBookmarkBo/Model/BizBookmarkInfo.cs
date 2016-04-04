@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using WebBookmarkBo.Service;
+using WebBookmarkService;
 using WebBookmarkService.DAL;
 using WebBookmarkService.Model;
 
@@ -155,13 +157,31 @@ namespace WebBookmarkBo.Model
             else
             {
                 DAL.Add(ToModel());
-                var model = DAL.GetByUserInfoIAndHashcode(UserInfoID,HashCode);
-                if(model!=null)
-                {
-                    BookmarkInfoID = model.BookmarkInfoID;
-                }
-                
+
+                CreateDynamicInfo();
+             
             }
+        }
+
+        private void CreateDynamicInfo()
+        {
+            Task.Factory.StartNew(() =>
+            {
+                try
+                {
+                    var model = DAL.GetByUserInfoIAndHashcode(UserInfoID, HashCode);
+                    if (model != null)
+                    {
+                        BookmarkInfoID = model.BookmarkInfoID;
+                        UserDynamicInfoBo.CreateDynamicInfoMessage(UserInfoID, DynamicInfoType.NewBookmark, this);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    LogHelper.WriteException("CreateDynamicInfoMessage", ex, new { UserInfoID = UserInfoID, Bookmark = this });
+                }
+
+            });
         }
     }
 }

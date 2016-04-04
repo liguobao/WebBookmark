@@ -8,6 +8,7 @@ using System.Text;
 using System.Data;
 using MySql.Data.MySqlClient;
 using WebBookmarkService.Model;
+using System.Linq;
 
 namespace WebBookmarkService.DAL
 {
@@ -368,6 +369,30 @@ namespace WebBookmarkService.DAL
                 return ToModels(reader);
             }
         }
+
+        /// <summary>
+        /// 获取Host地址相同的数据
+        /// </summary>
+        /// <param name="lstHost"></param>
+        /// <param name="userid"></param>
+        /// <returns></returns>
+        public IEnumerable<BookmarkInfo> GetListByHosts(List<string> lstHost,long userid=0)
+        {
+            if(lstHost==null || lstHost.Count==0)
+                return new List<BookmarkInfo>();
+            var hosts = lstHost.Select(host=>string.Format("'{0}'",host)).ToList();
+            string sql = string.Format("SELECT * FROM tblBookmarkInfo where Host in ({0})", string.Join(",", hosts));
+            if(userid!=0)
+            {
+                sql = sql + "and userinfoid !=" + userid;
+            }
+            using (MySqlDataReader reader = MyDBHelper.ExecuteDataReader(sql))
+            {
+                return ToModels(reader);
+            }
+        }
+
+
 
 	}
 }

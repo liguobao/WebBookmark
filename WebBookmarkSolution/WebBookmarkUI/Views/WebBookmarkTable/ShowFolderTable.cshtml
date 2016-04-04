@@ -6,7 +6,9 @@
      
            <tr>
                 <td><span class="am-icon-folder"></span></td>
-                <td><span name="openfolder" class="am-icon-reply" ><div name="divFolderID" style="display:none"> @Model.ParentWebfolderID</div></span>
+               <td><span name="openfolder" class="am-icon-reply"><div name="divFolderID" style="display:none"> @Model.ParentWebfolderID</div></span>
+               <td></td>
+               <td></td>
             </tr>
      
      
@@ -23,7 +25,8 @@
                                 <div id="model" hidden>@Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(folder))</div>
                                 <span class="am-icon-pencil-square-o"></span> 修改
                             </button>
-                            <button class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only delete" id="delete" value="folder">
+                            &nbsp;&nbsp;  &nbsp;&nbsp;
+                            <button class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only delete" id="delete" value="folder" style="margin-left:5px">
                                 <div name="infoID" style="display:none"> @folder.UserWebFolderID</div>
                                 <div name="ParentWebfolderID" hidden>@folder.ParentWebfolderID</div>
                                 <span class="am-icon-trash-o"></span> 删除
@@ -48,10 +51,11 @@
                                 <div id="model" hidden>@Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(bookmark))</div>
                                 <span class="am-icon-pencil-square-o"></span> 修改
                             </button>
-                            <button class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only" id="delete" value="bookmark">
+                          
+                            <button class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only" id="delete" value="bookmark" style="margin-left:5px">
                                 <div name="infoID" style="display:none"> @bookmark.BookmarkInfoID</div>
                                 <div name="ParentWebfolderID" hidden>@bookmark.UserWebFolderID</div>
-                                <span class="am-icon-trash-o"></span> 删除
+                               <span class="am-icon-trash-o"></span> 删除
                             </button>
                         </div>
                     </div>

@@ -10,30 +10,48 @@
     var showUserFolderURL = "@Url.Action("ShowUserFolder")";
     var showUserFollowURL = "@Url.Action("../Follower/ShowUserFollow")";
     var showUserBeFollwedUR = "@Url.Action("../Follower/ShowUserBeFollwed")";
+    var showUserRecommendURL = "@Url.Action("../UserRecommend")";
+    var showBookmarkRecommendURL = "@Url.Action("../BookmarkRecommend")";
+
+    
+
 </script>
 <script src="~/DomainJS/interestrecommend.js"></script>
 
 
 <div class="am-g">
     <div class="am-cf am-padding">
-        <div class="am-fl am-cf"><strong class="am-text-primary am-text-lg">兴趣推荐</strong> / <small>Interest Recommend</small></div>
-    </div>
+        <div class="am-fl am-cf am-u-sm-8"><strong class="am-text-primary am-text-lg">兴趣推荐</strong> / <small>Interest Recommend</small></div>
 
-
-    <div class="am-u-sm-12 am-u-md-8">
-        <div class="am-form-group">
-
+        <div class="am-fl am-cf am-u-sm-4 am-text-right">
+            <div class="am-input-group am-input-group-sm">
+                <input type="text" class="am-form-field" placeholder="输入用户名/邮箱进行搜索" id="searchname">
+                <span class="am-input-group-btn">
+                    <button class="am-btn am-btn-default" type="button" id="btnSearch"><i class="am-icon-search"></i> 搜索</button>
+                </span>
+            </div>
         </div>
+      
     </div>
 
-    <div class="am-u-sm-12 am-u-md-3">
-        <div class="am-input-group am-input-group-sm">
-            <input type="text" class="am-form-field" placeholder="输入用户名/邮箱进行搜索" id="searchname">
-            <span class="am-input-group-btn">
-                <button class="am-btn am-btn-default" type="button" id="btnSearch"><i class="am-icon-search"></i> 搜索</button>
-            </span>
+
+
+
+   <div class="am-tabs" data-am-tabs="">
+            <ul class="am-tabs-nav am-nav am-nav-tabs aw-nav-tabs">
+                <li class=""><a href="#" id="userrecommend" data-id='' data-url=''>用户推荐<span id="userrecommendloading"></span></a></li>
+                <li class=""><a href="#" id="bookmarkrecommend" data-id=''>书签推荐 <span id="bookmarkrecommendloading"></span></a></li>
+                <li class=""><a href="#" id="searchuser" data-id=''>搜索结果<span id="searchuserloading"></span></a></li>
+            </ul>
+
+            <div class="am-tabs-bd aw-user-center-tab" style="touch-action: pan-y; -webkit-user-select: none; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);">
+                <div class="am-active am-in" id="overview">
+
+                </div>
+            </div>
         </div>
-    </div>
+
+
 </div>
 
 

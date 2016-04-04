@@ -115,6 +115,7 @@
     <Compile Include="Commom\SessionUserParameterAttribute .cs" />
     <Compile Include="Commom\UILoginHelper.cs" />
     <Compile Include="Commom\UploadFileHelper.cs" />
+    <Compile Include="Controllers\BookmarkRecommendController.cs" />
     <Compile Include="Controllers\DefaultController.cs" />
     <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\FollowerController.cs" />
@@ -126,6 +127,7 @@
     <Compile Include="Controllers\ShowBookmarkInfoController.cs" />
     <Compile Include="Controllers\ShowGroupController.cs" />
     <Compile Include="Controllers\ShowMyAllGroupController.cs" />
+    <Compile Include="Controllers\UserRecommendController.cs" />
     <Compile Include="Controllers\UserInfoController.cs" />
     <Compile Include="Controllers\WebBookmarkTableController.cs" />
     <Compile Include="Global.asax.cs">
@@ -276,9 +278,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Shared\Error.cshtml" />
-    <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Shared\_LoginPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\UserInfo\Index.cshtml" />
@@ -318,6 +318,8 @@
     <Content Include="Views\MessageList\ShowNotReadMessage.cshtml" />
     <Content Include="Views\MessageList\ShowHasReadMessage.cshtml" />
     <Content Include="Views\MessageList\ShowMessageContent.cshtml" />
+    <Content Include="Views\UserRecommend\Index.cshtml" />
+    <Content Include="Views\BookmarkRecommend\Index.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

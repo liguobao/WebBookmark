@@ -138,7 +138,7 @@ namespace WebBookmarkUI.Controllers
                     bookmark.UserInfoID = loginUid;
                     bookmark.HashCode = bookmark.GetHashCode();
                     bookmark.Save();
-                    UserDynamicInfoBo.CreateDynamicInfoMessage(loginUid, DynamicInfoType.NewBookmark, bookmark);
+                   
                     
 
                 }else
@@ -157,7 +157,6 @@ namespace WebBookmarkUI.Controllers
                     folder.CreateTime = DateTime.Now;
                     folder.IElementHashcode = folder.GetHashCode();
                     folder.Save();
-                    UserDynamicInfoBo.CreateDynamicInfoMessage(loginUid, DynamicInfoType.NewWebFolder, folder);
                 }
 
                
