@@ -5,15 +5,16 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using WebBookmarkService.Model;
 
-namespace WebBookmarkService.Model
+namespace WebBookmarkService.BizModel
 {	
 	[Serializable()]
     
     /// <summary>
     /// 
     /// </summary>
-	public class BookmarkInfo
+	public class BizBookmarkInfo
 	{
         /// <summary>
         /// 主键，自增
@@ -70,5 +71,48 @@ namespace WebBookmarkService.Model
         /// </summary>
 		public string HashCode{get;set;}
             
+        
+        /// <summary>
+        /// Biz Convert To DB Model
+        /// </summary>
+        public BookmarkInfo ToModel()
+        {
+            return new BookmarkInfo()
+            {
+                BookmarkInfoID =  BookmarkInfoID,
+                UserWebFolderID =  UserWebFolderID,
+                UserInfoID =  UserInfoID,
+                Href =  Href,
+                HTML =  HTML,
+                Host =  Host,
+                CreateTime =  CreateTime,
+                IElementJSON =  IElementJSON,
+                BookmarkName =  BookmarkName,
+                Grate =  Grate,
+                HashCode =  HashCode,
+            };
+        }
+        
+        
+        public BizBookmarkInfo (BookmarkInfo dataInfo)
+        {
+             BookmarkInfoID =  dataInfo.BookmarkInfoID;
+             UserWebFolderID =  dataInfo.UserWebFolderID;
+             UserInfoID =  dataInfo.UserInfoID;
+             Href =  dataInfo.Href;
+             HTML =  dataInfo.HTML;
+             Host =  dataInfo.Host;
+             CreateTime =  dataInfo.CreateTime;
+             IElementJSON =  dataInfo.IElementJSON;
+             BookmarkName =  dataInfo.BookmarkName;
+             Grate =  dataInfo.Grate;
+             HashCode =  dataInfo.HashCode;
+        }
+        
+        public  BizBookmarkInfo ()
+        {
+        
+        } 
+        
 	}
 }

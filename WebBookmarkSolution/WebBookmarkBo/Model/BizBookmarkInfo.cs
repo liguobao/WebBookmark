@@ -11,6 +11,7 @@ namespace WebBookmarkBo.Model
     public class BizBookmarkInfo
     {
         #region 属性
+        private static readonly BookmarkInfoDAL DAL = new BookmarkInfoDAL();
 
         /// <summary>
         /// 主键，自增
@@ -57,6 +58,8 @@ namespace WebBookmarkBo.Model
         /// </summary>
         public string BookmarkName { get; set; }
 
+        public int HashCode { get; set; }
+
 
         #endregion
 
@@ -76,6 +79,7 @@ namespace WebBookmarkBo.Model
                 CreateTime = CreateTime,
                 IElementJSON = IElementJSON,
                 BookmarkName = BookmarkName,
+                HashCode = HashCode,
             };
         }
 
@@ -93,6 +97,7 @@ namespace WebBookmarkBo.Model
             CreateTime = dataInfo.CreateTime;
             IElementJSON = dataInfo.IElementJSON;
             BookmarkName = dataInfo.BookmarkName;
+            HashCode = dataInfo.HashCode;
         }
 
 
@@ -104,7 +109,7 @@ namespace WebBookmarkBo.Model
 
         public static BizBookmarkInfo LoadByID(long infoID)
         {
-            var dataInfo = new BookmarkInfoDAL().GetByBookmarkInfoID(infoID);
+            var dataInfo = DAL.GetByBookmarkInfoID(infoID);
             if(dataInfo!=null)
                 return new BizBookmarkInfo(dataInfo);
             return new BizBookmarkInfo();
@@ -118,7 +123,7 @@ namespace WebBookmarkBo.Model
         /// <returns></returns>
         public static List<BizBookmarkInfo> LoadByFolderID(long folderID)
         {
-            var lstModel = new BookmarkInfoDAL().GetListByFolderID(folderID);
+            var lstModel = DAL.GetListByFolderID(folderID);
             if (lstModel == null)
                 return new List<BizBookmarkInfo>();
             return lstModel.Select(model=>new BizBookmarkInfo(model)).ToList();
@@ -129,21 +134,33 @@ namespace WebBookmarkBo.Model
         public static List<BizBookmarkInfo> LoadByUID(long uid)
         {
             var lstBiz = new List<BizBookmarkInfo>();
-            var lstModel = new BookmarkInfoDAL().GetListByUID(uid);
+            var lstModel = DAL.GetListByUID(uid);
             lstBiz = lstModel.Select(model => new BizBookmarkInfo(model)).ToList();
             return lstBiz;
         }
 
+      
+        public static BizBookmarkInfo LoadByUserIDAndHashcode(long userInfoID,int hashcode)
+        {
+            var model = DAL.GetByUserInfoIAndHashcode(userInfoID, hashcode);
+            return model != null ? new BizBookmarkInfo(model) : null;
+        }
 
         public void Save()
         {
             if(BookmarkInfoID!=0)
             {
-                new BookmarkInfoDAL().Update(ToModel());
+                DAL.Update(ToModel());
             }
             else
             {
-                new BookmarkInfoDAL().Add(ToModel()); ;
+                DAL.Add(ToModel());
+                var model = DAL.GetByUserInfoIAndHashcode(UserInfoID,HashCode);
+                if(model!=null)
+                {
+                    BookmarkInfoID = model.BookmarkInfoID;
+                }
+                
             }
         }
     }

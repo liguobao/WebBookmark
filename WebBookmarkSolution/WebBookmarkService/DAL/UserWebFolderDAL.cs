@@ -377,6 +377,22 @@ namespace WebBookmarkService.DAL
         }
 
 
+        public UserWebFolder GetByUserInfoIDAndHashcode(long userID, int hashcode)
+        {
+            string sql = "SELECT * FROM tblUserWebFolder WHERE UserInfoID = @UserInfoID AND IElementHashcode=@IElementHashcode";
+            using (MySqlDataReader reader = MyDBHelper.ExecuteDataReader(sql, new MySqlParameter("@UserInfoID", userID), new MySqlParameter("@IElementHashcode", hashcode)))
+            {
+                if (reader.Read())
+                {
+                    return ToModel(reader);
+                }
+                else
+                {
+                    return null;
+                }
+            }
+        }
+
         #endregion
 
     }

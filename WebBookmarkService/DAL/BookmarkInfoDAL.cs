@@ -13,13 +13,15 @@ namespace WebBookmarkService.DAL
 {
 	public partial class BookmarkInfoDAL
 	{
+		#region 自动生成方法
+		
         #region 根据传入Model，并返回Model
         /// <summary>
         /// 根据传入Model，并返回Model
         /// </summary>        
         public bool Add (BookmarkInfo bookmarkInfo)
 		{
-				string sql ="INSERT INTO tblBookmarkInfo (UserWebFolderID, UserInfoID, Href, HTML, Host, CreateTime, IElementJSON, BookmarkName)  VALUES (@UserWebFolderID, @UserInfoID, @Href, @HTML, @Host, @CreateTime, @IElementJSON, @BookmarkName)";
+				string sql ="INSERT INTO tblBookmarkInfo (UserWebFolderID, UserInfoID, Href, HTML, Host, CreateTime, IElementJSON, BookmarkName, Grate, HashCode)  VALUES (@UserWebFolderID, @UserInfoID, @Href, @HTML, @Host, @CreateTime, @IElementJSON, @BookmarkName, @Grate, @HashCode)";
 				MySqlParameter[] para = new MySqlParameter[]
 					{
 						new MySqlParameter("@UserWebFolderID", ToDBValue(bookmarkInfo.UserWebFolderID)),
@@ -30,6 +32,8 @@ namespace WebBookmarkService.DAL
 						new MySqlParameter("@CreateTime", ToDBValue(bookmarkInfo.CreateTime)),
 						new MySqlParameter("@IElementJSON", ToDBValue(bookmarkInfo.IElementJSON)),
 						new MySqlParameter("@BookmarkName", ToDBValue(bookmarkInfo.BookmarkName)),
+						new MySqlParameter("@Grate", ToDBValue(bookmarkInfo.Grate)),
+						new MySqlParameter("@HashCode", ToDBValue(bookmarkInfo.HashCode)),
 					};
 					
 				int AddId = (int)MyDBHelper.ExecuteScalar(sql, para);
@@ -81,6 +85,8 @@ namespace WebBookmarkService.DAL
                 +", CreateTime = @CreateTime" 
                 +", IElementJSON = @IElementJSON" 
                 +", BookmarkName = @BookmarkName" 
+                +", Grate = @Grate" 
+                +", HashCode = @HashCode" 
                
             +" WHERE BookmarkInfoID = @BookmarkInfoID";
 
@@ -96,6 +102,8 @@ namespace WebBookmarkService.DAL
 					,new MySqlParameter("@CreateTime", ToDBValue(bookmarkInfo.CreateTime))
 					,new MySqlParameter("@IElementJSON", ToDBValue(bookmarkInfo.IElementJSON))
 					,new MySqlParameter("@BookmarkName", ToDBValue(bookmarkInfo.BookmarkName))
+					,new MySqlParameter("@Grate", ToDBValue(bookmarkInfo.Grate))
+					,new MySqlParameter("@HashCode", ToDBValue(bookmarkInfo.HashCode))
 			};
 
 			return MyDBHelper.ExecuteNonQuery(sql, para);
@@ -140,6 +148,8 @@ namespace WebBookmarkService.DAL
 			bookmarkInfo.CreateTime = (DateTime)ToModelValue(dr,"CreateTime");
 			bookmarkInfo.IElementJSON = (string)ToModelValue(dr,"IElementJSON");
 			bookmarkInfo.BookmarkName = (string)ToModelValue(dr,"BookmarkName");
+			bookmarkInfo.Grate = (int)ToModelValue(dr,"Grate");
+			bookmarkInfo.HashCode = (string)ToModelValue(dr,"HashCode");
 			return bookmarkInfo;
 		}
 		#endregion
@@ -250,5 +260,7 @@ namespace WebBookmarkService.DAL
 			}
 		}
         #endregion
+	
+	    #endregion
 	}
 }

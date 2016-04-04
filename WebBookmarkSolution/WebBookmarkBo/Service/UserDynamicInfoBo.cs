@@ -55,7 +55,7 @@ namespace WebBookmarkBo.Service
                 userDynamicInfo.UserInfoID = userInfoID;
                 userDynamicInfo.CreateTime = DateTime.Now;
                 userDynamicInfo.UserDynamicType = (int)DynamicInfoType.NewFollower;
-                userDynamicInfo.UserDynamicContent = string.Format("关注了【{0}】。", befollower.UserInfoID);
+                userDynamicInfo.UserDynamicContent = string.Format("关注了【{0}】。", befollower.UserName);
                 userDynamicInfo.UserDynamicURL = "~/UserInfo/ShowUserDetail?uid=" + befollower.UserInfoID;
                 userDynamicInfo.Save();
             }

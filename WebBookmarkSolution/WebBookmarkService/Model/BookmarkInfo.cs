@@ -60,5 +60,15 @@ namespace WebBookmarkService.Model
         /// </summary>
 		public string BookmarkName{get;set;}
             
+        /// <summary>
+        /// 等级,0:对外公开，1：对关注者公开，2对群组公开，3：仅自己可见
+        /// </summary>
+		public int Grate{get;set;}
+            
+        /// <summary>
+        /// 类似于主键
+        /// </summary>
+		public int HashCode{get;set;}
+            
 	}
 }

@@ -12,6 +12,7 @@ namespace WebBookmarkBo.Model
     {
         #region 属性
 
+        private static readonly UserWebFolderDAL DAL = new UserWebFolderDAL();
 
         /// <summary>
         /// 主键，自增
@@ -103,18 +104,23 @@ namespace WebBookmarkBo.Model
         {
             if(UserWebFolderID !=0)
             {
-                new UserWebFolderDAL().Update(ToModel());
+                DAL.Update(ToModel());
 
             }else
             {
-                new UserWebFolderDAL().Add(ToModel());
+                DAL.Add(ToModel());
+                var model = DAL.GetByUserInfoIDAndHashcode(UserInfoID,IElementHashcode);
+                if(model!=null)
+                {
+                    UserWebFolderID = model.UserWebFolderID;
+                }
             }
         }
 
 
         public static BizUserWebFolder LoadByID(long infoID)
         {
-           var dataInfo= new UserWebFolderDAL().GetByUserWebFolderID(infoID);
+            var dataInfo = DAL.GetByUserWebFolderID(infoID);
            if (dataInfo != null)
                return new BizUserWebFolder(dataInfo);
            
@@ -129,7 +135,7 @@ namespace WebBookmarkBo.Model
         /// <returns></returns>
         public static BizUserWebFolder LoadContainsChirdrenAndBookmark(long folderID)
         {
-            var dataInfo = new UserWebFolderDAL().GetByUserWebFolderID(folderID);
+            var dataInfo = DAL.GetByUserWebFolderID(folderID);
             if (dataInfo != null)
             {
                 return new BizUserWebFolder(dataInfo) 
@@ -144,7 +150,7 @@ namespace WebBookmarkBo.Model
 
         public static List<BizUserWebFolder> LoadByParentWebfolderID(long parentWebfolderID)
         {
-            var list = new UserWebFolderDAL().GetByParentWebfolderID(parentWebfolderID);
+            var list = DAL.GetByParentWebfolderID(parentWebfolderID);
             if (list == null)
                 return new List<BizUserWebFolder>();
             return list.Select(info=>new BizUserWebFolder(info)).ToList();
@@ -155,7 +161,7 @@ namespace WebBookmarkBo.Model
         public static List<BizUserWebFolder> LoadAllByUID(long uid)
         {
             List<BizUserWebFolder> list = new List<BizUserWebFolder>();
-            var lstModel = new UserWebFolderDAL().GetByUID(uid);
+            var lstModel = DAL.GetByUID(uid);
             if(lstModel!=null)
             {
                 list.AddRange(lstModel.Select(model=>new BizUserWebFolder(model)));

@@ -242,7 +242,7 @@ namespace WebBookmarkService.DAL
         /// </summary>
         public IEnumerable<UserRelationship> GetByFollowUserID(long followerID)
         {
-            string sql = "SELECT * FROM tblUserRelationship WHERE FollowerID = @FollowerID";
+            string sql = "SELECT * FROM tblUserRelationship WHERE FollowerID = @FollowerID order by CreateTime desc";
             using (MySqlDataReader reader = MyDBHelper.ExecuteDataReader(sql, new MySqlParameter("@FollowerID", followerID)))
             {
                 return ToModels(reader);
@@ -254,7 +254,7 @@ namespace WebBookmarkService.DAL
         /// </summary>
         public IEnumerable<UserRelationship> GetByBeFollowUserID(long beFollwedUID)
         {
-            string sql = "SELECT * FROM tblUserRelationship WHERE BeFollwedUID = @BeFollwedUID";
+            string sql = "SELECT * FROM tblUserRelationship WHERE BeFollwedUID = @BeFollwedUID order by CreateTime desc";
             using (MySqlDataReader reader = MyDBHelper.ExecuteDataReader(sql, new MySqlParameter("@BeFollwedUID", beFollwedUID)))
             {
                 return ToModels(reader);

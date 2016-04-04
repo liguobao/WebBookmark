@@ -10,6 +10,7 @@ using WebBookmarkService;
 using WebBookmarkUI.Models;
 using WebfolderBo.Service;
 using WebfolderBo;
+using WebBookmarkBo.Service;
 
 namespace WebBookmarkUI.Controllers
 {
@@ -115,6 +116,7 @@ namespace WebBookmarkUI.Controllers
                 result.IsSuccess = false;
                 return Json(result);
             }
+            var loginUid = UILoginHelper.GetUIDFromHttpContext(HttpContext);
 
             try
             {
@@ -133,8 +135,12 @@ namespace WebBookmarkUI.Controllers
                     bookmark.UserWebFolderID = folderID;
                     bookmark.CreateTime = DateTime.Now;
                     bookmark.Host = href.GetHost();
-                    bookmark.UserInfoID = UILoginHelper.GetUIDFromHttpContext(HttpContext);
+                    bookmark.UserInfoID = loginUid;
+                    bookmark.HashCode = bookmark.GetHashCode();
                     bookmark.Save();
+                    UserDynamicInfoBo.CreateDynamicInfoMessage(loginUid, DynamicInfoType.NewBookmark, bookmark);
+                    
+
                 }else
                 {
                     BizUserWebFolder folder = new BizUserWebFolder();
@@ -143,12 +149,15 @@ namespace WebBookmarkUI.Controllers
                         folder = BizUserWebFolder.LoadByID(infoID);
                     }
 
-                    folder.UserInfoID = UILoginHelper.GetUIDFromHttpContext(HttpContext);
+                    folder.UserInfoID =loginUid;
                     folder.WebFolderName = name;
                     folder.ParentWebfolderID = folderID;
+                    folder.IntroContent = "";
+                    folder.IElementJSON = "";
                     folder.CreateTime = DateTime.Now;
+                    folder.IElementHashcode = folder.GetHashCode();
                     folder.Save();
-                
+                    UserDynamicInfoBo.CreateDynamicInfoMessage(loginUid, DynamicInfoType.NewWebFolder, folder);
                 }
 
                
