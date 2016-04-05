@@ -70,10 +70,12 @@
   <ItemGroup>
     <Compile Include="DAL\BookmarkCommentDAL.cs" />
     <Compile Include="DAL\BookmarkInfoDAL.cs" />
+    <Compile Include="DAL\BookmarkTagInfoDAL.cs" />
     <Compile Include="DAL\GroupInfoDAL.cs" />
     <Compile Include="DAL\GroupUserDAL.cs" />
     <Compile Include="DAL\MessageInfoDAL.cs" />
     <Compile Include="DAL\SystemLogDAL.cs" />
+    <Compile Include="DAL\TagInfoDAL.cs" />
     <Compile Include="DAL\UserDynamicInfoDAL.cs" />
     <Compile Include="DAL\UserInfoDAL.cs" />
     <Compile Include="DAL\UserLabelInfologDAL.cs" />
@@ -84,10 +86,12 @@
     <Compile Include="DAL\WebpageCommentDAL.cs" />
     <Compile Include="Model\BookmarkComment.cs" />
     <Compile Include="Model\BookmarkInfo.cs" />
+    <Compile Include="Model\BookmarkTagInfo.cs" />
     <Compile Include="Model\GroupInfo.cs" />
     <Compile Include="Model\GroupUser.cs" />
     <Compile Include="Model\MessageInfo.cs" />
     <Compile Include="Model\SystemLog.cs" />
+    <Compile Include="Model\TagInfo.cs" />
     <Compile Include="Model\UserDynamicInfo.cs" />
     <Compile Include="Model\UserInfo.cs" />
     <Compile Include="Model\UserLabelInfolog.cs" />

@@ -58,6 +58,8 @@
     <Compile Include="Model\BizGroupUser.cs" />
     <Compile Include="Model\BizMessageInfo.cs" />
     <Compile Include="Model\BizUserDynamicInfo.cs" />
+    <Compile Include="Model\BookmarkTagInfo.cs" />
+    <Compile Include="Model\TagInfo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Service\BookmarkInfoBo.cs" />
     <Compile Include="Service\RecommendBo.cs" />

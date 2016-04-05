@@ -163,6 +163,33 @@ namespace WebBookmarkBo.Model
             }
         }
 
+        public void AddBookmarkTag(string tagname)
+        {
+            if (string.IsNullOrEmpty(tagname))
+                return;
+            var tagInfo = BizTagInfo.LoadByTagNameAndUserID(tagname,UserInfoID);
+            if (tagInfo == null)
+                tagInfo = new BizTagInfo();
+            tagInfo.TagName = tagname;
+            tagInfo.UserInfoID = UserInfoID;
+            tagInfo.CreateTime = DateTime.Now;
+            tagInfo.Save();
+
+            BizBookmarkTagInfo bookmarkTagInfo = new BizBookmarkTagInfo();
+            bookmarkTagInfo.CreateTime = DateTime.Now;
+            bookmarkTagInfo.BookmarkInfoID = BookmarkInfoID;
+            bookmarkTagInfo.UserInfoID = UserInfoID;
+            bookmarkTagInfo.TagInfoID = tagInfo.TagInfoID;
+            bookmarkTagInfo.Save();   
+            
+        }
+
+        public void AddBookmarkTag(long tagInfoID)
+        {
+
+        }
+
+
         private void CreateDynamicInfo()
         {
             Task.Factory.StartNew(() =>
