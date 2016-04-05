@@ -16,7 +16,8 @@
 
 <div class="aw-mod aw-user-detail-box">
     <div class="am-cf am-padding">
-        <div class="am-fl am-cf"><strong class="am-text-primary am-text-lg">@Model.BookmarkName</strong> / <small><a href='@Url.Content(Model.Href)'>@Model.Href</a></small></div>
+        <div class="am-fl am-cf"><strong class="am-text-primary am-text-lg"><a href='@Url.Content(Model.Href)'>@Model.BookmarkName</a></strong> / <small>
+            <a href='@Url.Content("~/UserInfo/ShowUserDetail?uid=" + Model.UserInfo.UserInfoID)'>@Model.UserInfo.UserName</a></small></div>
     </div>
     <div class="am-fl am-cf" style="margin-left:1%;">
        创建日期：@Model.CreateTime &nbsp;&nbsp;&nbsp;&nbsp;

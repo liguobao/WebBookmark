@@ -135,6 +135,8 @@ namespace WebBookmarkUI.Models
         /// </summary>
         public string BookmarkName { get; set; }
 
+        public UIUserInfo UserInfo { get; set; }
+
 
     }
 }

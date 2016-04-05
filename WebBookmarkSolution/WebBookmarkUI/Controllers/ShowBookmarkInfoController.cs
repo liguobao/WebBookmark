@@ -35,6 +35,13 @@ namespace WebBookmarkUI.Controllers
                 model.UserWebFolderID = bookmarkInfo.UserWebFolderID;
                 //model.HTML = bookmarkInfo.HTML;
                 model.CreateTime = bookmarkInfo.CreateTime;
+                var bookmarkUserInfo = BizUserInfo.LoadByUserInfoID(bookmarkInfo.UserInfoID);
+                model.UserInfo = new UIUserInfo() 
+                { 
+                    UserName = bookmarkUserInfo.UserName,
+                    UserEmail = bookmarkUserInfo.UserEmail,
+                    UserInfoID = bookmarkUserInfo.UserInfoID,
+                };
             }
             return View(model);
         }
