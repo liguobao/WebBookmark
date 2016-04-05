@@ -2,6 +2,10 @@
 #MyWebFolder Commit log
 
 ##2016.4.5
+1. 修复bug，之前一个版本的历史遗留
+
+
+##2016.4.5
 1. 新增用户推荐，此版本一次网络请求需要5秒以上，SQL需要优化
 2. 推荐内容考虑引入推荐算法，简单实现“协同过滤”就算了（或者不做，优化上面的做法算了）。http://www.infoq.com/cn/articles/recommendation-algorithm-overview-part02
 3. 书签推荐还没做，下次做吧。

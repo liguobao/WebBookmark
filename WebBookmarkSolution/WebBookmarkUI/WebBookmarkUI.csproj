@@ -194,6 +194,7 @@
     <Content Include="DomainJS\modifypassword.js" />
     <Content Include="DomainJS\quitgroup.js" />
     <Content Include="DomainJS\register.js" />
+    <Content Include="DomainJS\searchuser.js" />
     <Content Include="DomainJS\showgroupdetail.js" />
     <Content Include="DomainJS\showuserdetail.js" />
     <Content Include="DomainJS\userInfo.js" />

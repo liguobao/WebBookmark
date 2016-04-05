@@ -7,13 +7,11 @@
         btnSearch.attr("disabled", true);
         btnSearch.html("<i class='am-icon-spinner am-icon-spin'></i>正在努力寻找...");
         var nameOrEmail = $("#searchname").val();
-        var divContent = $("#overview");
+        var divContent = $("#divContent");
 
         $("#bookmarkrecommend").parent().removeClass("am-active");
         $("#userrecommend").parent().removeClass("am-active");
         $("#searchuser").parent().addClass("am-active");
-
-        $("#searchuserloading").addClass("am-icon-spinner").addClass("am-icon-spin");
 
         $.ajax({
             type: "post",
@@ -27,7 +25,6 @@
                     }
                     btnSearch.html(" <i class='am-icon-search'></i>搜索");
                     btnSearch.attr("disabled", false);
-                    $("#searchuserloading").removeClass("am-icon-spinner").removeClass("am-icon-spin");
                 }
         });
         e.stopPropagation();

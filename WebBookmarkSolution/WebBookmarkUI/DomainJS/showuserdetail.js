@@ -170,7 +170,7 @@ function ShowUserInfo(showUserInfoID) {
         data: { showUserInfoID: showUserInfoID },
         success:
             function (data) {
-                $("#content").html(data);
+                $("#divContent").html(data);
                 ShowFolder(showUserInfoID, 0);
             }
     });

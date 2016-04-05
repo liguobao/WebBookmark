@@ -22,7 +22,7 @@
                                         }
                                         else
                                         {
-                                            <a href='http://s.amazeui.org/media/i/demos/bw-2014-06-19.jpg?imageView/1/w/200/h/200/q/80' class="aw-user-img"><img src='http://s.amazeui.org/media/i/demos/bw-2014-06-19.jpg?imageView/1/w/200/h/200/q/80' alt="" width="50" height="50"></a>
+                                            <a href='@Url.Content("~/UserInfo/ShowUserDetail?uid=" + @userInfo.UserInfoID)' class="aw-user-img"><img src='http://s.amazeui.org/media/i/demos/bw-2014-06-19.jpg?imageView/1/w/200/h/200/q/80' alt="" width="50" height="50"></a>
                                         }
 
                                         @if (userInfo.UserInfoID != loginUid)
@@ -39,7 +39,7 @@
                                         }
 
                                         <p class="aw-title">
-                                            <a href="#" id="showUserInfo" data-id='@userInfo.UserInfoID'>@userInfo.UserName / @userInfo.UserEmail</a>
+                                            <a href='@Url.Content("~/UserInfo/ShowUserDetail?uid=" + @userInfo.UserInfoID)' >@userInfo.UserName / @userInfo.UserEmail</a>
                                         </p>
 
                                         <p class="aw-article-content">
