@@ -4,7 +4,7 @@ using System.Linq;
 using WebBookmarkBo.Model;
 using WebBookmarkService.DAL;
 
-namespace WebfolderBo.Service
+namespace WebBookmarkBo.Service
 {
     public class BookmarkInfoBo
     {

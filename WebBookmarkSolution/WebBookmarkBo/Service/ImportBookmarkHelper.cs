@@ -10,7 +10,7 @@ using WebBookmarkBo.Model;
 using WebBookmarkBo.Service;
 using WebBookmarkService;
 
-namespace WebfolderBo.Service
+namespace WebBookmarkBo.Service
 {
     public class ImportBookmarkHelper
     {

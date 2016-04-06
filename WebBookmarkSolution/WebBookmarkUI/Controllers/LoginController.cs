@@ -6,7 +6,7 @@ using System.Web.Mvc;
 using WebBookmarkBo.Model;
 using WebBookmarkBo.Service;
 using WebBookmarkUI.Models;
-using WebfolderBo;
+using WebBookmarkBo;
 
 namespace WebBookmarkUI.Controllers
 {

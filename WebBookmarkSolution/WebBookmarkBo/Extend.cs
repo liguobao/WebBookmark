@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using WebBookmarkBo.Service;
 
-namespace WebfolderBo
+namespace WebBookmarkBo
 {
     /// <summary>
     /// 扩展方法类

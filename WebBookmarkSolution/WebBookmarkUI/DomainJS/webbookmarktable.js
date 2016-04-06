@@ -5,6 +5,8 @@
         var $divfolder = $this.find("[name='divFolderID']");
         var folderID = $divfolder.text();
         ShowFolder(folderID);
+        ShowAddFolderOrBookmarkView(folderID);
+        ShowPageFolder(folderID);
     });
 
 
@@ -112,7 +114,18 @@
         }
     });
 
-    //btnSaveBookmark
+    $('body').on('change', "[id='pageFolderSelect']", function () {
+        var $this = $(this);
+        var folderID = $this.val();
+        var uid = $this.attr("data-uid");
+        var href = "javascript:void(function (){var xmlhttp = new XMLHttpRequest();xmlhttp.open('POST', 'http://webbookmark.online/AddBookmark/Add?url='+location.href+'&uid="
+            + uid + "&folderid=" + folderID
+            + "' ,true);xmlhttp.send(location.href);}());";
+        $("#AQuickAddData").attr("href",href);
+
+    });
+
+  
 
     $("#btnSaveBookmark").on('click', function () {
        
@@ -156,9 +169,9 @@
         $("#bookmarkhref").show();
     })
 
-
     ShowFolder(0);
     ShowAddFolderOrBookmarkView(0);
+    ShowPageFolder(0);
 
 })
 
@@ -192,6 +205,21 @@ function ShowAddFolderOrBookmarkView(folderID)
             function (data) {
                 if (data != null) {
                     $("#divUIContent").html(data);
+                }
+            }
+    });
+}
+
+
+function ShowPageFolder(folderID) {
+    $.ajax({
+        type: "post",
+        url: showUserAllFolderURL,
+        data: { folderID: folderID },
+        success:
+            function (data) {
+                if (data != null) {
+                    $("#divAllFolder").html(data);
                 }
             }
     });

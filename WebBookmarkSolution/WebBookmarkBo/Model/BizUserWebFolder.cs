@@ -111,6 +111,12 @@ namespace WebBookmarkBo.Model
             }else
             {
                 DAL.Add(ToModel());
+                var model = DAL.GetByUserInfoIDAndHashcode(UserInfoID, IElementHashcode);
+                if (model != null)
+                {
+                    UserWebFolderID = model.UserWebFolderID;
+
+                }
                 CreateDynamicInfo();
             }
         }
@@ -121,12 +127,8 @@ namespace WebBookmarkBo.Model
             {
                 try
                 {
-                    var model = DAL.GetByUserInfoIDAndHashcode(UserInfoID, IElementHashcode);
-                    if (model != null)
-                    {
-                        UserWebFolderID = model.UserWebFolderID;
-                        UserDynamicInfoBo.CreateDynamicInfoMessage(UserInfoID, DynamicInfoType.NewWebFolder, this);
-                    }
+                   
+                    UserDynamicInfoBo.CreateDynamicInfoMessage(UserInfoID, DynamicInfoType.NewWebFolder, this);
                 }
                 catch (Exception ex)
                 {

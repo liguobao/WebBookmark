@@ -144,6 +144,9 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="bin/AngleSharp.dll">
       <publishTime>03/29/2016 00:03:28</publishTime>
     </File>
+    <File Include="bin/HtmlAgilityPack.dll">
+      <publishTime>04/06/2016 22:26:35</publishTime>
+    </File>
     <File Include="bin/Microsoft.Web.Infrastructure.dll">
       <publishTime>03/19/2016 14:58:30</publishTime>
     </File>
@@ -181,13 +184,13 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>03/29/2016 00:03:28</publishTime>
     </File>
     <File Include="bin/WebBookmarkBo.dll">
-      <publishTime>04/05/2016 00:22:16</publishTime>
+      <publishTime>04/07/2016 00:16:58</publishTime>
     </File>
     <File Include="bin/WebBookmarkService.dll">
-      <publishTime>04/05/2016 00:22:16</publishTime>
+      <publishTime>04/06/2016 00:11:10</publishTime>
     </File>
     <File Include="bin/WebBookmarkUI.dll">
-      <publishTime>04/05/2016 00:22:17</publishTime>
+      <publishTime>04/07/2016 00:16:59</publishTime>
     </File>
     <File Include="bin/WebfolderBo.dll">
       <publishTime>04/04/2016 02:02:22</publishTime>
@@ -229,7 +232,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>03/29/2016 00:03:27</publishTime>
     </File>
     <File Include="DomainJS/interestrecommend.js">
-      <publishTime>04/05/2016 00:20:40</publishTime>
+      <publishTime>04/05/2016 20:59:32</publishTime>
     </File>
     <File Include="DomainJS/login.js">
       <publishTime>03/29/2016 00:03:27</publishTime>
@@ -246,23 +249,26 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="DomainJS/register.js">
       <publishTime>03/29/2016 00:03:27</publishTime>
     </File>
+    <File Include="DomainJS/searchuser.js">
+      <publishTime>04/05/2016 21:42:21</publishTime>
+    </File>
     <File Include="DomainJS/showgroupdetail.js">
       <publishTime>04/03/2016 19:13:16</publishTime>
     </File>
     <File Include="DomainJS/showuserdetail.js">
-      <publishTime>04/01/2016 20:35:49</publishTime>
+      <publishTime>04/05/2016 20:54:09</publishTime>
     </File>
     <File Include="DomainJS/userInfo.js">
       <publishTime>03/29/2016 00:03:27</publishTime>
     </File>
     <File Include="DomainJS/webbookmarktable.js">
-      <publishTime>04/02/2016 15:11:06</publishTime>
+      <publishTime>04/07/2016 00:16:50</publishTime>
     </File>
     <File Include="Global.asax">
       <publishTime>03/29/2016 00:03:27</publishTime>
     </File>
     <File Include="packages.config">
-      <publishTime>03/29/2016 00:03:28</publishTime>
+      <publishTime>04/06/2016 22:26:36</publishTime>
     </File>
     <File Include="Scripts/jQueryFileUpload/jquery.fileupload.js">
       <publishTime>03/29/2016 00:03:27</publishTime>
@@ -415,13 +421,13 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>03/30/2016 00:52:08</publishTime>
     </File>
     <File Include="Views/InterestRecommend/Index.cshtml">
-      <publishTime>04/05/2016 00:19:54</publishTime>
+      <publishTime>04/05/2016 20:57:13</publishTime>
     </File>
     <File Include="Views/InterestRecommend/SearchUser.cshtml">
-      <publishTime>04/04/2016 21:32:03</publishTime>
+      <publishTime>04/05/2016 21:06:46</publishTime>
     </File>
     <File Include="Views/InterestRecommend/ShowUserFolder.cshtml">
-      <publishTime>03/29/2016 00:03:27</publishTime>
+      <publishTime>04/05/2016 21:01:04</publishTime>
     </File>
     <File Include="Views/InterestRecommend/ShowUserInfo.cshtml">
       <publishTime>04/02/2016 00:47:00</publishTime>
@@ -454,16 +460,16 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>03/29/2016 00:03:27</publishTime>
     </File>
     <File Include="Views/Shared/_Layout.cshtml">
-      <publishTime>04/03/2016 13:37:44</publishTime>
+      <publishTime>04/06/2016 22:58:07</publishTime>
     </File>
     <File Include="Views/Shared/_LoginPartial.cshtml">
       <publishTime>03/29/2016 00:03:27</publishTime>
     </File>
     <File Include="Views/ShowBookmarkInfo/Index.cshtml">
-      <publishTime>04/03/2016 23:45:25</publishTime>
+      <publishTime>04/05/2016 21:30:32</publishTime>
     </File>
     <File Include="Views/ShowBookmarkInfo/ShowBookmarkComment.cshtml">
-      <publishTime>04/04/2016 01:57:31</publishTime>
+      <publishTime>04/05/2016 21:44:30</publishTime>
     </File>
     <File Include="Views/ShowBookmarkInfo/ShowBookmarkHTML.cshtml">
       <publishTime>03/29/2016 00:03:27</publishTime>
@@ -487,7 +493,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>03/31/2016 23:24:57</publishTime>
     </File>
     <File Include="Views/UserRecommend/Index.cshtml">
-      <publishTime>04/04/2016 22:13:47</publishTime>
+      <publishTime>04/05/2016 21:41:28</publishTime>
     </File>
     <File Include="Views/Web.config">
       <publishTime>03/29/2016 00:03:27</publishTime>
@@ -496,7 +502,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>03/29/2016 00:03:27</publishTime>
     </File>
     <File Include="Views/WebBookmarkTable/Index.cshtml">
-      <publishTime>04/02/2016 14:32:47</publishTime>
+      <publishTime>04/07/2016 00:10:37</publishTime>
     </File>
     <File Include="Views/WebBookmarkTable/ShowAddFolderOrBookmarkView.cshtml">
       <publishTime>03/29/2016 00:03:27</publishTime>
@@ -507,8 +513,11 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="Views/WebBookmarkTable/ShowFolderTable.cshtml">
       <publishTime>04/04/2016 20:39:37</publishTime>
     </File>
+    <File Include="Views/WebBookmarkTable/ShowUserAllFolder.cshtml">
+      <publishTime>04/07/2016 00:14:59</publishTime>
+    </File>
     <File Include="Web.config">
-      <publishTime>04/05/2016 00:22:18</publishTime>
+      <publishTime>04/07/2016 00:16:59</publishTime>
     </File>
   </ItemGroup>
 </Project>

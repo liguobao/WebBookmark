@@ -12,6 +12,8 @@
     var showFolderTableURL = "@Url.Action("ShowFolderTable")"; 
     var showAddFolderOrBookmarkView = "@Url.Action("ShowAddFolderOrBookmarkView")"; 
 
+    var showUserAllFolderURL = "@Url.Action("ShowUserAllFolder")"; 
+
 </script>
 <script src="~/Scripts/layer/layer.js"></script>
 <script src="~/DomainJS/webbookmarktable.js"></script>
@@ -48,21 +50,46 @@
                 </div>
 
             </div>
-
         </div>
     </div>
+
+    <div class="am-modal am-modal-no-btn" tabindex="-1" id="modal-QuickAddDataToWebBookmarkContent">
+        <div class="am-modal-dialog">
+            <div class="am-modal-hd">
+                <p>快速添加书签工具</p>
+                <a href="javascript: void(0)" class="am-close am-close-spin" data-am-modal-close>&times;</a>
+            </div>
+            <div class="am-modal-bd">
+                <div class="">
+                    此工具可将当前网页URL快速添加到WebBookmark中指定的书签夹，完成自动保存。 请先选择书签夹（如不选则默认），然后拖动" Webbookmark书签"至浏览器收藏夹。
+                </div>
+               
+                <div id="divAllFolder" class="">
+                </div>
+
+               
+            </div>
+        </div>
+    </div>
+  
 
 
 
     <div class="am-g">
         <div class="am-u-sm-12 am-u-md-6">
-            <div class="am-btn-toolbar">
+            <div class="">
                 <div class="am-btn-group am-btn-group-xs">
                         <div class="am-footer-switch">
                             <span class="am-footer-ysp" data-rel="mobile"
                                   data-am-modal="{target: '#addfolderOrbookmark'}">
                                 <button type="button" class="am-btn am-btn-default" id="btnAddFolderOrBookmark"><span class="am-icon-plus"></span> 新增书签/书签夹</button>
                             </span>
+
+                            <button type="button"
+                                    class="am-btn am-btn-default" id="modifygroup"
+                                    data-am-modal="{target: '#modal-QuickAddDataToWebBookmarkContent', closeViaDimmer: 0, width: 400, height: 225}">
+                                <span class="am-icon-pencil-square-o"></span> 生成快速书签工具
+                            </button>
                         </div>
                 </div>
             </div>

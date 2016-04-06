@@ -1,0 +1,21 @@
+﻿@model WebBookmarkUI.Models.UIWebFolderInfo
+<select id="pageFolderSelect" class="am-form-field am-radius am-text-right" data-am-selected data-uid='@Model.UserInfoID' val='@Model.UserWebFolderID'>
+    @if (Model != null && Model.ChildrenFolderList != null && Model.ChildrenFolderList != null)
+    {
+        <option value='@Model.UserWebFolderID'>@Model.WebFolderName</option>
+        foreach (var folder in Model.ChildrenFolderList)
+        {
+            <option value='@folder.UserWebFolderID'>@folder.WebFolderName</option>
+        }
+    }
+    else
+    {
+        <option value="0">书签栏</option>
+    }
+</select>
+
+<div class="am-form-group am-text-xl" style="margin-top:20px;">
+    <a id="AQuickAddData" href="javascript:void(function (){var xmlhttp = new XMLHttpRequest();xmlhttp.open('POST','http://webbookmark.online/AddBookmark/Add?url='+location.href+'&uid=@Model.UserInfoID&folderid=@Model.UserWebFolderID',true);xmlhttp.send(location.href);}());">
+        Webbookmark书签
+    </a>
+</div>

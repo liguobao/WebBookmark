@@ -8,8 +8,7 @@ using System.Xml.Linq;
 using WebBookmarkBo.Model;
 using WebBookmarkService;
 using WebBookmarkUI.Models;
-using WebfolderBo.Service;
-using WebfolderBo;
+using WebBookmarkBo;
 using WebBookmarkBo.Service;
 
 namespace WebBookmarkUI.Controllers
@@ -74,6 +73,8 @@ namespace WebBookmarkUI.Controllers
             var model = new UIWebFolderInfo(folderInfo);
             return View("ShowAddFolderOrBookmarkView", model);
         }
+
+
 
 
 
@@ -248,6 +249,26 @@ namespace WebBookmarkUI.Controllers
         public FileResult PreView(string path)
         {
             return File(path, "text/html");
+        }
+
+
+        public ActionResult ShowUserAllFolder(long folderID)
+        {
+            long uid = UILoginHelper.GetUIDFromHttpContext(HttpContext);
+            if (folderID == 0)
+            {
+                var lst = BizUserWebFolder.LoadAllByUID(uid);
+                if (lst != null && lst.Count > 0)
+                {
+                    var firstFolder = lst.Where(folder => folder.ParentWebfolderID == 0);
+                    if (firstFolder == null || firstFolder.Count() == 0)
+                        return View();
+                    folderID = firstFolder.FirstOrDefault().UserWebFolderID;
+                }
+            }
+            var folderInfo = BizUserWebFolder.LoadContainsChirdrenAndBookmark(folderID);
+            var model = new UIWebFolderInfo(folderInfo);
+            return View("ShowUserAllFolder", model);
         }
 
     }

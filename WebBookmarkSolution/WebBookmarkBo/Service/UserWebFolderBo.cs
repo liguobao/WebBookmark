@@ -5,7 +5,7 @@ using WebBookmarkBo.Model;
 using WebBookmarkService;
 using WebBookmarkService.DAL;
 
-namespace WebfolderBo.Service
+namespace WebBookmarkBo.Service
 {
     public class UserWebFolderBo
     {
