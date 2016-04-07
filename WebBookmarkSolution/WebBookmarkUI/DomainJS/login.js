@@ -34,7 +34,7 @@ function login()
         {
             if(rsp.IsSuccess)
             {
-                alert(rsp.SuccessMessage);
+               // alert(rsp.SuccessMessage);
                 window.location.href = '../Default?uid=' + rsp.ResultID; // 跳转到B目录
             }else
             {
