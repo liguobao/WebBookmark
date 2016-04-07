@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Text;
 using WebBookmarkService.DAL;
 using WebBookmarkService.Model;
+using System.Linq;
 
 namespace WebBookmarkBo.Model
 {	
@@ -86,10 +87,23 @@ namespace WebBookmarkBo.Model
         }
 
 
+        public static BizTagInfo LoadByTagInfoID(long tagInfoID)
+        {
+            var model = DAL.GetByTagInfoID(tagInfoID);
+            return model !=null ? new BizTagInfo(model):null;
+        }
+
         public static BizTagInfo LoadByTagNameAndUserID(string tagname ,long userInfoID)
         {
            var model = DAL.GetByTagNameAndUserInfoID(tagname,userInfoID);
            return model != null ? new BizTagInfo(model) : null;
+        }
+
+
+        public static List<BizTagInfo> LoadByUserID(long userInfoID)
+        {
+            var lstModel = DAL.GetListByUserID(userInfoID);
+            return lstModel == null ? new List<BizTagInfo>() : lstModel.Select(model => new BizTagInfo(model)).ToList();
         }
 	}
 }

@@ -138,5 +138,7 @@ namespace WebBookmarkUI.Models
         public UIUserInfo UserInfo { get; set; }
 
 
+        public List<UIBookmarkTagInfo> TagInfoList { get; set; }
+
     }
 }

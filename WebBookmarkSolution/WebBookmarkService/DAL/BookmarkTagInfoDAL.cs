@@ -238,5 +238,49 @@ namespace WebBookmarkService.DAL
         #endregion
 	
 	    #endregion
+
+
+        /// <summary>
+        /// 获取某个书签的所有标签数据
+        /// </summary>
+        /// <param name="bookmarkInfoID"></param>
+        /// <returns></returns>
+        public IEnumerable<BookmarkTagInfo> GetByBookmarkID(long bookmarkInfoID)
+        {
+            string sql = "SELECT * FROM tblBookmarkTagInfo WHERE BookmarkInfoID = @BookmarkInfoID";
+            using (MySqlDataReader reader = MyDBHelper.ExecuteDataReader(sql, new MySqlParameter("@BookmarkInfoID", bookmarkInfoID)))
+            {
+                return ToModels(reader);
+            }
+        }
+
+        /// <summary>
+        /// 获取某个标签的所有书签
+        /// </summary>
+        /// <param name="tagInfoID"></param>
+        /// <returns></returns>
+        public IEnumerable<BookmarkTagInfo> GetByTagInfoID(long tagInfoID)
+        {
+            string sql = "SELECT * FROM tblBookmarkTagInfo WHERE TagInfoID = @TagInfoID";
+            using (MySqlDataReader reader = MyDBHelper.ExecuteDataReader(sql, new MySqlParameter("@TagInfoID", tagInfoID)))
+            {
+                return ToModels(reader);
+            }
+        }
+
+        /// <summary>
+        /// 获取用户的所有标签数据
+        /// </summary>
+        /// <param name="userInfoID"></param>
+        /// <returns></returns>
+        public IEnumerable<BookmarkTagInfo> GetByUserInfoID(long userInfoID)
+        {
+            string sql = "SELECT * FROM tblBookmarkTagInfo WHERE UserInfoID = @UserInfoID";
+            using (MySqlDataReader reader = MyDBHelper.ExecuteDataReader(sql, new MySqlParameter("@UserInfoID", userInfoID)))
+            {
+                return ToModels(reader);
+            }
+        }
+
 	}
 }

@@ -26,6 +26,14 @@ namespace WebBookmarkUI.Controllers
             var bookmarkInfo = BizBookmarkInfo.LoadByID(bookmarkID);
             if (bookmarkInfo != null)
             {
+                bookmarkInfo.LoadBookmarkTagInfo();
+                Dictionary<long, BizTagInfo> dicTagInfo = BizTagInfo.LoadByUserID(bookmarkInfo.UserInfoID).ToDictionary(tag => tag.TagInfoID, tag => tag);
+
+                //var tagInfos = BizTagInfo.LoadByUserID(bookmarkInfo.UserInfoID);
+                //if(tagInfos!=null && tagInfos.Count>0)
+                //{
+                //  dicTagInfo= tagInfos.ToDictionary(tag => tag.TagInfoID, tag => tag);
+                //}
                 model = new UIBookmarkInfo();
                 model.BookmarkInfoID = bookmarkInfo.BookmarkInfoID;
                 model.BookmarkName = bookmarkInfo.BookmarkName;
@@ -42,6 +50,14 @@ namespace WebBookmarkUI.Controllers
                     UserEmail = bookmarkUserInfo.UserEmail,
                     UserInfoID = bookmarkUserInfo.UserInfoID,
                 };
+                model.TagInfoList = bookmarkInfo.BizBookmarkTagInfoList.Select(btg => new UIBookmarkTagInfo() 
+                {
+                    BookmarkTagInfoID = btg.BookmarkTagInfoID,
+                    BookmarkInfoID = btg.BookmarkInfoID,
+                    TagInfoID = btg.TagInfoID,
+                    CreateTime = btg.CreateTime,
+                    TagInfo = dicTagInfo.ContainsKey(btg.TagInfoID) ? dicTagInfo[btg.TagInfoID] : null,
+                }).ToList();
             }
             return View(model);
         }
@@ -161,5 +177,56 @@ namespace WebBookmarkUI.Controllers
         }
 
 
+        public ActionResult SaveBookmarkTag(long bookmarkID,long tagInfoID=0,string tagName="")
+        {
+            BizResultInfo result = new BizResultInfo();
+            var bookmarkInfo = BizBookmarkInfo.LoadByID(bookmarkID);
+            if(bookmarkInfo==null || bookmarkInfo.BookmarkInfoID==0)
+            {
+                result.ErrorMessage = "书签数据为空，不要逗我玩啦...";
+                return Json(result);
+            }
+
+            if(tagInfoID!=0)
+            {
+                bookmarkInfo.AddBookmarkTag(tagInfoID);
+            }
+
+            if(!string.IsNullOrEmpty(tagName))
+            {
+                bookmarkInfo.AddBookmarkTag(tagName);
+            }
+
+            result.SuccessMessage = "保存成功！";
+            result.IsSuccess = true;
+            return Json(result);
+        }
+
+
+        public ActionResult RemoveBookmarkTag(long bookmarkID,long bookmarkTagInfoID=0,string tagName="")
+        {
+            BizResultInfo result = new BizResultInfo();
+            var bookmarkInfo = BizBookmarkInfo.LoadByID(bookmarkID);
+           
+            if(bookmarkInfo==null || bookmarkInfo.BookmarkInfoID==0)
+            {
+                result.ErrorMessage = "书签数据为空，不要逗我玩啦...";
+                return Json(result);
+            }
+            bookmarkInfo.LoadBookmarkTagInfo();
+            if (!string.IsNullOrEmpty(tagName))
+            {
+                bookmarkInfo.RemoveByTagName(tagName);
+            }
+
+            if(bookmarkTagInfoID!=0)
+            {
+                bookmarkInfo.RemoveByBookmarkTagID(bookmarkTagInfoID);
+            }
+            result.SuccessMessage = "移除成功！";
+            result.IsSuccess = true;
+          
+            return Json(result);
+        }
     }
 }

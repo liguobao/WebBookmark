@@ -63,6 +63,12 @@ namespace WebBookmarkBo.Model
         public int HashCode { get; set; }
 
 
+        public List<BizBookmarkTagInfo> BizBookmarkTagInfoList { get; set; }
+
+
+
+
+
         #endregion
 
         /// <summary>
@@ -163,6 +169,11 @@ namespace WebBookmarkBo.Model
             }
         }
 
+        public void LoadBookmarkTagInfo()
+        {
+            BizBookmarkTagInfoList = BizBookmarkTagInfo.LoadByBookmarkID(BookmarkInfoID);
+        }
+
         public void AddBookmarkTag(string tagname)
         {
             if (string.IsNullOrEmpty(tagname))
@@ -180,15 +191,68 @@ namespace WebBookmarkBo.Model
             bookmarkTagInfo.BookmarkInfoID = BookmarkInfoID;
             bookmarkTagInfo.UserInfoID = UserInfoID;
             bookmarkTagInfo.TagInfoID = tagInfo.TagInfoID;
-            bookmarkTagInfo.Save();   
+            bookmarkTagInfo.Save();  
+         
             
         }
 
         public void AddBookmarkTag(long tagInfoID)
         {
+            var tagInfo = BizTagInfo.LoadByTagInfoID(tagInfoID);
+            if(tagInfo!=null)
+            {
+                //非当前用户标签，复制一份
+                if(tagInfo.UserInfoID != UserInfoID)
+                {
+                    var newTagInfo = new BizTagInfo() 
+                    {
+                        TagName = tagInfo.TagName,
+                        CreateTime = DateTime.Now,
+                        UserInfoID = UserInfoID,
+                    };
+                    newTagInfo.Save();
+                    tagInfo = newTagInfo;
+                }
+            }
 
+            BizBookmarkTagInfo bookmarkTagInfo = new BizBookmarkTagInfo();
+            bookmarkTagInfo.CreateTime = DateTime.Now;
+            bookmarkTagInfo.BookmarkInfoID = BookmarkInfoID;
+            bookmarkTagInfo.UserInfoID = UserInfoID;
+            bookmarkTagInfo.TagInfoID = tagInfo.TagInfoID;
+            bookmarkTagInfo.Save(); 
         }
 
+
+        public void RemoveByBookmarkTagID(long bookmarkTagInfoID)
+        {
+            if(BizBookmarkTagInfoList!=null)
+            {
+                var bookmarkTagInfo = BizBookmarkTagInfoList.Find(model => model.BookmarkTagInfoID == bookmarkTagInfoID);
+                if(bookmarkTagInfo!=null)
+                {
+                    BizBookmarkTagInfo.DeleteByBookmarkTagInfoID(bookmarkTagInfo.BookmarkTagInfoID);
+                    BizBookmarkTagInfoList.Remove(bookmarkTagInfo);
+                }
+            }
+        }
+
+        public void RemoveByTagName(string tagName)
+        {
+            if (BizBookmarkTagInfoList != null)
+            {
+                var tagInfo = BizTagInfo.LoadByTagNameAndUserID(tagName,UserInfoID);
+                if(tagInfo==null)
+                    return;
+
+                var bookmarkTagInfo = BizBookmarkTagInfoList.Find(model => model.TagInfoID == tagInfo.TagInfoID);
+                if (bookmarkTagInfo != null)
+                {
+                    BizBookmarkTagInfo.DeleteByBookmarkTagInfoID(bookmarkTagInfo.BookmarkTagInfoID);
+                    BizBookmarkTagInfoList.Remove(bookmarkTagInfo);
+                }
+            }
+        }
 
         private void CreateDynamicInfo()
         {

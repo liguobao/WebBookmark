@@ -137,6 +137,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\UIBookmarkTagInfo.cs" />
     <Compile Include="Models\SearchUserInfo.cs" />
     <Compile Include="Models\UICommentInfo.cs" />
     <Compile Include="Models\UIGroupInfo.cs" />

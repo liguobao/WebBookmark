@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Text;
 using WebBookmarkService.DAL;
 using WebBookmarkService.Model;
+using System.Linq;
 
 namespace WebBookmarkBo.Model
 {	
@@ -86,7 +87,17 @@ namespace WebBookmarkBo.Model
             }
         }
         
+        public static List<BizBookmarkTagInfo> LoadByBookmarkID(long bookmarkID)
+        {
+            var lstModel = DAL.GetByBookmarkID(bookmarkID);
+            return lstModel == null ? new List<BizBookmarkTagInfo>() : lstModel.Select(model => new BizBookmarkTagInfo(model)).ToList();
+           
+        }
 
+        public static bool DeleteByBookmarkTagInfoID(long bookmarkTagInfoID)
+        {
+            return DAL.DeleteByBookmarkTagInfoID(bookmarkTagInfoID) >=0;
+        }
         
 	}
 }

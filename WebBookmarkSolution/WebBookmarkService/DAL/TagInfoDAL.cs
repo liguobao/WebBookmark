@@ -246,7 +246,7 @@ namespace WebBookmarkService.DAL
         public IEnumerable<TagInfo> GetListByUserID(long userinfoID)
         {
             string sql = "SELECT * FROM tblTagInfo WHERE UserInfoID = @UserInfoID";
-            using (MySqlDataReader reader = MyDBHelper.ExecuteDataReader(sql, new MySqlParameter("@TagInfoID", userinfoID)))
+            using (MySqlDataReader reader = MyDBHelper.ExecuteDataReader(sql, new MySqlParameter("@UserInfoID", userinfoID)))
             {
                 return ToModels(reader);
             }
