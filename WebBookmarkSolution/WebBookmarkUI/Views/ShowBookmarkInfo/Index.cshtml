@@ -25,13 +25,26 @@
     <div class="am-fl am-cf" style="margin-left:1%;">
             创建日期：@Model.CreateTime &nbsp;&nbsp;&nbsp;&nbsp;
             标签：
-            <span id="TagList">
+
+           @if(Model.UserInfoID==WebBookmarkUI.UILoginHelper.GetUIDFromHttpContext(this.Context))
+           {
+                <span id="TagList">
                 @foreach (var tagInfo in Model.TagInfoList)
                 {
-                    <a>@tagInfo.TagInfo.TagName <span class="am-icon-close" id="removebookmarkTagInfo" data-id='@tagInfo.BookmarkTagInfoID'> &nbsp;&nbsp;</span></a>
+                    <a>@tagInfo.TagInfo.TagName<span class="am-icon-close" id="removebookmarkTagInfo" data-id='@tagInfo.BookmarkTagInfoID'> &nbsp;&nbsp;</span></a>
                 }
-            </span>
+                </span>
             <input id="inputBookmarkTagName" placeholder="输入标签" data-bookmarkid='@Model.BookmarkInfoID' />
+           }else
+           {
+               <span id="TagList">
+                @foreach (var tagInfo in Model.TagInfoList)
+                {
+                    <a>@tagInfo.TagInfo.TagName</a>
+                }
+                </span>
+           }
+           
       
     </div>
 
@@ -40,7 +53,7 @@
                 <ul class="am-tabs-nav am-nav am-nav-tabs aw-nav-tabs">
                     <li class=""><a href="#" id="bookmarkHTML" data-id='@Model.BookmarkInfoID' data-url='@Model.Href'>HTML <span id="loadHTML"></span></a></li>
                     <li class="am-active"><a href="#" id="commentInfo" data-id='@Model.BookmarkInfoID'>相关评论 <span id="loadcomment"></span></a></li>
-                    <li class=""><a href="#" id="tagInfo" data-id='@Model.BookmarkInfoID'>标签 <span id="loadtagInfo"></span></a></li>
+                    @*<li class=""><a href="#" id="tagInfo" data-id='@Model.BookmarkInfoID'>标签 <span id="loadtagInfo"></span></a></li>*@
                 </ul>
 
                 <div class="am-tabs-bd aw-user-center-tab" style="touch-action: pan-y; -webkit-user-select: none; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);">

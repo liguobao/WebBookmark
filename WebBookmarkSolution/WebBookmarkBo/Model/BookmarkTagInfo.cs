@@ -94,6 +94,14 @@ namespace WebBookmarkBo.Model
            
         }
 
+        public static BizBookmarkTagInfo LoadByBookmarkIDAndTagInfoID(long bookmarkID,long tagInfoID)
+        {
+            var model = DAL.GetByBookmarkInfoIDAndTagInfoID(bookmarkID,tagInfoID);
+            return model != null ? new BizBookmarkTagInfo(model) : null;
+
+        }
+
+
         public static bool DeleteByBookmarkTagInfoID(long bookmarkTagInfoID)
         {
             return DAL.DeleteByBookmarkTagInfoID(bookmarkTagInfoID) >=0;

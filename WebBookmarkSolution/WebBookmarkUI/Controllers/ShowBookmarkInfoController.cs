@@ -186,19 +186,28 @@ namespace WebBookmarkUI.Controllers
                 result.ErrorMessage = "书签数据为空，不要逗我玩啦...";
                 return Json(result);
             }
+            bookmarkInfo.LoadBookmarkTagInfo();
 
-            if(tagInfoID!=0)
+            if(tagInfoID!=0 && bookmarkInfo.BizBookmarkTagInfoList.All(mode=>mode.TagInfoID!=tagInfoID))
             {
                 bookmarkInfo.AddBookmarkTag(tagInfoID);
             }
+            var errorMessage = string.Empty;
 
-            if(!string.IsNullOrEmpty(tagName))
+            if (!string.IsNullOrEmpty(tagName))
             {
-                bookmarkInfo.AddBookmarkTag(tagName);
+               errorMessage = bookmarkInfo.AddBookmarkTag(tagName);
             }
 
-            result.SuccessMessage = "保存成功！";
-            result.IsSuccess = true;
+            if (!string.IsNullOrEmpty(errorMessage))
+            {
+                result.ErrorMessage = errorMessage;
+                result.IsSuccess = false;
+            }else
+            {
+                result.SuccessMessage = "保存成功！";
+                result.IsSuccess = true;
+            }
             return Json(result);
         }
 

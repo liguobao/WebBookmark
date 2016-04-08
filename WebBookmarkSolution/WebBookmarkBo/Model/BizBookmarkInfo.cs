@@ -174,26 +174,32 @@ namespace WebBookmarkBo.Model
             BizBookmarkTagInfoList = BizBookmarkTagInfo.LoadByBookmarkID(BookmarkInfoID);
         }
 
-        public void AddBookmarkTag(string tagname)
+        public string AddBookmarkTag(string tagname)
         {
             if (string.IsNullOrEmpty(tagname))
-                return;
+                return "标签不能为空呀。";
             var tagInfo = BizTagInfo.LoadByTagNameAndUserID(tagname,UserInfoID);
             if (tagInfo == null)
+            {
                 tagInfo = new BizTagInfo();
-            tagInfo.TagName = tagname;
-            tagInfo.UserInfoID = UserInfoID;
-            tagInfo.CreateTime = DateTime.Now;
-            tagInfo.Save();
+                tagInfo.TagName = tagname;
+                tagInfo.UserInfoID = UserInfoID;
+                tagInfo.CreateTime = DateTime.Now;
+                tagInfo.Save();
+            }
+           
 
-            BizBookmarkTagInfo bookmarkTagInfo = new BizBookmarkTagInfo();
+            var bookmarkTagInfo = BizBookmarkTagInfo.LoadByBookmarkIDAndTagInfoID(BookmarkInfoID,tagInfo.TagInfoID);
+            if (bookmarkTagInfo != null)
+                return "已经存在一样的标签了，换一个啦。";
+            bookmarkTagInfo = new BizBookmarkTagInfo();
             bookmarkTagInfo.CreateTime = DateTime.Now;
             bookmarkTagInfo.BookmarkInfoID = BookmarkInfoID;
             bookmarkTagInfo.UserInfoID = UserInfoID;
             bookmarkTagInfo.TagInfoID = tagInfo.TagInfoID;
-            bookmarkTagInfo.Save();  
-         
-            
+            bookmarkTagInfo.Save();
+
+            return string.Empty;
         }
 
         public void AddBookmarkTag(long tagInfoID)

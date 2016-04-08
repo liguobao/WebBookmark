@@ -7,14 +7,14 @@
     $('body').on("click", "[id='bookmarkHTML']", function () {
         var $this = $(this);
         $("#commentInfo").parent().removeClass("am-active");
-        $("#tagInfo").parent().removeClass("am-active");
+       // $("#tagInfo").parent().removeClass("am-active");
         $this.parent().addClass("am-active");
         ShowBookmarkHTML(bookmarkID, url);
     })
 
     $('body').on("click", "[id='commentInfo']", function () {
         var $this = $(this);
-        $("#tagInfo").parent().removeClass("am-active");
+      //  $("#tagInfo").parent().removeClass("am-active");
         $("#bookmarkHTML").parent().removeClass("am-active");
         $this.parent().addClass("am-active");
         ShowBookmarkComment(bookmarkID);

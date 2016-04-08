@@ -282,5 +282,22 @@ namespace WebBookmarkService.DAL
             }
         }
 
+
+
+        public BookmarkTagInfo GetByBookmarkInfoIDAndTagInfoID(long bookmarkInfoID,long tagInfoID)
+        {
+            string sql = "SELECT * FROM tblBookmarkTagInfo WHERE BookmarkInfoID = @BookmarkInfoID AND TagInfoID=@TagInfoID";
+            using (MySqlDataReader reader = MyDBHelper.ExecuteDataReader(sql, new MySqlParameter("@BookmarkInfoID", bookmarkInfoID), new MySqlParameter("@TagInfoID", tagInfoID)))
+            {
+                if (reader.Read())
+                {
+                    return ToModel(reader);
+                }
+                else
+                {
+                    return null;
+                }
+            }
+        }
 	}
 }
