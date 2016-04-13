@@ -52,10 +52,21 @@ namespace WebBookmarkBo.Model
         /// </summary>
         public DateTime CreateTime { get; set; }
 
+        private string imagURL;
         /// <summary>
         /// 用户头像URL
         /// </summary>
-        public string UserImagURL { get; set; }
+        public string UserImagURL {
+            get
+            {
+
+                return string.IsNullOrEmpty(imagURL) ? "http://s.amazeui.org/media/i/demos/bw-2014-06-19.jpg?imageView/1/w/200/h/200/q/80" : imagURL;
+            } 
+            set
+            {
+                imagURL = value;
+            } 
+        }
 
         /// <summary>
         /// 用户个人简介
