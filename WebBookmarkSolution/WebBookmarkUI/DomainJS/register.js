@@ -19,6 +19,16 @@ $(document).ready(function () {// DOM的onload事件处理函数
         $(this).parent().hide();
     });
 
+  
+    $('#agreement_chk').click( function (e) {
+        if(!$(this).prop("checked")){
+            $('#btnRegister').attr("disabled",true);
+
+        }else{
+            $('#btnRegister').attr("disabled",false);
+        }
+    });
+
 
     verify_register_form('#register_form');
 });

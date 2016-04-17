@@ -273,19 +273,10 @@ namespace WebBookmarkService.DAL
             List<MySqlParameter> lstPara = new List<MySqlParameter>();
             foreach(var bookmarkInfo in lstBookmarkInfo)
             {
-                sbSQL.AppendLine( 
-                    "INSERT INTO tblBookmarkInfo (UserWebFolderID, UserInfoID, Href, HTML, Host, CreateTime, IElementJSON, BookmarkName) " +
-                    "VALUES ("+
-                    "@UserWebFolderID" + index +
-                    ", @UserInfoID"+ index +
-                    ", @Href" + index +
-                    ", @HTML" + index +
-                    ", @Host" + index +
-                    ", @CreateTime" + index +
-                    ", @IElementJSON" + index +
-                    ", @BookmarkName" + index +
-                      ", @HashCode" + index +
-                    ");");
+                sbSQL.AppendLine("INSERT INTO tblBookmarkInfo (UserWebFolderID, UserInfoID, Href, HTML, Host, CreateTime, IElementJSON, BookmarkName, Grate, HashCode)  VALUES (@UserWebFolderID"+index+
+                    ", @UserInfoID" + index + ", @Href" + index + ", @HTML" + index + ", @Host" + index + ", @CreateTime" + index + ", @IElementJSON" + index + ", @BookmarkName" + index + ", @Grate" + index + ", @HashCode" + index + ");");
+
+               
                 
 
                 MySqlParameter[] para = new MySqlParameter[]
@@ -299,6 +290,7 @@ namespace WebBookmarkService.DAL
                         new MySqlParameter("@IElementJSON"+index, ToDBValue(bookmarkInfo.IElementJSON)),
                         new MySqlParameter("@BookmarkName"+index, ToDBValue(bookmarkInfo.BookmarkName)),
                         new MySqlParameter("@HashCode"+index, ToDBValue(bookmarkInfo.HashCode)),
+                        new MySqlParameter("@Grate"+index, ToDBValue(bookmarkInfo.Grate)),
                 };
                 lstPara.AddRange(para);
                 index = index + 1;
