@@ -27,7 +27,20 @@ namespace WebBookmarkUI.Controllers
                     var firstFolder = lst.Where(folder => folder.ParentWebfolderID == 0);
                     if (firstFolder == null || firstFolder.Count()==0)
                         return View();
-                    folderID = firstFolder.FirstOrDefault().UserWebFolderID;
+                    if(firstFolder.Count() == 1)
+                    {
+                        folderID = firstFolder.FirstOrDefault().UserWebFolderID;
+                    }else
+                    {
+                        BizUserWebFolder newFolderInfo = new BizUserWebFolder();
+                        newFolderInfo.UserInfoID = uid;
+                        newFolderInfo.UserWebFolderID = 0;
+                        newFolderInfo.ParentWebfolderID = 0;
+                        newFolderInfo.ChildrenFolderList = firstFolder.ToList();
+                        newFolderInfo.BizBookmarkInfoList = new List<BizBookmarkInfo>();
+                        return View(new UIWebFolderInfo(newFolderInfo));
+                    }
+                  
                 }
             }
             var folderInfo = BizUserWebFolder.LoadContainsChirdrenAndBookmark(folderID);
@@ -47,7 +60,20 @@ namespace WebBookmarkUI.Controllers
                     var firstFolder = lst.Where(folder => folder.ParentWebfolderID == 0);
                     if (firstFolder == null || firstFolder.Count()==0)
                         return View();
-                    folderID = firstFolder.FirstOrDefault().UserWebFolderID;
+                    if (firstFolder.Count() == 1)
+                    {
+                        folderID = firstFolder.FirstOrDefault().UserWebFolderID;
+                    }
+                    else
+                    {
+                        BizUserWebFolder newFolderInfo = new BizUserWebFolder();
+                        newFolderInfo.UserInfoID = uid;
+                        newFolderInfo.UserWebFolderID = 0;
+                        newFolderInfo.ParentWebfolderID = 0;
+                        newFolderInfo.ChildrenFolderList = firstFolder.ToList();
+                        newFolderInfo.BizBookmarkInfoList = new List<BizBookmarkInfo>();
+                        return View("ShowFolderTable", new UIWebFolderInfo(newFolderInfo));
+                    }
                 }
             }
             var folderInfo = BizUserWebFolder.LoadContainsChirdrenAndBookmark(folderID);
@@ -66,7 +92,20 @@ namespace WebBookmarkUI.Controllers
                     var firstFolder = lst.Where(folder => folder.ParentWebfolderID == 0);
                     if (firstFolder == null || firstFolder.Count()==0)
                         return View();
-                    folderID = firstFolder.FirstOrDefault().UserWebFolderID;
+                    if (firstFolder.Count() == 1)
+                    {
+                        folderID = firstFolder.FirstOrDefault().UserWebFolderID;
+                    }
+                    else
+                    {
+                        BizUserWebFolder newFolderInfo = new BizUserWebFolder();
+                        newFolderInfo.UserInfoID = uid;
+                        newFolderInfo.UserWebFolderID = 0;
+                        newFolderInfo.ParentWebfolderID = 0;
+                        newFolderInfo.ChildrenFolderList = firstFolder.ToList();
+                        newFolderInfo.BizBookmarkInfoList = new List<BizBookmarkInfo>();
+                        return View("ShowAddFolderOrBookmarkView", new UIWebFolderInfo(newFolderInfo));
+                    }
                 }
             }
             var folderInfo = BizUserWebFolder.LoadContainsChirdrenAndBookmark(folderID);

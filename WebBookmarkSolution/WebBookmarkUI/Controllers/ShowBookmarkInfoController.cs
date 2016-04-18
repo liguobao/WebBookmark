@@ -77,7 +77,17 @@ namespace WebBookmarkUI.Controllers
             {
                 html = HTTPHelper.GetHTML(url);
                 if (string.IsNullOrEmpty(html))
+                {
+                    model = new UIBookmarkInfo();
+                    model.HTML = bookmarkInfo.HTML;
+                    model.Href = bookmarkInfo.Href;
+                    model.UserInfoID = bookmarkInfo.UserInfoID;
+                    model.Host = bookmarkInfo.Host;
+                    model.BookmarkName = bookmarkInfo.BookmarkName;
+                    model.BookmarkInfoID = bookmarkInfo.BookmarkInfoID;
                     return PartialView("ShowBookmarkHTML", model);
+                }
+                   
                 bookmarkInfo.HTML = html;
                 bookmarkInfo.Save();
             }
