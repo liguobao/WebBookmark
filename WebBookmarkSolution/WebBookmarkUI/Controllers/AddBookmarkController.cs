@@ -59,6 +59,9 @@ namespace WebBookmarkUI.Controllers
                 htmlDoc.LoadHtml(html);
                 var title = htmlDoc.DocumentNode.SelectSingleNode("//title").InnerText;
                 bookmark.BookmarkName = !string.IsNullOrEmpty(title) ? title:url ;
+            }else
+            {
+                bookmark.BookmarkName = url;
             }
             bookmark.UserWebFolderID = folderID;
             bookmark.CreateTime = DateTime.Now;
