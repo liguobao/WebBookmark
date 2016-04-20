@@ -201,6 +201,7 @@
     <Content Include="DomainJS\register.js" />
     <Content Include="DomainJS\searchuser.js" />
     <Content Include="DomainJS\showgroupdetail.js" />
+    <Content Include="DomainJS\showuserallgroupmessage.js" />
     <Content Include="DomainJS\showuserdetail.js" />
     <Content Include="DomainJS\userInfo.js" />
     <Content Include="DomainJS\webbookmarktable.js" />
@@ -327,6 +328,7 @@
     <Content Include="Views\UserRecommend\Index.cshtml" />
     <Content Include="Views\BookmarkRecommend\Index.cshtml" />
     <Content Include="Views\WebBookmarkTable\ShowUserAllFolder.cshtml" />
+    <Content Include="Views\GroupInfo\ShowUserAllGroupMessage.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

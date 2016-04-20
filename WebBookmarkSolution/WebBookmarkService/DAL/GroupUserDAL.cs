@@ -278,6 +278,18 @@ namespace WebBookmarkService.DAL
             }
         }
 
+
+        public IEnumerable<GroupUser> GetListByGroupInfoIDs(List<long> groupInfoIDs)
+        {
+            if (groupInfoIDs == null || groupInfoIDs.Count == 0)
+                return null;
+            string sql =string.Format( "SELECT * FROM tblGroupUser WHERE GroupInfoID in ({0})",string.Join(",",groupInfoIDs));
+            using (MySqlDataReader reader = MyDBHelper.ExecuteDataReader(sql))
+            {
+                return ToModels(reader);
+            }
+        }
+
         public GroupUser GetByUserIDAndGroupInfoID(long uid,long groupID)
         {
             string sql = "SELECT * FROM tblGroupUser WHERE GroupInfoID = @GroupInfoID and UserInfoID = @UserInfoID";

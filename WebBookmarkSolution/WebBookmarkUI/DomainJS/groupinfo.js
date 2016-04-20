@@ -77,7 +77,7 @@
         $("#mygroup").parent().removeClass("am-active");
         $("#groupuser").parent().removeClass("am-active");
         $this.parent().addClass("am-active");
-        ShowALLUserGroupList(createUserID);
+        ShowUserAllGroupMessage();
     })
 
 
@@ -196,6 +196,24 @@ function ShowUserGroupListHasPass(userID) {
                     $("#overview").html(data);
                 }
                 $("#groupuserloading").removeClass("am-icon-spinner").removeClass("am-icon-spin");
+            }
+    });
+}
+
+
+function ShowUserAllGroupMessage() {
+    $("#groupmessageloading").addClass("am-icon-spinner").addClass("am-icon-spin");
+
+    $.ajax({
+        type: "post",
+        url: ShowUserAllGroupMessageURL,
+        data: { },
+        success:
+            function (data) {
+                if (data != "") {
+                    $("#overview").html(data);
+                }
+                $("#groupmessageloading").removeClass("am-icon-spinner").removeClass("am-icon-spin");
             }
     });
 }

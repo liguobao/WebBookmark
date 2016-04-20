@@ -35,7 +35,9 @@ namespace WebBookmarkUI.Models
 
         public UIGroupInfo GroupInfo { get; set; }
 
-
+        /// <summary>
+        /// 申请用户信息
+        /// </summary>
         public UIUserInfo GroupUserInfo { get; set; }
     }
 }

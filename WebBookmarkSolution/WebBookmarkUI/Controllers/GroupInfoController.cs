@@ -557,5 +557,51 @@ namespace WebBookmarkUI.Controllers
             result.IsSuccess = true;
             return Json(result);
         }
+
+
+        /// <summary>
+        /// 未通过审核的群组用户
+        /// </summary>
+        /// <param name="groupID"></param>
+        /// <returns></returns>
+        public ActionResult ShowUserAllGroupMessage()
+        {
+            long loginUID = UILoginHelper.GetUIDFromHttpContext(HttpContext);
+            List<UIUserGroupInfo> lstUIUserGroupInfo = null;
+            var lstGroupInfo = BizGroupInfo.LoadByCreateUserID(loginUID);
+            if (lstGroupInfo == null)
+                return View("ShowUserAllGroupMessage", lstUIUserGroupInfo);
+
+
+            var lstGroupUser = BizGroupUser.LoadByGroupIDList(lstGroupInfo.Select(info => info.GroupInfoID).ToList());
+            var dicGroupInfo = lstGroupInfo.ToDictionary(info=>info.GroupInfoID,info=>info);
+
+            var dicUserInfo = UserInfoBo.GetListByUIDList(lstGroupUser.Select(model => model.UserInfoID).Distinct().ToList())
+                .ToDictionary(info => info.UserInfoID, info => info);
+
+            lstUIUserGroupInfo = lstGroupUser.Where(model => model.IsPass == (int)ApplyStatus.Waiting).Select(model => new UIUserGroupInfo()
+            {
+                GroupInfo = dicGroupInfo.ContainsKey(model.GroupInfoID) ?
+                new UIGroupInfo()
+                {
+                    CreateTime = dicGroupInfo[model.GroupInfoID].CreateTime,
+                    CreateUesrID = dicGroupInfo[model.GroupInfoID].CreateUesrID,
+                    GroupInfoID = dicGroupInfo[model.GroupInfoID].GroupInfoID,
+                    GroupName = dicGroupInfo[model.GroupInfoID].GroupName,
+                }:null,
+                GroupInfoID = model.GroupInfoID,
+                GroupUserID = model.GroupUserID,
+                CreateTime = model.CreateTime,
+                IsPass = model.IsPass,
+                UserInfoID = model.UserInfoID,
+                GroupUserInfo = ToUIUserInfo(model.UserInfoID, dicUserInfo),
+             
+            }).ToList();
+
+            return View("ShowUserAllGroupMessage", lstUIUserGroupInfo);
+
+        }
+
+
     }
 }
