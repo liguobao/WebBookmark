@@ -118,7 +118,7 @@
         var $this = $(this);
         var folderID = $this.val();
         var uid = $this.attr("data-uid");
-        var href = "javascript:void(function (){var xmlhttp = new XMLHttpRequest();xmlhttp.open('POST', 'http://webbookmark.online/AddBookmark/Add?url='+location.href+'&uid="
+        var href = "javascript:void(function (){var xmlhttp = new XMLHttpRequest();xmlhttp.open('POST', 'https://webbookmark.online/AddBookmark/Add?url='+location.href+'&uid="
             + uid + "&folderid=" + folderID
             + "' ,true);xmlhttp.send(location.href);}());";
         $("#AQuickAddData").attr("href",href);

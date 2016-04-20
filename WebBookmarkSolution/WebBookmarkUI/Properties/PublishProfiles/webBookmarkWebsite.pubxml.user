@@ -184,13 +184,13 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>03/29/2016 00:03:28</publishTime>
     </File>
     <File Include="bin/WebBookmarkBo.dll">
-      <publishTime>04/18/2016 10:45:21</publishTime>
+      <publishTime>04/20/2016 14:53:28</publishTime>
     </File>
     <File Include="bin/WebBookmarkService.dll">
-      <publishTime>04/18/2016 10:45:20</publishTime>
+      <publishTime>04/20/2016 14:53:27</publishTime>
     </File>
     <File Include="bin/WebBookmarkUI.dll">
-      <publishTime>04/18/2016 10:45:23</publishTime>
+      <publishTime>04/20/2016 17:02:55</publishTime>
     </File>
     <File Include="bin/WebfolderBo.dll">
       <publishTime>04/04/2016 02:02:22</publishTime>
@@ -226,7 +226,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>04/08/2016 22:54:35</publishTime>
     </File>
     <File Include="DomainJS/groupinfo.js">
-      <publishTime>04/01/2016 21:19:16</publishTime>
+      <publishTime>04/20/2016 10:33:15</publishTime>
     </File>
     <File Include="DomainJS/importbookmark.js">
       <publishTime>03/29/2016 00:03:27</publishTime>
@@ -255,6 +255,9 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="DomainJS/showgroupdetail.js">
       <publishTime>04/03/2016 19:13:16</publishTime>
     </File>
+    <File Include="DomainJS/showuserallgroupmessage.js">
+      <publishTime>04/20/2016 11:28:13</publishTime>
+    </File>
     <File Include="DomainJS/showuserdetail.js">
       <publishTime>04/05/2016 20:54:09</publishTime>
     </File>
@@ -262,7 +265,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>03/29/2016 00:03:27</publishTime>
     </File>
     <File Include="DomainJS/webbookmarktable.js">
-      <publishTime>04/07/2016 00:16:50</publishTime>
+      <publishTime>04/20/2016 17:02:10</publishTime>
     </File>
     <File Include="Global.asax">
       <publishTime>03/29/2016 00:03:27</publishTime>
@@ -403,7 +406,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>04/02/2016 00:47:00</publishTime>
     </File>
     <File Include="Views/GroupInfo/Index.cshtml">
-      <publishTime>04/02/2016 00:47:00</publishTime>
+      <publishTime>04/20/2016 10:31:47</publishTime>
     </File>
     <File Include="Views/GroupInfo/ShowALLUserGroupList.cshtml">
       <publishTime>04/01/2016 23:23:57</publishTime>
@@ -416,6 +419,9 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     </File>
     <File Include="Views/GroupInfo/ShowMyGroupList.cshtml">
       <publishTime>04/01/2016 23:21:52</publishTime>
+    </File>
+    <File Include="Views/GroupInfo/ShowUserAllGroupMessage.cshtml">
+      <publishTime>04/20/2016 11:39:12</publishTime>
     </File>
     <File Include="Views/GroupInfo/ShowUserGroupList.cshtml">
       <publishTime>03/30/2016 00:52:08</publishTime>
@@ -514,10 +520,10 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>04/04/2016 20:39:37</publishTime>
     </File>
     <File Include="Views/WebBookmarkTable/ShowUserAllFolder.cshtml">
-      <publishTime>04/07/2016 00:14:59</publishTime>
+      <publishTime>04/20/2016 17:02:41</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>04/18/2016 10:45:25</publishTime>
+      <publishTime>04/20/2016 17:02:55</publishTime>
     </File>
   </ItemGroup>
 </Project>
