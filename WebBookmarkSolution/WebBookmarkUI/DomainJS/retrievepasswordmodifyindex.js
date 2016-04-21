@@ -1,0 +1,50 @@
+﻿$(document).ready(function () {// DOM的onload事件处理函数  
+    $('#btnRetrievePassword').bind('click', function (e) {
+        e.preventDefault();
+        var newPassword = $('#NewPassword').val();
+
+        var confirmPassword = $('#ConfirmPassword').val();
+        if (newPassword == "")
+        {
+            alert("新密码不能为空。");
+            return;
+        }
+        if (newPassword.lenth < 6)
+        {
+            alert("密码长度不能少于6位。");
+            return;
+        }
+
+        if (newPassword != confirmPassword)
+        {
+            alert("两次输入的密码不一致，请重新输入。");
+            return;
+        }
+
+        var token = GetQueryString("token");
+
+        $.ajax(
+        {
+          type: "post",
+          url: retrievePasswordURL,
+          data: { token: token, newPassword: newPassword },
+          success:
+              function (result) {
+                  if (result.IsSuccess) {
+                      alert(result.SuccessMessage);
+                      window.location.href = '../login';
+                  } else {
+                      alert(result.ErrorMessage);
+                      return;
+                  }
+              }
+        });
+        e.stopPropagation();
+    });
+})
+
+function GetQueryString(name) {
+    var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+    var r = window.location.search.substr(1).match(reg);
+    if (r != null) return (r[2]); return null;
+}

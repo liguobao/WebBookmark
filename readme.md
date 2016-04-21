@@ -2,6 +2,10 @@
 #WebBookmark Commit log
 
 
+##2016.4.21
+1. 完成找回密码功能
+2. 完成发送邮件功能
+
 ##2016.4.20 
 1. 修复获取不到HTTPS页面数据问题，获取不到直接取URL作为标签名
 2. x-Frame-Options限制iframe网页嵌套 暂时无解

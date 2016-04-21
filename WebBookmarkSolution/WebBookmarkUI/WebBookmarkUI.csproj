@@ -128,6 +128,7 @@
     <Compile Include="Controllers\GroupInfoController.cs" />
     <Compile Include="Controllers\MessageListController.cs" />
     <Compile Include="Controllers\RegisterController.cs" />
+    <Compile Include="Controllers\RetrievePasswordController.cs" />
     <Compile Include="Controllers\ShowBookmarkInfoController.cs" />
     <Compile Include="Controllers\ShowGroupController.cs" />
     <Compile Include="Controllers\ShowMyAllGroupController.cs" />
@@ -197,8 +198,10 @@
     <Content Include="DomainJS\login.js" />
     <Content Include="DomainJS\messagelist.js" />
     <Content Include="DomainJS\modifypassword.js" />
+    <Content Include="DomainJS\retrievepasswordmodifyindex.js" />
     <Content Include="DomainJS\quitgroup.js" />
     <Content Include="DomainJS\register.js" />
+    <Content Include="DomainJS\retrievepassword.js" />
     <Content Include="DomainJS\searchuser.js" />
     <Content Include="DomainJS\showgroupdetail.js" />
     <Content Include="DomainJS\showuserallgroupmessage.js" />
@@ -329,6 +332,8 @@
     <Content Include="Views\BookmarkRecommend\Index.cshtml" />
     <Content Include="Views\WebBookmarkTable\ShowUserAllFolder.cshtml" />
     <Content Include="Views\GroupInfo\ShowUserAllGroupMessage.cshtml" />
+    <Content Include="Views\RetrievePassword\Index.cshtml" />
+    <Content Include="Views\RetrievePassword\ModifyIndex.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

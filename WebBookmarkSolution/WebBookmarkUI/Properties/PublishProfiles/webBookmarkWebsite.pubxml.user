@@ -184,13 +184,13 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>03/29/2016 00:03:28</publishTime>
     </File>
     <File Include="bin/WebBookmarkBo.dll">
-      <publishTime>04/20/2016 14:53:28</publishTime>
+      <publishTime>04/21/2016 13:15:06</publishTime>
     </File>
     <File Include="bin/WebBookmarkService.dll">
-      <publishTime>04/20/2016 14:53:27</publishTime>
+      <publishTime>04/21/2016 13:15:06</publishTime>
     </File>
     <File Include="bin/WebBookmarkUI.dll">
-      <publishTime>04/20/2016 17:40:53</publishTime>
+      <publishTime>04/21/2016 13:15:07</publishTime>
     </File>
     <File Include="bin/WebfolderBo.dll">
       <publishTime>04/04/2016 02:02:22</publishTime>
@@ -248,6 +248,12 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     </File>
     <File Include="DomainJS/register.js">
       <publishTime>04/17/2016 21:44:45</publishTime>
+    </File>
+    <File Include="DomainJS/retrievepassword.js">
+      <publishTime>04/21/2016 13:11:15</publishTime>
+    </File>
+    <File Include="DomainJS/retrievepasswordmodifyindex.js">
+      <publishTime>04/21/2016 12:20:13</publishTime>
     </File>
     <File Include="DomainJS/searchuser.js">
       <publishTime>04/05/2016 21:42:21</publishTime>
@@ -439,7 +445,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>04/02/2016 00:47:00</publishTime>
     </File>
     <File Include="Views/Login/Index.cshtml">
-      <publishTime>03/29/2016 00:03:27</publishTime>
+      <publishTime>04/21/2016 11:36:44</publishTime>
     </File>
     <File Include="Views/MessageList/Index.cshtml">
       <publishTime>04/03/2016 18:35:12</publishTime>
@@ -458,6 +464,12 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     </File>
     <File Include="Views/Register/Index.cshtml">
       <publishTime>04/17/2016 21:11:02</publishTime>
+    </File>
+    <File Include="Views/RetrievePassword/Index.cshtml">
+      <publishTime>04/21/2016 13:08:21</publishTime>
+    </File>
+    <File Include="Views/RetrievePassword/ModifyIndex.cshtml">
+      <publishTime>04/21/2016 13:00:14</publishTime>
     </File>
     <File Include="Views/Shared/Error.cshtml">
       <publishTime>04/02/2016 13:19:17</publishTime>
@@ -523,7 +535,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>04/20/2016 17:03:00</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>04/20/2016 17:40:54</publishTime>
+      <publishTime>04/21/2016 13:15:08</publishTime>
     </File>
   </ItemGroup>
 </Project>
