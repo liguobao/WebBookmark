@@ -44,7 +44,15 @@ namespace WebBookmarkUI.Controllers
                     return Json(result);
                 }
 
-                string token = userInfo.UserInfoID.ConvertToCiphertext();
+                string token = (userInfo.UserInfoID+ userInfo.UserEmail + DateTime.Now).ConvertToCiphertext();
+                var retrievePasswordLog = new BizRetrievePasswordLog();
+                retrievePasswordLog.CreateTime = DateTime.Now;
+                retrievePasswordLog.LogStatus = 0;
+                retrievePasswordLog.Token = token;
+                retrievePasswordLog.UserInfoID = userInfo.UserInfoID;
+                retrievePasswordLog.LastTime = DateTime.Now;
+                retrievePasswordLog.Save();
+                
                 
                 EmailInfo emailInfo = new EmailInfo();
                 emailInfo.Subject = "WebBookmark找回密码";
@@ -76,10 +84,37 @@ namespace WebBookmarkUI.Controllers
             }
             try
             {
-                var userID = token.ConvertToPlainLong();
-                var userInfo = BizUserInfo.LoadByUserInfoID(userID);
+
+                var retrievePasswordLog = BizRetrievePasswordLog.LoadByToken(token);
+                if(retrievePasswordLog==null)
+                {
+                    result.IsSuccess = false;
+                    result.ErrorMessage = "找不到重置密码记录，不要逗我玩啦。";
+                    return Json(result);
+                }
+                if ((DateTime.Now - retrievePasswordLog.CreateTime).TotalHours > 24)
+                {
+                    result.IsSuccess = false;
+                    result.ErrorMessage = "重置密码链接已超时，请重新申请。";
+                    return Json(result);
+                }
+                if (retrievePasswordLog.LogStatus ==1)
+                {
+                    result.IsSuccess = false;
+                    result.ErrorMessage = "重置密码链接已使用，请重新申请。";
+                    return Json(result);
+                }
+
+
+
+
+                var userInfo = BizUserInfo.LoadByUserInfoID(retrievePasswordLog.UserInfoID);
                 userInfo.UserPassword = newPassword;
                 userInfo.Save();
+                retrievePasswordLog.LogStatus = 1;
+                retrievePasswordLog.LastTime = DateTime.Now;
+                retrievePasswordLog.Save();
+
                 result.IsSuccess = true;
                 result.SuccessMessage = "重置密码成功了，现在赶紧去登录吧。";
                 return Json(result);

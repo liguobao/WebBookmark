@@ -63,7 +63,7 @@
     <Compile Include="Model\BookmarkTagInfo.cs" />
     <Compile Include="Model\BizTagInfo.cs" />
     <Compile Include="Model\BizConfigurationInfo.cs" />
-    <Compile Include="Model\RetrievePasswordLog.cs" />
+    <Compile Include="Model\BizRetrievePasswordLog.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Service\BookmarkInfoBo.cs" />
     <Compile Include="Service\RecommendBo.cs" />

@@ -6,18 +6,19 @@
         var confirmPassword = $('#ConfirmPassword').val();
         if (newPassword == "")
         {
-            alert("新密码不能为空。");
+            $("#lblMessage").text("新密码不能为空。");
+           
             return;
         }
         if (newPassword.lenth < 6)
         {
-            alert("密码长度不能少于6位。");
+            $("#lblMessage").text("密码长度不能少于6位。");
             return;
         }
 
         if (newPassword != confirmPassword)
         {
-            alert("两次输入的密码不一致，请重新输入。");
+            $("#lblMessage").text("两次输入的密码不一致，请重新输入。");
             return;
         }
 
@@ -34,7 +35,7 @@
                       alert(result.SuccessMessage);
                       window.location.href = '../login';
                   } else {
-                      alert(result.ErrorMessage);
+                      $("#lblMessage").text(result.ErrorMessage);
                       return;
                   }
               }

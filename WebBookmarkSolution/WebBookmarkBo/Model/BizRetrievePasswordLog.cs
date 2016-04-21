@@ -5,9 +5,10 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using WebBookmarkService.DAL;
 using WebBookmarkService.Model;
 
-namespace WebBookmarkService.BizModel
+namespace WebBookmarkBo.BizModel
 {	
 	[Serializable()]
     
@@ -16,6 +17,8 @@ namespace WebBookmarkService.BizModel
     /// </summary>
 	public class BizRetrievePasswordLog
 	{
+
+        private static readonly RetrievePasswordLogDAL DAL = new RetrievePasswordLogDAL();
         /// <summary>
         /// 
         /// </summary>
@@ -78,6 +81,26 @@ namespace WebBookmarkService.BizModel
         {
         
         } 
+
+
+        public void Save()
+        {
+            if(RetrievePasswordLogID==0)
+            {
+                DAL.Add(ToModel());
+            }else
+            {
+                DAL.Update(ToModel());
+            }
+        }
+
+
+
+        public static BizRetrievePasswordLog LoadByToken(string token)
+        {
+            var model =DAL.GetByToken(token);
+            return model != null ? new BizRetrievePasswordLog(model) : null;
+        }
         
 	}
 }

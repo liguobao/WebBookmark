@@ -240,7 +240,27 @@ namespace WebBookmarkService.DAL
 			}
 		}
         #endregion
+
 	
 	    #endregion
+
+
+
+
+        public RetrievePasswordLog GetByToken(string token)
+        {
+            string sql = "SELECT * FROM tblRetrievePasswordLog WHERE Token = @Token";
+            using (MySqlDataReader reader = MyDBHelper.ExecuteDataReader(sql, new MySqlParameter("@Token", token)))
+            {
+                if (reader.Read())
+                {
+                    return ToModel(reader);
+                }
+                else
+                {
+                    return null;
+                }
+            }
+        }
 	}
 }
