@@ -10,7 +10,7 @@
            
             return;
         }
-        if (newPassword.lenth < 6)
+        if (newPassword.length < 6)
         {
             $("#lblMessage").text("密码长度不能少于6位。");
             return;
