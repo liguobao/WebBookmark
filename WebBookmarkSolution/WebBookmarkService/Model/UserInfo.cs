@@ -65,5 +65,15 @@ namespace WebBookmarkService.Model
         /// </summary>
 		public string UserInfoComment{get;set;}
             
+        /// <summary>
+        /// 激活账号token
+        /// </summary>
+		public string ActivateAccountToken{get;set;}
+            
+        /// <summary>
+        /// 账号状态。0：未激活；1：已激活
+        /// </summary>
+		public int AccountStatus{get;set;}
+            
 	}
 }

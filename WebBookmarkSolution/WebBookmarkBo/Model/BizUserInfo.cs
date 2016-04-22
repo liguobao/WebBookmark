@@ -10,6 +10,8 @@ namespace WebBookmarkBo.Model
 {
     public  class BizUserInfo
     {
+        private static readonly UserInfoDAL DAL = new UserInfoDAL();
+
         #region 属性
 
         /// <summary>
@@ -74,6 +76,17 @@ namespace WebBookmarkBo.Model
         public string UserInfoComment { get; set; }
 
 
+        /// <summary>
+        /// 激活账号token
+        /// </summary>
+        public string ActivateAccountToken { get; set; }
+
+        /// <summary>
+        /// 账号状态。0：未激活；1：已激活
+        /// </summary>
+        public int AccountStatus { get; set; }
+
+
         #endregion
 
         public UserInfo ToModel()
@@ -90,6 +103,8 @@ namespace WebBookmarkBo.Model
                 UserQQ = UserQQ,
                 UserImagURL = UserImagURL,
                 UserInfoComment = UserInfoComment,
+                ActivateAccountToken = ActivateAccountToken,
+                AccountStatus = AccountStatus,
             };
         }
 
@@ -116,6 +131,8 @@ namespace WebBookmarkBo.Model
             UserQQ = dataInfo.UserQQ;
             UserInfoComment = dataInfo.UserInfoComment;
             UserImagURL = dataInfo.UserImagURL;
+            ActivateAccountToken = dataInfo.ActivateAccountToken;
+            AccountStatus = dataInfo.AccountStatus;
         }
 
       
@@ -134,14 +151,20 @@ namespace WebBookmarkBo.Model
 
 
        public static BizUserInfo LoadByUserInfoID(long userInfoID)
-        {
-            return new BizUserInfo(new UserInfoDAL().GetByUserInfoID(userInfoID));
+       {
+            return new BizUserInfo(DAL.GetByUserInfoID(userInfoID));
         }
 
 
        public static BizUserInfo LoadByUserEmailOrUserLoginName(string emailOrLoginName)
        {
-            return new BizUserInfo(new UserInfoDAL().GetByUserEmailOrUserLoginName(emailOrLoginName));
+           return new BizUserInfo(DAL.GetByUserEmailOrUserLoginName(emailOrLoginName));
        }
+
+       public static BizUserInfo LoadByActivateAccountToken(string token)
+       {
+           return new BizUserInfo(DAL.GetByActivateAccountToken(token));
+       }
+       
     }
 }

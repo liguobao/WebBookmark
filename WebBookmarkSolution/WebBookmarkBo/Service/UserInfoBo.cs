@@ -27,7 +27,7 @@ namespace WebBookmarkBo.Service
                 {
                     result.IsSuccess = true;
                     result.ResultID = newUserInfo.UserInfoID.ConvertToCiphertext();
-                    result.SuccessMessage = "注册成功";
+                    result.SuccessMessage = "注册成功,请登录注册邮箱查收激活账号邮件完成注册操作。";
                     MessageBo.CreateMessage(newUserInfo.UserInfoID, MessageTypeEnum.WelcomeToWebBookmark, newUserInfo);
                 }
                 else
@@ -158,6 +158,11 @@ namespace WebBookmarkBo.Service
                 if(userInfo.UserPassword != password)
                 {
                     result.ErrorMessage = "亲，密码不对哦，麻烦重新输入密码....";
+                    result.IsSuccess = false;
+                    return result;
+                }else if(userInfo.AccountStatus==0)
+                {
+                    result.ErrorMessage = "亲，你的账号还没激活，请登录点击注册邮件中的激活链接进行激活操作....";
                     result.IsSuccess = false;
                     return result;
                 }else

@@ -334,6 +334,7 @@
     <Content Include="Views\GroupInfo\ShowUserAllGroupMessage.cshtml" />
     <Content Include="Views\RetrievePassword\Index.cshtml" />
     <Content Include="Views\RetrievePassword\ModifyIndex.cshtml" />
+    <Content Include="Views\Register\ActivateAccount.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

@@ -5,15 +5,16 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using WebBookmarkService.Model;
 
-namespace WebBookmarkService.Model
+namespace WebBookmarkService.BizModel
 {	
 	[Serializable()]
     
     /// <summary>
     /// 
     /// </summary>
-	public class UserInfo
+	public class BizUserInfo
 	{
         /// <summary>
         /// 用户ID
@@ -75,5 +76,50 @@ namespace WebBookmarkService.Model
         /// </summary>
 		public int AccountStatus{get;set;}
             
+        
+        /// <summary>
+        /// Biz Convert To DB Model
+        /// </summary>
+        public UserInfo ToModel()
+        {
+            return new UserInfo()
+            {
+                UserInfoID =  UserInfoID,
+                UserLoginName =  UserLoginName,
+                UserPassword =  UserPassword,
+                UserName =  UserName,
+                UserEmail =  UserEmail,
+                UserPhone =  UserPhone,
+                UserQQ =  UserQQ,
+                CreateTime =  CreateTime,
+                UserImagURL =  UserImagURL,
+                UserInfoComment =  UserInfoComment,
+                ActivateAccountToken =  ActivateAccountToken,
+                AccountStatus =  AccountStatus,
+            };
+        }
+        
+        
+        public BizUserInfo (UserInfo dataInfo)
+        {
+             UserInfoID =  dataInfo.UserInfoID;
+             UserLoginName =  dataInfo.UserLoginName;
+             UserPassword =  dataInfo.UserPassword;
+             UserName =  dataInfo.UserName;
+             UserEmail =  dataInfo.UserEmail;
+             UserPhone =  dataInfo.UserPhone;
+             UserQQ =  dataInfo.UserQQ;
+             CreateTime =  dataInfo.CreateTime;
+             UserImagURL =  dataInfo.UserImagURL;
+             UserInfoComment =  dataInfo.UserInfoComment;
+             ActivateAccountToken =  dataInfo.ActivateAccountToken;
+             AccountStatus =  dataInfo.AccountStatus;
+        }
+        
+        public  BizUserInfo ()
+        {
+        
+        } 
+        
 	}
 }

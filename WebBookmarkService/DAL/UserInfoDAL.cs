@@ -13,13 +13,15 @@ namespace WebBookmarkService.DAL
 {
 	public partial class UserInfoDAL
 	{
+		#region 自动生成方法
+		
         #region 根据传入Model，并返回Model
         /// <summary>
         /// 根据传入Model，并返回Model
         /// </summary>        
         public bool Add (UserInfo userInfo)
 		{
-				string sql ="INSERT INTO tblUserInfo (UserLoginName, UserPassword, UserName, UserEmail, UserPhone, UserQQ, CreateTime, UserImagURL, UserInfoComment)  VALUES (@UserLoginName, @UserPassword, @UserName, @UserEmail, @UserPhone, @UserQQ, @CreateTime, @UserImagURL, @UserInfoComment)";
+				string sql ="INSERT INTO tblUserInfo (UserLoginName, UserPassword, UserName, UserEmail, UserPhone, UserQQ, CreateTime, UserImagURL, UserInfoComment, ActivateAccountToken, AccountStatus)  VALUES (@UserLoginName, @UserPassword, @UserName, @UserEmail, @UserPhone, @UserQQ, @CreateTime, @UserImagURL, @UserInfoComment, @ActivateAccountToken, @AccountStatus)";
 				MySqlParameter[] para = new MySqlParameter[]
 					{
 						new MySqlParameter("@UserLoginName", ToDBValue(userInfo.UserLoginName)),
@@ -31,6 +33,8 @@ namespace WebBookmarkService.DAL
 						new MySqlParameter("@CreateTime", ToDBValue(userInfo.CreateTime)),
 						new MySqlParameter("@UserImagURL", ToDBValue(userInfo.UserImagURL)),
 						new MySqlParameter("@UserInfoComment", ToDBValue(userInfo.UserInfoComment)),
+						new MySqlParameter("@ActivateAccountToken", ToDBValue(userInfo.ActivateAccountToken)),
+						new MySqlParameter("@AccountStatus", ToDBValue(userInfo.AccountStatus)),
 					};
 					
 				int AddId = (int)MyDBHelper.ExecuteScalar(sql, para);
@@ -83,6 +87,8 @@ namespace WebBookmarkService.DAL
                 +", CreateTime = @CreateTime" 
                 +", UserImagURL = @UserImagURL" 
                 +", UserInfoComment = @UserInfoComment" 
+                +", ActivateAccountToken = @ActivateAccountToken" 
+                +", AccountStatus = @AccountStatus" 
                
             +" WHERE UserInfoID = @UserInfoID";
 
@@ -99,6 +105,8 @@ namespace WebBookmarkService.DAL
 					,new MySqlParameter("@CreateTime", ToDBValue(userInfo.CreateTime))
 					,new MySqlParameter("@UserImagURL", ToDBValue(userInfo.UserImagURL))
 					,new MySqlParameter("@UserInfoComment", ToDBValue(userInfo.UserInfoComment))
+					,new MySqlParameter("@ActivateAccountToken", ToDBValue(userInfo.ActivateAccountToken))
+					,new MySqlParameter("@AccountStatus", ToDBValue(userInfo.AccountStatus))
 			};
 
 			return MyDBHelper.ExecuteNonQuery(sql, para);
@@ -144,6 +152,8 @@ namespace WebBookmarkService.DAL
 			userInfo.CreateTime = (DateTime)ToModelValue(dr,"CreateTime");
 			userInfo.UserImagURL = (string)ToModelValue(dr,"UserImagURL");
 			userInfo.UserInfoComment = (string)ToModelValue(dr,"UserInfoComment");
+			userInfo.ActivateAccountToken = (string)ToModelValue(dr,"ActivateAccountToken");
+			userInfo.AccountStatus = (int)ToModelValue(dr,"AccountStatus");
 			return userInfo;
 		}
 		#endregion
@@ -254,5 +264,7 @@ namespace WebBookmarkService.DAL
 			}
 		}
         #endregion
+	
+	    #endregion
 	}
 }
