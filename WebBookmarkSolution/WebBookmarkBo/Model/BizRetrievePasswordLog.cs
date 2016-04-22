@@ -8,7 +8,7 @@ using System.Text;
 using WebBookmarkService.DAL;
 using WebBookmarkService.Model;
 
-namespace WebBookmarkBo.BizModel
+namespace WebBookmarkBo.Model
 {	
 	[Serializable()]
     

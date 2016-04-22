@@ -78,6 +78,7 @@
     <Compile Include="DAL\RetrievePasswordLogDAL.cs" />
     <Compile Include="DAL\SystemLogDAL.cs" />
     <Compile Include="DAL\TagInfoDAL.cs" />
+    <Compile Include="DAL\UserConfigurationDAL.cs" />
     <Compile Include="DAL\UserDynamicInfoDAL.cs" />
     <Compile Include="DAL\UserInfoDAL.cs" />
     <Compile Include="DAL\UserLabelInfologDAL.cs" />
@@ -96,6 +97,7 @@
     <Compile Include="Model\RetrievePasswordLog.cs" />
     <Compile Include="Model\SystemLog.cs" />
     <Compile Include="Model\TagInfo.cs" />
+    <Compile Include="Model\UserConfiguration.cs" />
     <Compile Include="Model\UserDynamicInfo.cs" />
     <Compile Include="Model\UserInfo.cs" />
     <Compile Include="Model\UserLabelInfolog.cs" />

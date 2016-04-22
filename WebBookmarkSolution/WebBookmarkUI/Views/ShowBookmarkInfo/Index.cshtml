@@ -13,6 +13,10 @@
     var saveBookmarkTagURL = "@Url.Action("SaveBookmarkTag")";
 
     var removeBookmarkTagURL = "@Url.Action("RemoveBookmarkTag")";
+    var collectBookmarkToUserDefaultFolderURL = "@Url.Action("CollectBookmarkToUserDefaultFolder")";
+
+    
+
 </script>
 <script src="~/DomainJS/bookmarkdetail.js"></script>
 
@@ -25,7 +29,6 @@
     <div class="am-fl am-cf" style="margin-left:1%;">
             创建日期：@Model.CreateTime &nbsp;&nbsp;&nbsp;&nbsp;
             标签：
-
            @if(Model.UserInfoID==WebBookmarkUI.UILoginHelper.GetUIDFromHttpContext(this.Context))
            {
                 <span id="TagList">
@@ -42,7 +45,11 @@
                 {
                     <a>@tagInfo.TagInfo.TagName</a>
                 }
+                 &nbsp; &nbsp; &nbsp; &nbsp;
                 </span>
+               <span class="am-icon-star am-text-success" data-am-popover="{content: '收藏到我的默认书签夹', trigger: 'hover focus'}" 
+                     data-id="@Model.BookmarkInfoID" id="CollectBookmark">收藏</span>
+
            }
            
       

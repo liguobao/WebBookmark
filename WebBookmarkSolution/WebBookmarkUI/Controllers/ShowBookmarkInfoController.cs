@@ -5,7 +5,6 @@ using System.Web;
 using System.Web.Mvc;
 using WebBookmarkBo.Model;
 using WebBookmarkBo.Service;
-using WebBookmarkService.Model;
 using WebBookmarkUI.Commom;
 using WebBookmarkUI.Models;
 using WebBookmarkService;
@@ -247,5 +246,127 @@ namespace WebBookmarkUI.Controllers
           
             return Json(result);
         }
+
+
+        public ActionResult CollectBookmarkToUserDefaultFolder(long bookmarkID)
+        {
+            BizResultInfo result = new BizResultInfo();
+            var bookmarkInfo = BizBookmarkInfo.LoadByID(bookmarkID);
+            if(bookmarkInfo==null || bookmarkInfo.BookmarkInfoID==0)
+            {
+                result.IsSuccess = false;
+                result.ErrorMessage = "书签数据有误，可能是数据库被怪兽吃掉了，也可能是你娃误操作给了一个错误的书签ID。建议刷新重试吧。";
+                return Json(result);
+            }
+
+            var loginUID = UILoginHelper.GetUIDFromHttpContext(HttpContext);
+            if(bookmarkInfo.UserInfoID == loginUID)
+            {
+                result.IsSuccess = false;
+                result.ErrorMessage = "不用收藏自己的书签哦。";
+                return Json(result);
+            }
+            long folderID =  GetUserDefaultFolderID(loginUID);
+
+            BizBookmarkInfo newBookmark = new BizBookmarkInfo() 
+            {
+                BookmarkName = bookmarkInfo.BookmarkName,
+                CreateTime = DateTime.Now,
+                Host = bookmarkInfo.Host,
+                Href = bookmarkInfo.Href,
+                UserInfoID = loginUID,
+                HTML = bookmarkInfo.HTML,
+                IElementJSON = bookmarkInfo.IElementJSON,
+                UserWebFolderID = folderID,
+            };
+            newBookmark.HashCode = newBookmark.GetHashCode();
+            newBookmark.Save();
+            result.IsSuccess = true;
+            return Json(result);
+        }
+
+        private static long GetUserDefaultFolderID(long loginUID)
+        {
+            long folderID = 0;
+            var folderConfiguration = BizUserConfiguration.LoadByKey(loginUID, "UserDefaultFolder");
+            if (folderConfiguration == null)
+            {
+                var userFolderList = BizUserWebFolder.LoadAllByUID(loginUID);
+                if (userFolderList != null && userFolderList.Count > 0)
+                {
+                    var firstFolder = userFolderList.Where(folder => folder.ParentWebfolderID == 0);
+                    if (firstFolder != null && firstFolder.Count() > 0)
+                    {
+                        NewFolderAndConfigurationHasParentFolderID(loginUID, ref folderID, ref folderConfiguration, firstFolder);
+                    }
+                    else
+                    {
+                        NewFolderAndConfigurationNoParentFolderID(loginUID, ref folderID, ref folderConfiguration);
+                    }
+                }else
+                {
+                    NewFolderAndConfigurationNoParentFolderID(loginUID, ref folderID, ref folderConfiguration);
+                }
+
+
+            }else
+            {
+                folderID =Convert.ToInt64(folderConfiguration.UserConfigurationValue);
+            }
+
+
+            return folderID;
+        }
+
+        #region GetUserDefaultFolderID 私有方法
+
+        private static void NewFolderAndConfigurationHasParentFolderID(long loginUID, ref long folderID, ref BizUserConfiguration folderConfiguration,
+            IEnumerable<BizUserWebFolder> firstFolder)
+        {
+            BizUserWebFolder newFolder = new BizUserWebFolder();
+            newFolder.UserInfoID = loginUID;
+            newFolder.WebFolderName = "默认书签夹";
+            newFolder.ParentWebfolderID = firstFolder.FirstOrDefault().UserWebFolderID;
+            newFolder.CreateTime = DateTime.Now;
+            newFolder.IElementJSON = "";
+            newFolder.Grade = 0;
+            newFolder.IntroContent = "默认书签夹";
+            newFolder.Save();
+
+            folderID = newFolder.UserWebFolderID;
+
+            folderConfiguration = new BizUserConfiguration();
+            folderConfiguration.UserConfigurationKey = "UserDefaultFolder";
+            folderConfiguration.UserConfigurationNo = 1;
+            folderConfiguration.UserConfigurationValue = newFolder.UserWebFolderID.ToString();
+            folderConfiguration.UserInfoID = loginUID;
+            folderConfiguration.Description = "用户默认书签夹配置信息";
+            folderConfiguration.Save();
+        }
+
+        private static void NewFolderAndConfigurationNoParentFolderID(long loginUID, ref long folderID, ref BizUserConfiguration folderConfiguration)
+        {
+            BizUserWebFolder newFolder = new BizUserWebFolder();
+            newFolder.UserInfoID = loginUID;
+            newFolder.WebFolderName = "默认书签夹";
+            newFolder.ParentWebfolderID = 0;
+            newFolder.CreateTime = DateTime.Now;
+            newFolder.IElementJSON = "";
+            newFolder.IntroContent = "默认书签夹";
+            newFolder.Grade = 0;
+            newFolder.Save();
+
+            folderID = newFolder.UserWebFolderID;
+
+            folderConfiguration = new BizUserConfiguration();
+            folderConfiguration.UserConfigurationKey = "UserDefaultFolder";
+            folderConfiguration.UserConfigurationNo = 1;
+            folderConfiguration.UserConfigurationValue = newFolder.UserWebFolderID.ToString();
+            folderConfiguration.UserInfoID = loginUID;
+            folderConfiguration.Description = "用户默认书签夹配置信息";
+            folderConfiguration.Save();
+        }
+
+        #endregion
     }
 }

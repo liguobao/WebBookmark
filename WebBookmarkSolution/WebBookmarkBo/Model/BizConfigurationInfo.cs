@@ -9,7 +9,7 @@ using WebBookmarkService.DAL;
 using WebBookmarkService.Model;
 using System.Linq;
 
-namespace WebBookmarkBo.BizModel
+namespace WebBookmarkBo.Model
 {	
 	[Serializable()]
     

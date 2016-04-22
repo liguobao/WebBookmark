@@ -59,6 +59,27 @@
 
     })
 
+
+    $('body').on("click", "[id='CollectBookmark']", function () {
+        var $this = $(this);
+        var bookmarkInfoID = $this.attr("data-id");
+        $.ajax({
+            type: "post",
+            url: collectBookmarkToUserDefaultFolderURL,
+            data: { bookmarkID: bookmarkInfoID},
+            success:
+                function (result) {
+                    if (result.IsSuccess) {
+                        $this.text("收藏成功！");
+                    }
+                    else {
+                        alert(result.ErrorMessage);
+                    }
+                }
+        });
+
+    })
+
 })
 
 
