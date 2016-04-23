@@ -1,6 +1,10 @@
 
 #WebBookmark Commit log
 
+##2016.4.24
+1. 做了一点微小的工作
+2. 修改书签在iframe的展示方式，如果主站允许在 frame中展示，则使用 frame展示，否则展示HTML
+
 ##2016.4.23
 1. 通过导入根证书修复Mono请求HTTPS协议的网页异常的问题；
 2. 修复展示书签HTML时，因为页面禁止iframe导致无法加载书签HTML的问题，采用直接获取HTML加载到srcdoc中；

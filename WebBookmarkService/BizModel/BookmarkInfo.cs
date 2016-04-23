@@ -69,7 +69,12 @@ namespace WebBookmarkService.BizModel
         /// <summary>
         /// 类似于主键
         /// </summary>
-		public string HashCode{get;set;}
+		public int HashCode{get;set;}
+            
+        /// <summary>
+        /// 是否可在iframe中展示
+        /// </summary>
+		public int IsShowWithiframe{get;set;}
             
         
         /// <summary>
@@ -90,6 +95,7 @@ namespace WebBookmarkService.BizModel
                 BookmarkName =  BookmarkName,
                 Grate =  Grate,
                 HashCode =  HashCode,
+                IsShowWithiframe =  IsShowWithiframe,
             };
         }
         
@@ -107,6 +113,7 @@ namespace WebBookmarkService.BizModel
              BookmarkName =  dataInfo.BookmarkName;
              Grate =  dataInfo.Grate;
              HashCode =  dataInfo.HashCode;
+             IsShowWithiframe =  dataInfo.IsShowWithiframe;
         }
         
         public  BizBookmarkInfo ()

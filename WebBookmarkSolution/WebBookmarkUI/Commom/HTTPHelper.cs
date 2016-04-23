@@ -14,9 +14,10 @@ namespace WebBookmarkUI.Commom
 {
     public class HTTPHelper
     {
-        public static string GetHTML(string url)
+        public static Tuple< string,string> GetHTML(string url)
         {
-            string htmlCode;
+            string htmlCode =string.Empty;
+            string XFrameOptions = string.Empty;
 
             try
             {
@@ -29,6 +30,8 @@ namespace WebBookmarkUI.Commom
                 HttpWebResponse webResponse = (System.Net.HttpWebResponse)webRequest.GetResponse();
                 //获取目标网站的编码格式
                 string contentype = webResponse.Headers["Content-Type"];
+                XFrameOptions = webResponse.Headers["X-Frame-Options"];
+
                 Regex regex = new Regex("charset\\s*=\\s*[\\W]?\\s*([\\w-]+)", RegexOptions.IgnoreCase);
                 if (webResponse.ContentEncoding.ToLower() == "gzip")//如果使用了GZip则先解压
                 {
@@ -65,12 +68,12 @@ namespace WebBookmarkUI.Commom
                         }
                     }
                 }
-                return htmlCode;
+                return Tuple.Create<string, string>(htmlCode, XFrameOptions);
 
             }catch(Exception ex)
             {
                 LogHelper.WriteException("GetHTML", ex, new { Url = url });
-                return "";
+                return Tuple.Create<string, string>(htmlCode, XFrameOptions);
             }
 
 

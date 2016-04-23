@@ -130,6 +130,9 @@ namespace WebBookmarkUI.Models
         /// </summary>
         public DateTime CreateTime { get; set; }
 
+
+        public bool IsShowWithiframe { get; set; }
+
         /// <summary>
         /// 
         /// </summary>

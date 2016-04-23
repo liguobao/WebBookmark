@@ -22,7 +22,7 @@ namespace WebBookmarkService.DAL
         /// </summary>        
         public bool Add(BookmarkInfo bookmarkInfo)
         {
-            string sql = "INSERT INTO tblBookmarkInfo (UserWebFolderID, UserInfoID, Href, HTML, Host, CreateTime, IElementJSON, BookmarkName, Grate, HashCode)  VALUES (@UserWebFolderID, @UserInfoID, @Href, @HTML, @Host, @CreateTime, @IElementJSON, @BookmarkName, @Grate, @HashCode)";
+            string sql = "INSERT INTO tblBookmarkInfo (UserWebFolderID, UserInfoID, Href, HTML, Host, CreateTime, IElementJSON, BookmarkName, Grate, HashCode, IsShowWithiframe)  VALUES (@UserWebFolderID, @UserInfoID, @Href, @HTML, @Host, @CreateTime, @IElementJSON, @BookmarkName, @Grate, @HashCode, @IsShowWithiframe)";
             MySqlParameter[] para = new MySqlParameter[]
 					{
 						new MySqlParameter("@UserWebFolderID", ToDBValue(bookmarkInfo.UserWebFolderID)),
@@ -35,6 +35,7 @@ namespace WebBookmarkService.DAL
 						new MySqlParameter("@BookmarkName", ToDBValue(bookmarkInfo.BookmarkName)),
 						new MySqlParameter("@Grate", ToDBValue(bookmarkInfo.Grate)),
 						new MySqlParameter("@HashCode", ToDBValue(bookmarkInfo.HashCode)),
+						new MySqlParameter("@IsShowWithiframe", ToDBValue(bookmarkInfo.IsShowWithiframe)),
 					};
 
             int AddId = (int)MyDBHelper.ExecuteScalar(sql, para);
@@ -89,6 +90,7 @@ namespace WebBookmarkService.DAL
                 + ", BookmarkName = @BookmarkName"
                 + ", Grate = @Grate"
                 + ", HashCode = @HashCode"
+                + ", IsShowWithiframe = @IsShowWithiframe"
 
             + " WHERE BookmarkInfoID = @BookmarkInfoID";
 
@@ -106,6 +108,7 @@ namespace WebBookmarkService.DAL
 					,new MySqlParameter("@BookmarkName", ToDBValue(bookmarkInfo.BookmarkName))
 					,new MySqlParameter("@Grate", ToDBValue(bookmarkInfo.Grate))
 					,new MySqlParameter("@HashCode", ToDBValue(bookmarkInfo.HashCode))
+					,new MySqlParameter("@IsShowWithiframe", ToDBValue(bookmarkInfo.IsShowWithiframe))
 			};
 
             return MyDBHelper.ExecuteNonQuery(sql, para);
@@ -152,6 +155,7 @@ namespace WebBookmarkService.DAL
             bookmarkInfo.BookmarkName = (string)ToModelValue(dr, "BookmarkName");
             bookmarkInfo.Grate = (int)ToModelValue(dr, "Grate");
             bookmarkInfo.HashCode = (int)ToModelValue(dr, "HashCode");
+            bookmarkInfo.IsShowWithiframe = (int)ToModelValue(dr, "IsShowWithiframe");
             return bookmarkInfo;
         }
         #endregion
@@ -265,6 +269,8 @@ namespace WebBookmarkService.DAL
 
         #endregion
 	
+	
+	
 
         public bool BatchInsert(List<BookmarkInfo> lstBookmarkInfo)
         {
@@ -273,8 +279,9 @@ namespace WebBookmarkService.DAL
             List<MySqlParameter> lstPara = new List<MySqlParameter>();
             foreach(var bookmarkInfo in lstBookmarkInfo)
             {
-                sbSQL.AppendLine("INSERT INTO tblBookmarkInfo (UserWebFolderID, UserInfoID, Href, HTML, Host, CreateTime, IElementJSON, BookmarkName, Grate, HashCode)  VALUES (@UserWebFolderID"+index+
-                    ", @UserInfoID" + index + ", @Href" + index + ", @HTML" + index + ", @Host" + index + ", @CreateTime" + index + ", @IElementJSON" + index + ", @BookmarkName" + index + ", @Grate" + index + ", @HashCode" + index + ");");
+                sbSQL.AppendLine("INSERT INTO tblBookmarkInfo (UserWebFolderID, UserInfoID, Href, HTML, Host, CreateTime, IElementJSON, BookmarkName, Grate, HashCode, IsShowWithiframe)  VALUES (@UserWebFolderID" + index +
+                    ", @UserInfoID" + index + ", @Href" + index + ", @HTML" + index + ", @Host" +
+                    index + ", @CreateTime" + index + ", @IElementJSON" + index + ", @BookmarkName" + index + ", @Grate" + index + ", @HashCode" + index + ", @IsShowWithiframe" + index + ");");
 
                
                 
@@ -291,6 +298,7 @@ namespace WebBookmarkService.DAL
                         new MySqlParameter("@BookmarkName"+index, ToDBValue(bookmarkInfo.BookmarkName)),
                         new MySqlParameter("@HashCode"+index, ToDBValue(bookmarkInfo.HashCode)),
                         new MySqlParameter("@Grate"+index, ToDBValue(bookmarkInfo.Grate)),
+                        new MySqlParameter("@IsShowWithiframe"+index, ToDBValue(bookmarkInfo.IsShowWithiframe)),
                 };
                 lstPara.AddRange(para);
                 index = index + 1;

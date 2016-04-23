@@ -21,7 +21,7 @@ namespace WebBookmarkService.DAL
         /// </summary>        
         public bool Add (BookmarkInfo bookmarkInfo)
 		{
-				string sql ="INSERT INTO tblBookmarkInfo (UserWebFolderID, UserInfoID, Href, HTML, Host, CreateTime, IElementJSON, BookmarkName, Grate, HashCode)  VALUES (@UserWebFolderID, @UserInfoID, @Href, @HTML, @Host, @CreateTime, @IElementJSON, @BookmarkName, @Grate, @HashCode)";
+				string sql ="INSERT INTO tblBookmarkInfo (UserWebFolderID, UserInfoID, Href, HTML, Host, CreateTime, IElementJSON, BookmarkName, Grate, HashCode, IsShowWithiframe)  VALUES (@UserWebFolderID, @UserInfoID, @Href, @HTML, @Host, @CreateTime, @IElementJSON, @BookmarkName, @Grate, @HashCode, @IsShowWithiframe)";
 				MySqlParameter[] para = new MySqlParameter[]
 					{
 						new MySqlParameter("@UserWebFolderID", ToDBValue(bookmarkInfo.UserWebFolderID)),
@@ -34,6 +34,7 @@ namespace WebBookmarkService.DAL
 						new MySqlParameter("@BookmarkName", ToDBValue(bookmarkInfo.BookmarkName)),
 						new MySqlParameter("@Grate", ToDBValue(bookmarkInfo.Grate)),
 						new MySqlParameter("@HashCode", ToDBValue(bookmarkInfo.HashCode)),
+						new MySqlParameter("@IsShowWithiframe", ToDBValue(bookmarkInfo.IsShowWithiframe)),
 					};
 					
 				int AddId = (int)MyDBHelper.ExecuteScalar(sql, para);
@@ -87,6 +88,7 @@ namespace WebBookmarkService.DAL
                 +", BookmarkName = @BookmarkName" 
                 +", Grate = @Grate" 
                 +", HashCode = @HashCode" 
+                +", IsShowWithiframe = @IsShowWithiframe" 
                
             +" WHERE BookmarkInfoID = @BookmarkInfoID";
 
@@ -104,6 +106,7 @@ namespace WebBookmarkService.DAL
 					,new MySqlParameter("@BookmarkName", ToDBValue(bookmarkInfo.BookmarkName))
 					,new MySqlParameter("@Grate", ToDBValue(bookmarkInfo.Grate))
 					,new MySqlParameter("@HashCode", ToDBValue(bookmarkInfo.HashCode))
+					,new MySqlParameter("@IsShowWithiframe", ToDBValue(bookmarkInfo.IsShowWithiframe))
 			};
 
 			return MyDBHelper.ExecuteNonQuery(sql, para);
@@ -149,7 +152,8 @@ namespace WebBookmarkService.DAL
 			bookmarkInfo.IElementJSON = (string)ToModelValue(dr,"IElementJSON");
 			bookmarkInfo.BookmarkName = (string)ToModelValue(dr,"BookmarkName");
 			bookmarkInfo.Grate = (int)ToModelValue(dr,"Grate");
-			bookmarkInfo.HashCode = (string)ToModelValue(dr,"HashCode");
+			bookmarkInfo.HashCode = (int)ToModelValue(dr,"HashCode");
+			bookmarkInfo.IsShowWithiframe = (int)ToModelValue(dr,"IsShowWithiframe");
 			return bookmarkInfo;
 		}
 		#endregion

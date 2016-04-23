@@ -63,6 +63,11 @@ namespace WebBookmarkBo.Model
         public int HashCode { get; set; }
 
 
+        /// <summary>
+        /// 是否可在iframe中展示
+        /// </summary>
+        public int IsShowWithiframe { get; set; }
+
         public List<BizBookmarkTagInfo> BizBookmarkTagInfoList { get; set; }
 
 
@@ -88,6 +93,7 @@ namespace WebBookmarkBo.Model
                 IElementJSON = IElementJSON,
                 BookmarkName = BookmarkName,
                 HashCode = HashCode,
+                IsShowWithiframe = IsShowWithiframe,
             };
         }
 
@@ -106,6 +112,7 @@ namespace WebBookmarkBo.Model
             IElementJSON = dataInfo.IElementJSON;
             BookmarkName = dataInfo.BookmarkName;
             HashCode = dataInfo.HashCode;
+            IsShowWithiframe = dataInfo.IsShowWithiframe;
         }
 
 

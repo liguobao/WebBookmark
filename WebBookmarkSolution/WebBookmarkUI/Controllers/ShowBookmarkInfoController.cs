@@ -64,7 +64,7 @@ namespace WebBookmarkUI.Controllers
         public ActionResult ShowBookmarkHTML(long bookmarkID,string url)
         {
             UIBookmarkInfo model = null;
-            string html = string.Empty;
+           
             if(bookmarkID==0 || string.IsNullOrEmpty(url))
                 return PartialView("ShowBookmarkHTML", model);
 
@@ -72,10 +72,13 @@ namespace WebBookmarkUI.Controllers
             var bookmarkInfo = BizBookmarkInfo.LoadByID(bookmarkID);
             if(bookmarkInfo==null)
                 return PartialView("ShowBookmarkHTML", model);
+            model = new UIBookmarkInfo();
+            model.IsShowWithiframe = bookmarkInfo.IsShowWithiframe == 1;//是否可在iframe中展示
+
             if (string.IsNullOrEmpty(bookmarkInfo.HTML))
             {
-                html = HTTPHelper.GetHTML(url);
-                if (string.IsNullOrEmpty(html))
+                var result = HTTPHelper.GetHTML(url);
+                if (string.IsNullOrEmpty(result.Item1))
                 {
                     model = new UIBookmarkInfo();
                     model.HTML = bookmarkInfo.HTML;
@@ -86,11 +89,18 @@ namespace WebBookmarkUI.Controllers
                     model.BookmarkInfoID = bookmarkInfo.BookmarkInfoID;
                     return PartialView("ShowBookmarkHTML", model);
                 }
-                   
-                bookmarkInfo.HTML = html;
+
+                bookmarkInfo.HTML = result.Item1;
+
+                if (string.IsNullOrEmpty(result.Item2) || result.Item2.ToUpper() == "ALLOW-FROM")
+                {
+                    bookmarkInfo.IsShowWithiframe = 1;
+                    model.IsShowWithiframe = true;
+                }
+
                 bookmarkInfo.Save();
             }
-            model = new UIBookmarkInfo();
+           
             model.HTML = bookmarkInfo.HTML;
             model.Href = bookmarkInfo.Href;
             model.UserInfoID = bookmarkInfo.UserInfoID;

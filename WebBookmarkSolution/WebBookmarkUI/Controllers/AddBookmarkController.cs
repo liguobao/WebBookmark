@@ -51,18 +51,24 @@ namespace WebBookmarkUI.Controllers
 
             BizBookmarkInfo bookmark = new BizBookmarkInfo();
             bookmark.Href = url;
-            var html = HTTPHelper.GetHTML(url);
-            if(!string.IsNullOrEmpty(html))
+            var res = HTTPHelper.GetHTML(url);
+            if (!string.IsNullOrEmpty(res.Item1))
             {
-                bookmark.HTML = html;
+                bookmark.HTML = res.Item1;
                 HtmlDocument htmlDoc = new HtmlDocument();
-                htmlDoc.LoadHtml(html);
+                htmlDoc.LoadHtml(res.Item1);
                 var title = htmlDoc.DocumentNode.SelectSingleNode("//title").InnerText;
                 bookmark.BookmarkName = !string.IsNullOrEmpty(title) ? title:url ;
             }else
             {
                 bookmark.BookmarkName = url;
             }
+
+            if (!string.IsNullOrEmpty(res.Item2) && res.Item2.ToUpper() == "ALLOW-FROM")
+            {
+                bookmark.IsShowWithiframe = 1;
+            }
+
             bookmark.UserWebFolderID = folderID;
             bookmark.CreateTime = DateTime.Now;
             bookmark.Host = url.GetHost();
