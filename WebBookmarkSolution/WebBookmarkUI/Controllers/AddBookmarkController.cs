@@ -64,7 +64,7 @@ namespace WebBookmarkUI.Controllers
                 bookmark.BookmarkName = url;
             }
 
-            if (!string.IsNullOrEmpty(res.Item2) && res.Item2.ToUpper() == "ALLOW-FROM")
+            if (string.IsNullOrEmpty(res.Item2) || res.Item2.ToUpper() == "ALLOW-FROM")
             {
                 bookmark.IsShowWithiframe = 1;
             }
