@@ -1,7 +1,6 @@
 ﻿@model WebBookmarkUI.Models.UIBookmarkInfo
 
-<iframe src='@Model.Href' style="width:100%;height:700px;">
-</iframe>
+<iframe @*src='@Model.Href'*@ style="width:100%;height:700px;" srcdoc='@Model.HTML'></iframe>
 <div class="am-text-right">
     by &nbsp;<a href='@Model.Href' target="_blank">@Model.Href</a>
 </div>

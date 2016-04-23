@@ -21,13 +21,22 @@ namespace WebBookmarkUI
             WebApiConfig.Register(GlobalConfiguration.Configuration);
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
+
+           System.Net.ServicePointManager.ServerCertificateValidationCallback +=
+           delegate(object sender, System.Security.Cryptography.X509Certificates.X509Certificate certificate,
+                                   System.Security.Cryptography.X509Certificates.X509Chain chain,
+                                   System.Net.Security.SslPolicyErrors sslPolicyErrors)
+           {
+               return true; // **** Always accept
+           };
+
         }
 
         protected void Application_Error(object sender, EventArgs e)
         {
             var ex = Server.GetLastError();
             
-            LogHelper.WriteException("Application_Error", ex, new { Message="应用程序引发异常。"});
+            LogHelper.WriteException("Application_Error", ex, new { Message="应用程序引发异常。",UserIP = this.Request.UserHostAddress});
 
             var httpStatusCode = (ex is HttpException) ? (ex as HttpException).GetHttpCode() : 500; //这里仅仅区分两种错误
             var httpContext = ((MvcApplication)sender).Context;
