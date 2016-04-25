@@ -74,6 +74,7 @@
     <Compile Include="DAL\ConfigurationInfoDAL.cs" />
     <Compile Include="DAL\GroupInfoDAL.cs" />
     <Compile Include="DAL\GroupUserDAL.cs" />
+    <Compile Include="DAL\LikeLogDAL.cs" />
     <Compile Include="DAL\MessageInfoDAL.cs" />
     <Compile Include="DAL\RetrievePasswordLogDAL.cs" />
     <Compile Include="DAL\SystemLogDAL.cs" />
@@ -93,6 +94,7 @@
     <Compile Include="Model\ConfigurationInfo.cs" />
     <Compile Include="Model\GroupInfo.cs" />
     <Compile Include="Model\GroupUser.cs" />
+    <Compile Include="Model\LikeLog.cs" />
     <Compile Include="Model\MessageInfo.cs" />
     <Compile Include="Model\RetrievePasswordLog.cs" />
     <Compile Include="Model\SystemLog.cs" />

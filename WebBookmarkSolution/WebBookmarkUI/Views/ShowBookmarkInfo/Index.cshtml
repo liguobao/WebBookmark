@@ -2,7 +2,7 @@
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-@model WebBookmarkUI.Models.UIBookmarkInfo 
+@model WebBookmarkUI.Models.UIBookmarkInfo
 
 <script>
     var showHTML = "@Url.Action("ShowBookmarkHTML")";
@@ -14,9 +14,8 @@
 
     var removeBookmarkTagURL = "@Url.Action("RemoveBookmarkTag")";
     var collectBookmarkToUserDefaultFolderURL = "@Url.Action("CollectBookmarkToUserDefaultFolder")";
-
+    var addBookmarkLikeLogURL = "@Url.Action("AddBookmarkLikeLog")";
     
-
 </script>
 <script src="~/DomainJS/bookmarkdetail.js"></script>
 
@@ -28,28 +27,35 @@
     </div>
     <div class="am-fl am-cf" style="margin-left:1%;">
             创建日期：@Model.CreateTime &nbsp;&nbsp;&nbsp;&nbsp;
-            标签：
-           @if(Model.UserInfoID==WebBookmarkUI.UILoginHelper.GetUIDFromHttpContext(this.Context))
+          
+           @if (Model.UserInfoID == WebBookmarkUI.UILoginHelper.GetUIDFromHttpContext(this.Context))
            {
-                <span id="TagList">
-                @foreach (var tagInfo in Model.TagInfoList)
-                {
-                    <a>@tagInfo.TagInfo.TagName<span class="am-icon-close" id="removebookmarkTagInfo" data-id='@tagInfo.BookmarkTagInfoID'> &nbsp;&nbsp;</span></a>
-                }
+               <span class="am-icon-thumbs-up am-text-secondary" style="margin-left:10px;">&nbsp;@Model.LikeCount</span>
+                <span id="TagList" style="margin-left:10px;">
+                    标签：
+                    @foreach (var tagInfo in Model.TagInfoList)
+                    {
+                        <a>@tagInfo.TagInfo.TagName<span class="am-icon-close" id="removebookmarkTagInfo" data-id='@tagInfo.BookmarkTagInfoID'> &nbsp;&nbsp;</span></a>
+                    }
                 </span>
-            <input id="inputBookmarkTagName" placeholder="输入标签" data-bookmarkid='@Model.BookmarkInfoID' />
-           }else
-           {
-               <span id="TagList">
-                @foreach (var tagInfo in Model.TagInfoList)
-                {
-                    <a>@tagInfo.TagInfo.TagName</a>
-                }
-                 &nbsp; &nbsp; &nbsp; &nbsp;
-                </span>
-               <span class="am-icon-star am-text-success" data-am-popover="{content: '收藏到我的默认书签夹', trigger: 'hover focus'}" 
-                     data-id="@Model.BookmarkInfoID" id="CollectBookmark">收藏</span>
+               <input id="inputBookmarkTagName" placeholder="输入标签" data-bookmarkid='@Model.BookmarkInfoID' />
 
+           }
+           else
+           {
+            <span class="am-icon-star am-text-success" data-am-popover="{content: '收藏到我的默认书签夹', trigger: 'hover focus',theme: 'success lg',}"
+                  data-id="@Model.BookmarkInfoID" id="CollectBookmark">收藏</span>
+
+              <span class="am-icon-thumbs-up am-text-secondary" data-am-popover="{content: '赞一个', trigger: 'hover focus',theme: 'secondary lg', }"
+               style="margin-left:10px;" id="spAddBookmarkLikeLog">&nbsp;@Model.LikeCount</span>
+
+               <span id="TagList" style="margin-left:10px;">
+                    标签：
+                    @foreach (var tagInfo in Model.TagInfoList)
+                    {
+                        <a>@tagInfo.TagInfo.TagName</a>
+                    }
+               </span>
            }
            
       

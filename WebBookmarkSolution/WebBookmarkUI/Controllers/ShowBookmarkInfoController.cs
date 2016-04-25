@@ -8,6 +8,7 @@ using WebBookmarkBo.Service;
 using WebBookmarkUI.Commom;
 using WebBookmarkUI.Models;
 using WebBookmarkService;
+using System.Text;
 
 namespace WebBookmarkUI.Controllers
 {
@@ -26,14 +27,14 @@ namespace WebBookmarkUI.Controllers
             if (bookmarkInfo != null)
             {
                 bookmarkInfo.LoadBookmarkTagInfo();
-                Dictionary<long, BizTagInfo> dicTagInfo = BizTagInfo.LoadByUserID(bookmarkInfo.UserInfoID).ToDictionary(tag => tag.TagInfoID, tag => tag);
-
-                //var tagInfos = BizTagInfo.LoadByUserID(bookmarkInfo.UserInfoID);
-                //if(tagInfos!=null && tagInfos.Count>0)
-                //{
-                //  dicTagInfo= tagInfos.ToDictionary(tag => tag.TagInfoID, tag => tag);
-                //}
+                bookmarkInfo.LoadLikeLog();
                 model = new UIBookmarkInfo();
+
+                model.LikeCount = bookmarkInfo.LikeCount;
+                model.LikeLogList = bookmarkInfo.LikeLogList;
+
+                Dictionary<long, BizTagInfo> dicTagInfo = BizTagInfo.LoadByUserID(bookmarkInfo.UserInfoID).ToDictionary(tag => tag.TagInfoID, tag => tag);
+              
                 model.BookmarkInfoID = bookmarkInfo.BookmarkInfoID;
                 model.BookmarkName = bookmarkInfo.BookmarkName;
                 model.Host = bookmarkInfo.Host;
@@ -253,8 +254,46 @@ namespace WebBookmarkUI.Controllers
             }
             result.SuccessMessage = "移除成功！";
             result.IsSuccess = true;
-          
             return Json(result);
+        }
+
+
+        public ActionResult AddBookmarkLikeLog(long bookmarkID)
+        {
+            BizResultInfo result = new BizResultInfo();
+            var loginUID = UILoginHelper.GetUIDFromHttpContext(HttpContext);
+
+            var bookmarkInfo = BizBookmarkInfo.LoadByID(bookmarkID);
+            
+            if(bookmarkInfo!=null)
+            {
+                var likelog = BizLikeLog.LoadUserIDAndBookmarkID(loginUID,bookmarkID);
+                if(likelog !=null)
+                {
+                    result.IsSuccess = false;
+                    result.ErrorMessage = "你已经点赞过了呀，不要重复点赞了。";
+                }else
+                {
+                    likelog = new BizLikeLog();
+                    likelog.InfoID = bookmarkID;
+                    likelog.InfoType = (int)InfoTypeEnum.Bookmark;
+                    likelog.UserInfoID = loginUID;
+                    likelog.Save();
+
+                    bookmarkInfo.LoadLikeLog();
+                    result.Target = bookmarkInfo.LikeCount;
+                    result.IsSuccess = true;
+                    result.SuccessMessage = "点赞成功。";
+                }
+            }else
+            {
+                result.IsSuccess = false;
+                result.ErrorMessage = "找不到书签呀，刷新一下再来试试？";
+            }
+
+
+            return Json(result);
+
         }
 
 

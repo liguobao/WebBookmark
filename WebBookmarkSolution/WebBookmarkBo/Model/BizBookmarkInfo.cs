@@ -10,7 +10,7 @@ using WebBookmarkService.Model;
 
 namespace WebBookmarkBo.Model
 {
-    public class BizBookmarkInfo
+    public partial class BizBookmarkInfo
     {
         #region 属性
         private static readonly BookmarkInfoDAL DAL = new BookmarkInfoDAL();
@@ -71,7 +71,12 @@ namespace WebBookmarkBo.Model
         public List<BizBookmarkTagInfo> BizBookmarkTagInfoList { get; set; }
 
 
+        public List<BizLikeLog> LikeLogList { get; set; }
 
+        /// <summary>
+        /// 点赞数量
+        /// </summary>
+        public int LikeCount { get; set; }
 
 
         #endregion
@@ -122,45 +127,7 @@ namespace WebBookmarkBo.Model
 
         }
 
-        public static BizBookmarkInfo LoadByID(long infoID)
-        {
-            var dataInfo = DAL.GetByBookmarkInfoID(infoID);
-            if(dataInfo!=null)
-                return new BizBookmarkInfo(dataInfo);
-            return new BizBookmarkInfo();
-        }
-
-
-        /// <summary>
-        /// 通过FolderID 加载书签数据
-        /// </summary>
-        /// <param name="folderID"></param>
-        /// <returns></returns>
-        public static List<BizBookmarkInfo> LoadByFolderID(long folderID)
-        {
-            var lstModel = DAL.GetListByFolderID(folderID);
-            if (lstModel == null)
-                return new List<BizBookmarkInfo>();
-            return lstModel.Select(model=>new BizBookmarkInfo(model)).ToList();
-            
-        }
-
-
-        public static List<BizBookmarkInfo> LoadByUID(long uid)
-        {
-            var lstBiz = new List<BizBookmarkInfo>();
-            var lstModel = DAL.GetListByUID(uid);
-            lstBiz = lstModel.Select(model => new BizBookmarkInfo(model)).ToList();
-            return lstBiz;
-        }
-
-      
-        public static BizBookmarkInfo LoadByUserIDAndHashcode(long userInfoID,int hashcode)
-        {
-            var model = DAL.GetByUserInfoIAndHashcode(userInfoID, hashcode);
-            return model != null ? new BizBookmarkInfo(model) : null;
-        }
-
+       
         public void Save()
         {
             if(BookmarkInfoID!=0)
@@ -180,6 +147,13 @@ namespace WebBookmarkBo.Model
         {
             BizBookmarkTagInfoList = BizBookmarkTagInfo.LoadByBookmarkID(BookmarkInfoID);
         }
+
+        public void LoadLikeLog()
+        {
+            LikeLogList = BizLikeLog.LoadByBookmarkID(BookmarkInfoID);
+            LikeCount = LikeLogList.Count;
+        }
+
 
         public string AddBookmarkTag(string tagname)
         {
@@ -267,6 +241,9 @@ namespace WebBookmarkBo.Model
             }
         }
 
+
+       
+
         private void CreateDynamicInfo()
         {
             Task.Factory.StartNew(() =>
@@ -287,5 +264,10 @@ namespace WebBookmarkBo.Model
 
             });
         }
+
+
+        
+
+
     }
 }

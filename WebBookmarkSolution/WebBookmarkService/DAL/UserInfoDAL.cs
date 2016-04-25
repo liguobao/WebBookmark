@@ -326,7 +326,7 @@ namespace WebBookmarkService.DAL
         /// </summary>
         /// <param name="lstUID"></param>
         /// <returns></returns>
-        public IEnumerable<UserInfo> SearchByUID(List<long> lstUID)
+        public IEnumerable<UserInfo> GetByUserIDList(List<long> lstUID)
         {
             string sql = string.Format("SELECT * FROM tblUserInfo WHERE UserInfoID IN ({0})",string.Join(",",lstUID));
             using (MySqlDataReader reader = MyDBHelper.ExecuteDataReader(sql))

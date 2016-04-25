@@ -202,7 +202,7 @@ namespace WebBookmarkBo.Service
         {
             if (lstUID == null || lstUID.Count == 0)
                 return new List<BizUserInfo>();
-            var list = new UserInfoDAL().SearchByUID(lstUID);
+            var list = new UserInfoDAL().GetByUserIDList(lstUID);
             if (list == null || list.Count() == 0)
                 return new List<BizUserInfo>();
             return list.Select(model => new BizUserInfo(model)).ToList();

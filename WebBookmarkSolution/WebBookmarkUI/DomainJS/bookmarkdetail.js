@@ -37,6 +37,27 @@
         SaveBookmarkTag(tagName,bookmarkID);
     });
 
+    $('#spAddBookmarkLikeLog').bind('click', function (e) {
+        e.preventDefault();
+
+        var $this = $(this);
+        $.ajax({
+            type: "post",
+            url: addBookmarkLikeLogURL,
+            data: { bookmarkID: bookmarkID },
+            success:
+                function (result) {
+                    if (result.IsSuccess) {
+                        $this.text(result.Target);
+                    } else {
+                        $this.text(result.ErrorMessage);
+                    }
+                }
+        });
+        e.stopPropagation();
+    });
+
+
     $('body').on("click", "[id='removebookmarkTagInfo']", function () {
         var $this = $(this);
         var bookmarkTagInfoID = $this.attr("data-id");

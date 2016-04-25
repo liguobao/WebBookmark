@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using WebBookmarkBo.Service;
 using WebBookmarkUI.Commom;
 using WebBookmarkUI.Models;
+using WebBookmarkBo;
 
 namespace WebBookmarkUI.Controllers
 {
@@ -71,6 +72,7 @@ namespace WebBookmarkUI.Controllers
             var dicBeFollower = UserRelationshipBo.GetByBeFollwedUID(uid);
 
             var lstUserInfoModel = new List<SearchUserInfo>();
+
             var lstModel = UserInfoBo.GetListByUIDList(dicBeFollower.Keys.ToList());
             if (lstModel != null && lstModel.Count > 0)
             {

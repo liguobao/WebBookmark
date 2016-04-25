@@ -35,5 +35,7 @@ namespace WebBookmarkUI.Models
 
 
         public BizTagInfo TagInfo { get; set; }
+
+       
     }
 }
