@@ -260,6 +260,10 @@ namespace WebBookmarkBo.Model
         /// </summary>
         RejecrApplyJoinGroup = 10,
 
+        /// <summary>
+        /// 新增点赞
+        /// </summary>
+        NewLikeBookmarkLog = 11,
 
     }
 }

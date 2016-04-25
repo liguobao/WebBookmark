@@ -11,6 +11,12 @@ namespace WebBookmarkBo.Service
 {
     public class MessageBo
     {
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="userID"></param>
+        /// <param name="type"></param>
+        /// <param name="info"></param>
         public static void CreateMessage(long userID,MessageTypeEnum type,object info)
         {
             Task.Factory.StartNew(() => 
@@ -48,6 +54,9 @@ namespace WebBookmarkBo.Service
                             return;
                         case MessageTypeEnum.RejecrApplyJoinGroup:
                             RejectGroupUser(info);
+                            return;
+                        case MessageTypeEnum.NewLikeBookmarkLog:
+                            NewLikeBookmarkLog(userID,info);
                             return;
                     }
                 }catch(Exception ex)
@@ -273,6 +282,28 @@ namespace WebBookmarkBo.Service
 
         }
 
+
+
+        private static void NewLikeBookmarkLog(long userID, object info)
+        {
+          
+            var bookmarkInfo = info as BizBookmarkInfo;
+            if(bookmarkInfo!=null)
+            {
+                var criticsUser = BizUserInfo.LoadByUserInfoID(userID);
+                BizMessageInfo messageInfo = new BizMessageInfo();
+                messageInfo.CreateTime = DateTime.Now;
+                messageInfo.IsRead = (int)MessageReadStatus.NotRead;
+                messageInfo.MessageTitle = string.Format("书签：【{0}】新增点赞", bookmarkInfo.BookmarkName);
+                messageInfo.MessageContent = string.Format("【{0}】点赞了你的书签【{1}】，点击下面的链接去查看啦。^-^",
+                   criticsUser.UserName, bookmarkInfo.BookmarkName);
+                messageInfo.MessageURL = "~/ShowBookmarkInfo?bookmarkID=" + bookmarkInfo.BookmarkInfoID;
+                messageInfo.UserInfoID = bookmarkInfo.UserInfoID;
+                messageInfo.MessageInfoType = (int)MessageTypeEnum.NewLikeBookmarkLog;
+                messageInfo.Save();
+            }
+          
+        }
 
 
     }

@@ -36,6 +36,10 @@ namespace WebBookmarkBo.Service
                         case DynamicInfoType.NewWebFolder:
                             AddNewFolder(userInfoID, info);
                             return;
+
+                        case DynamicInfoType.NewLikeBookmark:
+                            AddNewLikeBookmark(userInfoID, info);
+                            return;
                     }
 
                 }catch(Exception ex)
@@ -106,6 +110,23 @@ namespace WebBookmarkBo.Service
             }
         }
 
+
+        private static void AddNewLikeBookmark(long userInfoID, object info)
+        {
+            var bookmarkInfo = info as BizBookmarkInfo;
+            if (bookmarkInfo != null)
+            {
+                BizUserDynamicInfo userDynamicInfo = new BizUserDynamicInfo();
+                userDynamicInfo.UserInfoID = userInfoID;
+                userDynamicInfo.CreateTime = DateTime.Now;
+                userDynamicInfo.UserDynamicType = (int)DynamicInfoType.NewLikeBookmark;
+                userDynamicInfo.UserDynamicContent = string.Format("给书签【{0}】 点了赞。", bookmarkInfo.BookmarkName);
+                userDynamicInfo.UserDynamicURL = "~/ShowBookmarkInfo?bookmarkID=" + bookmarkInfo.BookmarkInfoID;
+                userDynamicInfo.Save();
+            }
+        }
+
+
         public static List<BizUserDynamicInfo> LoadDynamicLog(long loginUserID)
         {
             var dicUserRelationship = UserRelationshipBo.GetByFollowUserID(loginUserID);
@@ -132,6 +153,8 @@ namespace WebBookmarkBo.Service
         NewFollower = 2,
 
         NewBookmarkComment = 3,
+
+        NewLikeBookmark = 4,
 
     }
 }

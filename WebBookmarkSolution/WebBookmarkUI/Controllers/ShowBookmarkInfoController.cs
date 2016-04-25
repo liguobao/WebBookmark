@@ -284,6 +284,10 @@ namespace WebBookmarkUI.Controllers
                     result.Target = bookmarkInfo.LikeCount;
                     result.IsSuccess = true;
                     result.SuccessMessage = "点赞成功。";
+
+                    UserDynamicInfoBo.CreateDynamicInfoMessage(loginUID, DynamicInfoType.NewLikeBookmark, bookmarkInfo);
+                    MessageBo.CreateMessage(loginUID, MessageTypeEnum.NewLikeBookmarkLog, bookmarkInfo);
+
                 }
             }else
             {
