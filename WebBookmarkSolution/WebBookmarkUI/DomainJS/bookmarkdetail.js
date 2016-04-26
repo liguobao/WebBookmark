@@ -7,25 +7,25 @@
     $('body').on("click", "[id='bookmarkHTML']", function () {
         var $this = $(this);
         $("#commentInfo").parent().removeClass("am-active");
-       // $("#tagInfo").parent().removeClass("am-active");
+         $("#sameHostBookmark").parent().removeClass("am-active");
         $this.parent().addClass("am-active");
         ShowBookmarkHTML(bookmarkID, url);
     })
 
     $('body').on("click", "[id='commentInfo']", function () {
         var $this = $(this);
-      //  $("#tagInfo").parent().removeClass("am-active");
+          $("#sameHostBookmark").parent().removeClass("am-active");
         $("#bookmarkHTML").parent().removeClass("am-active");
         $this.parent().addClass("am-active");
         ShowBookmarkComment(bookmarkID);
     })
 
-    $('body').on("click", "[id='tagInfo']", function () {
+    $('body').on("click", "[id='sameHostBookmark']", function () {
         var $this = $(this);
         $("#bookmarkHTML").parent().removeClass("am-active");
         $("#commentInfo").parent().removeClass("am-active");
         $this.parent().addClass("am-active");
-        
+        ShowSameHostBookmark(bookmarkID);
     })
    
     $("#inputBookmarkTagName").blur(function () {
@@ -181,6 +181,26 @@ function ShowBookmarkComment(bookmarkID) {
                     $("#overview").html(data);
                 }
                 $("#loadcomment").removeClass("am-icon-spinner").removeClass("am-icon-spin");
+            }
+    });
+}
+
+
+
+function ShowSameHostBookmark(bookmarkID) {
+    $("#loadsameHostBookmark").addClass("am-icon-spinner").addClass("am-icon-spin");
+
+    $.ajax({
+        type: "post",
+        url: showSameHostBookmarkListURL,
+        data: { bookmarkID: bookmarkID },
+        success:
+            function (data) {
+                if (data != null) {
+
+                    $("#overview").html(data);
+                }
+                $("#loadsameHostBookmark").removeClass("am-icon-spinner").removeClass("am-icon-spin");
             }
     });
 }

@@ -120,6 +120,7 @@
     <Compile Include="Commom\UploadFileHelper.cs" />
     <Compile Include="Controllers\AddBookmarkController.cs" />
     <Compile Include="Controllers\BookmarkRecommendController.cs" />
+    <Compile Include="Controllers\AsyncShowBookmarkRecommendController.cs" />
     <Compile Include="Controllers\DefaultController.cs" />
     <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\FollowerController.cs" />
@@ -336,6 +337,8 @@
     <Content Include="Views\RetrievePassword\Index.cshtml" />
     <Content Include="Views\RetrievePassword\ModifyIndex.cshtml" />
     <Content Include="Views\Register\ActivateAccount.cshtml" />
+    <Content Include="Views\BookmarkRecommend\ShowSameHostBookmarkList.cshtml" />
+    <Content Include="Views\AsyncShowBookmarkRecommend\Index.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

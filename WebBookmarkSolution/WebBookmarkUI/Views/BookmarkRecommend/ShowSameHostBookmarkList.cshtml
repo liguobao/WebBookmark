@@ -1,8 +1,16 @@
 ﻿@model List<WebBookmarkUI.Models.UIBookmarkInfo>
-<div class="admin-content" style="margin-left:2%">
+<div class="admin-content">
     <div class="am-g">
         <div class="am-u-sm-12">
             <table class="am-table am-table-striped am-table-hover table-main ">
+                <thead>
+                    <tr>
+                        <th class="table-main">名称</th>
+                        <th class="tab-content">域名</th>
+                        <th class="tab-content">拥有者</th>
+                        <th class="table-date am-hide-sm-only">创建日期</th>
+                    </tr>
+                </thead>
                 <tbody>
                     @if (Model != null)
                     {
@@ -21,4 +29,3 @@
         </div>
     </div>
 </div>
-

@@ -15,6 +15,8 @@
     var removeBookmarkTagURL = "@Url.Action("RemoveBookmarkTag")";
     var collectBookmarkToUserDefaultFolderURL = "@Url.Action("CollectBookmarkToUserDefaultFolder")";
     var addBookmarkLikeLogURL = "@Url.Action("AddBookmarkLikeLog")";
+
+    var showSameHostBookmarkListURL = "@Url.Action("../BookmarkRecommend/ShowSameHostBookmarkList")";
     
 </script>
 <script src="~/DomainJS/bookmarkdetail.js"></script>
@@ -66,7 +68,7 @@
                 <ul class="am-tabs-nav am-nav am-nav-tabs aw-nav-tabs">
                     <li class=""><a href="#" id="bookmarkHTML" data-id='@Model.BookmarkInfoID' data-url='@Model.Href'>HTML <span id="loadHTML"></span></a></li>
                     <li class="am-active"><a href="#" id="commentInfo" data-id='@Model.BookmarkInfoID'>相关评论 <span id="loadcomment"></span></a></li>
-                    @*<li class=""><a href="#" id="tagInfo" data-id='@Model.BookmarkInfoID'>标签 <span id="loadtagInfo"></span></a></li>*@
+                    <li class=""><a href="#" id="sameHostBookmark" data-id='@Model.BookmarkInfoID'>相关书签 <span id="loadsameHostBookmark"></span></a></li>
                 </ul>
 
                 <div class="am-tabs-bd aw-user-center-tab" style="touch-action: pan-y; -webkit-user-select: none; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);">

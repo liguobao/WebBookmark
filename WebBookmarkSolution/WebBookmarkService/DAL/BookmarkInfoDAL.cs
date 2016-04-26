@@ -374,9 +374,9 @@ namespace WebBookmarkService.DAL
         /// 获取Host地址相同的数据
         /// </summary>
         /// <param name="lstHost"></param>
-        /// <param name="userid"></param>
+        /// <param name="userid">过滤某个用户ID</param>
         /// <returns></returns>
-        public IEnumerable<BookmarkInfo> GetListByHosts(List<string> lstHost,long userid=0)
+        public IEnumerable<BookmarkInfo> GetListByHosts(List<string> lstHost,long userid=0,int starIndex =0,int length=0)
         {
             if(lstHost==null || lstHost.Count==0)
                 return new List<BookmarkInfo>();
@@ -386,13 +386,37 @@ namespace WebBookmarkService.DAL
             {
                 sql = sql + "and userinfoid !=" + userid;
             }
+            if(length!=0)
+            {
+                sql = sql + string.Format(" limit {0},{1}",starIndex,length);
+            }
+
             using (MySqlDataReader reader = MyDBHelper.ExecuteDataReader(sql))
             {
                 return ToModels(reader);
             }
         }
 
+        public IEnumerable<BookmarkInfo> GetSameHostBookmarkByBookmarkID(long bookmarkInfoID,int starIndex =0,int length=0)
+        {
+            string sql = "SELECT * FROM webbookmark.tblBookmarkInfo leftInfo JOIN tblBookmarkInfo rightInfo ON leftInfo.host = rightInfo.host WHERE rightInfo.BookmarkInfoID = @BookmarkInfoID AND rightInfo.userinfoid != leftInfo.userinfoid";
 
+            if(length!=0)
+            {
+                sql = sql + string.Format(" limit {0},{1}",starIndex,length);
+            }
 
+            using (MySqlDataReader reader = MyDBHelper.ExecuteDataReader(sql, new MySqlParameter("@BookmarkInfoID", bookmarkInfoID)))
+            {
+                if (reader.Read())
+                {
+                    return ToModels(reader);
+                }
+                else
+                {
+                    return null;
+                }
+            }
+        }
 	}
 }
