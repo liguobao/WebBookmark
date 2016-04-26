@@ -339,6 +339,7 @@
     <Content Include="Views\Register\ActivateAccount.cshtml" />
     <Content Include="Views\BookmarkRecommend\ShowSameHostBookmarkList.cshtml" />
     <Content Include="Views\AsyncShowBookmarkRecommend\Index.cshtml" />
+    <Content Include="Views\AsyncShowBookmarkRecommend\Show.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

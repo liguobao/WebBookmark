@@ -1,0 +1,26 @@
+﻿@model List<WebBookmarkUI.Models.UIBookmarkInfo>
+
+
+
+<div class="admin-content" style="margin-left:2%">
+    <div class="am-g">
+        <div class="am-u-sm-12">
+            <table class="am-table am-table-striped am-table-hover table-main ">
+                <tbody>
+                    @if (Model != null)
+                    {
+                        foreach (var bookmark in Model)
+                        {
+                            <tr>
+                                <td><a href='@Url.Content("~/ShowBookmarkInfo?bookmarkID="+@bookmark.BookmarkInfoID)' target='_blank'>@bookmark.BookmarkName  </a></td>
+                                <td>@bookmark.Host</td>
+                                <td><a href="@Url.Content("~/UserInfo/ShowUserDetail?uid=" + bookmark.UserInfo.UserInfoID)">@bookmark.UserInfo.UserName</a></td>
+                                <td>@bookmark.CreateTime</td>
+                            </tr>
+                        }
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

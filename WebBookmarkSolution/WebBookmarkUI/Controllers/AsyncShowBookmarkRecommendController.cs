@@ -16,7 +16,7 @@ namespace WebBookmarkUI.Controllers
         /// 异步
         /// </summary>
         /// <returns></returns>
-        public Task<ViewResult> Index()
+        public Task<ViewResult> Show()
         {
             return Task.Factory.StartNew(() => 
             {
@@ -52,6 +52,35 @@ namespace WebBookmarkUI.Controllers
         }
 
 
-       
+        public ActionResult Index()
+        {
+            var loginUID = UILoginHelper.GetUIDFromHttpContext(HttpContext);
+            var lstBookmarkInfo = RecommendBo.GetRecommendBookmarkList(loginUID);
+
+            var dicUserInfo = UserInfoBo.GetListByUIDList(lstBookmarkInfo.Select(model => model.UserInfoID).ToList())
+                .ToDictionary(model => model.UserInfoID, model => model);
+
+            var lstModel = new List<UIBookmarkInfo>();
+            lstModel.AddRange(lstBookmarkInfo.Select(model => new UIBookmarkInfo()
+            {
+                Href = model.Href,
+                BookmarkName = model.BookmarkName,
+                BookmarkInfoID = model.BookmarkInfoID,
+                CreateTime = model.CreateTime,
+                UserWebFolderID = model.UserWebFolderID,
+                UserInfoID = model.UserInfoID,
+                Host = model.Host,
+                UserInfo = dicUserInfo.ContainsKey(model.UserInfoID) ? new UIUserInfo()
+                {
+                    UserEmail = dicUserInfo[model.UserInfoID].UserEmail,
+                    UserInfoID = dicUserInfo[model.UserInfoID].UserInfoID,
+                    UserName = dicUserInfo[model.UserInfoID].UserName,
+                    UserImagURL = dicUserInfo[model.UserInfoID].UserImagURL,
+                } : new UIUserInfo() { UserName = "这个人消失了", UserInfoID = 0 },
+            }));
+
+            lstModel = Extend.GetRandomList(lstModel);
+            return View(lstModel.Count > 15 ? lstModel.Take(15).ToList() : lstModel);
+        }
     }
 }
