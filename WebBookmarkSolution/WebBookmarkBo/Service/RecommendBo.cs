@@ -27,6 +27,19 @@ namespace WebBookmarkBo.Service
             return lstBookmark.Select(model => model.UserInfoID).Distinct().ToList();//获取用户ID
         }
 
+        /// <summary>
+        /// 获取推荐用户信息
+        /// </summary>
+        /// <param name="userID"></param>
+        /// <returns></returns>
+        public static List<BizUserInfo> GetRecommendUserList(long userID)
+        {
+            var lstUser = new UserInfoDAL().GetSameHrefUserList(userID);
+            if (lstUser != null)
+                return lstUser.Select(model => new BizUserInfo(model)).ToList();
+            return new List<BizUserInfo>();
+        }
+
 
         public static List<BizBookmarkInfo> GetRecommendBookmarkList(long userID,int starIndex =0,int length=0)
         {

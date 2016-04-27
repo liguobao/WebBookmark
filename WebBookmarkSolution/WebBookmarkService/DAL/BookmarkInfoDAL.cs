@@ -418,5 +418,47 @@ namespace WebBookmarkService.DAL
                 }
             }
         }
+
+
+        public IEnumerable<BookmarkInfo> GetRandomListByUserID(long userID,int index,int length)
+        {
+            string sql = @"SELECT 
+                            *
+                        FROM
+                            webbookmark.tblBookmarkInfo AS t1
+                                JOIN
+                            (SELECT 
+                                ROUND(RAND() * ((SELECT 
+                                            MAX(BookmarkInfoID)
+                                        FROM
+                                            webbookmark.tblBookmarkInfo) - (SELECT 
+                                            MIN(BookmarkInfoID)
+                                        FROM
+                                            webbookmark.tblBookmarkInfo)) + (SELECT 
+                                            MIN(BookmarkInfoID)
+                                        FROM
+                                            webbookmark.tblBookmarkInfo)) AS id
+                            ) AS t2
+                        WHERE
+                            t1.BookmarkInfoID >= t2.id and t1.userinfoid=@UserInfoID";
+
+            if (length != 0)
+            {
+                sql = sql + string.Format(" limit {0},{1}", index, length);
+            }
+
+            using (MySqlDataReader reader = MyDBHelper.ExecuteDataReader(sql, new MySqlParameter("@UserInfoID", userID)))
+            {
+                if (reader.Read())
+                {
+                    return ToModels(reader);
+                }
+                else
+                {
+                    return null;
+                }
+            }
+        }
+
 	}
 }

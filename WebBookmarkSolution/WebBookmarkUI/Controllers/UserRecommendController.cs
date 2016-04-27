@@ -17,10 +17,8 @@ namespace WebBookmarkUI.Controllers
         {
             var loginUid = UILoginHelper.GetUIDFromHttpContext(HttpContext);
             var dicBeFollowerID = UserRelationshipBo.GetByFollowUserID(loginUid);
-            var lstUserID = RecommendBo.GetRecommendUserIDListDependHost(loginUid);
-
             var lstUserInfoModel = new List<SearchUserInfo>();
-            var lstModel = UserInfoBo.GetListByUIDList(lstUserID);
+            var lstModel = RecommendBo.GetRecommendUserList(loginUid);
             if (lstModel != null && lstModel.Count > 0)
             {
                 lstUserInfoModel.AddRange(lstModel.Select(model => new SearchUserInfo()

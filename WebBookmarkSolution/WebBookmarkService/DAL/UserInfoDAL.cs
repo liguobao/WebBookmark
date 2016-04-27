@@ -334,5 +334,53 @@ namespace WebBookmarkService.DAL
                 return ToModels(reader);
             }
         }
+
+
+        /// <summary>
+        /// 获取和当前用户拥有相同链接的用户信息
+        /// </summary>
+        /// <param name="userID">当前用户</param>
+        /// <returns></returns>
+        public IEnumerable<UserInfo> GetSameHrefUserList(long userID)
+        {
+            string sql = @"SELECT 
+                            *
+                        FROM
+                            webbookmark.tblUserInfo userInfo
+                                JOIN
+                            (SELECT DISTINCT
+                                (info.UserInfoID)
+                            FROM
+                                webbookmark.tblBookmarkInfo info
+                            JOIN (SELECT 
+                                *
+                            FROM
+                                webbookmark.tblBookmarkInfo AS t1
+                            JOIN (SELECT 
+                                ROUND(RAND() * ((SELECT 
+                                            MAX(BookmarkInfoID)
+                                        FROM
+                                            webbookmark.tblBookmarkInfo) - (SELECT 
+                                            MIN(BookmarkInfoID)
+                                        FROM
+                                            webbookmark.tblBookmarkInfo)) + (SELECT 
+                                            MIN(BookmarkInfoID)
+                                        FROM
+                                            webbookmark.tblBookmarkInfo)) AS id
+                            ) AS t2
+                            WHERE
+                                t1.BookmarkInfoID >= t2.id
+                                    AND t1.userinfoid = @UserInfoID
+                            LIMIT 0 , @Length) AS userBM ON userBM.href = info.href
+                                AND info.userinfoid != userBM.userinfoid) AS userids ON userids.userinfoid = userInfo.userinfoid;";
+            Random rd = new Random(DateTime.Now.Millisecond);
+            int length = rd.Next(0, 100);
+
+            using (MySqlDataReader reader = MyDBHelper.ExecuteDataReader(sql, new MySqlParameter("@UserInfoID", userID), new MySqlParameter("@Length", length)))
+            {
+                return ToModels(reader);
+            }
+        }
+
     }
 }
