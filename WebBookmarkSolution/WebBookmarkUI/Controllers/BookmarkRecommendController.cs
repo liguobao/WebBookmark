@@ -41,7 +41,7 @@ namespace WebBookmarkUI.Controllers
                     UserImagURL = dicUserInfo[model.UserInfoID].UserImagURL,
                 } : new UIUserInfo() { UserName = "这个人消失了", UserInfoID = 0 },
             }));
-
+            lstModel = lstModel.DistinctBy(model=>model.Href).ToList();
             lstModel = Extend.GetRandomList(lstModel);
             return View(lstModel.Count > 15 ? lstModel.Take(15).ToList() : lstModel);
         }
