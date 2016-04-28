@@ -41,9 +41,17 @@ namespace WebBookmarkUI.Controllers
                     UserImagURL = dicUserInfo[model.UserInfoID].UserImagURL,
                 } : new UIUserInfo() { UserName = "这个人消失了", UserInfoID = 0 },
             }));
-            lstModel = lstModel.DistinctBy(model=>model.Href).ToList();
             lstModel = Extend.GetRandomList(lstModel);
-            return View(lstModel.Count > 15 ? lstModel.Take(15).ToList() : lstModel);
+          
+            if(lstModel.Count>20)
+            {
+                var returnModel = lstModel.Take(20).DistinctBy(model => model.Href);
+                return View(returnModel.ToList());
+            }else
+            {
+                return View(lstModel);
+            }
+           
         }
 
         public ActionResult ShowSameHostBookmarkList(long bookmarkID)
