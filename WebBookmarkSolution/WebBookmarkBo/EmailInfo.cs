@@ -58,6 +58,8 @@ namespace WebBookmarkBo
                     mail.IsBodyHtml = true;
 
                     SmtpClient smtp = new SmtpClient();
+                    smtp.EnableSsl = true;
+                    smtp.Port = 587;
                     smtp.Host = "smtp.qq.com";
                     smtp.Credentials = new NetworkCredential(emailAccount, emailPassword);
 
