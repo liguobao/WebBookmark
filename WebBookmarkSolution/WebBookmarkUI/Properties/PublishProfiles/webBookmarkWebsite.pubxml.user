@@ -259,7 +259,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>04/05/2016 21:42:21</publishTime>
     </File>
     <File Include="DomainJS/showgroupdetail.js">
-      <publishTime>04/03/2016 19:13:16</publishTime>
+      <publishTime>05/07/2016 10:25:34</publishTime>
     </File>
     <File Include="DomainJS/showuserallgroupmessage.js">
       <publishTime>04/20/2016 11:28:13</publishTime>
@@ -427,7 +427,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>04/01/2016 23:23:57</publishTime>
     </File>
     <File Include="Views/GroupInfo/ShowGroupDetail.cshtml">
-      <publishTime>04/03/2016 19:12:59</publishTime>
+      <publishTime>05/07/2016 10:25:34</publishTime>
     </File>
     <File Include="Views/GroupInfo/ShowGroupUserList.cshtml">
       <publishTime>04/03/2016 19:13:25</publishTime>

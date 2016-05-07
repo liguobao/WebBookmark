@@ -5,7 +5,7 @@
 
     $('body').on("click", "[id='groupuser']", function () {
         var $this = $(this);
-        $("#groupinfo").parent().removeClass("am-active");
+       // $("#groupinfo").parent().removeClass("am-active");
         $("#groupusernopass").parent().removeClass("am-active");
         $this.parent().addClass("am-active");
         ShowGroupUserList(groupID);
@@ -13,20 +13,20 @@
 
     $('body').on("click", "[id='groupusernopass']", function () {
         var $this = $(this);
-        $("#groupinfo").parent().removeClass("am-active");
+       // $("#groupinfo").parent().removeClass("am-active");
         $("#groupuser").parent().removeClass("am-active");
         $this.parent().addClass("am-active");
         ShowGroupUserListNotPass(groupID);
     });
 
 
-    $('body').on("click", "[id='groupinfo']", function () {
-        var $this = $(this);
-        $("#groupuser").parent().removeClass("am-active");
-        $("#groupusernopass").parent().removeClass("am-active");
-        $this.parent().addClass("am-active");
-        ShowGroupUserList(groupID);
-    });
+    //$('body').on("click", "[id='groupinfo']", function () {
+    //    var $this = $(this);
+    //    $("#groupuser").parent().removeClass("am-active");
+    //    $("#groupusernopass").parent().removeClass("am-active");
+    //    $this.parent().addClass("am-active");
+    //    ShowGroupUserList(groupID);
+    //});
 
 
     $('body').on("click", "[id='btnPass']", function () {
