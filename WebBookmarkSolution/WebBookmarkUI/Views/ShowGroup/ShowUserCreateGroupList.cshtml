@@ -3,7 +3,9 @@
 <script type="text/javascript">
 </script>
 
-
+@if (Model != null && Model.Count > 0)
+{
+    int index = 1;
 <div class="admin-content">
     <div class="am-g">
         <div class="am-u-sm-12">
@@ -16,10 +18,9 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @if (Model != null && Model.Count > 0)
-                    {
-                        int index = 1;
-                        foreach (var groupInfo in Model)
+                   
+                      
+                        @foreach (var groupInfo in Model)
                         {
                             <tr>
                                 <td>@index</td>
@@ -29,10 +30,12 @@
                             </tr>
                             index++;
                         }
-                    }
+
                 </tbody>
             </table>
 
         </div>
     </div>
 </div>
+    
+}
