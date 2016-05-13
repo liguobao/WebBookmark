@@ -104,6 +104,8 @@ namespace WebBookmarkBo.Model
         public static List<BizGroupUser> LoadByGroupIDList(List< long> groupIDs)
         {
             var lstModel = new GroupUserDAL().GetListByGroupInfoIDs(groupIDs);
+            if (lstModel == null)
+                return new List<BizGroupUser>();
             return lstModel.Select(mode => new BizGroupUser(mode)).ToList();
         }
 

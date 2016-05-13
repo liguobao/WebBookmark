@@ -382,5 +382,24 @@ namespace WebBookmarkService.DAL
             }
         }
 
+
+        /// <summary>
+        /// 随机获取用户数据
+        /// </summary>
+        /// <param name="index"></param>
+        /// <param name="length"></param>
+        /// <returns></returns>
+        public IEnumerable<UserInfo> GetRandomList(int index, int length)
+        {
+            string sql = string.Format("SELECT * FROM tblUserInfo");
+            if (length != 0)
+            {
+                sql = sql + string.Format(" limit {0},{1}", index, length);
+            }
+            using (MySqlDataReader reader = MyDBHelper.ExecuteDataReader(sql))
+            {
+                return ToModels(reader);
+            }
+        }
     }
 }

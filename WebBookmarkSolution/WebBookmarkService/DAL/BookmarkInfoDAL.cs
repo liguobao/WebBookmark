@@ -460,5 +460,51 @@ namespace WebBookmarkService.DAL
             }
         }
 
+        /// <summary>
+        /// 随机获取书签数据
+        /// </summary>
+        /// <param name="index"></param>
+        /// <param name="length"></param>
+        /// <returns></returns>
+        public IEnumerable<BookmarkInfo> GetRandomList(int index, int length)
+        {
+            var lstUser = new UserInfoDAL().GetRandomList(0, length);
+            string sql =string.Format( @"SELECT 
+                            *
+                        FROM
+                            webbookmark.tblBookmarkInfo AS t1
+                                JOIN
+                            (SELECT 
+                                ROUND(RAND() * ((SELECT 
+                                            MAX(BookmarkInfoID)
+                                        FROM
+                                            webbookmark.tblBookmarkInfo) - (SELECT 
+                                            MIN(BookmarkInfoID)
+                                        FROM
+                                            webbookmark.tblBookmarkInfo)) + (SELECT 
+                                            MIN(BookmarkInfoID)
+                                        FROM
+                                            webbookmark.tblBookmarkInfo)) AS id
+                            ) AS t2
+                        WHERE
+                            t1.BookmarkInfoID >= t2.id and t1.userinfoid in ({0})", string.Join(",", lstUser.Select(model=>model.UserInfoID)));
+
+            //if (length != 0)
+            //{
+            //    sql = sql + string.Format(" limit {0},{1}", index, length);
+            //}
+
+            using (MySqlDataReader reader = MyDBHelper.ExecuteDataReader(sql))
+            {
+                if (reader.Read())
+                {
+                    return ToModels(reader);
+                }
+                else
+                {
+                    return null;
+                }
+            }
+        }
 	}
 }

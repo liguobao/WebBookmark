@@ -19,6 +19,10 @@ namespace WebBookmarkUI.Controllers
         {
             var loginUID = UILoginHelper.GetUIDFromHttpContext(HttpContext);
             var lstBookmarkInfo = RecommendBo.GetRecommendBookmarkList(loginUID);
+            if(lstBookmarkInfo==null || lstBookmarkInfo.Count==0)
+            {
+                lstBookmarkInfo = RecommendBo.GetRandomBookmarkList(0,200);
+            }
 
             var dicUserInfo = UserInfoBo.GetListByUIDList(lstBookmarkInfo.Select(model => model.UserInfoID).ToList())
                 .ToDictionary(model => model.UserInfoID, model => model);
