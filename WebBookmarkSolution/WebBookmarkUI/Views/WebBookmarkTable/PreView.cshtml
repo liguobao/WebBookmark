@@ -1,0 +1,15 @@
+﻿@{
+    ViewBag.Title = "PreView";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@model WebBookmarkBo.Model.BizResultInfo
+
+@if(Model!=null)
+{
+    <div>
+       @Html.Raw( Model.Target )
+    </div>
+}else
+{
+    
+}

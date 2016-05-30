@@ -251,5 +251,25 @@ namespace WebBookmarkService.DAL
 			}
 		}
         #endregion
+
+
+
+        public UserWebBookmarkImportLog GetByFileName(long userID,string filename)
+        {
+            string sql = "SELECT * FROM tblUserWebBookmarkImportLog WHERE FileName = @FileName and UserInfoID = @UserInfoID";
+            using (MySqlDataReader reader = MyDBHelper.ExecuteDataReader(sql, new MySqlParameter("@FileName", filename),
+                new MySqlParameter("@UserInfoID", userID)))
+            {
+                if (reader.Read())
+                {
+                    return ToModel(reader);
+                }
+                else
+                {
+                    return null;
+                }
+            }
+        }
+
 	}
 }

@@ -2,6 +2,7 @@
 using System.Web.Mvc;
 using WebBookmarkBo.Service;
 using WebBookmarkBo;
+using WebBookmarkService;
 
 namespace WebBookmarkUI
 {
@@ -48,6 +49,8 @@ namespace WebBookmarkUI
 
         public static long GetUIDFromHttpContext(HttpContextBase httpContext)
         {
+            LogHelper.WriteDebug("GetUIDFromHttpContext log", "", httpContext.Request.Cookies);
+
             long uid = 0;
             var userInfo = httpContext.Request.Cookies["UserInfo"];
             if (userInfo != null)
@@ -81,6 +84,8 @@ namespace WebBookmarkUI
 
         public static bool CheckUserLogin(HttpContextBase httpContext)
         {
+            LogHelper.WriteDebug("CheckUserLogin log", "", httpContext.Request.Cookies);
+
             var rsp = UserInfoBo.UserLogin(GetUIUserLoginNameOrEmail(httpContext), GetUIUserPassword(httpContext));
             return rsp.IsSuccess;  
         }

@@ -39,6 +39,8 @@ namespace WebBookmarkBo.Model
         #endregion
 
 
+        private static UserWebBookmarkImportLogDAL DAL = new UserWebBookmarkImportLogDAL();
+
         public UserWebBookmarkImportLog ToModel()
         {
             return new UserWebBookmarkImportLog()
@@ -77,11 +79,16 @@ namespace WebBookmarkBo.Model
             
             if(UserWebBookmarkImportLogID== default(long))
             {
-                new UserWebBookmarkImportLogDAL().Add(ToModel());
+                DAL.Add(ToModel());
+                var model = DAL.GetByFileName(UserInfoID,FileName);
+                if(model!=null)
+                {
+                    UserWebBookmarkImportLogID = model.UserWebBookmarkImportLogID;
+                }
             }
             else
             {
-                new UserWebBookmarkImportLogDAL().Update(ToModel());
+                DAL.Update(ToModel());
             }
         }
 
@@ -93,8 +100,8 @@ namespace WebBookmarkBo.Model
         /// <returns></returns>
         public static IEnumerable<BizUserWebBookmarkImportLog> LoadAllByUID(long uid)
         {
-           
-            var lstDataInfo = new UserWebBookmarkImportLogDAL().LoadByUID(uid);
+
+            var lstDataInfo = DAL.LoadByUID(uid);
             if(lstDataInfo!=null)
             {
                 return lstDataInfo.Select(data => new BizUserWebBookmarkImportLog(data));
@@ -108,15 +115,12 @@ namespace WebBookmarkBo.Model
         /// </summary>
         /// <param name="uid"></param>
         /// <returns></returns>
-        public static BizUserWebBookmarkImportLog LoadOne(long uid)
+        public static BizUserWebBookmarkImportLog LoadImportLogID(long importLogID)
         {
-            BizUserWebBookmarkImportLog biz = null;
-            var list = LoadAllByUID(uid);
-            if(list!=null && list.Count() >0)
-            {
-                biz = list.FirstOrDefault();
-            }
-            return biz;
+           var model = DAL.GetByUserWebBookmarkImportLogID(importLogID);
+           if (model != null)
+               return new BizUserWebBookmarkImportLog(model);
+            return null;
         }
     }
 }

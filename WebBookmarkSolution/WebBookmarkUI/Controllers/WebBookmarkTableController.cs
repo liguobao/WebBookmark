@@ -247,21 +247,26 @@ namespace WebBookmarkUI.Controllers
             return View();
         }
 
-        public ActionResult ImportWebBookmarkToDB(string filePath)
+        public ActionResult ImportWebBookmarkToDB(string importLogID)
         {
             BizResultInfo result = new BizResultInfo();
 
-            if(string.IsNullOrEmpty(filePath))
+            if (string.IsNullOrEmpty(importLogID))
             {
                 result.IsSuccess = false;
                 result.ErrorMessage = "先上传文件呀。";
+                return Json(result);
             }
             long uid = UILoginHelper.GetUIDFromHttpContext(HttpContext);
 
-            var path = Server.MapPath(filePath);
+            var importLog = BizUserWebBookmarkImportLog.LoadImportLogID(importLogID.ConvertToPlainLong());
+            if(importLog==null)
+            {
+                return Json(new BizResultInfo() { IsSuccess = false, SuccessMessage = "文件丢失，保存失败。" });
+            }
 
-            result = ImportBookmarkHelper.ImportBookmarkDataToDB(path,uid);
-
+            var path = Server.MapPath(importLog.Path);
+            result = ImportBookmarkHelper.ImportBookmarkDataToDB(path, uid);
 
             return Json(new BizResultInfo() { IsSuccess = true,SuccessMessage="保存成功耶，你可以到别的地方玩了。" });
         }
@@ -274,20 +279,25 @@ namespace WebBookmarkUI.Controllers
             var result = UploadFileHelper.UploadFileToUserImportFile(Request);
             if(result.IsSuccess)
             {
-                BizUserWebBookmarkImportLog importLog = new BizUserWebBookmarkImportLog();
-                importLog.CreateTime = DateTime.Now;
+                BizUserWebBookmarkImportLog importLog = result.Target as BizUserWebBookmarkImportLog;
                 importLog.UserInfoID = UILoginHelper.GetUIDFromHttpContext(HttpContext);
-                importLog.Path = result.ResultID;
-                importLog.FileName = result.ResultID;
                 importLog.Save();
+                result.ResultID = importLog.UserWebBookmarkImportLogID.ConvertToCiphertext();
             }
 
             return Json(result);
         }
 
-        public FileResult PreView(string path)
+        public ActionResult PreView(string importLogID)
         {
-            return File(path, "text/html");
+            var importLog = BizUserWebBookmarkImportLog.LoadImportLogID(importLogID.ConvertToPlainLong());
+            if (importLog == null)
+            {
+                return View();
+            }
+            var path = Server.MapPath(importLog.Path);
+            var allText = System.IO.File.ReadAllText(path);
+            return View(new BizResultInfo() { Target = allText});
         }
 
 
